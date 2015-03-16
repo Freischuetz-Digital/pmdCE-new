@@ -5,9 +5,17 @@
  *
  * TODO - Replace this content of this view to suite the needs of your application.
  */
-Ext.define('pmdCE.view.main.Main', {
+ 
+var ceToolbar = new pmdCE.view.main.CEToolbar();
+
+var cePanel = new pmdCE.view.main.CEPanelTable(); 
+
+ceToolbar.setPanel(cePanel);
+
+ 
+/*Ext.define('pmdCE.view.main.Main', {
     extend: 'Ext.container.Container',
-    requires: [
+  requires: [
         'pmdCE.view.main.MainController',
         'pmdCE.view.main.MainModel'
     ],
@@ -22,9 +30,19 @@ Ext.define('pmdCE.view.main.Main', {
     layout: {
         type: 'border'
     },
+    
+    ceToolbar: new pmdCE.view.main.CEToolbar(),
+    
+    cePanel: new pmdCE.view.main.CEPanelTable(),
+   
 
-    items: [{
-        xtype: 'panel',
+    items: [
+    
+   // {
+    this.ceToolbar,
+    this.cePanel
+    
+      /*xtype: 'panel',
         bind: {
             title: '{name}'
         },
@@ -43,5 +61,8 @@ Ext.define('pmdCE.view.main.Main', {
             title: 'Tab 1',
             html: '<h2>Änderung</h2>'
         }]
-    }]
-});
+    }
+    
+    
+    ]
+});*/
