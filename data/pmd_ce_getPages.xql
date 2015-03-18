@@ -1,0 +1,9 @@
+{
+    pages: [
+        {id: 'A_page127', path: 'A/A_mov8/A_page127.xml', movement_id: 'A_mov8'},
+        {id: 'A_page128', path: 'A/A_mov8/A_page127.xml', movement_id: 'A_mov8'},
+        {id: 'A_page129', path: 'A/A_mov8/A_page127.xml', movement_id: 'A_mov8'},
+        {id: 'A_page222', path: 'A/A_mov9/A_page222.xml', movement_id: 'A_mov9'},
+        {id: 'A_page223', path: 'A/A_mov9/A_page223.xml', movement_id: 'A_mov9'}
+    ]
+}
