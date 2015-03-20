@@ -5,44 +5,71 @@
  *
  * TODO - Replace this content of this view to suite the needs of your application.
  */
- 
-var ceToolbar = new pmdCE.view.main.CEToolbar();
-
-var cePanel = new pmdCE.view.main.CEPanelTable(); 
-
-ceToolbar.setPanel(cePanel);
-
- 
-/*Ext.define('pmdCE.view.main.Main', {
-    extend: 'Ext.container.Container',
+Ext.define('pmdCE.view.main.Main', {
+    extend: 'Ext.panel.Panel',
   requires: [
         'pmdCE.view.main.MainController',
-        'pmdCE.view.main.MainModel'
+        'pmdCE.view.main.MainModel',
+        'Ext.layout.container.Table'
     ],
 
-    xtype: 'app-main',
+    xtype: 'layout-table',
+   
+    layout: {
+        type: 'table',
+        columns: 1,
+        tableAttrs: {
+            style: {
+                width: '100%'
+            }
+        }
+    },
+
+    autoScroll: true,
+    
+    ceToolbar: null,
+    
+    defaults: {
+        //bodyPadding: '15 20',
+        border: true
+    },
+    
+   /*  items: [
+     ceToolbar = new pmdCE.view.main.CEToolbar(),
+     cePanel = new pmdCE.view.main.CEPanelTable()
+    ]*/
+    
+     initComponent: function() {
+     
+     ceToolbar = new pmdCE.view.main.CEToolbar(),
+     
+this.items = [
+     ceToolbar, 
+     cePanel = new pmdCE.view.main.CEPanelTable()
+    ],
+
+this.callParent()
+
+ 
+    }
+    
+  /*  xtype: 'app-main',
     
     controller: 'main',
     viewModel: {
         type: 'main'
-    },
+    },*/
 
-    layout: {
+   /*layout: {
         type: 'border'
-    },
-    
-    ceToolbar: new pmdCE.view.main.CEToolbar(),
-    
-    cePanel: new pmdCE.view.main.CEPanelTable(),
-   
+    },*/
 
-    items: [
+
+   /* items: [
+      {
+   
     
-   // {
-    this.ceToolbar,
-    this.cePanel
-    
-      /*xtype: 'panel',
+      xtype: 'panel',
         bind: {
             title: '{name}'
         },
@@ -61,8 +88,10 @@ ceToolbar.setPanel(cePanel);
             title: 'Tab 1',
             html: '<h2>Änderung</h2>'
         }]
-    }
+    }*/
     
     
-    ]
-});*/
+ //   ]
+    
+    
+});

@@ -8,9 +8,13 @@ Ext.define('pmdCE.Application', {
    
     name: 'pmdCE',
     
-    views: [    
+    views: [ 
+    
        'main.CEPanelTable',
        'main.CEToolbar',
+       'main.FacsimileView',
+       'main.XMLEditorView',
+       'main.CETableEditor',
        'main.Main'      
     ],
 
@@ -24,9 +28,12 @@ Ext.define('pmdCE.Application', {
         // TODO: add global / shared stores here
     ],
     
+    sourcesStore: null,
+    movementsStore: null,
+    pagesStore: null,
     
     launch: function () {
-        var sourcesStore = Ext.create('Ext.data.Store', {
+        sourcesStore = Ext.create('Ext.data.Store', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
@@ -39,7 +46,7 @@ Ext.define('pmdCE.Application', {
              autoLoad: true
          });
          
-         var movementsStore = Ext.create('Ext.data.Store', {
+         movementsStore = Ext.create('Ext.data.Store', {
             model: 'pmdCE.model.Movement',
              proxy: {
                  type: 'ajax',
@@ -53,7 +60,7 @@ Ext.define('pmdCE.Application', {
          });
 
 
-        var pagesStore = Ext.create('Ext.data.Store', {
+        pagesStore = Ext.create('Ext.data.Store', {
             model: 'pmdCE.model.Page',
              proxy: {
                  type: 'ajax',
@@ -72,5 +79,20 @@ Ext.define('pmdCE.Application', {
          pagesStore.load();
          
          console.log(pagesStore);
+         
+        
+    },
+    
+    getSourcesStore: function(){
+    return sourcesStore;
+    },
+    
+    getMovementsStore: function(){
+    return movementsStore;
+    },
+    
+    getPagesStore: function(){
+    return pagesStore;
     }
+    
 });

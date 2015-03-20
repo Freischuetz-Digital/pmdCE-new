@@ -1,6 +1,25 @@
 Ext.define('pmdCE.view.main.CEPanelTable', {
     extend: 'Ext.panel.Panel',
-   
+    
+    xtype: 'layout-border',
+    requires: [
+        'Ext.layout.container.Border'
+       // 'pmdCE.view.main.FacsimileView'
+    ],
+    
+    layout: 'border',
+    width: 1360,
+    height: 570,
+
+    bodyBorder: false,
+    
+    defaults: {
+       // collapsible: true,
+        split: true,
+        bodyPadding: 10
+    },
+    
+    
     facsimilieView: null,
     xmlView: null,
     editorView: null,
@@ -10,17 +29,61 @@ Ext.define('pmdCE.view.main.CEPanelTable', {
     hairpinsItem: null,
     dynamsItems: null,
     dirsItems: null,
+    
+/*     initComponent: function() {
+  facsimilieView = this.createCEView()
+  
+ // this.callParent()
+    },*/
+    
+    initComponent: function() {
+    
+    facsimilieView = new pmdCE.view.main.FacsimileView(),
+    xmlView = new pmdCE.view.main.XMLEditorView(),
+    ceTabView = new pmdCE.view.main.CETableEditor(),
+    //this.createCEView();
+    
+    this.items = [
+    
+    //facsimilieView = new pmdCE.view.main.FacsimileView(),
+    facsimilieView,
+    ceTabView,
        
-    initComponent: function () {
-   
-        facsimilieView = this.createCEView();
-        ceTabView = this.createCETabView();
-        xmlView = this.createCEView();
-        editorView = this.createCEEditorView();
-   
-        Ext.create('Ext.panel.Panel', {   
-            renderTo : document.body,
-            layout: {
+     /*  {
+            title: 'Navigation',
+            region:'west',
+            floatable: false,
+            margin: '5 0 0 0',
+            width: 700,
+            minWidth: 600,
+            maxWidth: 900,
+            html: '<p>Secondary content like navigation links could go here</p>'
+        },*/
+        /*{
+            title: 'Main Content',
+            collapsible: false,
+            region: 'center',
+            margin: '5 0 0 0',
+            html: '<h2>Main Page</h2><p>This is where the main content would go</p>'
+        },*/
+        xmlView
+        /* {
+            title: 'Footer',
+            region: 'south',
+            height: 100,
+            minHeight: 75,
+            maxHeight: 150,
+            html: '<p>Footer content</p>'
+        }*/
+    ],
+     this.callParent();
+   },
+  
+ 
+
+    
+    
+   /*  layout: {
             type: 'table',
             columns: 2       
         },
@@ -28,23 +91,71 @@ Ext.define('pmdCE.view.main.CEPanelTable', {
             border: true,
             width : 650,
             height : 300    
-        },     
+        },   */  
+   
     
-        items: [
+       
+ /*   initComponent: function () {
+    
+    
+    this.tbar = [
+        {
+            title: 'Footer',
+            region: 'south',
+            height: 100,
+            minHeight: 75,
+            maxHeight: 150,
+            html: '<p>Footer content</p>'
+        },
+        {
+            title: 'Navigation',
+            region:'west',
+            floatable: false,
+            margin: '5 0 0 0',
+            width: 125,
+            minWidth: 100,
+            maxWidth: 250,
+            html: '<p>Secondary content like navigation links could go here</p>'
+        },
+        {
+            title: 'Main Content',
+            collapsible: false,
+            region: 'center',
+            margin: '5 0 0 0',
+            html: '<h2>Main Page</h2><p>This is where the main content would go</p>'
+        }
+    ];
+    
+    
+   
+        facsimilieView = this.createCEView();
+        ceTabView = this.createCETabView();
+        xmlView = this.createCEView();
+        editorView = this.createCEEditorView();
+        
+        this.tbar = [
             facsimilieView,
             ceTabView,
             xmlView,
             editorView
-        ]
-     });   
-},
+        ];
+        this.callParent();
+   
+      
+},*/
     
 
 createCEView: function(){
     var ceView = Ext.create('Ext.form.Panel', {
         layout:'absolute',
-        layoutConfig: {      
-        },
+      //  layoutConfig: { 
+       region:'west',
+            floatable: false,
+            margin: '5 0 0 0',
+            width: 700,
+            minWidth: 600,
+            maxWidth: 900,
+     //   },
         defaultType: 'textfield',
         items: [{
             xtype:'label',
@@ -172,7 +283,7 @@ getCETabView: function(){
 
 getCEItem: function(){
  return testItem;
-},
+}
 
 
 });
