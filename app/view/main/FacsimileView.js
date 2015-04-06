@@ -1,22 +1,46 @@
 Ext.define('pmdCE.view.main.FacsimileView', {
 extend: 'Ext.form.Panel',
         layout:'absolute',
-        region:'west',
-            floatable: false,
-            margin: '5 0 0 0',
-            width: 700,
-            minWidth: 600,
-            maxWidth: 900,
+        region:'south',
+           // floatable: false,
+        //    margin: '5 0 0 0',
+         /*   height: 100,
+            minHeight: 75,
+            maxHeight: 150,*/
       
-        defaultType: 'textfield',
-        
+      //  defaultType: 'textfield',
+      flex: 1,
+      title: "Page NR",
+       autoScroll: true,
+     
 initComponent: function() {
-this.tbar = [{
-            xtype:'label',
-            text: 'Panel Absolute'
-        }],
+
+
+var image = Ext.create('Ext.Img', {
+    src: "http://www.freischuetz-digital.de/digilib/Scaler/freidi/sources/A/00000111.jpg?dw=1200&amp;wx=0&amp;wy=0&amp;ww=1&amp;wh=1",
+    renderTo: Ext.getBody()
+});
+image.on("load", function() {
+    console.log("loaded");
+});
+
+
+this.items = [
+
+    
+image
+  
+ 
+  
+ 
+    
+    ]
         this.callParent()
 
 }
 
     });
+    
+    
+   
+//});

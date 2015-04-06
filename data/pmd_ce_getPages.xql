@@ -1,5 +1,6 @@
 {
     pages: [
+        {id: 'A_page111', path: 'A/A_mov6/A_page111.xml', movement_id: 'A_mov6'},
         {id: 'A_page127', path: 'A/A_mov8/A_page127.xml', movement_id: 'A_mov8'},
         {id: 'A_page128', path: 'A/A_mov8/A_page127.xml', movement_id: 'A_mov8'},
         {id: 'A_page129', path: 'A/A_mov8/A_page127.xml', movement_id: 'A_mov8'},

@@ -3,95 +3,46 @@
  * "autoCreateViewport" property. That setting automatically applies the "viewport"
  * plugin to promote that instance of this class to the body element.
  *
- * TODO - Replace this content of this view to suite the needs of your application.
  */
+ 
 Ext.define('pmdCE.view.main.Main', {
     extend: 'Ext.panel.Panel',
-  requires: [
-        'pmdCE.view.main.MainController',
-        'pmdCE.view.main.MainModel',
-        'Ext.layout.container.Table'
+    requires: [
+        'Ext.layout.container.VBox'
     ],
-
-    xtype: 'layout-table',
-   
+    xtype: 'layout-vertical-box',
+    id: 'cemain',
+ 
     layout: {
-        type: 'table',
-        columns: 1,
-        tableAttrs: {
-            style: {
-                width: '100%'
-            }
-        }
+        type: 'vbox',
+        pack: 'start',
+        align: 'stretch'
     },
-
-    autoScroll: true,
+    
+    bodyPadding: 5,
+   
+    defaults: {
+        frame: true
+        //bodyPadding: 3
+    },
     
     ceToolbar: null,
+    cePanel: null,
     
-    defaults: {
-        //bodyPadding: '15 20',
-        border: true
-    },
+    initComponent: function() {
     
-   /*  items: [
-     ceToolbar = new pmdCE.view.main.CEToolbar(),
-     cePanel = new pmdCE.view.main.CEPanelTable()
-    ]*/
-    
-     initComponent: function() {
-     
-     ceToolbar = new pmdCE.view.main.CEToolbar(),
+  ceToolbar = new pmdCE.view.main.CEToolbar(),
+    cePanel = new pmdCE.view.main.CEPanelTable(),
      
 this.items = [
-     ceToolbar, 
-     cePanel = new pmdCE.view.main.CEPanelTable()
-    ],
+     ceToolbar,
+       cePanel
+       
+    ]
 
 this.callParent()
 
- 
     }
     
-  /*  xtype: 'app-main',
+    });
     
-    controller: 'main',
-    viewModel: {
-        type: 'main'
-    },*/
-
-   /*layout: {
-        type: 'border'
-    },*/
-
-
-   /* items: [
-      {
-   
-    
-      xtype: 'panel',
-        bind: {
-            title: '{name}'
-        },
-        region: 'west',
-        html: '<ul><li>This area is commonly used for navigation, for example, using a "tree" component.</li></ul>',
-        width: 250,
-        split: true,
-        tbar: [{
-            text: 'Button',
-            handler: 'onClickButton'
-        }]
-    },{
-        region: 'center',
-        xtype: 'tabpanel',
-        items:[{
-            title: 'Tab 1',
-            html: '<h2>Änderung</h2>'
-        }]
-    }*/
-    
-    
- //   ]
-    
-    
-});

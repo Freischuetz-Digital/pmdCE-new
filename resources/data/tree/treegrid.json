@@ -1,0 +1,53 @@
+
+
+{
+"id": 'root',
+              "text" : 'Root Node',
+    "expanded" : true,
+   
+    "children": [
+        {
+            "element": "Hairpin", 
+            "hairpinId": "A_mov6_measure122_ce1",
+            "children": [
+                {
+                    "staff": "1",
+                    "tstamp": 1,
+                    "tstamp2": "0m+3.875",
+                    "place": "below",
+                    "form": "cres",
+                    "leaf": true
+                }
+                 ]
+        }, 
+        {
+            "element": "Original",
+            "hairpinId": "A_mov6_measure122_ce1",
+            "children": [
+                {
+                    "staff": "20",
+                    "start": 2,
+                    "end": "2m+3.875",
+                    "place": "below2",
+                    "form": "cres2",
+                    "leaf": true
+                }
+            ]
+        },
+        {
+            "element": "Regularisation",
+            "hairpinId": "A_mov6_measure122_ce1",
+            "children": [
+                {
+                    "staff": "30",
+                    "start": 3,
+                    "end": "3m+3.875",
+                    "place": "below3",
+                    "form": "cres3",
+                    "leaf": true
+                }
+            ]
+        }
+    ]
+   
+     }

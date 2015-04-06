@@ -1,20 +1,62 @@
 Ext.define('pmdCE.view.main.XMLEditorView', {
 extend: 'Ext.form.Panel',
-        layout:'absolute',
-       region: 'south',
-            height: 100,
-            minHeight: 75,
-            maxHeight: 150,
-           
-        defaultType: 'textfield',
+
+    layout: 'absolute',
+   // xtype: 'textarea',
+   // bwrapCfg: {tag: 'pre'},
+    //bodyCfg: {tag: 'code'},
+  //  width: 500,
+   // height: 400,
+   border: true,
+
+       // layout:'absolute',
+      // id: 'xmleditorview',
+      flex: 1,
+      title: 'XML View',
+      //region: 'center',
+      collapsible: true,
+      collapsed: true,
+      region:'south',
+      
+    //  width: 500,
+   // height: 100,
+    
+   /* defaults: {
+        //bodyPadding: 15,
+       // width: 200,
+        height: 100
+       // frame: true
+    },
+        */
         
-    initComponent: function() {
-        this.tbar = [{
-            xtype:'label',
-            text: 'Panel Absolute'
-        }],
+         defaults: {
+        bodyPadding: 15,
+       // width: 200,
+       // height: 100,
+        frame: true
+    },
+    
+        
+        test: null,
+        test2: null,
+        
+initComponent: function() {
+
+this.id = 'xmlview__'+Ext.getCmp('hairpinsitem').getTileId(),
+
+test = $.get( '../../../resources/verovio/hairpin.xml', function( data ) {
+    test = Ext.DomQuery.selectNode('hairpin', data);
+    test2 = document.createElement("div");
+        //test.cloneNode();
+        test2.appendChild(test.cloneNode(true));
+        console.log('test2.innerHTML', test2.innerHTML);
+ 
+ $('#xmlview__'+Ext.getCmp('hairpinsitem').getTileId()+'-body').html(Ext.String.htmlEncode(test2.innerHTML));
+
+}),
+
         this.callParent()
 
-    }
+}
 
     });
