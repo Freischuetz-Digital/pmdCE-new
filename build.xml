@@ -38,5 +38,20 @@
             <target name="-before-build"/>
             <target name="-after-build"/>
     -->
+    
+    <property name="project.version" value="0.1"/>
+    <property name="project.app" value="freidi-pmdCE"/>
+    <property name="build.dir" value="build"/>
+    
+    <target name="build-plus">
+        <copy todir="${build.dir}">
+            <fileset dir="${basedir}/add"/>
+        </copy>
+    </target>
+    
+    <target name="xar">
+        <mkdir dir="build-xar"/>
+        <zip basedir="." destfile="build-xar/${project.app}-${project.version}.xar" excludes="build-xar/, add/, .sencha/, build/, build/*, build.xml, build.sh, README.md" />
+    </target>
 
 </project>
