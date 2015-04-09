@@ -37,6 +37,8 @@ Ext.define('pmdCE.Application', {
         'Movement',
         'Page',
         'Hairpins',
+        'Hairpin',
+        'HairpinStart',
         'User',
         'Task',
         'Slurs'       
@@ -52,7 +54,10 @@ Ext.define('pmdCE.Application', {
     extStaff_start: null,
     slursStore: null,
     renderer: null,
-    hairpinsDataStore: null,
+    //hairpinsDataStore: null,
+    hairpinDataStore: null,
+    hairpinStart: null,
+    
     
     launch: function () {
     
@@ -62,8 +67,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                // url: 'data/pmd_ce_getNavigation.xql',
-                 url: 'data/pmd_ce_getSources.xql',
+                 url: 'data/pmd_ce_getNavigation.xql',
+                 //url: 'resources/xql/getSources.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sources'
@@ -114,8 +119,31 @@ Ext.define('pmdCE.Application', {
              autoLoad: false
          }),
          
+         hairpinDataStore = Ext.create('Ext.data.Store', {
+         storeId:'hairpinDataStore',
+            model: 'pmdCE.model.Hairpin',
+             proxy: {
+                 type: 'ajax',
+                 url: 'data/pmd_ce_getHairpinData.xql',
+                 //url: 'data/pmd_ce_getHairpinData.xql',
+                 //url: 'http://localhost:8080/exist/apps/proofMEIdata/pmdCE/resources/xql/getControlEvents.xql',
+                 reader: {
+                     type: 'json',
+                     rootProperty: 'hairpin'
+                 }
+             },
+             autoLoad: false
+         }),
+         
+         hairpinStart = Ext.create('Ext.data.Store', {
+   // extend: 'Ext.data.Store',
+
+   // alias: 'store.books',
+    model: 'pmdCE.model.HairpinStart'
+});
+         
                  
-         hairpinsDataStore = Ext.create('Ext.data.TreeStore', {
+       /*  hairpinsDataStore = Ext.create('Ext.data.TreeStore', {
          storeId:'hairpinsDataStore',
             model: 'pmdCE.model.Task',
              proxy: {
@@ -124,7 +152,7 @@ Ext.define('pmdCE.Application', {
                   //  mode: 'id'
                 },
                 // For Save
-       /* listeners : {
+        listeners : {
         write: function(store, operation, opts){
             Ext.each(operation.records, function(record){
                 if (record.dirty) {
@@ -132,21 +160,22 @@ Ext.define('pmdCE.Application', {
                 }
             });
         }
-      },*/
-                /*baseParams: {
+      },
+                baseParams: {
         mode: 'id'
-    },*/
+    },
                 folderSort: true
-         }),
+         }),*/
        
          sourcesStore.load();
          movementsStore.load();
          pagesStore.load();
+         hairpinStart.load();
        //  slursStore.load();
-       hairpinsDataStore.load();
+       //hairpinsDataStore.load();
      
-        //console.log('+++++++STORE+++++++');
-       // console.log(hairpinsDataStore);
+        console.log('+++++++STORE+++++++');
+        console.log(hairpinStart);
         
     },
     
@@ -174,9 +203,13 @@ Ext.define('pmdCE.Application', {
     return renderer;
     },
     
-     getHairpinsDataStore: function(){
-    return hairpinsDataStore;
+    getHairpinDataStore: function(){
+    return hairpinDataStore;
     }
     
+  /*   getHairpinsDataStore: function(){
+    return hairpinsDataStore;
+    }
+    */
     
 });

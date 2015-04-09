@@ -1,24 +1,19 @@
-
-
 {
-"id": 'root',
-              "text" : 'Root Node',
+    "id": 'root',
+     "text" : 'Root Node',
     "expanded" : true,
    
     "children": [
         {
-            "element": "Hairpin", 
-            "hairpinId": "A_mov6_measure122_ce1",
-            "children": [
-                {
-                    "staff": "1",
-                    "tstamp": 1,
-                    "tstamp2": "0m+3.875",
-                    "place": "below",
-                    "form": "cres",
-                    "leaf": true
-                }
-                 ]
+            "placement": "Obvious",
+            "element": "A_mov6_measure122_ce1", 
+            "icon": '../../../resources/images/mix_volume.png',
+             "staff": "1",
+             "tstamp": 1,
+             "tstamp2": "0m+3.875",
+             "place": "below",
+             "form": "cres",
+             "leaf": true              
         }, 
         {
             "element": "Original",

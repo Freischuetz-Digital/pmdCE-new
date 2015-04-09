@@ -8,14 +8,11 @@ Ext.define('pmdCE.view.main.EditDialog', {
    bodyPadding: 10,
    
    staffField: null,  
-  startField: null,
-  endField: null,
   placeField: null,
   formField: null,
   tstampField: null,
    tstampField2: null,
-    durField: null,
-    
+  
    modelTest: null,
    
     initComponent: function() {
@@ -23,20 +20,14 @@ Ext.define('pmdCE.view.main.EditDialog', {
         
 staffField = this.createTextField('staffField', 'Staff');
 formField = this.createTextField('formField', 'Form');
-startField = this.createTextField('startField', 'StartId');
-endField = this.createTextField('endField', 'EndId');
 placeField = this.createComboBox('Place');
 tstampField = this.createTextField('tstampField', 'Tstamp');
 tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
-durField = this.createTextField('durField', 'Duration');
 
      this.items =  [
                 staffField,
-                startField,
-                tstampField,
-                endField,
+               tstampField,
                 tstamp2Field,
-                durField,
                 placeField,
                 formField
             ] , 

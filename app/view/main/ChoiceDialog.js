@@ -23,60 +23,42 @@ Ext.define('pmdCE.view.main.ChoiceDialog', {
    bodyPadding: 10,
    
    staffFieldOrig: null,  
-  startFieldOrig: null,
-  endFieldOrig: null,
   placeFieldOrig: null,
   formFieldOrig: null,
   tstampFieldOrig: null,
    tstampField2Orig: null,
-    durFieldOrig: null,
   
   staffFieldReg1: null,  
-  startFieldReg1: null,
-  endFieldReg1: null,
   placeFieldReg1: null,
   formFieldReg1: null,
   tstampFieldReg1: null,
    tstampField2Reg1: null,
-    durFieldReg1: null,
-    
+
    staffFieldReg2: null,  
-  startFieldReg2: null,
-  endFieldReg2: null,
   placeFieldReg2: null,
   formFieldReg2: null,
   tstampFieldReg2: null,
    tstampField2Reg2: null,
-    durFieldReg2: null,
-   
+
     initComponent: function() {
  
 staffFieldOrig = this.createTextField('staffField', 'Staff');
 formFieldOrig = this.createTextField('formField', 'Form');
-startFieldOrig = this.createTextField('startField', 'StartId');
-endFieldOrig = this.createTextField('endField', 'EndId');
 placeFieldOrig = this.createComboBox('Place');
 tstampFieldOrig = this.createTextField('tstampField', 'Tstamp');
 tstamp2FieldOrig = this.createTextField('tstampField2', 'Tstamp2');
-durFieldOrig = this.createTextField('durField', 'Duration');
 
 staffFieldReg1 = this.createTextField('staffField', 'Staff');
 formFieldReg1 = this.createTextField('formField', 'Form');
-startFieldReg1 = this.createTextField('startField', 'StartId');
-endFieldReg1 = this.createTextField('endField', 'EndId');
 placeFieldReg1 = this.createComboBox('Place');
 tstampFieldReg1 = this.createTextField('tstampField', 'Tstamp');
 tstamp2FieldReg1 = this.createTextField('tstampField2', 'Tstamp2');
-durFieldReg1 = this.createTextField('durField', 'Duration');
 
 staffFieldReg2 = this.createTextField('staffField', 'Staff');
 formFieldReg2 = this.createTextField('formField', 'Form');
-startFieldReg2 = this.createTextField('startField', 'StartId');
-endFieldReg2 = this.createTextField('endField', 'EndId');
 placeFieldReg2 = this.createComboBox('Place');
 tstampFieldReg2 = this.createTextField('tstampField', 'Tstamp');
 tstamp2FieldReg2 = this.createTextField('tstampField2', 'Tstamp2');
-durFieldReg2 = this.createTextField('durField', 'Duration');
 
      this.items =  [
      
@@ -90,11 +72,8 @@ durFieldReg2 = this.createTextField('durField', 'Duration');
         
         items: [
                 staffFieldOrig,
-                startFieldOrig,
                 tstampFieldOrig,
-                endFieldOrig,
                 tstamp2FieldOrig,
-                durFieldOrig,
                 placeFieldOrig,
                 formFieldOrig
         ]
@@ -109,11 +88,8 @@ durFieldReg2 = this.createTextField('durField', 'Duration');
         
         items: [
             staffFieldReg1,
-                startFieldReg1,
                 tstampFieldReg1,
-                endFieldReg1,
                 tstamp2FieldReg1,
-                durFieldReg1,
                 placeFieldReg1,
                 formFieldReg1
         ]
@@ -128,11 +104,8 @@ durFieldReg2 = this.createTextField('durField', 'Duration');
         
         items: [
            staffFieldReg2,
-                startFieldReg2,
-                tstampFieldReg2,
-                endFieldReg2,
+               tstampFieldReg2,
                  tstamp2FieldReg2,
-                durFieldReg2,
                 placeFieldReg2,
                 formFieldReg2
         ]

@@ -12,12 +12,13 @@ Ext.define('pmdCE.view.main.CECenterPanel', {
      collapsible: false,
            region: 'center',
 
-    //bodyBorder: false,
-   
+    bodyBorder: false,
+    
     defaults: {
        // collapsible: true,
-        split: true
-       // bodyPadding: 10
+        split: true,
+         bodyPadding: 3
+       
     },
     
     ceEditor: null,

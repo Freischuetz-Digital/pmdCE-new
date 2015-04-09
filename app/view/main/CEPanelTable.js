@@ -13,7 +13,6 @@ Ext.define('pmdCE.view.main.CEPanelTable', {
     defaults: {
        // collapsible: true,
         split: true
-       // bodyPadding: 10
     },
     
     ceTabView: null,

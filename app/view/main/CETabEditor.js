@@ -4,7 +4,9 @@ Ext.define('pmdCE.view.main.CETabEditor', {
     requires: [
         'Ext.layout.container.Card'
     ],
-    xtype: 'layout-cardtabs',
+   // xtype: 'layout-cardtabs',
+    
+
 
     //style: 'background-color:#dfe8f6; ',
     //width: 500,
@@ -17,15 +19,19 @@ Ext.define('pmdCE.view.main.CETabEditor', {
             minWidth: 200,
             maxWidth: 300,
 
-    /*defaults: {
-        bodyPadding: 8
-    },*/
-
+/*items: Ext.create('Ext.button.Button', {   
+      //  cls: ceCls,
+        icon: '../../../resources/images/drop-add.gif',
+       // scale: 'medium',
+        handler: this.sourceOnItemClick
+}),*/
+           // icon: '../../../resources/images/drop-add.gif',
     
 
-    //slursItem: null,
+        
 
     initComponent: function() {
+   
    // slursItem = new pmdCE.view.main.SlursItem(),
    // slursItem.title = 'Slurs',
     hairpinsItems = new pmdCE.view.main.HairpinsItem(),
@@ -41,8 +47,13 @@ Ext.define('pmdCE.view.main.CETabEditor', {
        // dirsItems
   
      
-    ]
+    ],
+    
+    
+    
           this.callParent()
     }
+    
+ 
 
 });

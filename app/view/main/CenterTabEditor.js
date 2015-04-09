@@ -14,11 +14,11 @@ Ext.define('pmdCE.view.main.CenterTabEditor', {
 
     //bodyBorder: false,
    
-    defaults: {
+   /* defaults: {
        // collapsible: true,
-        split: true
-       // bodyPadding: 10
-    },
+       // split: true
+        bodyPadding: 10
+    },*/
     
     ceEditor: null,
     /*facsimileView: null,

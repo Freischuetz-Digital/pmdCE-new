@@ -4,6 +4,11 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     
     id: 'cetoolbar',
    
+    defaults: {
+       // collapsible: true,
+       // border: true
+    },
+   
  homeButton: null,
  sourceButton: null,
  movementButton: null,
@@ -11,15 +16,15 @@ Ext.define('pmdCE.view.main.CEToolbar', {
  arrowLeft: null,
  arrowR: null,
  
- createButton: null,
+ //createButton: null,
  saveButton: null,
- deleteButton: null,
+ //deleteButton: null,
  selectToolButton: null,
  loginButton: null,
  
  me: null,
  cePanelTable: null,
-   
+ 
     initComponent: function() {
     
     me = this;
@@ -29,18 +34,18 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     sourceButton = this.createCEButton('splitbutton', 'Source', [{handler: this.sourceOnItemClick}], this.click);
     movementButton = this.createCEButton('splitbutton', 'Movement', [{handler: this.moveOnItemClick}], this.click2);
     movementButton.setDisabled(true);
-    arrowLeft = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/dd-insert-arrow-left.gif');
+    arrowLeft = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/page-prev-disabled.gif');
     arrowLeft.setDisabled(true);
     pagesButton = this.createCEButton('splitbutton', 'Pages', [{handler: this.pagesOnItemClick}], this.click3);
     pagesButton.setDisabled(true);    
-    arrowR = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/dd-insert-arrow-right.gif');
+    arrowR = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/page-next-disabled.gif');
     arrowR.setDisabled(true);
     saveButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/Save.png', this.saveComponents);
     saveButton.setDisabled(true);
-    createButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
-    createButton.setDisabled(true);
-    deleteButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/icon16_error.png', this.deleteComponent);
-    deleteButton.setDisabled(true);
+    //createButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
+    //createButton.setDisabled(true);
+    //deleteButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/icon16_error.png', this.deleteComponent);
+    //deleteButton.setDisabled(true);
     selectToolButton = this.createCEButton('splitbutton', 'Control Events', [{text: 'Pitch Tool'}, {text: 'Abbrev Resolver'}]);
     loginButton = this.createLoginButton('splitbutton', 'Login');
        loginButton.setDisabled(true);    
@@ -51,17 +56,18 @@ Ext.define('pmdCE.view.main.CEToolbar', {
                 movementButton,
                 arrowLeft,
                 pagesButton,             
-              arrowR,  
-              '-',
+              arrowR,
+             '-',
             saveButton, 
-                createButton,
-            deleteButton,
+               // createButton,
+           // deleteButton,
                '->', 
                selectToolButton,
             '-',
               loginButton
-              ];
-
+              ],
+              
+            
         this.callParent()
     },
  
@@ -156,8 +162,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
         pagesButton.setDisabled(true);
         arrowLeft.setDisabled(true);
         arrowR.setDisabled(true);
-        createButton.setDisabled(true);
-        deleteButton.setDisabled(true);
+       // createButton.setDisabled(true);
+       // deleteButton.setDisabled(true);
         if(!saveButton.isDisabled()){
         // TODO
         alert('save?')
@@ -170,8 +176,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
      moveOnItemClick: function(item){
         movementButton.setText(item.text);
         pagesButton.setDisabled(false);
-        createButton.setDisabled(true);
-        deleteButton.setDisabled(true);
+       // createButton.setDisabled(true);
+        //deleteButton.setDisabled(true);
         
          if(!saveButton.isDisabled()){
         // TODO
@@ -194,8 +200,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
        // cePanelTable.getCETabView();
         arrowLeft.setDisabled(false);
         arrowR.setDisabled(false);
-        createButton.setDisabled(false);
-        deleteButton.setDisabled(false);
+       // createButton.setDisabled(false);
+       // deleteButton.setDisabled(false);
         // TODO: save for all testen
        /*   if(!saveButton.isDisabled()){
         alert('save?')

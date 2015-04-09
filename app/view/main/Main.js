@@ -20,10 +20,12 @@ Ext.define('pmdCE.view.main.Main', {
     },
     
     bodyPadding: 5,
+    
    
     defaults: {
-        frame: true
-        //bodyPadding: 3
+        //frame: true,
+        border: true,
+        bodyPadding: 1
     },
     
     ceToolbar: null,

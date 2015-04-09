@@ -32,13 +32,11 @@ extend: 'Ext.form.Panel',
          defaults: {
         bodyPadding: 15,
        // width: 200,
-       // height: 100,
+        height: 100,
         frame: true
     },
     
         
-        test: null,
-        test2: null,
         
 initComponent: function() {
 
@@ -49,7 +47,7 @@ test = $.get( '../../../resources/verovio/hairpin.xml', function( data ) {
     test2 = document.createElement("div");
         //test.cloneNode();
         test2.appendChild(test.cloneNode(true));
-        console.log('test2.innerHTML', test2.innerHTML);
+        //console.log('test2.innerHTML', test2.innerHTML);
  
  $('#xmlview__'+Ext.getCmp('hairpinsitem').getTileId()+'-body').html(Ext.String.htmlEncode(test2.innerHTML));
 

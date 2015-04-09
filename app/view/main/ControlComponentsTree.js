@@ -1,48 +1,68 @@
 Ext.define('pmdCE.view.main.ControlComponentsTree', {
-    extend: 'Ext.tree.Panel',
+    extend: 'Ext.grid.Panel',
     
     requires: [
-        'Ext.data.*',
+        'Ext.selection.CellModel',
         'Ext.grid.*',
-        'Ext.tree.*',
-        'Ext.ux.CheckColumn',
-        'pmdCE.model.Task'
-    ],    
-    xtype: 'tree-grid',
+        'Ext.data.*',
+        'Ext.util.*',
+        'Ext.form.*',
+        'pmdCE.model.Hairpin'
+    ],
+    xtype: 'cell-editing',
+    /*xtype: 'tree-grid',
     flex: 3,
-    region: 'center',
-    
+    region: 'center',   
     reserveScrollbar: true,
-    
-   // title: 'Core Team Projects',
-   // height: 370,
     useArrows: true,
-    rootVisible: false,
+    rootVisible: false,*/
+    
+    flex: 3,
+    region: 'center',   
+    xtype: 'array-grid',
+    //store: 'Companies',
+    stateful: true,
+   // collapsible: true,
    // multiSelect: true,
-    //singleExpand: true,
+    stateId: 'stateGrid',
+   // height: 350,
+   // title: 'Array Grid',
+    viewConfig: {
+        enableTextSelection: true
+    },
+
+   
    
     
     initComponent: function() {
-       // this.width = 600;
-           
+       
        this.id = 'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId(),
+       
+       
+       this.cellEditing = new Ext.grid.plugin.CellEditing({
+            clicksToEdit: 1
+        });
+
+        this.cellEditing.on('edit', this.onEditComplete, this);
         
             this.columns = [{
-                xtype: 'treecolumn', //this is so we know which column will show the tree
-                text: 'Element',
+                text: 'Orig/Reg',
+                width: 60,
+                sortable: true
+                //dataIndex: 'staff'
+            },
+            /*{
+               // xtype: 'treecolumn', //this is so we know which column will show the tree
+                text: 'XML ID',
                 flex: 2,
                 sortable: true,
-                dataIndex: 'element'
-            }, {
+                dataIndex: 'id'
+            }, */
+            {
                 text: 'Staff',
                 flex: 1,
                 sortable: true,
                 dataIndex: 'staff'
-            },{
-                text: 'StartId',
-                flex: 1,
-                sortable: true,
-                dataIndex: 'start'
             },
             {
                 text: 'Tstamp',
@@ -51,23 +71,12 @@ Ext.define('pmdCE.view.main.ControlComponentsTree', {
                 dataIndex: 'tstamp'
             },
             {
-                text: 'EndId',
-                flex: 1,
-                sortable: true,
-                dataIndex: 'end'
-            },
-            {
                 text: 'Tstamp2',
                 flex: 1,
                 dataIndex: 'tstamp2',
                 sortable: true
             },
             {
-                text: 'Dur',
-                flex: 1,
-                sortable: true,
-                dataIndex: 'dur'
-            },{
                 text: 'Place',
                 flex: 1,
                 dataIndex: 'place',
@@ -77,14 +86,59 @@ Ext.define('pmdCE.view.main.ControlComponentsTree', {
                 flex: 1,
                 dataIndex: 'form',
                 sortable: true
-            }, {
+            }, 
+           /* {
                 xtype: 'actioncolumn',
                 text: 'Delete',
                 width: 40,
-                icon: '../../../resources/images/icon16_error.png',
+                icon: '../../../resources/images/remove_1.png',
                 align: 'center',
-                 handler: function(grid, rowIndex, colIndex, actionItem, event, record, row) {
-            /*     console.log("grid");
+                 handler: this.deleteElement                
+               /\* function(grid, rowIndex, colIndex, actionItem, event, record, row) {          
+                }   *\/  
+            }, */
+            /*{
+                xtype: 'actioncolumn',
+                text: 'Add',
+                width: 40,
+                menuDisabled: true,
+                icon: '../../../resources/images/drop-add.gif',
+                align: 'center',
+                 handler: this.showDialog,
+                
+                 isDisabled: function(view, rowIdx, colIdx, item, record) {
+                    return record.data.leaf;
+                }
+            },*/
+            {
+                xtype: 'actioncolumn',
+                text: 'Edit',
+                width: 40,
+                align: 'center',
+                menuDisabled: true,
+                icon: '../../../resources/images/edit.png',
+               
+                handler: this.changeElementDialog,
+                 isDisabled: function(view, rowIdx, colIdx, item, record) {
+                    return !record.data.leaf;
+                }
+            }]
+        this.callParent()
+    },
+    
+    showDialog: function(){ 
+    
+    var win = new pmdCE.view.main.AddDialog();
+    win.show();
+},
+
+ changeElementDialog: function(){    
+    var win = new pmdCE.view.main.EditDialog();
+    win.show();
+},
+
+deleteElement: function(grid, rowIndex, colIndex, actionItem, event, record, row){    
+     /*     console.log("grid");
             console.log(grid);
             console.log("rowIndex");
             console.log(rowIndex);
@@ -130,46 +184,30 @@ Ext.Msg.confirm("Deletion", "The element will be deleted", function(btnText){
              pmdCE.getApplication().getHairpinsDataStore().sync();
             }
         }, this);
-
-                }
-      
-            }, {
-                xtype: 'actioncolumn',
-                text: 'Add',
-                width: 40,
-                menuDisabled: true,
-                icon: '../../../resources/images/drop-add.gif',
-                align: 'center',
-                 handler: this.showDialog,
-                
-                 isDisabled: function(view, rowIdx, colIdx, item, record) {
-                    return record.data.leaf;
-                }
-            },{
-                xtype: 'actioncolumn',
-                text: 'Edit',
-                width: 40,
-                align: 'center',
-                menuDisabled: true,
-                icon: '../../../resources/images/edit.png',
-               
-                handler: this.changeElementDialog,
-                 isDisabled: function(view, rowIdx, colIdx, item, record) {
-                    return !record.data.leaf;
-                }
-            }]
-        this.callParent()
-    },
-    
-    showDialog: function(){ 
-    
-    var win = new pmdCE.view.main.AddDialog();
-    win.show();
 },
+ onAddClick: function(){
+        // Create a model instance
+        var rec = new pmdCE.model.Hairpin({
+            common: '',
+            light: 'Mostly Shady',
+            price: 0,
+            availDate: Ext.Date.clearTime(new Date()),
+            indoor: false
+        });
 
- changeElementDialog: function(){    
-    var win = new pmdCE.view.main.EditDialog();
-    win.show();
-}
+        this.getStore().insert(0, rec);
+        this.cellEditing.startEditByPosition({
+            row: 0,
+            column: 0
+        });
+    },
+
+    onRemoveClick: function(grid, rowIndex){
+        this.getStore().removeAt(rowIndex);
+    },
+
+    onEditComplete: function(editor, context) {
+        this.getView().focusRow(context.record);
+    }
 });
 

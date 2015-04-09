@@ -2,10 +2,13 @@ Ext.define('pmdCE.view.main.VerovioImageStart', {
 extend: 'Ext.form.Panel',
         layout:'absolute',
        
-      flex: 1,
-      
+      //flex: 1,
+      height: 100,
+      width: 250,
        border: true,
+       margin: '0 10 10 0',
       // title: 'Start',
+     
       
      // me: null,
     /* tileId: null,
@@ -24,7 +27,7 @@ test = $.get( "resources/verovio/test.mei", function( data ) {
 	pageHeight: 450,
 	pageWidth: 800,
 //	ignoreLayout: 5,
-	border: 0,
+	border: 10,
 	scale: 30
     });
     renderer.setOptions(options);

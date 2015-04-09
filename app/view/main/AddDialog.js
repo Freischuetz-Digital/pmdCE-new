@@ -1,6 +1,6 @@
 Ext.define('pmdCE.view.main.AddDialog', {
    extend: 'Ext.window.Window',
-   title: 'Add Element',
+   title: 'Add Hairpin',
    flex: 1,
    //height: 200,
    //width: 500, 
@@ -8,34 +8,36 @@ Ext.define('pmdCE.view.main.AddDialog', {
    bodyPadding: 10,
    
    staffField: null,  
-  startField: null,
-  tstampField: null,
-  endField: null,
-  placeField: null,
+    tstampField: null,
+ placeField: null,
   formField: null,
   tstampField2: null,
-  durField: null,
-  
+ 
     initComponent: function() {
     
     staffField = this.createTextField('staffField', 'Staff');
-formField = this.createTextField('formField', 'Form');
-startField = this.createTextField('startField', 'StartId');
-endField = this.createTextField('endField', 'EndId');
+formField = this.createRadioGroup();
 placeField = this.createComboBox('Place');
 tstampField = this.createTextField('tstampField', 'Tstamp');
 tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
-durField = this.createTextField('durField', 'Duration');
-    
+
      this.items =  [
                 staffField,
-                startField,
                 tstampField,
-                endField,
                 tstamp2Field,
-                durField,
                 placeField,
                 formField
+              /*  {
+            xtype: 'radiogroup',
+            fieldLabel: 'Form',
+            cls: 'x-check-group-alt',
+            
+            items: [
+                {boxLabel: 'Cres', name: 'cres', inputValue: 1, margin: '0 10 10 0'},
+                {boxLabel: 'Dim', name: 'dim', inputValue: 2, checked: true, margin: '0 10 10 0'}
+                
+            ]
+        }*/
             ] , 
    
     this.buttons = [{
@@ -46,35 +48,55 @@ durField = this.createTextField('durField', 'Duration');
         
         function(){
         
-        var testId = 'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId();
+       // var testId =  'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId();
         
-       var target = Ext.getCmp(testId).getSelectionModel().getSelection()[0];
+        
+        // var target = Ext.getCmp('hairpinsitem').getSelectionModel().getSelection()[0];
+        
+      // var target = Ext.getCmp(testId).getSelectionModel().getSelection()[0];
        //Ext.getCmp(testId).selModel.getSelection()[0] || Ext.getCmp(testId).getRootNode();
-         var selectedEl = target.get('element');
+       //  var selectedEl = target.get('element');
+       
+       
+       var ceEditor = new pmdCE.view.main.CEEditor();
+                Ext.getCmp('centertabeditor').add(ceEditor);
+                Ext.getCmp('centertabeditor').setActiveItem(ceEditor);
          
-var hairpin = Ext.create('pmdCE.model.Task', { 
-                    element: staffField.value,
-                    start: startField.value,
-                    end: endField.value,
+var hairpin = Ext.create('pmdCE.model.Hairpins', { 
+                    id: 'test',
+                    staff: staffField.value,
+                    tstamp: tstampField.value,
+                    tstamp2: tstamp2Field.value,
                     place: placeField.value,
                     form: formField.value,
-                    leaf: true 
+                    placement: 'obvious' 
 	    });
 	   // this.isNewRecord = true;
 	   // this.newRecordId = newCar.get('id');
 	   // var grid = this.lookupReference('modelCarsGrid');
 	    // pmdCE.getApplication().getHairpinsDataStore().insert(target.get('depth'), newCar);	    
 	    //target.appendChild(newCar);
-	   var rootNode = Ext.getCmp(testId).getSelectionModel().getSelection()[0];
+	    
+	    
+	    var app = pmdCE.getApplication();
+         var store = app.getHairpinsStore();
+	    store.insert(0, hairpin);
+	    
+	   
+	   
+	   
+	  // var rootNode = Ext.getCmp('hairpinsitem').getSelectionModel().getSelection()[0];
 	   //Ext.getCmp(testId).selModel.getSelection()[0];
 	    
-        rootNode.appendChild(hairpin);
+       // rootNode.appendChild(hairpin);
 	     	     
 	    // rootNode.getChildAt(1).appendChild(newCar);	     
 	    // pmdCE.getApplication().getHairpinsDataStore().add(newCar);
             // record.remove(true);
-             pmdCE.getApplication().getHairpinsDataStore().sync();
+            // store.sync();
 	   // grid.getPlugin('modelCarsRowEditingPlugin').startEdit(newCar);
+	   
+	   
 	 	  
             this.up('window').close();
            
@@ -134,6 +156,29 @@ return ceTextField;
 });
 
 return ceTextField;
+},
+
+createRadioGroup: function(){
+    var radios = new Ext.form.RadioGroup({
+     xtype: 'radiogroup',
+            fieldLabel: 'Form',
+            cls: 'x-check-group-alt',
+            
+            items: [
+                {boxLabel: 'Cres', name: 'cres', inputValue: 1, margin: '0 10 10 0'},
+                {boxLabel: 'Dim', name: 'dim', inputValue: 2, checked: true, margin: '0 10 10 0'}
+                
+            ]
+    
+    
+    /* columns    : 2,
+       items: [
+             {boxLabel: 'E-Mail', name: 'communication', inputValue: 1},
+             {boxLabel: 'Nagios', name: 'communication', inputValue: 2}
+        ]*/
+   });
+   return radios;
+    
 }
 });
 

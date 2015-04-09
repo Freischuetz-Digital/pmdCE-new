@@ -2,12 +2,15 @@ Ext.define('pmdCE.view.main.VerovioImageEnd', {
 extend: 'Ext.form.Panel',
         layout:'absolute',
        
-      flex: 1,
+      //flex: 1,
+       height: 100,
+       width: 250,
      // id: 'verovioimageend',
        border: true,
       // title: 'End',
       tileId: null,
       bodyId: null,
+      margin: '0 10 10 0',
      
         
 initComponent: function() {
@@ -22,7 +25,7 @@ test = $.get( "resources/verovio/testEnd.mei", function( data ) {
 	pageHeight: 450,
 	pageWidth: 800,
 	//ignoreLayout: 5,
-	border: 0,
+	border: 10,
 	scale: 30
     });
     renderer.setOptions(options);
