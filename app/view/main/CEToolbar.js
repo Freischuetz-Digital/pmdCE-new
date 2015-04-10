@@ -29,18 +29,18 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     
     me = this;
       
-    homeButton = this.createCEBox('box', {tag: 'img', src:'../../../resources/images/freidi_icon_57.png', width : 26,
+    homeButton = this.createCEBox('box', {tag: 'img', src:'resources/images/freidi_icon_57.png', width : 26,
     height : 26}, this.homeOnItemToggle, true);
     sourceButton = this.createCEButton('splitbutton', 'Source', [{handler: this.sourceOnItemClick}], this.click);
     movementButton = this.createCEButton('splitbutton', 'Movement', [{handler: this.moveOnItemClick}], this.click2);
     movementButton.setDisabled(true);
-    arrowLeft = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/page-prev-disabled.gif');
+    arrowLeft = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/page-prev-disabled.gif');
     arrowLeft.setDisabled(true);
     pagesButton = this.createCEButton('splitbutton', 'Pages', [{handler: this.pagesOnItemClick}], this.click3);
     pagesButton.setDisabled(true);    
-    arrowR = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/page-next-disabled.gif');
+    arrowR = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/page-next-disabled.gif');
     arrowR.setDisabled(true);
-    saveButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/Save.png', this.saveComponents);
+    saveButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/Save.png', this.saveComponents);
     saveButton.setDisabled(true);
     //createButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
     //createButton.setDisabled(true);
@@ -100,8 +100,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
             var itemsArray = store.data.items;           
             for(var i = 0; i < itemsArray.length ; i++){ 
              var menuItem = Ext.create('Ext.menu.Item', {
-             itemId: itemsArray[i].id, 
-             text: itemsArray[i].id,
+             itemId: itemsArray[i].data.sigle, 
+             text: itemsArray[i].data.sigle,
              handler: this.sourceOnItemClick
              });
              sourceButton.getMenu().add(menuItem);            
@@ -113,16 +113,18 @@ Ext.define('pmdCE.view.main.CEToolbar', {
        if(movementButton.getText() === 'Movement'){
             movementButton.getMenu().removeAll();
             var app = pmdCE.getApplication();
-            var store = app.getMovementsStore();           
+            var store = app.getSourcesStore();           
             var itemsArray = store.data.items;           
             for(var i = 0; i < itemsArray.length ; i++){ 
-                if(sourceButton.getText() === itemsArray[i].data.source_id){           
-                    var menuItem = Ext.create('Ext.menu.Item', {
-                    itemId: itemsArray[i].id, 
-                    text: itemsArray[i].id,
+                if(sourceButton.getText() === itemsArray[i].data.sigle){   
+                for(var j = 0; j < itemsArray[i].data.mdivs.length ; j++){
+                     var menuItem = Ext.create('Ext.menu.Item', {
+                    itemId: itemsArray[i].data.mdivs[j].id, 
+                    text: itemsArray[i].data.mdivs[j].id,
                     handler: this.moveOnItemClick          
              });
-             movementButton.getMenu().add(menuItem);   
+             movementButton.getMenu().add(menuItem);                    
+                }                    
               }
           }
         }
@@ -132,16 +134,22 @@ Ext.define('pmdCE.view.main.CEToolbar', {
        if(pagesButton.getText() === 'Pages'){
             pagesButton.getMenu().removeAll();
             var app = pmdCE.getApplication();
-            var store = app.getPagesStore();
+            var store = app.getSourcesStore();
             var itemsArray = store.data.items;  
-            for(var i = 0; i < itemsArray.length ; i++){           
-            if(movementButton.getText() === itemsArray[i].data.movement_id){                
-             var menuItem = Ext.create('Ext.menu.Item', {
-             itemId: itemsArray[i].id, 
-             text: itemsArray[i].id,
-             handler: this.pagesOnItemClick
-             });
-             pagesButton.getMenu().add(menuItem); 
+            for(var i = 0; i < itemsArray.length ; i++){                    
+                if(sourceButton.getText() === itemsArray[i].data.sigle){   
+                    for(var j = 0; j < itemsArray[i].data.mdivs.length ; j++){
+                        if(movementButton.getText() === itemsArray[i].data.mdivs[j].id){
+                            for(var k = 0; k < itemsArray[i].data.mdivs[j].pages.length ; k++){
+                         var menuItem = Ext.create('Ext.menu.Item', {
+                            itemId: itemsArray[i].data.mdivs[j].pages[k].id, 
+                            text: itemsArray[i].data.mdivs[j].pages[k].id,
+                            handler: this.pagesOnItemClick
+                        });
+                        pagesButton.getMenu().add(menuItem);                        
+                    }                   
+                }               
+                }
              }
           }
         }

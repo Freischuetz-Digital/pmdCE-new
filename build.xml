@@ -51,7 +51,7 @@
     
     <target name="xar">
         <mkdir dir="build-xar"/>
-        <zip basedir="." destfile="build-xar/${project.app}-${project.version}.xar" excludes="build-xar/, add/, .sencha/, build/, build/*, build.xml, build.sh, README.md" />
+        <zip basedir="." destfile="build-xar/${project.app}-${project.version}.xar" excludes="build-xar/, add/, .sencha/, build.xml, build.sh, README.md" />
     </target>
 
 </project>

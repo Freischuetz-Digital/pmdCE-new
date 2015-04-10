@@ -11,7 +11,7 @@ Ext.define('pmdCE.view.main.HairpinsItem', {
    // multiSelect: true,
  //   stateId: 'stateGrid',
  //   height: 350,
-   icon: '../../../resources/images/mix_volume.png',
+   icon: 'resources/images/mix_volume.png',
     autoScroll: true,
    
     modelTest: null,
@@ -52,7 +52,7 @@ Ext.define('pmdCE.view.main.HairpinsItem', {
                 //text: 'Delete',
                 //width: 30,
                 flex : 1,
-                icon: '../../../resources/images/remove_1.png',
+                icon: 'resources/images/remove_1.png',
                 align: 'center',
              // menuDisabled: true,
            sortable : false,
@@ -163,10 +163,10 @@ createCEIcon: function(){
     var ceIcon = Ext.create('Ext.button.Button', {  
         xtype: 'button',
       //  cls: ceCls,
-        icon: "../../../resources/images/drop-add.gif",
+        icon: "resources/images/drop-add.gif",
          menu: [Ext.create('Ext.menu.Item', {
                         text: "Obvious",
-                        icon: '../../../resources/images/mix_volume.png',
+                        icon: 'resources/images/mix_volume.png',
                         handler: function() {
                             var win = new pmdCE.view.main.AddDialog();
                             win.show();
@@ -175,7 +175,7 @@ createCEIcon: function(){
                      
                      Ext.create('Ext.menu.Item', {
                 text: "Ambiguous",
-                icon: '../../../resources/images/mix_volume.png',
+                icon: 'resources/images/mix_volume.png',
                 handler: function() {
                     // TODO: choice
                     var win = new pmdCE.view.main.ChoiceDialog();

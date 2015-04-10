@@ -64,7 +64,7 @@ verovioImageStart,
 {
         xtype: 'label',
        // forId: 'myFieldId',
-        text: 'Add regularization(s) dep. start time',
+        text: 'Add regularization(s) dep. end time',
         margin: '0 10 10 0'
        // margin: '0 0 0 10'
     },
