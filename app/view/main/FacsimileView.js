@@ -12,7 +12,8 @@ extend: 'Ext.form.Panel',
       flex: 1,
       title: "Page NR",
        autoScroll: true,
-     
+       
+    
 initComponent: function() {
 
 

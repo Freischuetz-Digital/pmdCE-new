@@ -1,13 +1,13 @@
 Ext.define('pmdCE.view.main.CEToolbar', {
     extend: 'Ext.panel.Panel',
-    xtype: 'basic-toolbar',
+   // xtype: 'basic-toolbar',
     
     id: 'cetoolbar',
    
-    defaults: {
+   /* defaults: {
        // collapsible: true,
        // border: true
-    },
+    },*/
    
  homeButton: null,
  sourceButton: null,
@@ -16,9 +16,9 @@ Ext.define('pmdCE.view.main.CEToolbar', {
  arrowLeft: null,
  arrowR: null,
  
- //createButton: null,
+ createButton: null,
  saveButton: null,
- //deleteButton: null,
+ deleteButton: null,
  selectToolButton: null,
  loginButton: null,
  
@@ -42,10 +42,11 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     arrowR.setDisabled(true);
     saveButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/Save.png', this.saveComponents);
     saveButton.setDisabled(true);
-    //createButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
-    //createButton.setDisabled(true);
-    //deleteButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/icon16_error.png', this.deleteComponent);
-    //deleteButton.setDisabled(true);
+    createButton = this.createCEIcon1();
+    //('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
+    createButton.setDisabled(true);
+    deleteButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/icon16_error.png', this.deleteComponent);
+    deleteButton.setDisabled(true);
     selectToolButton = this.createCEButton('splitbutton', 'Control Events', [{text: 'Pitch Tool'}, {text: 'Abbrev Resolver'}]);
     loginButton = this.createLoginButton('splitbutton', 'Login');
        loginButton.setDisabled(true);    
@@ -59,8 +60,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
               arrowR,
              '-',
             saveButton, 
-               // createButton,
-           // deleteButton,
+            createButton,
+            deleteButton,
                '->', 
                selectToolButton,
             '-',
@@ -170,8 +171,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
         pagesButton.setDisabled(true);
         arrowLeft.setDisabled(true);
         arrowR.setDisabled(true);
-       // createButton.setDisabled(true);
-       // deleteButton.setDisabled(true);
+        createButton.setDisabled(true);
+        deleteButton.setDisabled(true);
         if(!saveButton.isDisabled()){
         // TODO
         alert('save?')
@@ -184,8 +185,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
      moveOnItemClick: function(item){
         movementButton.setText(item.text);
         pagesButton.setDisabled(false);
-       // createButton.setDisabled(true);
-        //deleteButton.setDisabled(true);
+        createButton.setDisabled(true);
+        deleteButton.setDisabled(true);
         
          if(!saveButton.isDisabled()){
         // TODO
@@ -208,19 +209,32 @@ Ext.define('pmdCE.view.main.CEToolbar', {
        // cePanelTable.getCETabView();
         arrowLeft.setDisabled(false);
         arrowR.setDisabled(false);
-       // createButton.setDisabled(false);
-       // deleteButton.setDisabled(false);
+        createButton.setDisabled(false);
+        deleteButton.setDisabled(false);
         // TODO: save for all testen
        /*   if(!saveButton.isDisabled()){
         alert('save?')
         saveButton.setDisabled(true);
         } */
+        
+        
+         verovioView = new pmdCE.view.main.VerovioView();
+   
+         controllsView = new pmdCE.view.main.CEGridPanel();
+        
+         xmlView = new pmdCE.view.main.XMLEditorView();
+         
+         Ext.getCmp('hairpinsitem').add(controllsView);
+         Ext.getCmp('hairpinsitem').add(verovioView);
+         Ext.getCmp('hairpinsitem').add(xmlView);
+                //Ext.getCmp('centertabeditor').setActiveItem(ceEditor);
          
          
          var app = pmdCE.getApplication();
-         var store = app.getHairpinsStore();
-         store.load();
-         Ext.getCmp('hairpinsitem').getView().bindStore(store);   
+        // var store = app.getHairpinsStore();
+        var store = app.getHairpinDataStore();
+        // store.load();
+         Ext.getCmp('cegridpanel').getView().bindStore(store);   
     },
     
     homeOnItemToggle: function(){
@@ -272,7 +286,39 @@ createCEIcon: function(ceCls, ceIcon, ceHandler){
         handler: ceHandler
 });
 return ceIcon;
-}
+},
+
+createCEIcon1: function(){
+    var ceIcon = Ext.create('Ext.button.Button', {  
+        xtype: 'button',
+      //  cls: ceCls,
+        icon: "resources/images/drop-add.gif",
+         menu: [Ext.create('Ext.menu.Item', {
+                        text: "Obvious",
+                        icon: 'resources/images/mix_volume.png',
+                        handler: function() {
+                            var win = new pmdCE.view.main.AddDialog();
+                            win.show();
+                        }
+                     }),
+                     
+                     Ext.create('Ext.menu.Item', {
+                text: "Ambiguous",
+                icon: 'resources/images/mix_volume.png',
+                handler: function() {
+                    // TODO: choice
+                    var win = new pmdCE.view.main.ChoiceDialog();
+                    win.show();
+                }
+             })
+                    ]
+        });
+    
+      
+
+return ceIcon;
+},
+
 
 
 });

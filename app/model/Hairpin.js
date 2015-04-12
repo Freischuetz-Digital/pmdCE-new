@@ -1,7 +1,7 @@
 Ext.define('pmdCE.model.Hairpin', {
     extend: 'Ext.data.Model',
     fields: [
-        {name: 'id',   reference: 'pmdCE.model.Hairpins'},
+        {name: 'id',   type: 'string'},
         {name: 'staff',   type: 'string'},
         {name: 'tstamp',   type: 'string'},
         {name: 'tstamp2',   type: 'string'},

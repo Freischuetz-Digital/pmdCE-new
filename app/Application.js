@@ -13,6 +13,7 @@ Ext.define('pmdCE.Application', {
        'main.CEToolbar',
        'main.FacsimileView',
        'main.XMLEditorView',
+       'main.CETabPanel',  
        'main.CETabEditor',
        'main.SlursItem',
        'main.HairpinsItem',
@@ -27,8 +28,9 @@ Ext.define('pmdCE.Application', {
        'main.AddDialog',
        'main.EditDialog',
        'main.ChoiceDialog',
-       'main.ControlComponentsTree',
        'main.CenterTabEditor',
+       'main.CEGridPanel',
+       'main.CEPanel',          
        'main.Main'      
     ],
 
@@ -67,8 +69,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                 //url: 'data/pmd_ce_getNavigation.xql',
-                 url: 'resources/xql/getSources.xql',
+                 url: 'data/pmd_ce_getNavigation.xql',
+                 //url: 'resources/xql/getSources.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sources'
@@ -134,13 +136,13 @@ Ext.define('pmdCE.Application', {
              },
              autoLoad: false
          }),
-         
+    /*     
          hairpinStart = Ext.create('Ext.data.Store', {
    // extend: 'Ext.data.Store',
 
    // alias: 'store.books',
     model: 'pmdCE.model.HairpinStart'
-});
+});*/
          
                  
        /*  hairpinsDataStore = Ext.create('Ext.data.TreeStore', {
@@ -170,12 +172,12 @@ Ext.define('pmdCE.Application', {
          sourcesStore.load();
       //   movementsStore.load();
       //   pagesStore.load();
-         hairpinStart.load();
+       //  hairpinStart.load();
        //  slursStore.load();
-       //hairpinsDataStore.load();
+       hairpinDataStore.load();
      
         console.log('+++++++STORE+++++++');
-        console.log(sourcesStore);
+        console.log(hairpinDataStore);
         
     },
     

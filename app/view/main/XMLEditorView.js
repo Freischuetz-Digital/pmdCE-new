@@ -10,13 +10,13 @@ extend: 'Ext.form.Panel',
    border: true,
 
        // layout:'absolute',
-      // id: 'xmleditorview',
+       id: 'xmleditorview',
       flex: 1,
       title: 'XML View',
       //region: 'center',
       collapsible: true,
       collapsed: true,
-      region:'south',
+      region:'east',
       
     //  width: 500,
    // height: 100,
@@ -40,7 +40,7 @@ extend: 'Ext.form.Panel',
         
 initComponent: function() {
 
-this.id = 'xmlview__'+Ext.getCmp('hairpinsitem').getTileId(),
+//this.id = 'xmlview__'+Ext.getCmp('hairpinsitem').getTileId(),
 
 test = $.get( '../../../resources/verovio/hairpin.xml', function( data ) {
     test = Ext.DomQuery.selectNode('hairpin', data);
@@ -48,8 +48,10 @@ test = $.get( '../../../resources/verovio/hairpin.xml', function( data ) {
         //test.cloneNode();
         test2.appendChild(test.cloneNode(true));
         //console.log('test2.innerHTML', test2.innerHTML);
+        
+        $('#xmleditorview-body').html(Ext.String.htmlEncode(test2.innerHTML));
  
- $('#xmlview__'+Ext.getCmp('hairpinsitem').getTileId()+'-body').html(Ext.String.htmlEncode(test2.innerHTML));
+// $('#xmlview__'+Ext.getCmp('hairpinsitem').id+'-body').html(Ext.String.htmlEncode(test2.innerHTML));
 
 }),
 

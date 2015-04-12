@@ -16,8 +16,8 @@ Ext.define('pmdCE.view.main.CECenterPanel', {
     
     defaults: {
        // collapsible: true,
-        split: true,
-         bodyPadding: 3
+        split: true
+       //  bodyPadding: 3
        
     },
     

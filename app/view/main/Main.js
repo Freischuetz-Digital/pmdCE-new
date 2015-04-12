@@ -24,8 +24,8 @@ Ext.define('pmdCE.view.main.Main', {
    
     defaults: {
         //frame: true,
-        border: true,
-        bodyPadding: 1
+        border: true
+       // bodyPadding: 3
     },
     
     ceToolbar: null,
@@ -34,7 +34,8 @@ Ext.define('pmdCE.view.main.Main', {
     initComponent: function() {
     
   ceToolbar = new pmdCE.view.main.CEToolbar(),
-    cePanel = new pmdCE.view.main.CEPanelTable(),
+    //cePanel = new pmdCE.view.main.CEPanelTable(),
+    cePanel = new pmdCE.view.main.CEPanel(),
      
 this.items = [
      ceToolbar,

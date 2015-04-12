@@ -8,21 +8,30 @@ extend: 'Ext.form.Panel',
        border: true,
        margin: '0 10 10 0',
       // title: 'Start',
-     
+     id: 'verovioimagestart',
       
      // me: null,
     /* tileId: null,
      bodyId: null,*/
+     renderer: null,
+     
  
 initComponent: function() {
 
-this.id = 'verovioimagestart_'+Ext.getCmp('hairpinsitem').getTileId(),
+//this.id = 'verovioimagestart_'+Ext.getCmp('hairpinsitem').getTileId(),
 
 
 app = pmdCE.getApplication();
 renderer = app.getRenderer();
 
+//renderer = Ext.getCmp('verovioview').getRenderer,
+
+//renderer = new verovio.toolkit();
+
 test = $.get( "resources/verovio/test.mei", function( data ) {
+
+//renderer = new verovio.toolkit();
+
     var options = JSON.stringify({
 	pageHeight: 450,
 	pageWidth: 800,
@@ -33,7 +42,7 @@ test = $.get( "resources/verovio/test.mei", function( data ) {
     renderer.setOptions(options);
     renderer.loadData(data);
     var svg = renderer.renderPage( 1, options );
-    $('#verovioimagestart_'+Ext.getCmp('hairpinsitem').getTileId()+'-body').html(svg);
+    $('#verovioimagestart-body').html(svg);
   
     var elements = document.getElementsByClassName('note');
     

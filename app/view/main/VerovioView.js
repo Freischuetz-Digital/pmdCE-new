@@ -4,11 +4,11 @@ Ext.define('pmdCE.view.main.VerovioView', {
         'Ext.layout.container.VBox'
     ],
    // xtype: 'layout-vertical-box',
- //   id: 'verovioview',
+    id: 'verovioview',
    /*width: 300,
      height: 400,*/
      flex: 1,
-    region: 'east',
+    region: 'center',
     
   /*  layout: {
         type: 'vbox',
@@ -23,9 +23,14 @@ Ext.define('pmdCE.view.main.VerovioView', {
     placement: null,
     
     
+    //renderer: null,
+    
+    
     initComponent: function() {
+    
+   // this.renderer = new verovio.toolkit(),
    
-    this.id = 'verovioView_'+Ext.getCmp('hairpinsitem').getTileId(),
+   // this.id = 'verovioView_'+Ext.getCmp('hairpinsitem').getTileId(),
     
     
   
@@ -74,6 +79,10 @@ verovioImageEnd
         this.callParent()
 
 },
+
+/*getRenderer: function(){
+    return this.renderer;
+    },*/
 
         createComboBox: function(fieldName){
     

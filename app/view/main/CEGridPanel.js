@@ -1,4 +1,4 @@
-Ext.define('pmdCE.view.main.ControlComponentsTree', {
+Ext.define('pmdCE.view.main.CEGridPanel', {
     extend: 'Ext.grid.Panel',
     
     requires: [
@@ -9,7 +9,7 @@ Ext.define('pmdCE.view.main.ControlComponentsTree', {
         'Ext.form.*',
         'pmdCE.model.Hairpin'
     ],
-   // xtype: 'cell-editing',
+    //xtype: 'cell-editing',
     /*xtype: 'tree-grid',
     flex: 3,
     region: 'center',   
@@ -19,18 +19,18 @@ Ext.define('pmdCE.view.main.ControlComponentsTree', {
     
     flex: 3,
     region: 'west',   
-   // xtype: 'array-grid',
+    //xtype: 'array-grid',
     //store: 'Companies',
-    stateful: true,
+   // stateful: true,
    // collapsible: true,
    // multiSelect: true,
-    stateId: 'stateGrid',
+  //  stateId: 'stateGrid',
    // height: 350,
    // title: 'Array Grid',
     viewConfig: {
         enableTextSelection: true
     },
-    id: 'constrolcomponentstree',
+    id: 'cegridpanel',
 
    
    
@@ -40,15 +40,22 @@ Ext.define('pmdCE.view.main.ControlComponentsTree', {
      //  this.id = 'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId(),
        
        
-       this.cellEditing = new Ext.grid.plugin.CellEditing({
+      /* this.cellEditing = new Ext.grid.plugin.CellEditing({
             clicksToEdit: 1
         });
 
         this.cellEditing.on('edit', this.onEditComplete, this);
-        
+        */
             this.columns = [{
+               // xtype: 'treecolumn', //this is so we know which column will show the tree
+                text: 'Name',
+                flex: 2,
+                sortable: true
+                //dataIndex: 'id'
+            }, 
+            {
                 text: 'Orig/Reg',
-                width: 60,
+                flex: 1,
                 sortable: true
                 //dataIndex: 'staff'
             },
@@ -87,7 +94,7 @@ Ext.define('pmdCE.view.main.ControlComponentsTree', {
                 flex: 1,
                 dataIndex: 'form',
                 sortable: true
-            }, 
+            }
            /* {
                 xtype: 'actioncolumn',
                 text: 'Delete',
@@ -111,7 +118,7 @@ Ext.define('pmdCE.view.main.ControlComponentsTree', {
                     return record.data.leaf;
                 }
             },*/
-            {
+           /* {
                 xtype: 'actioncolumn',
                 text: 'Edit',
                 width: 40,
@@ -123,7 +130,9 @@ Ext.define('pmdCE.view.main.ControlComponentsTree', {
                  isDisabled: function(view, rowIdx, colIdx, item, record) {
                     return !record.data.leaf;
                 }
-            }]
+            }*/
+            
+            ]
         this.callParent()
     },
     

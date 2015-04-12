@@ -1,9 +1,9 @@
-Ext.define('pmdCE.view.main.HairpinsItem', {
+Ext.define('pmdCE.view.main.HairpinsItem_1', {
     extend: 'Ext.grid.Panel',
     requires: [
         'Ext.grid.column.Action'
     ],
-    id:'hairpinsitem',
+    id:'hairpinsitem_1',
   //  title: 'Slurs',
     
  //    stateful: true,

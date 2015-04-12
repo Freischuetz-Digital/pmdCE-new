@@ -5,22 +5,29 @@ extend: 'Ext.form.Panel',
       //flex: 1,
        height: 100,
        width: 250,
-     // id: 'verovioimageend',
+      id: 'verovioimageend',
        border: true,
       // title: 'End',
       tileId: null,
       bodyId: null,
       margin: '0 10 10 0',
+      renderer: null,
      
         
 initComponent: function() {
 
-this.id = 'verovioimageend_'+Ext.getCmp('hairpinsitem').getTileId(),
-
+//this.id = 'verovioimageend_'+Ext.getCmp('hairpinsitem').getTileId(),
 app = pmdCE.getApplication();
 renderer = app.getRenderer();
 
+//renderer = Ext.getCmp('verovioview').renderer,
+//renderer = new verovio.toolkit();
+
+/*app = pmdCE.getApplication();
+renderer = app.getRenderer();*/
+
 test = $.get( "resources/verovio/testEnd.mei", function( data ) {
+//renderer = new verovio.toolkit();
     var options = JSON.stringify({
 	pageHeight: 450,
 	pageWidth: 800,
@@ -31,7 +38,8 @@ test = $.get( "resources/verovio/testEnd.mei", function( data ) {
     renderer.setOptions(options);
                   renderer.loadData(data);
     var svg = renderer.renderPage( 1, options );
-    $('#verovioimageend_'+Ext.getCmp('hairpinsitem').getTileId()+'-body').html(svg);
+    $('#verovioimageend-body').html(svg);
+   // $('#verovioimageend_'+Ext.getCmp('hairpinsitem').id+'-body').html(svg);
     
   }),
 

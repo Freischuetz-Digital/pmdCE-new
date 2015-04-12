@@ -12,7 +12,7 @@ Ext.define('pmdCE.view.main.CEEditor', {
   region: 'center',
    layout: 'border',
  // region: 'north',
- closable: true,
+ //closable: true,
   
    // xtype: 'layout-horizontal-box',
  
