@@ -24,6 +24,10 @@ Ext.define('pmdCE.Application', {
        'main.EditDialog',
        'main.ChoiceDialog',
        'main.CEGridPanel',
+       'main.AddObviousElDialog',
+       'main.AddAmbiguousElDialog',
+       'main.AmbiguousCard',
+       'main.ObviousCard',
        'main.CEPanel',          
        'main.Main'      
     ],
@@ -120,12 +124,12 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Hairpin',
              proxy: {
                  type: 'ajax',
-                 url: 'data/pmd_ce_getHairpinData.xql',
+                 url: 'data/pmd_ce_getHairpins.xql',
                  //url: 'data/pmd_ce_getHairpinData.xql',
                  //url: 'http://localhost:8080/exist/apps/proofMEIdata/pmdCE/resources/xql/getControlEvents.xql',
                  reader: {
                      type: 'json',
-                     rootProperty: 'hairpin'
+                     rootProperty: 'hairpins'
                  }
              },
              autoLoad: false

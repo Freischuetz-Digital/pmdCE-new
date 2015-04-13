@@ -314,7 +314,8 @@ createCEIcon1: function(){
                         text: "Obvious",
                         icon: 'resources/images/mix_volume.png',
                         handler: function() {
-                            var win = new pmdCE.view.main.AddDialog();
+                           // var win = new pmdCE.view.main.AddDialog();
+                           var win = new pmdCE.view.main.AddObviousElDialog();
                             win.show();
                         }
                      }),
@@ -324,7 +325,8 @@ createCEIcon1: function(){
                 icon: 'resources/images/mix_volume.png',
                 handler: function() {
                     // TODO: choice
-                    var win = new pmdCE.view.main.ChoiceDialog();
+                    //var win = new pmdCE.view.main.ChoiceDialog();
+                    var win = new pmdCE.view.main.AddAmbiguousElDialog();
                     win.show();
                 }
              })
