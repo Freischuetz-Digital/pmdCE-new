@@ -78,9 +78,9 @@ var hairpin = Ext.create('pmdCE.model.Hairpins', {
 	    //target.appendChild(newCar);
 	    
 	    
-	    var app = pmdCE.getApplication();
+	 /*   var app = pmdCE.getApplication();
          var store = app.getHairpinsStore();
-	    store.insert(0, hairpin);
+	    store.insert(0, hairpin);*/
 	    
 	   
 	   

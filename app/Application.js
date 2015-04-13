@@ -67,11 +67,11 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                // url: 'data/pmd_ce_getNavigation.xql',
-                 url: 'resources/xql/getSources.xql',
+                 url: 'data/pmd_ce_getNavigation.xql',
+                 //url: 'resources/xql/getSources.xql',
                  reader: {
                      type: 'json',
-                     rootProperty: 'sources'
+                     rootProperty: 'sigle'
                  }
              },
              autoLoad: true
@@ -124,8 +124,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Hairpin',
              proxy: {
                  type: 'ajax',
-                 url: 'data/getControlEvents.xql',
-                 //url: 'data/pmd_ce_getHairpins.xql',
+                // url: 'data/getControlEvents.xql',
+                 url: 'data/pmd_ce_getHairpins.xql',
                  //url: 'data/pmd_ce_getHairpinData.xql',
                  //url: 'http://localhost:8080/exist/apps/proofMEIdata/pmdCE/resources/xql/getControlEvents.xql',
                  reader: {
@@ -133,7 +133,7 @@ Ext.define('pmdCE.Application', {
                      rootProperty: 'hairpins'
                  }
              },
-             autoLoad: false
+             autoLoad: true
          }),
     /*     
          hairpinStart = Ext.create('Ext.data.Store', {
@@ -176,7 +176,7 @@ Ext.define('pmdCE.Application', {
        hairpinDataStore.load();
      
         console.log('+++++++STORE+++++++');
-        console.log(hairpinDataStore);
+        console.log(sourcesStore);
         
     },
     
