@@ -12,6 +12,7 @@ Ext.define('pmdCE.view.main.CETabPanel', {
         autoScroll: true
     },
     
+    
    /* requires: [
         'Ext.layout.container.Card'
     ],*/

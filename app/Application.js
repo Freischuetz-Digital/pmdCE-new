@@ -8,27 +8,21 @@ Ext.define('pmdCE.Application', {
    
     name: 'pmdCE',
     
-    views: [    
-       'main.CEPanelTable',
+    views: [           
        'main.CEToolbar',
        'main.FacsimileView',
        'main.XMLEditorView',
        'main.CETabPanel',  
-       'main.CETabEditor',
        'main.SlursItem',
        'main.HairpinsItem',
        'main.DynamsItem',
        'main.DirsItem',
-       'main.CEEditor',
-       'main.CECenterPanel',
-       'main.VerovioView',
-       'main.ControllsEditor', 
+       'main.VerovioView', 
        'main.VerovioImageStart',
        'main.VerovioImageEnd',
        'main.AddDialog',
        'main.EditDialog',
        'main.ChoiceDialog',
-       'main.CenterTabEditor',
        'main.CEGridPanel',
        'main.CEPanel',          
        'main.Main'      

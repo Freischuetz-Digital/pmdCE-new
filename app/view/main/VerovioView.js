@@ -43,7 +43,7 @@ Ext.define('pmdCE.view.main.VerovioView', {
 
 this.items = [
 
-{
+/*{
             xtype: 'radiogroup',
             //fieldLabel: 'Auto Layout',
             cls: 'x-check-group-alt',
@@ -53,7 +53,7 @@ this.items = [
                 {boxLabel: 'Obvious', name: 'obvious', inputValue: 2, checked: true, margin: '0 10 10 0'}
                 
             ]
-        },
+        },*/
 
 //placement,
 

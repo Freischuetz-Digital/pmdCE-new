@@ -17,7 +17,7 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
     useArrows: true,
     rootVisible: false,*/
     
-    flex: 3,
+    flex: 4,
     region: 'west',   
     //xtype: 'array-grid',
     //store: 'Companies',

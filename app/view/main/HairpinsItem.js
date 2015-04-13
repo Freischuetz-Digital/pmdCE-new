@@ -1,53 +1,36 @@
 Ext.define('pmdCE.view.main.HairpinsItem', {
 extend: 'Ext.panel.Panel',
-//xtype: 'layout-border',
     requires: [
-        'Ext.layout.container.Border'
+        'Ext.layout.container.HBox'
     ],
-    layout: 'border',
- //   width: 500,
- //   height: 400,
-
-    bodyBorder: false,
+    xtype: 'layout-horizontal-box',
+   // width: 500,
+   // height: 400,
+    flex:1,
     
-    defaults: {
-        //collapsible: true,
-        split: true
-       // bodyPadding: 10
+    layout: {
+        type: 'hbox',
+        pack: 'start',
+        align: 'stretch'
     },
     
+   // bodyPadding: 10,
     
+    defaults: {
+        frame: true,
+        autoScroll: true
+       // bodyPadding: 10
+    },
     title: 'Hairpins',
-
-
-   /* extend: 'Ext.grid.Panel',
+    id: 'hairpinsitem',
     
-     requires: [
-        'Ext.layout.container.Border'
-    ],
-     flex: 1,
-    // region: 'center',
-    id:'hairpinsitem',
-   layout: 'border',
-   autoScroll: true,
-     
-  collapsible: false,
-     
-    //bodyBorder: false,
+    autoScroll: true,
    
-    defaults: {
-       // collapsible: true,
-        split: true
-       // bodyPadding: 10
-    },
-    title: 'Hairpins',*/
     xmlView: null,
     verovioView: null,
     controllsView: null,
     
     initComponent: function () {
-    
-    this.id = 'hairpinsitem',
     
    // this.title = Ext.getCmp('hairpinsitem').getTileId(),
     

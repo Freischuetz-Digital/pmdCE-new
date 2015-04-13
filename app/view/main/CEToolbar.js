@@ -21,6 +21,7 @@ Ext.define('pmdCE.view.main.CEToolbar', {
  deleteButton: null,
  selectToolButton: null,
  loginButton: null,
+ showXmlButton: null,
  
  me: null,
  cePanelTable: null,
@@ -45,8 +46,10 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     createButton = this.createCEIcon1();
     //('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
     createButton.setDisabled(true);
-    deleteButton = this.createCEIcon('x-btn-text-icon x-ric-generic', '../../../resources/images/icon16_error.png', this.deleteComponent);
+    deleteButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/icon16_error.png', this.deleteComponent);
     deleteButton.setDisabled(true);
+    showXmlButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/xml-32.png', this.saveComponents);
+    showXmlButton.setDisabled(true);
     selectToolButton = this.createCEButton('splitbutton', 'Control Events', [{text: 'Pitch Tool'}, {text: 'Abbrev Resolver'}]);
     loginButton = this.createLoginButton('splitbutton', 'Login');
        loginButton.setDisabled(true);    
@@ -62,6 +65,20 @@ Ext.define('pmdCE.view.main.CEToolbar', {
             saveButton, 
             createButton,
             deleteButton,
+            '-',
+            showXmlButton,
+            '-',
+            {
+            xtype: 'radiogroup',
+            //fieldLabel: 'Auto Layout',
+            cls: 'x-check-group-alt',
+            disabled: true,
+            items: [
+            {boxLabel: 'Ambigous', name: 'ambigous', inputValue: 1, margin: '0 10 0 10'},
+                {boxLabel: 'Obvious', name: 'obvious', inputValue: 2, margin: '0 10 0 0'}
+                
+            ]
+        },
                '->', 
                selectToolButton,
             '-',
@@ -222,11 +239,11 @@ Ext.define('pmdCE.view.main.CEToolbar', {
    
          controllsView = new pmdCE.view.main.CEGridPanel();
         
-         xmlView = new pmdCE.view.main.XMLEditorView();
+       //  xmlView = new pmdCE.view.main.XMLEditorView();
          
          Ext.getCmp('hairpinsitem').add(controllsView);
          Ext.getCmp('hairpinsitem').add(verovioView);
-         Ext.getCmp('hairpinsitem').add(xmlView);
+       //  Ext.getCmp('hairpinsitem').add(xmlView);
                 //Ext.getCmp('centertabeditor').setActiveItem(ceEditor);
          
          
@@ -317,7 +334,7 @@ createCEIcon1: function(){
       
 
 return ceIcon;
-},
+}
 
 
 
