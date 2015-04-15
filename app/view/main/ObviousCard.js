@@ -8,7 +8,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
    // width: 500,
    // height: 400,
 
-    bodyPadding: 15,
+    bodyPadding: 10,
     
     defaults: {
         border:false
@@ -25,30 +25,34 @@ Ext.define('pmdCE.view.main.ObviousCard', {
       tstampField: null,
       tstampField2: null,
       
-      verovioView: null,
+      verovioImageStart: null,
+      verovioImageEnd: null,
   
     
          initComponent: function() {
          
-         staffField= this.createComboBox('Staff');  
-        startTaktField= this.createComboBox('Start measure');
-        endTaktField= this.createComboBox('End measure');
+         this.id = "obviousCard";
+         Ext.getCmp('cemain').setEditorId(this.id);
+         
+         staffField= this.createComboBoxStaff('Staff');  
+        startTaktField= this.createComboBoxMeasureNr('Start measure');
+        endTaktField= this.createComboBoxMeasureNr('End measure');
         placeField = this.createComboBox('Place');
         formField = this.createRadioGroup();
         
         tstampField = this.createTextField('tstampField', 'Tstamp');
         tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
-        
-        // TODO:setid
-        
-        // verovioView = new pmdCE.view.main.VerovioView();
+       
+        verovioImageStart = new pmdCE.view.main.VerovioImageStart(), 
+        verovioImageEnd = new pmdCE.view.main.VerovioImageEnd()
+         
          
           this.items  = [
         {
             id: 'card-0',
-            //html: '<h2>Welcome to the Demo Wizard!</h2><p>Step 1 of 3</p><p>Please click the "Next" button to continue...</p>'
+             bodyPadding: 5,
             items: [
-                staffField,
+            staffField,
             startTaktField,
             endTaktField,
             placeField,
@@ -57,19 +61,40 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         },
         {
             id: 'card-1',
-           // html: '<p>Step 2 of 3</p><p>Almost there.  Please click the "Next" button to continue...</p>'
+            layout: 'hbox',
+            bodyPadding: 5,
+           // margin: '0 10 10 0',
            items: [
-                 tstampField,
-                tstamp2Field
-                //verovioView
+           {
+        xtype: 'fieldset',
+        title: 'Start time',
+        defaultType: 'textfield',
+        
+        defaults: {
+            anchor: '100%'
+        },
+        
+        items: [
+                tstampField,
+                verovioImageStart
+        ]
+    },
+          {
+        xtype: 'fieldset',
+        title: 'End time',
+        defaultType: 'textfield',
+        defaults: {
+            anchor: '100%'
+        },
+        
+        items: [
+                tstamp2Field,
+                verovioImageEnd
+        ]
+    }
         ]
            
         }
-       /* ,
-        {
-            id: 'card-2',
-            html: '<h1>Congratulations!</h1><p>Step 3 of 3 - Complete</p>'
-        }*/
     ],
          
      
@@ -152,15 +177,8 @@ return ceTextField;
 
     createComboBox: function(fieldName){
     
-    var states = Ext.create('Ext.data.Store', {
-    fields: ['abbr', 'name'],
-    data : [
-        {"abbr":"above", "name":"above"},
-        {"abbr":"below", "name":"below"},
-         {"abbr":"between", "name":"between"}
-    ]
-});
-    
+var states = new Array("above", "below", "between"); 
+
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
     store: states,
@@ -175,7 +193,65 @@ return ceTextField;
     }
   }
   });
+return ceTextField;
+},
 
+   createComboBoxStaff: function(fieldName){
+   
+   var staffNrCurrent = Ext.getCmp('cetoolbar').staffNr;
+  
+   var dataStaffNr = new Array(staffNrCurrent);  
+   for(var i = 0; i < staffNrCurrent ; i++){
+   dataStaffNr[i] = i+1;       
+   }
+  
+    var ceTextField = Ext.create('Ext.form.ComboBox', {
+    fieldLabel: fieldName,
+    store: dataStaffNr,
+    queryMode: 'local',
+    displayField: 'name',
+    editable: false,
+    valueField: 'abbr',
+    listeners: {
+    select: function(combo, record, index) {
+    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
+     // modelTest.set('curvedir', combo.getValue());
+    }
+  }
+  });
+return ceTextField;
+},
+
+
+ createComboBoxMeasureNr: function(fieldName){
+   
+   var staffNrCurrent = Ext.getCmp('cetoolbar').staffNr;
+   var pageMeasuresMap = Ext.getCmp('cetoolbar').pageMeasuresMap;
+   var selectedPage = Ext.getCmp('pages').getText();
+   
+   var test = pageMeasuresMap[selectedPage];
+   var nr = test[1] - test[0]+1;
+   
+   var dataMeasureNr = new Array(nr); 
+  // dataMeasureNr[0] = test[0];
+   var value = test[0];
+   for(var i = 0; i < nr ; i++){
+   dataMeasureNr[i] = value++;       
+   }
+    var ceTextField = Ext.create('Ext.form.ComboBox', {
+    fieldLabel: fieldName,
+    store: dataMeasureNr,
+    queryMode: 'local',
+    displayField: 'name',
+    editable: false,
+    valueField: 'abbr',
+    listeners: {
+    select: function(combo, record, index) {
+    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
+     // modelTest.set('curvedir', combo.getValue());
+    }
+  }
+  });
 return ceTextField;
 },
 
@@ -187,7 +263,7 @@ createRadioGroup: function(){
             
             items: [
                 {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0'},
-                {boxLabel: 'Dim', name: 'Form', inputValue: 2, checked: true, margin: '0 10 10 0'}
+                {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0'}
                 
             ]
     

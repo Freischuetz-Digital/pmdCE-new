@@ -31,13 +31,11 @@ Ext.define('pmdCE.view.main.VerovioView', {
    // this.renderer = new verovio.toolkit(),
    
    // this.id = 'verovioView_'+Ext.getCmp('hairpinsitem').getTileId(),
-    
-    
-  
-   verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
-  // verovioImageStart.id = 'verovioimagestart_'+tileId,
-   verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
- //  verovioImageEnd.id = 'verovioimageend_'+tileId,
+   
+ //  verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
+  // verovioImageStart.id = this.id +'_start',
+//   verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
+  // verovioImageEnd.id = this.id +'_end',
  
  placement = this.createComboBox('Placement');
 
@@ -57,23 +55,23 @@ this.items = [
 
 //placement,
 
-{
-        xtype: 'label',
-       // forId: 'myFieldId',
-        text: 'Add regularization(s) dep. start time',
-        margin: '0 10 10 0'
-       // margin: '0 0 0 10'
-    },
-
-verovioImageStart,
-{
-        xtype: 'label',
-       // forId: 'myFieldId',
-        text: 'Add regularization(s) dep. end time',
-        margin: '0 10 10 0'
-       // margin: '0 0 0 10'
-    },
-verovioImageEnd
+//{
+//        xtype: 'label',
+//       // forId: 'myFieldId',
+//        text: 'Add regularization(s) dep. start time',
+//        margin: '0 10 10 0'
+//       // margin: '0 0 0 10'
+//    },
+//
+//verovioImageStart,
+//{
+//        xtype: 'label',
+//       // forId: 'myFieldId',
+//        text: 'Add regularization(s) dep. end time',
+//        margin: '0 10 10 0'
+//       // margin: '0 0 0 10'
+//    },
+//verovioImageEnd
 
         ],
         this.callParent()

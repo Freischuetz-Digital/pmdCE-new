@@ -23,6 +23,9 @@ Ext.define('pmdCE.view.main.CEToolbar', {
  loginButton: null,
  showXmlButton: null,
  
+ staffNr: null,
+ pageMeasuresMap: null,
+ 
  me: null,
  cePanelTable: null,
  
@@ -32,12 +35,12 @@ Ext.define('pmdCE.view.main.CEToolbar', {
       
     homeButton = this.createCEBox('box', {tag: 'img', src:'resources/images/freidi_icon_57.png', width : 26,
     height : 26}, this.homeOnItemToggle, true);
-    sourceButton = this.createCEButton('splitbutton', 'Source', [{handler: this.sourceOnItemClick}], this.click);
-    movementButton = this.createCEButton('splitbutton', 'Movement', [{handler: this.moveOnItemClick}], this.click2);
+    sourceButton = this.createCEButton('splitbutton', 'Source', 'source',[{handler: this.sourceOnItemClick}], this.click);
+    movementButton = this.createCEButton('splitbutton', 'Movement', 'movement',[{handler: this.moveOnItemClick}], this.click2);
     movementButton.setDisabled(true);
     arrowLeft = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/page-prev-disabled.gif');
     arrowLeft.setDisabled(true);
-    pagesButton = this.createCEButton('splitbutton', 'Pages', [{handler: this.pagesOnItemClick}], this.click3);
+    pagesButton = this.createCEButton('splitbutton', 'Pages', 'pages',[{handler: this.pagesOnItemClick}], this.click3);
     pagesButton.setDisabled(true);    
     arrowR = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/page-next-disabled.gif');
     arrowR.setDisabled(true);
@@ -50,7 +53,7 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     deleteButton.setDisabled(true);
     showXmlButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/xml-32.png', this.saveComponents);
     showXmlButton.setDisabled(true);
-    selectToolButton = this.createCEButton('splitbutton', 'Control Events', [{text: 'Pitch Tool'}, {text: 'Abbrev Resolver'}]);
+    selectToolButton = this.createCEButton('splitbutton', 'Control Events', 'controlevents', [{text: 'Pitch Tool'}, {text: 'Abbrev Resolver'}]);
     loginButton = this.createLoginButton('splitbutton', 'Login');
        loginButton.setDisabled(true);    
        this.tbar = [
@@ -140,7 +143,7 @@ Ext.define('pmdCE.view.main.CEToolbar', {
                     itemId: itemsArray[i].data.mdivs[j].id, 
                     text: itemsArray[i].data.mdivs[j].id,
                     handler: this.moveOnItemClick          
-             });
+                    });
              movementButton.getMenu().add(menuItem);                    
                 }                    
               }
@@ -153,13 +156,19 @@ Ext.define('pmdCE.view.main.CEToolbar', {
             pagesButton.getMenu().removeAll();
             var app = pmdCE.getApplication();
             var store = app.getSourcesStore();
-            var itemsArray = store.data.items;  
+            var itemsArray = store.data.items; 
+            
+            this.pageMeasuresMap = new Object();
+
             for(var i = 0; i < itemsArray.length ; i++){                    
                 if(sourceButton.getText() === itemsArray[i].data.sigle){   
                     for(var j = 0; j < itemsArray[i].data.mdivs.length ; j++){
                         if(movementButton.getText() === itemsArray[i].data.mdivs[j].id){
+                            this.staffNr = itemsArray[i].data.mdivs[j].staffNr;
                             for(var k = 0; k < itemsArray[i].data.mdivs[j].pages.length ; k++){
-                         var menuItem = Ext.create('Ext.menu.Item', {
+                            var key = itemsArray[i].data.mdivs[j].pages[k].id;
+                            this.pageMeasuresMap[key] = itemsArray[i].data.mdivs[j].pages[k].measureNr;                         
+                            var menuItem = Ext.create('Ext.menu.Item', {
                             itemId: itemsArray[i].data.mdivs[j].pages[k].id, 
                             text: itemsArray[i].data.mdivs[j].pages[k].id,
                             handler: this.pagesOnItemClick
@@ -178,11 +187,11 @@ Ext.define('pmdCE.view.main.CEToolbar', {
         sourceButton.setText(item.text);
         movementButton.setDisabled(false);
         
-        if(movementButton.text !== 'Movement'){
+        if(movementButton.getText() !== 'Movement'){
             movementButton.setText('Movement');
             
         }
-        if(pagesButton.text !== 'Pages'){
+        if(pagesButton.getText() !== 'Pages'){
             pagesButton.setText('Pages');
             }
         pagesButton.setDisabled(true);
@@ -211,7 +220,7 @@ Ext.define('pmdCE.view.main.CEToolbar', {
         saveButton.setDisabled(true);
         } 
         
-        if(pagesButton.text !== 'Pages'){
+        if(pagesButton.getText() !== 'Pages'){
             pagesButton.setText('Pages');
             }
     },
@@ -236,6 +245,7 @@ Ext.define('pmdCE.view.main.CEToolbar', {
         
         
          verovioView = new pmdCE.view.main.VerovioView();
+        // verovioView.id = 'verovioview',
    
          controllsView = new pmdCE.view.main.CEGridPanel();
         
@@ -250,19 +260,20 @@ Ext.define('pmdCE.view.main.CEToolbar', {
          var app = pmdCE.getApplication();
         // var store = app.getHairpinsStore();
         var store = app.getHairpinDataStore();
-        // store.load();
+        store.load();
          Ext.getCmp('cegridpanel').getView().bindStore(store);   
     },
-    
+      
     homeOnItemToggle: function(){
         window.location.href = "http://freischuetz-digital.de";
     },
 
 
-createCEButton: function(ceType, ceSource, ceMenu, ceHandler){
+createCEButton: function(ceType, ceSource, ceId, ceMenu, ceHandler){
     var ceButton = Ext.create('Ext.button.Button', {   
             xtype: 'button',
             text: ceSource,
+            id: ceId,
            scope   : this,
            // iconCls: ceIcon,
            // scale: 'medium',

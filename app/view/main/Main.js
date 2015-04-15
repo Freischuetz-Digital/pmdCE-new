@@ -4,7 +4,7 @@
  * plugin to promote that instance of this class to the body element.
  *
  */
- 
+
 Ext.define('pmdCE.view.main.Main', {
     extend: 'Ext.panel.Panel',
     requires: [
@@ -20,6 +20,8 @@ Ext.define('pmdCE.view.main.Main', {
     },
     
     bodyPadding: 5,
+    
+    editorId: null,
     
    
     defaults: {
@@ -45,6 +47,15 @@ this.items = [
 
 this.callParent()
 
+    },
+    
+    setEditorId: function(editorId){
+        this.editorId = editorId;
+        
+    },
+    
+    getEditorId: function(){
+        return this.editorId;
     }
     
     });

@@ -23,6 +23,7 @@ extend: 'Ext.panel.Panel',
     },
     title: 'Hairpins',
     id: 'hairpinsitem',
+    icon: 'resources/images/mix_volume.png',
     
     autoScroll: true,
    

@@ -20,8 +20,6 @@ Ext.define('pmdCE.Application', {
        'main.VerovioView', 
        'main.VerovioImageStart',
        'main.VerovioImageEnd',
-       'main.AddDialog',
-       'main.EditDialog',
        'main.ChoiceDialog',
        'main.CEGridPanel',
        'main.AddObviousElDialog',
@@ -58,9 +56,11 @@ Ext.define('pmdCE.Application', {
     hairpinDataStore: null,
     hairpinStart: null,
     
+    storeT: null,
+    
     
     launch: function () {
-    
+ 
     renderer = new verovio.toolkit(),
     
         sourcesStore = Ext.create('Ext.data.Store', {
@@ -133,7 +133,7 @@ Ext.define('pmdCE.Application', {
                      rootProperty: 'hairpins'
                  }
              },
-             autoLoad: true
+             autoLoad: false
          }),
     /*     
          hairpinStart = Ext.create('Ext.data.Store', {
@@ -173,10 +173,10 @@ Ext.define('pmdCE.Application', {
       //   pagesStore.load();
        //  hairpinStart.load();
        //  slursStore.load();
-       hairpinDataStore.load();
+      // hairpinDataStore.load();
      
         console.log('+++++++STORE+++++++');
-        console.log(sourcesStore);
+        //console.log(sourcesStore);
         
     },
     
@@ -208,6 +208,7 @@ Ext.define('pmdCE.Application', {
     return hairpinDataStore;
     }
     
+   
   /*   getHairpinsDataStore: function(){
     return hairpinsDataStore;
     }
