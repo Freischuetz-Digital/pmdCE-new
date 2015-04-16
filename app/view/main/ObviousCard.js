@@ -133,21 +133,23 @@ Ext.define('pmdCE.view.main.ObviousCard', {
        },*/
         handler: 
         function(){
-	 
-        var hairpin = Ext.create('pmdCE.model.Hairpin', {
         
-                    name: 'Test',
+        //TODO: generate Id
+        var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
+	 
+        var hairpin = Ext.create('pmdCE.model.Hairpin', {      
+                    name: formValue+'_st'+staffField.getValue()+'_ts'+tstampField.getValue()+'_obvious',
                     icon: 'resources/images/mix_volume.png',
                     placement: 'obvious',
                      children: [
                 {
                     icon: 'resources/images/details-xml.png',
-                    staff: "11",                   
-                    tstamp: "4",
-                    tstamp2: "m+6.5",
-                    place: "below",
-                    form: "dim",
-                    tag: "orig",
+                    staff: staffField.getValue(),                   
+                    tstamp: tstampField.getValue(),
+                    tstamp2: tstamp2Field.getValue(),
+                    place: placeField.getValue(),
+                    form: formValue,
+                    tag: "",
                     leaf: true
                 }
                 ] 

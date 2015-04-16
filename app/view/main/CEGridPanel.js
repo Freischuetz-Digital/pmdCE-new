@@ -8,27 +8,10 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
         'Ext.ux.CheckColumn',
         'pmdCE.model.Hairpin'
     ],
-    //xtype: 'cell-editing',
-   // xtype: 'tree-grid',
-    
- //   reserveScrollbar: true,
-  //  useArrows: true,
-  //  rootVisible: false,
-    // singleExpand: true,
-    
+   
     flex: 4,
     region: 'west',   
-    //xtype: 'array-grid',
-    //store: 'Companies',
-   // stateful: true,
-   // collapsible: true,
-   // multiSelect: true,
-  //  stateId: 'stateGrid',
-   // height: 350,
-   // title: 'Array Grid',
-   /* viewConfig: {
-        enableTextSelection: true
-    },*/
+  
     id: 'cegridpanel',
     
     xtype: 'tree-grid',
@@ -37,22 +20,37 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
    
     useArrows: true,
     rootVisible: false,
-   // multiSelect: true,
-   // singleExpand: true,
-    
-  
+   
     initComponent: function() {
-       
-     //  this.id = 'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId(),
-       
-       
-      /* this.cellEditing = new Ext.grid.plugin.CellEditing({
-            clicksToEdit: 1
-        });
-
-        this.cellEditing.on('edit', this.onEditComplete, this);
-        
-        */
+    
+    this.listeners = {
+          
+          itemclick: function(index) {            
+            // TODO: lade verovio
+           // console.log(Ext.getCmp('placementradiogroup').items);
+            if(index.selection.data.placement === "obvious"){
+                Ext.getCmp('Ambigous').setDisabled(false);
+                Ext.getCmp('Obvious').setDisabled(false);
+                Ext.getCmp('Obvious').setValue(true);
+            }
+            else if(index.selection.data.placement === "ambigous"){
+                 Ext.getCmp('Ambigous').setDisabled(false);
+                Ext.getCmp('Obvious').setDisabled(false);
+                Ext.getCmp('Ambigous').setValue(true);
+            }
+            else{
+                Ext.getCmp('Ambigous').setDisabled(true);
+                Ext.getCmp('Ambigous').setValue(false);
+                Ext.getCmp('Obvious').setDisabled(true);
+                Ext.getCmp('Obvious').setValue(false);
+            }
+           
+           
+           
+        }
+          
+           
+        };
      
             this.columns = [{
                 xtype: 'treecolumn', //this is so we know which column will show the tree
@@ -63,19 +61,11 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
                 
             }, 
             {
-               // xtype: 'templatecolumn',
                 text: 'Orig/Reg',
                 flex: 1,
                 sortable: true,
                 dataIndex: 'tag'
             },
-            /*{
-               // xtype: 'treecolumn', //this is so we know which column will show the tree
-                text: 'XML ID',
-                flex: 2,
-                sortable: true,
-                dataIndex: 'id'
-            }, */
             {
                 text: 'Staff',
                 flex: 1,

@@ -54,7 +54,6 @@ Ext.Ajax.request({
     if(elId.indexOf('End') != -1){ 
         $("#"+elId).on('click',function(e) {        
          // two notes were selected
-         console.log(e.shiftKey);
         if(e.shiftKey){
             me2.handleEventForTwoNotes(elements ,e.currentTarget, meiElements);
         }

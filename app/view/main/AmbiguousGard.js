@@ -135,39 +135,41 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
        // disabled: true,
         handler: 
         function(){
-	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
+            //TODO: generate Id
+             var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
         
-                    name: 'Test_A',
+	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
+	               name: formValue+'_st'+staffField.getValue()+'_ts'+tstampFieldOrig.getValue()+'_ambigous',
                     icon: 'resources/images/mix_volume.png',
-                    placement: 'obvious',
+                    placement: 'ambigous',
                      children: [
                 {
                     icon: 'resources/images/details-xml.png',
-                    staff: "11",                   
-                    tstamp: "4",
-                    tstamp2: "m+6.5",
-                    place: "below",
-                    form: "dim",
+                    staff: staffField.getValue(),                  
+                    tstamp: tstampFieldOrig.getValue(),
+                    tstamp2: tstamp2FieldOrig.getValue(),
+                    place: placeField.getValue(),
+                    form: formValue,
                     tag: "orig",
                     leaf: true
                 },
                 {
                     icon: 'resources/images/details-xml.png',
-                    staff: "11",                   
-                    tstamp: "4",
-                    tstamp2: "m+6.5",
-                    place: "below",
-                    form: "dim",
+                    staff: staffField.getValue(),                    
+                    tstamp: tstampFieldReg1.getValue(),
+                    tstamp2: tstamp2FieldReg1.getValue(),
+                    place: placeField.getValue(),
+                    form: formValue,
                     tag: "reg",
                     leaf: true
                 },
                 {
                     icon: 'resources/images/details-xml.png',
-                    staff: "11",                   
-                    tstamp: "4",
-                    tstamp2: "m+6.5",
-                    place: "below",
-                    form: "dim",
+                    staff: staffField.getValue(),                    
+                    tstamp: tstampFieldReg2.getValue(),
+                    tstamp2: tstamp2FieldReg2.getValue(),
+                    place: placeField.getValue(),
+                    form: formValue,
                     tag: "reg",
                     leaf: true
                 }

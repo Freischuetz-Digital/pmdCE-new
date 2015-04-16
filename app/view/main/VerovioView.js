@@ -51,8 +51,8 @@ this.items = [
                 {boxLabel: 'Obvious', name: 'obvious', inputValue: 2, checked: true, margin: '0 10 10 0'}
                 
             ]
-        },*/
-
+        },
+*/
 //placement,
 
 /*{
@@ -63,7 +63,7 @@ this.items = [
        // margin: '0 0 0 10'
     },*/
 
-verovioImageStart,
+//verovioImageStart,
 /*{
         xtype: 'label',
        // forId: 'myFieldId',
@@ -71,7 +71,7 @@ verovioImageStart,
         margin: '0 10 10 0'
        // margin: '0 0 0 10'
     },*/
-verovioImageEnd
+//verovioImageEnd
 
         ],
         this.callParent()

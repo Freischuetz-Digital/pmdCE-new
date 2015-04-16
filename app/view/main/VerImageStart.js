@@ -62,7 +62,6 @@ Ext.Ajax.request({
    
         $("#"+elId).on('click',function(e) {        
          // two notes were selected
-         console.log(e.shiftKey);
         if(e.shiftKey){
             me.handleEventForTwoNotes(elements ,e.currentTarget, meiElements);
         }

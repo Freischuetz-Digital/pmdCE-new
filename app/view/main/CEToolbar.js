@@ -22,6 +22,7 @@ Ext.define('pmdCE.view.main.CEToolbar', {
  selectToolButton: null,
  loginButton: null,
  showXmlButton: null,
+ radioGroup: null,
  
  staffNr: null,
  pageMeasuresMap: null,
@@ -53,6 +54,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     deleteButton.setDisabled(true);
     showXmlButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/xml-32.png', this.saveComponents);
     showXmlButton.setDisabled(true);
+    radioGroup = this.createRadioGroup();
+   // radioGroup.setDisabled(true);
     selectToolButton = this.createCEButton('splitbutton', 'Control Events', 'controlevents', [{text: 'Pitch Tool'}, {text: 'Abbrev Resolver'}]);
     loginButton = this.createLoginButton('splitbutton', 'Login');
        loginButton.setDisabled(true);    
@@ -71,17 +74,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
             '-',
             showXmlButton,
             '-',
-            {
-            xtype: 'radiogroup',
-            //fieldLabel: 'Auto Layout',
-            cls: 'x-check-group-alt',
-            disabled: true,
-            items: [
-            {boxLabel: 'Ambigous', name: 'ambigous', inputValue: 1, margin: '0 10 0 10'},
-                {boxLabel: 'Obvious', name: 'obvious', inputValue: 2, margin: '0 10 0 0'}
-                
-            ]
-        },
+            radioGroup,
+            '-',
                '->', 
                selectToolButton,
             '-',
@@ -347,6 +341,42 @@ createCEIcon1: function(){
       
 
 return ceIcon;
+},
+
+
+createRadioGroup: function(){
+    var radios = new Ext.form.RadioGroup({
+     xtype: 'radiogroup',
+            cls: 'x-check-group-alt',
+           id: 'placementradiogroup',
+           scale: 'small',
+           listeners: {
+                change: function (cb, nv, ov) {
+                   console.log("Change");
+                   console.log(cb);
+                   console.log(nv);
+                   console.log(ov);
+                }
+            },
+            items: [
+            {boxLabel: 'Ambigous', 
+            name: 'Placement', 
+            inputValue: 1, 
+            margin: '0 10 0 10', 
+            scale: 'small', 
+            id: "Ambigous", 
+            disabled: true
+            },
+            {boxLabel: 'Obvious', 
+            name: 'Placement', 
+            inputValue: 2, 
+            margin: '0 10 0 0', 
+            scale: 'small', 
+            id: "Obvious", 
+            disabled: true}              
+            ]   
+   });
+   return radios;    
 }
 
 
