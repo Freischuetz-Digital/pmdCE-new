@@ -1,21 +1,20 @@
 Ext.define('pmdCE.view.main.CEGridPanel', {
-    extend: 'Ext.grid.Panel',
+    extend: 'Ext.tree.Panel',
     
     requires: [
-        'Ext.selection.CellModel',
-        'Ext.grid.*',
         'Ext.data.*',
-        'Ext.util.*',
-        'Ext.form.*',
+        'Ext.grid.*',
+        'Ext.tree.*',
+        'Ext.ux.CheckColumn',
         'pmdCE.model.Hairpin'
     ],
     //xtype: 'cell-editing',
-    /*xtype: 'tree-grid',
-    flex: 3,
-    region: 'center',   
-    reserveScrollbar: true,
-    useArrows: true,
-    rootVisible: false,*/
+   // xtype: 'tree-grid',
+    
+ //   reserveScrollbar: true,
+  //  useArrows: true,
+  //  rootVisible: false,
+    // singleExpand: true,
     
     flex: 4,
     region: 'west',   
@@ -27,14 +26,21 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
   //  stateId: 'stateGrid',
    // height: 350,
    // title: 'Array Grid',
-    viewConfig: {
+   /* viewConfig: {
         enableTextSelection: true
-    },
+    },*/
     id: 'cegridpanel',
-
-   
-   
     
+    xtype: 'tree-grid',
+    
+    reserveScrollbar: true,
+   
+    useArrows: true,
+    rootVisible: false,
+   // multiSelect: true,
+   // singleExpand: true,
+    
+  
     initComponent: function() {
        
      //  this.id = 'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId(),
@@ -45,19 +51,23 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
         });
 
         this.cellEditing.on('edit', this.onEditComplete, this);
+        
         */
+     
             this.columns = [{
-               // xtype: 'treecolumn', //this is so we know which column will show the tree
+                xtype: 'treecolumn', //this is so we know which column will show the tree
                 text: 'Name',
                 flex: 2,
-                sortable: true
-                //dataIndex: 'id'
+                sortable: true,
+                dataIndex: 'name'
+                
             }, 
             {
+               // xtype: 'templatecolumn',
                 text: 'Orig/Reg',
                 flex: 1,
-                sortable: true
-                //dataIndex: 'staff'
+                sortable: true,
+                dataIndex: 'tag'
             },
             /*{
                // xtype: 'treecolumn', //this is so we know which column will show the tree

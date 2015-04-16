@@ -25,66 +25,49 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
     placeField: null,
     formField: null,
    
-         staffFieldOrig: null,  
-  placeFieldOrig: null,
-  formFieldOrig: null,
-  tstampFieldOrig: null,
-   tstampField2Orig: null,
-  
-  staffFieldReg1: null,  
-  placeFieldReg1: null,
-  formFieldReg1: null,
-  tstampFieldReg1: null,
-   tstampField2Reg1: null,
+    tstampFieldOrig: null,
+    tstampField2Orig: null,
+ 
+    tstampFieldReg1: null,
+    tstampField2Reg1: null,
 
-   staffFieldReg2: null,  
-  placeFieldReg2: null,
-  formFieldReg2: null,
-  tstampFieldReg2: null,
-   tstampField2Reg2: null,
+    tstampFieldReg2: null,
+    tstampField2Reg2: null,
    
-      verovioView1: null,
-      //verovioView2: null,
-     // verovioView3: null,
-  
-    
+   verovioImageStart: null,
+   verovioImageEnd: null,
+      
          initComponent: function() {
          
-         staffField= this.createComboBox('Staff');  
-        startTaktField= this.createComboBox('Start measure');
-        endTaktField= this.createComboBox('End measure');
+         this.id = "ambiguouscard";
+         Ext.getCmp('cemain').setEditorId(this.id);
+         
+         Ext.getCmp('verovioview').getVerStartView().close();
+         Ext.getCmp('verovioview').getVerEndView().close();
+         
+         staffField= this.createComboBoxStaff('Staff');  
+        startTaktField= this.createComboBoxMeasureNr('Start measure');
+        endTaktField= this.createComboBoxMeasureNr('End measure');
         placeField = this.createComboBox('Place');
         formField = this.createRadioGroup();
         
-        staffFieldOrig = this.createTextField('staffField', 'Staff');
-formFieldOrig = this.createRadioGroup();
-placeFieldOrig = this.createComboBox('Place');
-tstampFieldOrig = this.createTextField('tstampField', 'Tstamp');
-tstamp2FieldOrig = this.createTextField('tstampField2', 'Tstamp2');
+    tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp orig');
+    tstamp2FieldOrig = this.createTextField('tstampField2Orig', 'Tstamp2 orig');
 
-staffFieldReg1 = this.createTextField('staffField', 'Staff');
-formFieldReg1 = this.createRadioGroup();
-placeFieldReg1 = this.createComboBox('Place');
-tstampFieldReg1 = this.createTextField('tstampField', 'Tstamp');
-tstamp2FieldReg1 = this.createTextField('tstampField2', 'Tstamp2');
+tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
+tstamp2FieldReg1 = this.createTextField('tstampField2Reg1', 'Tstamp2 reg1');
 
-staffFieldReg2 = this.createTextField('staffField', 'Staff');
-formFieldReg2 = this.createRadioGroup();
-placeFieldReg2 = this.createComboBox('Place');
-tstampFieldReg2 = this.createTextField('tstampField', 'Tstamp');
-tstamp2FieldReg2 = this.createTextField('tstampField2', 'Tstamp2');
+tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
+tstamp2FieldReg2 = this.createTextField('tstampField2Reg2', 'Tstamp2 reg2');
 
-
-     // TODO: set id
-        // verovioView1 = new pmdCE.view.main.VerovioView();
-        // verovioView2 = new pmdCE.view.main.VerovioView();
-        // verovioView3 = new pmdCE.view.main.VerovioView();
-         
+verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
+        verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
+        
           this.items  = [
         {
             id: 'card-0',
             items: [
-                staffField,
+            staffField,
             startTaktField,
             endTaktField,
             placeField,
@@ -92,69 +75,42 @@ tstamp2FieldReg2 = this.createTextField('tstampField2', 'Tstamp2');
         ]
         },
         {
-            id: 'card-1',
-           height: 400,
+           id: 'card-1',
+           layout: 'hbox',
            items: [
                  {
         xtype: 'fieldset',
-        title: 'Original',
+        title: 'Start Time',
         defaultType: 'textfield',
         defaults: {
             anchor: '100%'
         },
         
         items: [
-                staffFieldOrig,
                 tstampFieldOrig,
-                tstamp2FieldOrig,
-                placeFieldOrig,
-                formFieldOrig
-               // verovioView1
-                
-        ]
-    },
-     {
-        xtype: 'fieldset',
-        title: 'Regulation',
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
-        },
-        
-        items: [
-            staffFieldReg1,
                 tstampFieldReg1,
-                tstamp2FieldReg1,
-                placeFieldReg1,
-                formFieldReg1
-               // verovioView1
+                tstampFieldReg2,
+                verovioImageStart 
         ]
     },
      {
         xtype: 'fieldset',
-        title: 'Regulation',
+        title: 'End Time',
         defaultType: 'textfield',
         defaults: {
             anchor: '100%'
         },
         
-        items: [
-           staffFieldReg2,
-               tstampFieldReg2,
+        items: [            
+                tstamp2FieldOrig,
+                tstamp2FieldReg1,
                  tstamp2FieldReg2,
-                placeFieldReg2,
-                formFieldReg2
-                //verovioView1
+                verovioImageEnd  
         ]
     }
         ]
            
         }
-       /* ,
-        {
-            id: 'card-2',
-            html: '<h1>Congratulations!</h1><p>Step 3 of 3 - Complete</p>'
-        }*/
     ],
          
      
@@ -175,10 +131,54 @@ tstamp2FieldReg2 = this.createTextField('tstampField2', 'Tstamp2');
      {
         text:'Create', 
         itemId: 'createItem',
-        disabled: true,
+        // TODO: handle
+       // disabled: true,
         handler: 
         function(){
-	       // TODO
+	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
+        
+                    name: 'Test_A',
+                    icon: 'resources/images/mix_volume.png',
+                    placement: 'obvious',
+                     children: [
+                {
+                    icon: 'resources/images/details-xml.png',
+                    staff: "11",                   
+                    tstamp: "4",
+                    tstamp2: "m+6.5",
+                    place: "below",
+                    form: "dim",
+                    tag: "orig",
+                    leaf: true
+                },
+                {
+                    icon: 'resources/images/details-xml.png',
+                    staff: "11",                   
+                    tstamp: "4",
+                    tstamp2: "m+6.5",
+                    place: "below",
+                    form: "dim",
+                    tag: "reg",
+                    leaf: true
+                },
+                {
+                    icon: 'resources/images/details-xml.png',
+                    staff: "11",                   
+                    tstamp: "4",
+                    tstamp2: "m+6.5",
+                    place: "below",
+                    form: "dim",
+                    tag: "reg",
+                    leaf: true
+                }
+                ] 
+                
+                
+	    });
+	    
+	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+	    var parent = root.appendChild(hairpin);
+	    parent.expand();
             this.up('window').close();
            
        }
@@ -237,14 +237,7 @@ return ceTextField;
 
     createComboBox: function(fieldName){
     
-    var states = Ext.create('Ext.data.Store', {
-    fields: ['abbr', 'name'],
-    data : [
-        {"abbr":"above", "name":"above"},
-        {"abbr":"below", "name":"below"},
-         {"abbr":"between", "name":"between"}
-    ]
-});
+    var states = new Array("above", "below", "between"); 
     
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
@@ -264,6 +257,65 @@ return ceTextField;
 return ceTextField;
 },
 
+
+   createComboBoxStaff: function(fieldName){
+   
+   var staffNrCurrent = Ext.getCmp('cetoolbar').staffNr;
+  
+   var dataStaffNr = new Array(staffNrCurrent);  
+   for(var i = 0; i < staffNrCurrent ; i++){
+   dataStaffNr[i] = i+1;       
+   }
+  
+    var ceTextField = Ext.create('Ext.form.ComboBox', {
+    fieldLabel: fieldName,
+    store: dataStaffNr,
+    queryMode: 'local',
+    displayField: 'name',
+    editable: false,
+    valueField: 'abbr',
+    listeners: {
+    select: function(combo, record, index) {
+    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
+     // modelTest.set('curvedir', combo.getValue());
+    }
+  }
+  });
+return ceTextField;
+},
+
+ createComboBoxMeasureNr: function(fieldName){
+   
+   var staffNrCurrent = Ext.getCmp('cetoolbar').staffNr;
+   var pageMeasuresMap = Ext.getCmp('cetoolbar').pageMeasuresMap;
+   var selectedPage = Ext.getCmp('pages').getText();
+   
+   var test = pageMeasuresMap[selectedPage];
+   var nr = test[1] - test[0]+1;
+   
+   var dataMeasureNr = new Array(nr); 
+  // dataMeasureNr[0] = test[0];
+   var value = test[0];
+   for(var i = 0; i < nr ; i++){
+   dataMeasureNr[i] = value++;       
+   }
+    var ceTextField = Ext.create('Ext.form.ComboBox', {
+    fieldLabel: fieldName,
+    store: dataMeasureNr,
+    queryMode: 'local',
+    displayField: 'name',
+    editable: false,
+    valueField: 'abbr',
+    listeners: {
+    select: function(combo, record, index) {
+    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
+     // modelTest.set('curvedir', combo.getValue());
+    }
+  }
+  });
+return ceTextField;
+},
+
 createRadioGroup: function(){
     var radios = new Ext.form.RadioGroup({
      xtype: 'radiogroup',
@@ -272,16 +324,9 @@ createRadioGroup: function(){
             
             items: [
                 {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0'},
-                {boxLabel: 'Dim', name: 'Form', inputValue: 2, checked: true, margin: '0 10 10 0'}
+                {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0'}
                 
             ]
-    
-    
-    /* columns    : 2,
-       items: [
-             {boxLabel: 'E-Mail', name: 'communication', inputValue: 1},
-             {boxLabel: 'Nagios', name: 'communication', inputValue: 2}
-        ]*/
    });
    return radios;
     

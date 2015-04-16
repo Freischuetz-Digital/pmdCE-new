@@ -15,24 +15,22 @@ extend: 'Ext.form.Panel',
      bodyId: null,*/
      renderer: null,
      me: null,
+     currId: null,
      
  
 initComponent: function() {
 
-
 me = this;
-//this.id = 'verovioimagestart_'+Ext.getCmp('hairpinsitem').getTileId(),
 
-this.id = Ext.getCmp('cemain').getEditorId()+'_start';
+//me.id = Ext.getCmp('cemain').getEditorId()+'_start';
+//id = this.id;
+currId = this.id;
 
 app = pmdCE.getApplication();
 renderer = app.getRenderer();
 
 Ext.Ajax.request({
     url: "resources/verovio/test.mei",
-   /* params: {
-        id: 1
-    },*/
     success: function(response){
         var text = response.responseText;
         
@@ -46,53 +44,33 @@ Ext.Ajax.request({
     renderer.setOptions(options);
                   renderer.loadData(text);
     var svg = renderer.renderPage( 1, options );
-    $('#'+Ext.getCmp('cemain').getEditorId()+'_start'+'-body').html(svg);
+   //var svg = renderer.renderData( text, options );
     
-    
+    //$('#'+Ext.getCmp('cemain').getEditorId()+'_start'+'-body').html(svg);
+    $('#'+currId+'-body').html(svg);
+   
     var xmlFile = response.responseXML;
     var meiElements = xmlFile.getElementsByTagName('note');
    
    var elements = document.getElementsByClassName('note');
- 
+  
     for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
     var elId = element.id;
     
     if(elId.indexOf('Start') != -1){ 
-        $("#"+elId).on('click',function(e) {
-        
-        me.handleEvent(elements ,e.currentTarget, meiElements);
-        
-           /* var note = e.currentTarget;           
-            for (var j = 0; j < meiElements.length; j++) {
-                var elementXML = meiElements[j];
-                var elXMLId = elementXML.getAttribute('xml:id');          
-                if(elXMLId === note.id){   
-                    if(note.style.fill === '#000000'){
-                        var tstamp = elementXML.getAttribute('tstamp');
-                        console.log("++++++++++++++++++"); 
-                        console.log(elXMLId);
-                    console.log(note.id);
-                    console.log(elId);
-                        console.log("++++++++++++++++++"); 
-                        $(note).css('fill','#3adf00');
-                        $(note).children().css('stroke','#3adf00');
-                    }
-                    else if(note.style.fill === '#3adf00'){
-                        $(note).css('fill','#000000');
-                        $(note).children().css('stroke','#000000');                       
-                    }
-                }
-            }*/
-    
    
-    /* if(e.shiftKey){
-        var win = new pmdCE.view.main.ChoiceDialog();
-         win.show();
-     }*/
-     
-     //e.preventDefault();             
-        });
+        $("#"+elId).on('click',function(e) {        
+         // two notes were selected
+         console.log(e.shiftKey);
+        if(e.shiftKey){
+            me.handleEventForTwoNotes(elements ,e.currentTarget, meiElements);
+        }
+        // one note was selected
+        else {         
+            me.handleEventForOneNote(elements ,e.currentTarget, meiElements);
+        }            
+       });
     }
    }
   }
@@ -102,44 +80,68 @@ Ext.Ajax.request({
 
 },
 
-handleEvent: function(elements, note, meiElements){
-
+handleEventForTwoNotes: function(elements, note, meiElements){
 for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
-    var elId = element.id;   
+    var elId = element.id;     
     if(elId.indexOf('Start') != -1 && elId === note.id){ 
-    for(var j = 0; j < meiElements.length; j++){
-        var elementXML = meiElements[j];
-                var elXMLId = elementXML.getAttribute('xml:id');          
-                if(elXMLId === note.id){   
-                    if(note.style.fill === '#000000'){
-                        var tstamp = elementXML.getAttribute('tstamp');
-                        console.log("++++++++++++++++++"); 
-                        console.log(elXMLId);
-                    console.log(note.id);
-                    console.log(elId);
-                        console.log("++++++++++++++++++"); 
+        for(var j = 0; j < meiElements.length; j++){
+            var elementXML = meiElements[j];
+            var elXMLId = elementXML.getAttribute('xml:id');
+            if(elXMLId === note.id){  
+                if(note.style.fill === '#000000'){
+                        // TODO: set tstamp field
+                        var tstamp = elementXML.getAttribute('tstamp');                        
                         $(note).css('fill','#3adf00');
                         $(note).children().css('stroke','#3adf00');
-                    }
-                    else if(note.style.fill === '#3adf00'){
+                 }
+             }
+        }
+    } 
+  } 
+},
+
+handleEventForOneNote: function(elements, note, meiElements){
+for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+    var elId = element.id;     
+    if(elId.indexOf('Start') != -1 && elId === note.id){ 
+        for(var j = 0; j < meiElements.length; j++){
+            var elementXML = meiElements[j];
+            var elXMLId = elementXML.getAttribute('xml:id');
+            if(elXMLId === note.id){
+            // set color           
+                if(note.style.fill === '#000000'){
+                        // TODO: set tstamp field
+                        var tstamp = elementXML.getAttribute('tstamp'); 
+                        if(Ext.getCmp('tstampFieldObv') !== 'undefined'){
+                            Ext.getCmp('tstampFieldObv').setValue(tstamp);
+                        }
+                      /*  else if(Ext.getCmp('tstampFieldObv') !== 'undefined'){
+                            
+                        }*/
+                        
+                        $(note).css('fill','#3adf00');
+                        $(note).children().css('stroke','#3adf00');
+                 }
+                 // set color back after second note click
+                 else if(note.style.fill === '#3adf00'){
+                        if(Ext.getCmp('tstampFieldObv') !== 'undefined'){
+                            Ext.getCmp('tstampFieldObv').setValue('');
+                        }
                         $(note).css('fill','#000000');
                         $(note).children().css('stroke','#000000');                       
-                    }
-                }
-        
+                 }
+             }
+        }
+    } 
+    // other note was clicked: set color back
+    else if(elId.indexOf('Start') != -1){
+          $(element).css('fill','#000000');
+          $(element).children().css('stroke','#000000');  
     }
     
-   
-    console.log("Richtig");
-    console.log(node);
-    
-    }
-    
-    }
-
-    
-    
+  } 
 }
 
  });

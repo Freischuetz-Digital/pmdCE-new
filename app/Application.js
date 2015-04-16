@@ -119,20 +119,24 @@ Ext.define('pmdCE.Application', {
              autoLoad: false
          }),*/
          
-         hairpinDataStore = Ext.create('Ext.data.Store', {
+         hairpinDataStore = Ext.create('Ext.data.TreeStore', {
          storeId:'hairpinDataStore',
             model: 'pmdCE.model.Hairpin',
              proxy: {
                  type: 'ajax',
                 // url: 'data/getControlEvents.xql',
-                 url: 'data/pmd_ce_getHairpins.xql',
+                 //url: 'data/pmd_ce_getHairpins.xql',
+                 url: 'resources/data/tree/treegrid.json'
+                // mode: 'name'
                  //url: 'data/pmd_ce_getHairpinData.xql',
                  //url: 'http://localhost:8080/exist/apps/proofMEIdata/pmdCE/resources/xql/getControlEvents.xql',
-                 reader: {
-                     type: 'json',
-                     rootProperty: 'hairpins'
-                 }
+            /* reader: {
+            type: 'json',
+            typeProperty: 'name'
+        }*/
+        
              },
+          
              autoLoad: false
          }),
     /*     

@@ -1,48 +1,42 @@
 {
-    "id": 'root',
-     "text" : 'Root Node',
-    "expanded" : true,
-   
+   "text": "Root",
     "children": [
         {
-            "placement": "Obvious",
-            "element": "A_mov6_measure122_ce1", 
-            "icon": '../../../resources/images/mix_volume.png',
-             "staff": "1",
-             "tstamp": 1,
-             "tstamp2": "0m+3.875",
-             "place": "below",
-             "form": "cres",
-             "leaf": true              
-        }, 
-        {
-            "element": "Original",
-            "hairpinId": "A_mov6_measure122_ce1",
-            "children": [
+            "name": "A_mov6_measure122_ce1", 
+            "icon": 'resources/images/mix_volume.png',
+             "placement": "obvious",
+               "children": [
                 {
-                    "staff": "20",
-                    "start": 2,
-                    "end": "2m+3.875",
-                    "place": "below2",
-                    "form": "cres2",
+                    "icon": 'resources/images/details-xml.png',
+                    "staff": "1",                   
+                    "tstamp": "1",
+                    "tstamp2": "m+6.5",
+                    "place": "below",
+                    "form": "cres",
+                    "tag": "",
                     "leaf": true
                 }
-            ]
-        },
+                ]            
+        }, 
         {
-            "element": "Regularisation",
-            "hairpinId": "A_mov6_measure122_ce1",
+            
+            "name": "A_mov6_measure123_ce1",
+            "icon": 'resources/images/mix_volume.png',
+            "placement": "obvious",
             "children": [
-                {
-                    "staff": "30",
-                    "start": 3,
-                    "end": "3m+3.875",
-                    "place": "below3",
-                    "form": "cres3",
+                { 
+                    "icon": 'resources/images/details-xml.png',
+                    "staff": "1",
+                    "tstamp": 2,
+                    "tstamp2": "m+5",
+                    "place": "below",
+                    "form": "dim",
+                     "tag": "",
                     "leaf": true
                 }
             ]
         }
     ]
-   
-     }
+   }
+  
+     
