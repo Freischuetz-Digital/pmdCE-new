@@ -4,7 +4,7 @@ Ext.define('pmdCE.view.main.VerovioView', {
         'Ext.layout.container.VBox'
     ],
    // xtype: 'layout-vertical-box',
-    id: 'verovioview',
+  //  id: 'verovioview',
    /*width: 300,
      height: 400,*/
      flex: 1,
@@ -22,24 +22,33 @@ Ext.define('pmdCE.view.main.VerovioView', {
     verovioImageEnd: null,
     placement: null,
     
-    
+    radioGroup: null,
+  
     //renderer: null,
+    verovioView: null,
     
     
     initComponent: function() {
     
+    //this.radioGroup = null;
+    
+    verovioView = this;
+    Ext.getCmp('cemain').setVerovioView(verovioView);
+   
    // this.renderer = new verovio.toolkit(),
    
    // this.id = 'verovioView_'+Ext.getCmp('hairpinsitem').getTileId(),
-   
-  verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
+ //  radioGroup = this.createRadioGroup();
+ // verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
   // verovioImageStart.id = this.id +'_start',
-   verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
+ //  verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
   // verovioImageEnd.id = this.id +'_end',
  
  placement = this.createComboBox('Placement');
 
 this.items = [
+
+//radioGroup
 
 /*{
             xtype: 'radiogroup',
@@ -111,21 +120,66 @@ this.items = [
 return ceTextField;
 },
 
-
-getVerStartView: function(){
+   setVerStartView: function(verovioImageStart){
+        this.verovioImageStart = verovioImageStart;       
+    },
     
-    return verovioImageStart
+    getVerStartView: function(){
+        return this.verovioImageStart;
+    },
+       
+     setVerEndView: function(verovioImageEnd){
+        this.verovioImageEnd = verovioImageEnd;       
+    },
+    
+    getVerEndView: function(){
+        return this.verovioImageEnd;
+    },
+
+createRadioGroup: function(){
+    var radios = new Ext.form.RadioGroup({
+     xtype: 'radiogroup',
+            cls: 'x-check-group-alt',
+          // id: 'placementradiogroup',
+           scale: 'small',
+           listeners: {
+                change: function (cb, nv, ov) {
+                   console.log("Change");
+                   console.log(cb);
+                   console.log(nv.Placement);
+                   console.log(ov);
+                }
+                
+            },
+           
+            items: [
+            {boxLabel: 'Ambigous', 
+            name: 'Placement', 
+            inputValue: 1, 
+            margin: '0 10 0 10', 
+            scale: 'small', 
+            id: "Ambigous", 
+            disabled: true
+            },
+            {boxLabel: 'Obvious', 
+            name: 'Placement', 
+            inputValue: 2, 
+            margin: '0 10 0 0', 
+            scale: 'small', 
+            id: "Obvious", 
+            disabled: true}              
+            ]   
+   });
+   return radios;    
 },
 
-getVerEndView: function(){
+   setRadioGroup: function(radioGroup){
+        this.radioGroup = radioGroup;       
+    },
     
-    return verovioImageEnd
-}
+    getRadioGroup: function(){
+        return this.radioGroup;
+    }
 
-
-
-
-
-  
 
 });

@@ -34,9 +34,13 @@ Ext.define('pmdCE.view.main.ObviousCard', {
          this.id = "obviouscard";
          Ext.getCmp('cemain').setEditorId(this.id);
          
-         Ext.getCmp('verovioview').getVerStartView().close();
-         Ext.getCmp('verovioview').getVerEndView().close();
-         
+         if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
+             Ext.getCmp('cemain').getVerovioView().getVerStartView().close();
+         }
+         if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
+             Ext.getCmp('cemain').getVerovioView().getVerEndView().close();
+         }
+        
          //console.log(Ext.getCmp('verovioview').getVerStartView());
          
         staffField= this.createComboBoxStaff('Staff');  

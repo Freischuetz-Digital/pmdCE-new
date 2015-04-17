@@ -21,8 +21,8 @@ Ext.define('pmdCE.view.main.Main', {
     
     bodyPadding: 5,
     
+    verovioView: null,
     editorId: null,
-    
    
     defaults: {
         //frame: true,
@@ -49,7 +49,16 @@ this.callParent()
 
     },
     
-    setEditorId: function(editorId){
+    setVerovioView: function(verovioView){
+        this.verovioView = verovioView;
+        
+    },
+    
+    getVerovioView: function(){
+        return this.verovioView;
+    },
+    
+     setEditorId: function(editorId){
         this.editorId = editorId;
         
     },
@@ -57,6 +66,7 @@ this.callParent()
     getEditorId: function(){
         return this.editorId;
     }
+
     
     });
     

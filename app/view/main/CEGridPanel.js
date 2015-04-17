@@ -27,7 +27,30 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
           
           itemclick: function(index) {            
             // TODO: lade verovio
-           // console.log(Ext.getCmp('placementradiogroup').items);
+         
+           var verovioView = Ext.getCmp('cemain').getVerovioView();
+           if(verovioView.getRadioGroup() !== null){
+                verovioView.remove(verovioView.getRadioGroup(), true);
+           }
+           var radioGroup = verovioView.createRadioGroup();
+           verovioView.add(radioGroup);
+           verovioView.setRadioGroup(radioGroup);
+           
+           if(verovioView.getVerStartView() !== null){
+                verovioView.remove(verovioView.getVerStartView(), true);
+           }
+           var verovioImageStart = new pmdCE.view.main.VerovioImageStart();
+           verovioView.add(verovioImageStart);
+           verovioView.setVerStartView(verovioImageStart);
+           
+             if(verovioView.getVerEndView() !== null){
+                verovioView.remove(verovioView.getVerEndView(), true);
+           }
+           var verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
+           verovioView.add(verovioImageEnd);
+           verovioView.setVerEndView(verovioImageEnd);
+           
+           
             if(index.selection.data.placement === "obvious"){
                 Ext.getCmp('Ambigous').setDisabled(false);
                 Ext.getCmp('Obvious').setDisabled(false);
