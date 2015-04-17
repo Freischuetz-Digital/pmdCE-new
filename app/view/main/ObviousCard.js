@@ -35,12 +35,14 @@ Ext.define('pmdCE.view.main.ObviousCard', {
          Ext.getCmp('cemain').setEditorId(this.id);
          
          if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
-             Ext.getCmp('cemain').getVerovioView().getVerStartView().close();
+             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
          }
          if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
-             Ext.getCmp('cemain').getVerovioView().getVerEndView().close();
+            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerEndView(), true);
          }
-        
+         if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
+            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
+         }
          //console.log(Ext.getCmp('verovioview').getVerStartView());
          
         staffField= this.createComboBoxStaff('Staff');  

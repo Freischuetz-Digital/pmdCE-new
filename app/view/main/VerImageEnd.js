@@ -106,7 +106,7 @@ for (var i = 0; i < elements.length; i++) {
                 if(note.style.fill === '#000000'){
                         // TODO: set tstamp field
                         var tstamp = elementXML.getAttribute('tstamp');                         
-                        if(Ext.getCmp('tstampField2Obv') !== 'undefined'){
+                        if(typeof Ext.getCmp('tstampField2Obv') !== 'undefined'){
                             Ext.getCmp('tstampField2Obv').setValue(tstamp);
                         }
                       /*  else if(Ext.getCmp('tstampFieldObv') !== 'undefined'){
@@ -117,7 +117,7 @@ for (var i = 0; i < elements.length; i++) {
                  }
                  // set color back after second note click
                  else if(note.style.fill === '#3adf00'){
-                        if(Ext.getCmp('tstampField2Obv') !== 'undefined'){
+                        if(typeof Ext.getCmp('tstampField2Obv') !== 'undefined'){
                             Ext.getCmp('tstampField2Obv').setValue('');
                         }
                         $(note).css('fill','#000000');

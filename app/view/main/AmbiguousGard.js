@@ -42,8 +42,15 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
          this.id = "ambiguouscard";
          Ext.getCmp('cemain').setEditorId(this.id);
          
-         Ext.getCmp('verovioview').getVerStartView().close();
-         Ext.getCmp('verovioview').getVerEndView().close();
+         if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
+             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
+         }
+         if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
+            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerEndView(), true);
+         }
+         if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
+            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
+         }
          
          staffField= this.createComboBoxStaff('Staff');  
         startTaktField= this.createComboBoxMeasureNr('Start measure');
