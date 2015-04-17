@@ -24,45 +24,16 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
     initComponent: function() {
     
     this.listeners = {
+    
+    itemclick: function(record, item, index, e, eOpts) {  
+        // items were removed
+        if(verovioView.items.length == 0){
+            this.createVerovioViewItems(item.data.placement);
+        }
+    },
+    
         selectionchange: function(selected, eOpts){
-            var verovioView = Ext.getCmp('cemain').getVerovioView();
-           if(verovioView.getRadioGroup() !== null){
-                verovioView.remove(verovioView.getRadioGroup(), true);
-           }
-           var radioGroup = verovioView.createRadioGroup();
-           verovioView.add(radioGroup);
-           verovioView.setRadioGroup(radioGroup);
-           
-           if(verovioView.getVerStartView() !== null){
-                verovioView.remove(verovioView.getVerStartView(), true);
-           }
-           var verovioImageStart = new pmdCE.view.main.VerovioImageStart();
-           verovioView.add(verovioImageStart);
-           verovioView.setVerStartView(verovioImageStart);
-           
-             if(verovioView.getVerEndView() !== null){
-                verovioView.remove(verovioView.getVerEndView(), true);
-           }
-           var verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
-           verovioView.add(verovioImageEnd);
-           verovioView.setVerEndView(verovioImageEnd);
-                      
-            if(eOpts[0].data.placement === "obvious"){
-                Ext.getCmp('Ambigous').setDisabled(false);
-                Ext.getCmp('Obvious').setDisabled(false);
-                Ext.getCmp('Obvious').setValue(true);
-            }
-            else if(eOpts[0].data.placement === "ambigous"){
-                 Ext.getCmp('Ambigous').setDisabled(false);
-                Ext.getCmp('Obvious').setDisabled(false);
-                Ext.getCmp('Ambigous').setValue(true);
-            }
-            else{
-                Ext.getCmp('Ambigous').setDisabled(true);
-                Ext.getCmp('Ambigous').setValue(false);
-                Ext.getCmp('Obvious').setDisabled(true);
-                Ext.getCmp('Obvious').setValue(false);
-            }
+            this.createVerovioViewItems(eOpts[0].data.placement);
         }
         };
      
@@ -154,6 +125,49 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
     
     var win = new pmdCE.view.main.AddDialog();
     win.show();
+},
+
+createVerovioViewItems: function(placement){
+    var verovioView = Ext.getCmp('cemain').getVerovioView();
+           if(verovioView.getRadioGroup() !== null){
+                verovioView.remove(verovioView.getRadioGroup(), true);
+           }
+           var radioGroup = verovioView.createRadioGroup();
+           verovioView.add(radioGroup);
+           verovioView.setRadioGroup(radioGroup);
+           verovioView.setNew();
+           
+           if(verovioView.getVerStartView() !== null){
+                verovioView.remove(verovioView.getVerStartView(), true);
+           }
+           var verovioImageStart = new pmdCE.view.main.VerovioImageStart();
+           verovioView.add(verovioImageStart);
+           verovioView.setVerStartView(verovioImageStart);
+           
+             if(verovioView.getVerEndView() !== null){
+                verovioView.remove(verovioView.getVerEndView(), true);
+           }
+           var verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
+           verovioView.add(verovioImageEnd);
+           verovioView.setVerEndView(verovioImageEnd);
+                      
+            if(placement === "obvious"){
+                Ext.getCmp('Ambigous').setDisabled(false);
+                Ext.getCmp('Obvious').setDisabled(false);
+                Ext.getCmp('Obvious').setValue(true);
+            }
+            else if(placement === "ambigous"){
+                 Ext.getCmp('Ambigous').setDisabled(false);
+                Ext.getCmp('Obvious').setDisabled(false);
+                Ext.getCmp('Ambigous').setValue(true);
+            }
+            else{
+                Ext.getCmp('Ambigous').setDisabled(true);
+                Ext.getCmp('Ambigous').setValue(false);
+                Ext.getCmp('Obvious').setDisabled(true);
+                Ext.getCmp('Obvious').setValue(false);
+            }
+    
 },
 
  changeElementDialog: function(){    
