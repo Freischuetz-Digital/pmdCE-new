@@ -24,9 +24,8 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
     initComponent: function() {
     
     this.listeners = {
-          
-          itemclick: function(index) {            
-           var verovioView = Ext.getCmp('cemain').getVerovioView();
+        selectionchange: function(selected, eOpts){
+            var verovioView = Ext.getCmp('cemain').getVerovioView();
            if(verovioView.getRadioGroup() !== null){
                 verovioView.remove(verovioView.getRadioGroup(), true);
            }
@@ -48,12 +47,12 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
            verovioView.add(verovioImageEnd);
            verovioView.setVerEndView(verovioImageEnd);
                       
-            if(index.selection.data.placement === "obvious"){
+            if(eOpts[0].data.placement === "obvious"){
                 Ext.getCmp('Ambigous').setDisabled(false);
                 Ext.getCmp('Obvious').setDisabled(false);
                 Ext.getCmp('Obvious').setValue(true);
             }
-            else if(index.selection.data.placement === "ambigous"){
+            else if(eOpts[0].data.placement === "ambigous"){
                  Ext.getCmp('Ambigous').setDisabled(false);
                 Ext.getCmp('Obvious').setDisabled(false);
                 Ext.getCmp('Ambigous').setValue(true);
@@ -65,8 +64,6 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
                 Ext.getCmp('Obvious').setValue(false);
             }
         }
-          
-           
         };
      
             this.columns = [{

@@ -26,6 +26,8 @@ Ext.define('pmdCE.Application', {
        'main.AddAmbiguousElDialog',
        'main.AmbiguousCard',
        'main.ObviousCard',
+       'main.ChangeToAmDialog',
+       'main.ChangeToObDialog',
        'main.CEPanel',          
        'main.Main'      
     ],

@@ -1,6 +1,6 @@
 Ext.define('pmdCE.view.main.AddAmbiguousElDialog', {
    extend: 'Ext.window.Window',
-   title: 'Add Obvious Element',
+   title: 'Add Ambiguous Element',
    flex: 1,
    //height: 200,
    //width: 500, 

@@ -146,8 +146,16 @@ createRadioGroup: function(){
                 change: function (cb, nv, ov) {
                    console.log("Change");
                    console.log(cb);
-                   console.log(nv.Placement);
+                   console.log(nv);
                    console.log(ov);
+                   if(nv.Placement === 1){
+                     //  var win = new pmdCE.view.main.ChangeToAmDialog();
+                     //  win.show();
+                   }
+                   else if(nv.Placement === 2){
+                     //  var win = new pmdCE.view.main.ChangeToObDialog();
+                      // win.show();
+                   }
                 }
                 
             },

@@ -111,7 +111,7 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
         items: [            
                 tstamp2FieldOrig,
                 tstamp2FieldReg1,
-                 tstamp2FieldReg2,
+                tstamp2FieldReg2,
                 verovioImageEnd  
         ]
     }
