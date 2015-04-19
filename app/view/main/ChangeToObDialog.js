@@ -17,7 +17,7 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
     this.id = "changetoamdialog";
          Ext.getCmp('cemain').setEditorId(this.id);
          
-         if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
+       /*  if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
              Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
          }
          if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
@@ -25,7 +25,7 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
          }
          if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
-         }
+         }*/
     
     staffField = this.createComboBoxStaff('Staff');  
     placeField = this.createComboBox('Place');

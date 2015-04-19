@@ -34,7 +34,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
          this.id = "obviouscard";
          Ext.getCmp('cemain').setEditorId(this.id);
          
-         if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
+       /*  if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
              Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
          }
          if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
@@ -42,7 +42,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
          }
          if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
-         }
+         }*/
          //console.log(Ext.getCmp('verovioview').getVerStartView());
          
         staffField= this.createComboBoxStaff('Staff');  
@@ -144,9 +144,10 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
 	 
         var hairpin = Ext.create('pmdCE.model.Hairpin', {      
-                    name: formValue+'_st'+staffField.getValue()+'_ts'+tstampField.getValue()+'_obvious',
+                    name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_obvious',
                     icon: 'resources/images/mix_volume.png',
-                    placement: 'obvious',
+                    obvious: true,
+                    ambiguous: false,
                      children: [
                 {
                     icon: 'resources/images/details-xml.png',

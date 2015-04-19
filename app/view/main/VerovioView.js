@@ -1,125 +1,54 @@
 Ext.define('pmdCE.view.main.VerovioView', {
     extend: 'Ext.panel.Panel',
-    requires: [
+     requires: [
         'Ext.layout.container.VBox'
     ],
    // xtype: 'layout-vertical-box',
-  //  id: 'verovioview',
-   /*width: 300,
-     height: 400,*/
-     flex: 1,
+    width: 150,
     region: 'center',
-    
-  /*  layout: {
-        type: 'vbox',
-        pack: 'start'
-        /\*align: 'stretch'*\/
-    },*/
-    
-    bodyPadding: 10,
-   
-    verovioImageStart: null,
-    verovioImageEnd: null,
-    placement: null,
-    
-    radioGroup: null,
   
-    //renderer: null,
-    verovioView: null,
+    layout: {
+        type: 'vbox',
+        pack: 'start',
+        align: 'stretch'
+    },
+      
+    bodyPadding: 10,
+     
+    createNewElButton: null,
+    addElementButton: null,
+    changeToButton: null,
+  
+     layout: {
+        type: 'vbox',
+        align: 'stretch'
+    },
     
-    isElemenGroupNew: null,
-    
-    
+       
     initComponent: function() {
-    
-    //this.radioGroup = null;
-    
+  
     verovioView = this;
     Ext.getCmp('cemain').setVerovioView(verovioView);
    
-   // this.renderer = new verovio.toolkit(),
+   addElementButton = this.createCEButton();
+   addElementButton.setDisabled(true);
    
-   // this.id = 'verovioView_'+Ext.getCmp('hairpinsitem').getTileId(),
- //  radioGroup = this.createRadioGroup();
- // verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
-  // verovioImageStart.id = this.id +'_start',
- //  verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
-  // verovioImageEnd.id = this.id +'_end',
- 
- placement = this.createComboBox('Placement');
-
+   createHairpinButton = this.createHairpinButton();
+   
+  deleteElementButton = this.deleteElementButton();
+   deleteElementButton.setDisabled(true);
+   
+   changeToButton = this.createChangeToButton();
+   changeToButton.setDisabled(true);
+  
 this.items = [
-
-//radioGroup
-
-/*{
-            xtype: 'radiogroup',
-            //fieldLabel: 'Auto Layout',
-            cls: 'x-check-group-alt',
-            
-            items: [
-            {boxLabel: 'Ambigous', name: 'ambigous', inputValue: 1, margin: '0 10 10 0'},
-                {boxLabel: 'Obvious', name: 'obvious', inputValue: 2, checked: true, margin: '0 10 10 0'}
-                
-            ]
-        },
-*/
-//placement,
-
-/*{
-        xtype: 'label',
-       // forId: 'myFieldId',
-        text: 'Add regularization(s) dep. start time',
-        margin: '0 10 10 0'
-       // margin: '0 0 0 10'
-    },*/
-
-//verovioImageStart,
-/*{
-        xtype: 'label',
-       // forId: 'myFieldId',
-        text: 'Add regularization(s) dep. end time',
-        margin: '0 10 10 0'
-       // margin: '0 0 0 10'
-    },*/
-//verovioImageEnd
-
+createHairpinButton,
+addElementButton,
+changeToButton,
+deleteElementButton
         ],
         this.callParent()
 
-},
-
-/*getRenderer: function(){
-    return this.renderer;
-    },*/
-
-        createComboBox: function(fieldName){
-    
-    var states = Ext.create('Ext.data.Store', {
-    fields: ['abbr', 'name'],
-    data : [
-        {"abbr":"ambigous", "name":"ambigous"},
-        {"abbr":"obvious", "name":"obvious"}
-    ]
-});
-    
-    var ceTextField = Ext.create('Ext.form.ComboBox', {
-    fieldLabel: fieldName,
-    store: states,
-    queryMode: 'local',
-    displayField: 'name',
-    editable: false,
-   // margin: '0 0 0 0',
-    valueField: 'abbr',
-    listeners: {
-    select: function(combo, record, index) {
-   // Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-     // modelTest.set('curvedir', combo.getValue());
-    }
-  }
-});
-
-return ceTextField;
 },
 
    setVerStartView: function(verovioImageStart){
@@ -141,9 +70,11 @@ return ceTextField;
 createRadioGroup: function(){
     var radios = new Ext.form.RadioGroup({
      xtype: 'radiogroup',
-            cls: 'x-check-group-alt',
+     layout: 'vbox',
+          //  cls: 'x-check-group-alt',
+            //labelWidth: 100,
           // id: 'placementradiogroup',
-           scale: 'small',
+          // scale: 'small',
             listeners: {
                 change: function (newValue, oldValue, eOpts) {
                    if(verovioView.isElemenGroupNew){
@@ -165,18 +96,19 @@ createRadioGroup: function(){
            
             items: [
             {boxLabel: 'Ambigous', 
+           // styles: {width:"100px"},
             name: 'Placement', 
             inputValue: 1, 
-            margin: '0 10 0 10', 
-            scale: 'small', 
+            //margin: '0 10 0 10', 
+           // scale: 'small', 
             id: "Ambigous", 
             disabled: true
             },
             {boxLabel: 'Obvious', 
             name: 'Placement', 
             inputValue: 2, 
-            margin: '0 10 0 0', 
-            scale: 'small', 
+           // margin: '0 10 0 0', 
+            //scale: 'small', 
             id: "Obvious", 
             disabled: true
             }              
@@ -185,6 +117,126 @@ createRadioGroup: function(){
    return radios;    
 },
 
+createCEButton: function(){
+    var ceButton = Ext.create('Ext.button.Button', {  
+                    xtype: 'button',
+                   // icon: "resources/images/drop-add.gif",
+                   // glyph: null,
+                   id: 'addelementbutton',
+                    text: 'Add element',
+                   // scale: 'medium',
+                   // width: 120,
+                    margin: '0 0 10 0', 
+                  //  flex: 1,         
+                  //  handler: ceHandler,
+                     menu: [Ext.create('Ext.menu.Item', {
+                        text: "Orig",
+                        icon: 'resources/images/details-xml.png'
+                        /*handler: function() {
+                           var win = new pmdCE.view.main.AddObviousElDialog();
+                            win.show();
+                        }*/
+                     }),
+                     
+                     Ext.create('Ext.menu.Item', {
+                text: "Reg",
+                icon: 'resources/images/details-xml.png'
+               /* handler: function() {
+                   var win = new pmdCE.view.main.AddAmbiguousElDialog();
+                    win.show();
+                }*/
+             })
+                    ]
+          });
+
+return ceButton;
+},
+
+createChangeToButton: function(){
+    var ceButton = Ext.create('Ext.button.Button', {  
+                    xtype: 'button',
+                   // icon: "resources/images/drop-add.gif",
+                   // glyph: null,
+                   id: 'changetobutton',
+                    text: 'Change to ...',
+                   // scale: 'medium',
+                   // width: 120,
+                    margin: '0 0 10 0', 
+                  //  flex: 1,         
+                  //  handler: ceHandler,
+                     menu: [Ext.create('Ext.menu.Item', {
+                        text: "Ambiguous",
+                       // icon: 'resources/images/details-xml.png'
+                        handler: function() {
+                            var win = new pmdCE.view.main.ChangeToAmDialog();
+                            win.show();
+                        }
+                     }),
+                     
+                     Ext.create('Ext.menu.Item', {
+                text: "Obvious",
+               // icon: 'resources/images/details-xml.png'
+                handler: function() {
+                    var win = new pmdCE.view.main.ChangeToObDialog();
+                            win.show();
+                }
+             })
+                    ]
+          });
+
+return ceButton;
+},
+
+createHairpinButton: function(){
+    var ceButton = Ext.create('Ext.button.Button', {  
+                    xtype: 'button',
+                    id: "createhairpinbutton",
+                   // icon: "resources/images/drop-add.gif",
+                   // glyph: null,
+                    text: 'Create hairpin',
+                     margin: '0 0 10 0', 
+                   // scale: 'medium',
+                   //   width: 120, 
+                  // bodyPadding: 10,
+                  //  handler: ceHandler,
+                     menu: [Ext.create('Ext.menu.Item', {
+                        text: "Ambiguous",
+                        icon: 'resources/images/mix_volume.png',
+                        handler: function() {
+                           var win = new pmdCE.view.main.AddAmbiguousElDialog();
+                            win.show();
+                        }
+                     }),
+                     
+                     Ext.create('Ext.menu.Item', {
+                text: "Obvious",
+                icon: 'resources/images/mix_volume.png',
+                handler: function() {
+                    var win = new pmdCE.view.main.AddObviousElDialog();
+                            win.show();
+                }
+             })
+                    ]
+          });
+
+return ceButton;
+},
+
+deleteElementButton: function(){
+    var ceButton = Ext.create('Ext.button.Button', {  
+                    xtype: 'button',
+                    id: "deleteButton",
+                   // icon: "resources/images/drop-add.gif",
+                    margin: '0 0 10 0', 
+                   // glyph: null,
+                    text: 'Delete'
+                    //scale: 'medium'
+                   // width: 120   
+                  //  handler: ceHandler,
+          });
+
+return ceButton;
+},
    setRadioGroup: function(radioGroup){
         this.radioGroup = radioGroup;       
     },

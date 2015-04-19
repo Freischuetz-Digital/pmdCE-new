@@ -2,9 +2,10 @@
    "text": "Root",
     "children": [
         {
-            "name": "A_mov6_measure122_ce1", 
+            "name": "cres_1_below_obvious", 
             "icon": 'resources/images/mix_volume.png',
-             "placement": "obvious",
+             "obvious": true,
+             "ambiguous": false,
                "children": [
                 {
                     "icon": 'resources/images/details-xml.png',
@@ -20,9 +21,10 @@
         }, 
         {
             
-            "name": "A_mov6_measure123_ce1",
+            "name": "dim_1_below_obvious",
             "icon": 'resources/images/mix_volume.png',
-            "placement": "obvious",
+            "obvious": true,
+            "ambiguous": false,
             "children": [
                 { 
                     "icon": 'resources/images/details-xml.png',

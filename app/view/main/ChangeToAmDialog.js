@@ -27,14 +27,24 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     verovioImageStart: null,
     verovioImageEnd: null,
     
+    selection: null,
+    rootNode: null,
+    selectedNode: null,
+    nodeToDelete: null,
+    vordStaff: null,
+	vordForm: null,
+	vordPlace: null,
+	vordTStamp: null,
+	vordTStamp2: null,
+    
     layout: 'hbox',
   
     initComponent: function() {
     
     this.id = "changetoamdialog";
-         Ext.getCmp('cemain').setEditorId(this.id);
+    Ext.getCmp('cemain').setEditorId(this.id);
          
-         if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
+        /* if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
              Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
          }
          if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
@@ -42,26 +52,68 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
          }
          if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
-         }
+         }*/
+         
+      selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+
+	  for(var i = 0; i < rootNode.childNodes.length ; i++){
+	  if(rootNode.childNodes[i].data.id === selection.data.id){
+	      selectedNode = rootNode.childNodes[i];	
+	      nodeToDelete = selectedNode.childNodes[0];
+	      vordStaff = nodeToDelete.data.staff;
+	      vordForm = nodeToDelete.data.form ;
+	      vordPlace = nodeToDelete.data.place;
+	      vordTStamp = nodeToDelete.data.tstamp;
+	      vordTStamp2 = nodeToDelete.data.tstamp2;
+	      break;
+	  }	      
+	  }    
     
-    staffFieldOrig = this.createComboBoxStaff('Staff');  
+    staffFieldOrig = this.createComboBoxStaff('Staff'); 
+    staffFieldOrig.setValue(vordStaff);
     placeFieldOrig = this.createComboBox('Place');
+    placeFieldOrig.setValue(vordPlace);
     formFieldOrig = this.createRadioGroup();
-    
-    staffFieldReg1 = this.createComboBoxStaff('Staff');  
+    console.log(formFieldOrig);
+    if(vordForm === 'dim'){
+        formFieldOrig.items.items[1].setValue(true);
+    }
+    else{
+        formFieldOrig.items.items[0].setValue(true);
+    }
+    staffFieldReg1 = this.createComboBoxStaff('Staff'); 
+    staffFieldReg1.setValue(vordStaff);
     placeFieldReg1 = this.createComboBox('Place');
+    placeFieldReg1.setValue(vordPlace);
     formFieldReg1 = this.createRadioGroup();
+     if(vordForm === 'dim'){
+        formFieldReg1.items.items[1].setValue(true);
+    }
+    else{
+        formFieldReg1.items.items[0].setValue(true);
+    }
     
     staffFieldReg2 = this.createComboBoxStaff('Staff'); 
+    staffFieldReg2.setValue(vordStaff);
     staffFieldReg2.setDisabled(true);
     placeFieldReg2 = this.createComboBox('Place');
+    placeFieldReg2.setValue(vordPlace);
     placeFieldReg2.setDisabled(true);
     formFieldReg2 = this.createRadioGroup();
     formFieldReg2.setDisabled(true);
+    if(vordForm === 'dim'){
+        formFieldReg2.items.items[1].setValue(true);
+    }
+    else{
+        formFieldReg2.items.items[0].setValue(true);
+    }
     tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
     tstampFieldReg2.setDisabled(true);
+    tstampFieldReg2.setValue(vordTStamp);
     tstampField2Reg2 = this.createTextField('tstampField2Reg2', 'Tstamp2 reg2');
     tstampField2Reg2.setDisabled(true);
+    tstampField2Reg2.setValue(vordTStamp2);
     
     tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
     tstamp2FieldReg1 = this.createTextField('tstampField2Reg1', 'Tstamp2 reg1');
@@ -193,7 +245,49 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
         handler: 
         function(){
       
-            this.up('window').close();
+        var formValueOrig = formFieldOrig.getValue().Form === 2 ? "dim" : 'cres';
+        var formValueReg1= formFieldReg1.getValue().Form === 2 ? "dim" : 'cres';
+      
+	  if(selectedNode !== null){
+	  // TODO: ? erase : Boolean (optional); True to erase the record using the configured proxy. Defaults to: false
+	  selectedNode.data.name = vordForm+'_'+vordStaff+'_'+vordPlace+'_ambiguous';
+	  selectedNode.data.obvious = false;
+         selectedNode.data.ambiguous = true;
+	      selectedNode.removeChild(nodeToDelete);
+	         selectedNode.appendChild({
+                    icon: 'resources/images/details-xml.png',
+                    staff: staffFieldOrig.getValue(),                   
+                    tstamp: tstampFieldOrig.getValue(),
+                    tstamp2: tstamp2FieldOrig.getValue(),
+                    place: placeFieldOrig.getValue(),
+                    form: formValueOrig,
+                    tag: "orig",
+                    leaf: true
+        });	
+        selectedNode.appendChild({
+                    icon: 'resources/images/details-xml.png',
+                    staff: staffFieldReg1.getValue(),                   
+                    tstamp: tstampFieldReg1.getValue(),
+                    tstamp2: tstamp2FieldReg1.getValue(),
+                    place: placeFieldReg1.getValue(),
+                    form: formValueReg1,
+                    tag: "reg",
+                    leaf: true
+        });
+        selectedNode.appendChild({
+                    icon: 'resources/images/details-xml.png',
+                    staff: vordStaff,                   
+                    tstamp: vordTStamp,
+                    tstamp2: vordTStamp2,
+                    place: vordPlace,
+                    form: vordForm,
+                    tag: "reg",
+                    leaf: true
+        });	
+	  }
+	  selectedNode.expand();
+
+      this.up('window').close();
            
        }
       
@@ -257,10 +351,9 @@ return ceTextField;
 
 createRadioGroup: function(){
     var radios = new Ext.form.RadioGroup({
-     xtype: 'radiogroup',
+            xtype: 'radiogroup',
             fieldLabel: 'Form',
-            cls: 'x-check-group-alt',
-            
+            cls: 'x-check-group-alt',           
             items: [
                 {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0'},
                 {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0'}

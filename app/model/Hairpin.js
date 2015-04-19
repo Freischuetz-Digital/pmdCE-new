@@ -7,6 +7,7 @@ Ext.define('pmdCE.model.Hairpin', {
         {name: 'tstamp2',   type: 'string'},
         {name: 'place',   type: 'string'},
         {name: 'form',   type: 'string'},
-        {name: 'placement',   type: 'string'}
+        {name: 'obvious',   type: 'boolean'},
+        {name: 'ambiguous',   type: 'boolean'}
     ]
 });

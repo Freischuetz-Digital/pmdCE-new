@@ -46,13 +46,13 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     arrowR.setDisabled(true);
     saveButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/Save.png', this.saveComponents);
     saveButton.setDisabled(true);
-    createButton = this.createCEIcon1();
+    //createButton = this.createCEIcon1();
     //('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
-    createButton.setDisabled(true);
-    deleteButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/icon16_error.png', this.deleteComponent);
-    deleteButton.setDisabled(true);
-    showXmlButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/xml-32.png', this.saveComponents);
-    showXmlButton.setDisabled(true);
+   // createButton.setDisabled(true);
+    //deleteButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/icon16_error.png', this.deleteComponent);
+    //deleteButton.setDisabled(true);
+    //showXmlButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/xml-32.png', this.saveComponents);
+    //showXmlButton.setDisabled(true);
     selectToolButton = this.createCEButton('splitbutton', 'Control Events', 'controlevents', [{text: 'Pitch Tool'}, {text: 'Abbrev Resolver'}]);
     loginButton = this.createLoginButton('splitbutton', 'Login');
        loginButton.setDisabled(true);    
@@ -66,10 +66,10 @@ Ext.define('pmdCE.view.main.CEToolbar', {
               arrowR,
              '-',
             saveButton, 
-            createButton,
-            deleteButton,
-            '-',
-            showXmlButton,
+           // createButton,
+           // deleteButton,
+           // '-',
+           // showXmlButton,
                '->', 
                selectToolButton,
             '-',
@@ -185,8 +185,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
         pagesButton.setDisabled(true);
         arrowLeft.setDisabled(true);
         arrowR.setDisabled(true);
-        createButton.setDisabled(true);
-        deleteButton.setDisabled(true);
+       // createButton.setDisabled(true);
+       // deleteButton.setDisabled(true);
         if(!saveButton.isDisabled()){
         // TODO
         alert('save?')
@@ -199,8 +199,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
      moveOnItemClick: function(item){
         movementButton.setText(item.text);
         pagesButton.setDisabled(false);
-        createButton.setDisabled(true);
-        deleteButton.setDisabled(true);
+       // createButton.setDisabled(true);
+       // deleteButton.setDisabled(true);
         
          if(!saveButton.isDisabled()){
         // TODO
@@ -223,8 +223,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
        // cePanelTable.getCETabView();
         arrowLeft.setDisabled(false);
         arrowR.setDisabled(false);
-        createButton.setDisabled(false);
-        deleteButton.setDisabled(false);
+       // createButton.setDisabled(false);
+       // deleteButton.setDisabled(false);
         // TODO: save for all testen
        /*   if(!saveButton.isDisabled()){
         alert('save?')
@@ -237,12 +237,47 @@ Ext.define('pmdCE.view.main.CEToolbar', {
    
          controllsView = new pmdCE.view.main.CEGridPanel();
         
-       //  xmlView = new pmdCE.view.main.XMLEditorView();
+         xmlView = new pmdCE.view.main.XMLEditorView();
          
          Ext.getCmp('hairpinsitem').add(controllsView);
          Ext.getCmp('hairpinsitem').add(verovioView);
-       //  Ext.getCmp('hairpinsitem').add(xmlView);
+         Ext.getCmp('hairpinsitem').add(xmlView);
                 //Ext.getCmp('centertabeditor').setActiveItem(ceEditor);
+                
+          /*      var verovioView = Ext.getCmp('cemain').getVerovioView();
+      
+           var radioGroup = verovioView.createRadioGroup();
+           verovioView.add(radioGroup);
+           verovioView.setRadioGroup(radioGroup);
+           verovioView.setNew();
+           
+           var addElementButton = verovioView.createCEButton();
+           verovioView.add(addElementButton);
+           
+           var createHairpinButton = verovioView.createHairpinButton();
+           verovioView.add(createHairpinButton);
+           
+           var deleteElementButton = verovioView.deleteElementButton();
+           verovioView.add(deleteElementButton);*/
+           
+         /*   if(placement === "obvious"){
+                Ext.getCmp('Ambigous').setDisabled(false);
+                Ext.getCmp('Obvious').setDisabled(false);
+                Ext.getCmp('Obvious').setValue(true);
+            }
+            else if(placement === "ambigous"){
+                 Ext.getCmp('Ambigous').setDisabled(false);
+                Ext.getCmp('Obvious').setDisabled(false);
+                Ext.getCmp('Ambigous').setValue(true);
+            }
+            else{*/
+            /*    Ext.getCmp('Ambigous').setDisabled(true);
+                Ext.getCmp('Ambigous').setValue(false);
+                Ext.getCmp('Obvious').setDisabled(true);
+                Ext.getCmp('Obvious').setValue(false);*/
+         //   }
+                
+                
          
          
          var app = pmdCE.getApplication();

@@ -42,7 +42,7 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
          this.id = "ambiguouscard";
          Ext.getCmp('cemain').setEditorId(this.id);
          
-         if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
+       /*  if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
              Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
          }
          if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
@@ -50,7 +50,7 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
          }
          if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
-         }
+         }*/
          
          staffField= this.createComboBoxStaff('Staff');  
         startTaktField= this.createComboBoxMeasureNr('Start measure');
@@ -146,9 +146,10 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
              var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
         
 	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
-	               name: formValue+'_st'+staffField.getValue()+'_ts'+tstampFieldOrig.getValue()+'_ambigous',
+	               name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_ambigous',
                     icon: 'resources/images/mix_volume.png',
-                    placement: 'ambigous',
+                    obvious: false,
+                    ambiguous: true,
                      children: [
                 {
                     icon: 'resources/images/details-xml.png',
