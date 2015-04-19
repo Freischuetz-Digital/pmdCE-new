@@ -3,6 +3,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
     requires: [
         'Ext.layout.container.Card'
     ],
+    id: "obviouscard",
     //xtype: 'layout-card',
     layout: 'card',
    // width: 500,
@@ -30,20 +31,6 @@ Ext.define('pmdCE.view.main.ObviousCard', {
   
     
          initComponent: function() {
-         
-         this.id = "obviouscard";
-         Ext.getCmp('cemain').setEditorId(this.id);
-         
-       /*  if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
-             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
-         }
-         if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
-            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerEndView(), true);
-         }
-         if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
-            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
-         }*/
-         //console.log(Ext.getCmp('verovioview').getVerStartView());
          
         staffField= this.createComboBoxStaff('Staff');  
         startTaktField= this.createComboBoxMeasureNr('Start measure');
@@ -165,20 +152,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 	  
 	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    var parent = root.appendChild(hairpin);
-
-/*parent.appendChild({
-      icon: 'resources/images/details-xml.png',
-                    staff: "11",                   
-                    tstamp: "4",
-                    tstamp2: "m+6.5",
-                    place: "below",
-                    form: "dim",
-                    tag: "orig",
-                    leaf: true
-   
-});*/
-
-    parent.expand();
+        parent.expand();
             this.up('window').close();
            
        }

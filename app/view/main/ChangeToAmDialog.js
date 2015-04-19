@@ -1,6 +1,7 @@
 Ext.define('pmdCE.view.main.ChangeToAmDialog', {
    extend: 'Ext.window.Window',
    title: 'Change to Ambiguous Element',
+   id: "changetoamdialog",
    flex: 1,
    modal: true,
  
@@ -41,19 +42,6 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
   
     initComponent: function() {
     
-    this.id = "changetoamdialog";
-    Ext.getCmp('cemain').setEditorId(this.id);
-         
-        /* if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
-             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
-         }
-         if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
-            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerEndView(), true);
-         }
-         if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
-            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
-         }*/
-         
       selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 

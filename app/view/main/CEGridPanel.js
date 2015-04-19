@@ -23,21 +23,16 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
     
     ambiguousColumn: null,
     obviousColumn: null,
+    editColumn: null,
    
     initComponent: function() {
     
     ambiguousColumn = this.createColumn();
     obviousColumn = this.createObColumn();
+    editColumn = this.createEditColumn();
     
     this.listeners = {
-    
-   /* itemclick: function(record, item, index, e, eOpts) {  
-        // items were removed
-        if(verovioView.items.length == 0){
-            this.createVerovioViewItems(item.data.placement);
-        }
-    },*/
-    
+  
         selectionchange: function(selected, eOpts){
         
         if(eOpts[0].data.depth === 1){
@@ -45,6 +40,7 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
             Ext.getCmp('deleteButton').setDisabled(false);
             Ext.getCmp('addelementbutton').setDisabled(false);
             Ext.getCmp('changetobutton').setDisabled(false);
+           // editColumn.setDisabled(true);
         }
         else if(eOpts[0].data.depth === 2){
         // TODO handle delete
@@ -52,19 +48,8 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
             Ext.getCmp('deleteButton').setDisabled(false);
         Ext.getCmp('addelementbutton').setDisabled(true);
         Ext.getCmp('changetobutton').setDisabled(true);
+        //editColumn.setDisabled(false);
         }
-        
-        
-        
-    //    console.log("eOpts[0].data");
-//console.log(eOpts[0].data);
-//if(eOpts[0].data.depth === 2){
-//    ambiguousColumn.disable();
-//}
-//else{
-//    ambiguousColumn.enable();
-//}
-           // this.createVerovioViewItems(eOpts[0].data.placement);
         }
         };
      
@@ -113,24 +98,8 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
             },
              ambiguousColumn,
              obviousColumn,
-            {
-                xtype: 'actioncolumn',
-                header: 'Edit',
-                width: 40,
-                align: 'center',
-                menuDisabled: true,
-                renderer: function (val, metadata, record) {
-                if (record.data.depth === 1) {
-                    this.items[0].icon = '';
-                } else {
-                    this.items[0].icon = 'resources/images/edit.png';
-                }
-                metadata.style = 'cursor: pointer;';
-                return val;
-            },
-                handler: this.changeElementDialog
-            }
-            
+             editColumn
+           
             ]
         this.callParent()
     },
@@ -141,47 +110,6 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
     win.show();
 },
 
-createVerovioViewItems: function(placement){
-
-  /*  var verovioView = Ext.getCmp('cemain').getVerovioView();
-      
-           var radioGroup = verovioView.createRadioGroup();
-           verovioView.add(radioGroup);
-           verovioView.setRadioGroup(radioGroup);
-           verovioView.setNew();
-           
-           var addElementButton = verovioView.createCEButton();
-           verovioView.add(addElementButton);
-           
-           var createHairpinButton = verovioView.createHairpinButton();
-           verovioView.add(createHairpinButton);
-           
-           var deleteElementButton = verovioView.deleteElementButton();
-           verovioView.add(deleteElementButton);*/
-           
-       /*     if(placement === "obvious"){
-                Ext.getCmp('Ambigous').setDisabled(false);
-                Ext.getCmp('Obvious').setDisabled(false);
-                Ext.getCmp('Obvious').setValue(true);
-            }
-            else if(placement === "ambigous"){
-                 Ext.getCmp('Ambigous').setDisabled(false);
-                Ext.getCmp('Obvious').setDisabled(false);
-                Ext.getCmp('Ambigous').setValue(true);
-            }
-            else{
-                Ext.getCmp('Ambigous').setDisabled(true);
-                Ext.getCmp('Ambigous').setValue(false);
-                Ext.getCmp('Obvious').setDisabled(true);
-                Ext.getCmp('Obvious').setValue(false);
-            }*/
-    
-},
-
- changeElementDialog: function(){    
-    var win = new pmdCE.view.main.EditDialog();
-    win.show();
-},
 
 //deleteElement: function(grid, rowIndex, colIndex, actionItem, event, record, row){    
      /*     console.log("grid");
@@ -231,30 +159,6 @@ return false;
             }
         }, this);
 },*/
- onAddClick: function(){
-        // Create a model instance
-        var rec = new pmdCE.model.Hairpin({
-            common: '',
-            light: 'Mostly Shady',
-            price: 0,
-            availDate: Ext.Date.clearTime(new Date()),
-            indoor: false
-        });
-
-        this.getStore().insert(0, rec);
-        this.cellEditing.startEditByPosition({
-            row: 0,
-            column: 0
-        });
-    },
-
-    onRemoveClick: function(grid, rowIndex){
-        this.getStore().removeAt(rowIndex);
-    },
-
-    onEditComplete: function(editor, context) {
-        this.getView().focusRow(context.record);
-    },
     
     createObColumn: function(){
     var eColumn = Ext.create('Ext.grid.column.Check', {
@@ -272,16 +176,31 @@ return false;
                      return (new Ext.ux.CheckColumn()).renderer(val);
                  }
                  }
-              /*     listeners: {
-                 checkchange: function( rowIndex, checked, eOpts ){
-                     if(eOpts){                   
-                         ambiguousColumn.setText(false);
-                         var win = new pmdCE.view.main.ChangeToObDialog();
-                            win.show();
-                     }
-                     
-                 }
-                 }*/
+                 });
+   return eColumn;   
+    },
+    
+    
+     createEditColumn: function(){
+    var eColumn = Ext.create('Ext.grid.column.Action', {
+         
+                xtype: 'actioncolumn',
+                header: 'Edit',
+                width: 40,
+                align: 'center',
+                menuDisabled: true,
+                //disabled: true,
+                renderer: function (val, metadata, record) {
+                if (record.data.depth === 1) {
+                    this.items[0].icon = '';
+                } else {
+                    this.items[0].icon = 'resources/images/edit.png';
+                }
+                metadata.style = 'cursor: pointer;';
+                return val;
+            },
+                handler: this.changeElementDialog
+            
                  });
    return eColumn;   
     },
@@ -301,17 +220,6 @@ return false;
                  }
         
     }
-     /*
-                 listeners: {
-                 checkchange: function( rowIndex, checked, eOpts ){
-                     if(eOpts){
-                         //obviousColumn.checked = false;
-                         var win = new pmdCE.view.main.ChangeToAmDialog();
-                            win.show();
-                     }
-                     
-                 }
-                 }*/
    });
    return eColumn;
    }

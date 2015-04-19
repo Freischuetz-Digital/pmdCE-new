@@ -21,9 +21,6 @@ Ext.define('pmdCE.view.main.Main', {
     
     bodyPadding: 5,
     
-    verovioView: null,
-    editorId: null,
-   
     defaults: {
         //frame: true,
         border: true
@@ -36,7 +33,6 @@ Ext.define('pmdCE.view.main.Main', {
     initComponent: function() {
     
   ceToolbar = new pmdCE.view.main.CEToolbar(),
-    //cePanel = new pmdCE.view.main.CEPanelTable(),
     cePanel = new pmdCE.view.main.CEPanel(),
      
 this.items = [
@@ -47,26 +43,7 @@ this.items = [
 
 this.callParent()
 
-    },
-    
-    setVerovioView: function(verovioView){
-        this.verovioView = verovioView;
-        
-    },
-    
-    getVerovioView: function(){
-        return this.verovioView;
-    },
-    
-     setEditorId: function(editorId){
-        this.editorId = editorId;
-        
-    },
-    
-    getEditorId: function(){
-        return this.editorId;
     }
 
-    
     });
     

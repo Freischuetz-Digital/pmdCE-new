@@ -26,6 +26,9 @@ me = this;
 //id = this.id;
 currId = this.id;
 
+console.log("currId");
+console.log(currId);
+
 app = pmdCE.getApplication();
 renderer = app.getRenderer();
 

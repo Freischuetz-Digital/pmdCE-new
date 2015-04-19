@@ -14,6 +14,7 @@ Ext.define('pmdCE.view.main.VerovioView', {
     },
       
     bodyPadding: 10,
+    id: "verovioview",
      
     createNewElButton: null,
     addElementButton: null,
@@ -27,9 +28,6 @@ Ext.define('pmdCE.view.main.VerovioView', {
        
     initComponent: function() {
   
-    verovioView = this;
-    Ext.getCmp('cemain').setVerovioView(verovioView);
-   
    addElementButton = this.createCEButton();
    addElementButton.setDisabled(true);
    
@@ -51,71 +49,6 @@ deleteElementButton
 
 },
 
-   setVerStartView: function(verovioImageStart){
-        this.verovioImageStart = verovioImageStart;       
-    },
-    
-    getVerStartView: function(){
-        return this.verovioImageStart;
-    },
-       
-     setVerEndView: function(verovioImageEnd){
-        this.verovioImageEnd = verovioImageEnd;       
-    },
-    
-    getVerEndView: function(){
-        return this.verovioImageEnd;
-    },
-
-createRadioGroup: function(){
-    var radios = new Ext.form.RadioGroup({
-     xtype: 'radiogroup',
-     layout: 'vbox',
-          //  cls: 'x-check-group-alt',
-            //labelWidth: 100,
-          // id: 'placementradiogroup',
-          // scale: 'small',
-            listeners: {
-                change: function (newValue, oldValue, eOpts) {
-                   if(verovioView.isElemenGroupNew){
-                       verovioView.isElemenGroupNew = false;
-                   }
-                   else if(!verovioView.isElemenGroupNew && oldValue.Placement === 2){
-                        var win = new pmdCE.view.main.ChangeToObDialog();
-                       win.show();
-                   }
-                     else if(!verovioView.isElemenGroupNew && oldValue.Placement === 1){
-                        var win = new pmdCE.view.main.ChangeToAmDialog();
-                       win.show();
-                   }
-                
-                }
-                
-            },
-           
-           
-            items: [
-            {boxLabel: 'Ambigous', 
-           // styles: {width:"100px"},
-            name: 'Placement', 
-            inputValue: 1, 
-            //margin: '0 10 0 10', 
-           // scale: 'small', 
-            id: "Ambigous", 
-            disabled: true
-            },
-            {boxLabel: 'Obvious', 
-            name: 'Placement', 
-            inputValue: 2, 
-           // margin: '0 10 0 0', 
-            //scale: 'small', 
-            id: "Obvious", 
-            disabled: true
-            }              
-            ]   
-   });
-   return radios;    
-},
 
 createCEButton: function(){
     var ceButton = Ext.create('Ext.button.Button', {  

@@ -230,8 +230,12 @@ Ext.define('pmdCE.view.main.CEToolbar', {
         alert('save?')
         saveButton.setDisabled(true);
         } */
-        
-        
+       
+        if(typeof Ext.getCmp('verovioview') !== 'undefined'){
+            // TODO: save?
+            Ext.getCmp('hairpinsitem').removeAll(true);
+        }
+      
          verovioView = new pmdCE.view.main.VerovioView();
         // verovioView.id = 'verovioview',
    
@@ -243,42 +247,6 @@ Ext.define('pmdCE.view.main.CEToolbar', {
          Ext.getCmp('hairpinsitem').add(verovioView);
          Ext.getCmp('hairpinsitem').add(xmlView);
                 //Ext.getCmp('centertabeditor').setActiveItem(ceEditor);
-                
-          /*      var verovioView = Ext.getCmp('cemain').getVerovioView();
-      
-           var radioGroup = verovioView.createRadioGroup();
-           verovioView.add(radioGroup);
-           verovioView.setRadioGroup(radioGroup);
-           verovioView.setNew();
-           
-           var addElementButton = verovioView.createCEButton();
-           verovioView.add(addElementButton);
-           
-           var createHairpinButton = verovioView.createHairpinButton();
-           verovioView.add(createHairpinButton);
-           
-           var deleteElementButton = verovioView.deleteElementButton();
-           verovioView.add(deleteElementButton);*/
-           
-         /*   if(placement === "obvious"){
-                Ext.getCmp('Ambigous').setDisabled(false);
-                Ext.getCmp('Obvious').setDisabled(false);
-                Ext.getCmp('Obvious').setValue(true);
-            }
-            else if(placement === "ambigous"){
-                 Ext.getCmp('Ambigous').setDisabled(false);
-                Ext.getCmp('Obvious').setDisabled(false);
-                Ext.getCmp('Ambigous').setValue(true);
-            }
-            else{*/
-            /*    Ext.getCmp('Ambigous').setDisabled(true);
-                Ext.getCmp('Ambigous').setValue(false);
-                Ext.getCmp('Obvious').setDisabled(true);
-                Ext.getCmp('Obvious').setValue(false);*/
-         //   }
-                
-                
-         
          
          var app = pmdCE.getApplication();
         // var store = app.getHairpinsStore();

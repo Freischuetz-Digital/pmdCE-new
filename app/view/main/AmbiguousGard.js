@@ -3,6 +3,7 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
     requires: [
         'Ext.layout.container.Card'
     ],
+    id: "ambiguouscard",
   //  xtype: 'layout-card',
     layout: 'card',
   //  width: 500,
@@ -36,21 +37,8 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
    
    verovioImageStart: null,
    verovioImageEnd: null,
-      
+    
          initComponent: function() {
-         
-         this.id = "ambiguouscard";
-         Ext.getCmp('cemain').setEditorId(this.id);
-         
-       /*  if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
-             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
-         }
-         if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
-            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerEndView(), true);
-         }
-         if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
-            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
-         }*/
          
          staffField= this.createComboBoxStaff('Staff');  
         startTaktField= this.createComboBoxMeasureNr('Start measure');
@@ -97,7 +85,7 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
                 tstampFieldOrig,
                 tstampFieldReg1,
                 tstampFieldReg2,
-                verovioImageStart 
+                verovioImageStart
         ]
     },
      {
