@@ -1,6 +1,6 @@
 xquery version "3.0";
 
-import module namespace freidi-pmd="http://www.freischuetz-digital.de/pmdCE-new" at "../../../modules/app.xql";
+import module namespace freidi-pmd="http://www.freischuetz-digital.de/pmdCE-new" at "../../modules/app.xql";
 
 declare namespace request="http://exist-db.org/xquery/request";
 declare namespace mei="http://www.music-encoding.org/ns/mei";
@@ -39,89 +39,15 @@ declare variable $dirs := $snippet//mei:dir;
 
 declare function local:jsonifySlurs($slurs) {
 
-    let $strings := for $elem in $slurs
-                    
-                    let $id := if($elem//@xml:id) then($elem//@xml:id[1]) else(generate-id($elem))
-                    let $measureID := $elem/ancestor::mei:measure/@xml:id
-                    let $measureN := $elem/ancestor::mei:measure/@n
-                    
-                    let $placement := if(local-name($elem) eq 'slur')
-                                      then('obvious')
-                                      else(
-                                         if(count($elem//mei:reg) = 1)
-                                         then('ambiguous')
-                                         else('multiResolve')
-                                      )
-                    
-                    let $startID := $elem//@startid[1]
-                    let $endID := $elem//@endid[1]
-                    
-                    let $event := $doc/id(substring($startID,2))
-                    let $staff := $event/ancestor::mei:staff
-                    let $layer :=  $event/ancestor::mei:layer
-(:                    let $predecessors := $layer//mei:*[local-name() = ('note','chord') and not(parent::mei:chord) and following::mei:*[@xml:id = $event/@xml:id]]:)
-                    
-                    let $endEvent := $doc/id(substring($endID,2))
-                    (:let $endPageName := concat($doc/mei:mei/@xml:id,'.xml'):)
-                    
-                    let $endStaff := $endEvent/ancestor::mei:staff
-                    let $endLayer :=  $endEvent/ancestor::mei:layer
-                    let $endMeasure := $endLayer/ancestor::mei:measure
-(:                    let $endPredecessors := $endLayer//mei:*[local-name() = ('note','chord') and not(parent::mei:chord) and following::mei:*[@xml:id = $endEvent/@xml:id]]:)
-                    
-                    let $curvedir := $elem//@curvedir[1]
-                    let $staffText := $elem//@staff[1]
-                    
-                    (:new model:)
-                    
-                    let $startIDs := $elem//@startid/substring(.,2)
-                    let $endIDs := $elem//@endid/substring(.,2)
-                    let $tstamp := $elem//(@tstamp)[1]
-                    let $tstamp2 := $elem//(@tstamp2)[1]
-                    
-                    
-                    order by number($staffText) ascending
-                    
+let $strings := for $elem in $slurs
+                    let $id := if($elem/@xml:id) then($elem/@xml:id) else(generate-id($elem))
                     return 
-                        concat('{"id":"',$id,'",',
-                            '"type":"slur",',
-                            '"startIDs":[',if(count($startIDs) gt 0) then(concat('"',string-join($startIDs,'","'),'"')) else(),'],',
-                            '"endIDs":[',if(count($endIDs) gt 0) then(concat('"',string-join($endIDs,'","'),'"')) else(),'],',
-                            '"tstamp":"',$tstamp,'",',
-                            '"tstamp2":"',$tstamp2,'",',
-                            '"curvedir":"',$curvedir,'",',
-                            '"docUri":"',substring-after(document-uri($doc),$freidi-pmd:ce-data),'",',
-                            '"staff":"',$staffText,'",',
-                            '"startStaffID":"',$staff/@xml:id,'",',
-                            '"endStaffID":"',$endStaff/@xml:id,'",',
-                            (:'"endPageName":"',$endPageName,'",',:)
-                            '"placement":"',$placement,'",',
-                            '"xml":"',replace(replace(serialize($elem),'"','\\"'),'\n','\\n'),'"',(:serialize(replace(replace(serialize($elem),'"','&amp;#x0027;'),'\n','')),'"',:)
-                            '}')
-                    
-                        (:concat('{"id":"',$id,'",',
-                        '"type":"slur",',
-                        
-                        
-                        '"measureID":"',$measureID,'",',
-                        '"measureN":"',$measureN,'",',
-                        '"startLabel":"m',$measureN,', e',count($predecessors) + 1,'",',
-                        '"endLabel":"m',$endMeasure/@n,', e',count($endPredecessors) + 1,'",',
-                        '"endMeasureID":"',$endMeasure/@xml:id,'",',
-                        '"curvedir":"',$curvedir,'",',
-                        '"placement":"',$placement,'",',
-                        
-                        '"staff":"',$staffText,'",',
-                        
-                        '"startID":"',substring($startID,2),'",',
-                        '"endID":"',substring($endID,2),'",',
-                        
-                        '"startStaffID":"',$staff/@xml:id,'",',
-                        '"endStaffID":"',$endStaff/@xml:id,'"',
-                        '}'):)
+                        concat('{"id":"',$id,'"}')
     
     return 
         string-join($strings,',')
+
+   
     
 };
 
@@ -143,83 +69,55 @@ declare function local:jsonifyHairpins($hairpins) {
                     let $measureID := $elem/ancestor::mei:measure/@xml:id
                     let $measureN := $elem/ancestor::mei:measure/@n
                     
-                    let $placement := if(local-name($elem) eq 'hairpin')
+                    let $obvious := if(local-name($elem) eq 'hairpin')
+                                      then('true')
+                                      else('false')
+                                      
+                    let $ambiguous := if(local-name($elem) ne 'hairpin')
+                                      then('true')
+                                      else('false')
+                    
+                    (:let $placement := if(local-name($elem) eq 'hairpin')
                                       then('obvious')
                                       else(
                                          if(count($elem//mei:reg) = 1)
                                          then('ambiguous')
                                          else('multiResolve')
-                                      )
-                    
-                    let $startID := $elem//@startid[1]
-                    let $endID := $elem//@endid[1]
-                    
-                    let $event := $doc/id(substring($startID,2))
-                    let $staff := $event/ancestor::mei:staff
-                    let $layer :=  $event/ancestor::mei:layer
-(:                    let $predecessors := $layer//mei:*[local-name() = ('note','chord') and not(parent::mei:chord) and following::mei:*[@xml:id = $event/@xml:id]]:)
-                    
-                    let $endEvent := $doc/id(substring($endID,2))
-                    (:let $endPageName := concat($doc/mei:mei/@xml:id,'.xml'):)
-                    
-                    let $endStaff := $endEvent/ancestor::mei:staff
-                    let $endLayer :=  $endEvent/ancestor::mei:layer
-                    let $endMeasure := $endLayer/ancestor::mei:measure
-(:                    let $endPredecessors := $endLayer//mei:*[local-name() = ('note','chord') and not(parent::mei:chord) and following::mei:*[@xml:id = $endEvent/@xml:id]]:)
-                    
-                    let $curvedir := $elem//@curvedir[1]
+                                      ):)
+            
+                    let $place := $elem//@place[1]
                     let $staffText := $elem//@staff[1]
                     
-                    (:new model:)
-                    
-                    let $startIDs := $elem//@startid/substring(.,2)
-                    let $endIDs := $elem//@endid/substring(.,2)
                     let $tstamp := $elem//(@tstamp)[1]
                     let $tstamp2 := $elem//(@tstamp2)[1]
                     
-                    
-                    order by number($staffText) ascending
-                    
+                     let $form := $elem//@form[1]
+                 
                     return 
                         concat('{"id":"',$id,'",',
-                            '"type":"hairpin",',
-                            '"startIDs":[',if(count($startIDs) gt 0) then(concat('"',string-join($startIDs,'","'),'"')) else(),'],',
-                            '"endIDs":[',if(count($endIDs) gt 0) then(concat('"',string-join($endIDs,'","'),'"')) else(),'],',
+                            '"name":"hairpin",',                      
+                            '"obvious":"',$obvious,'",',
+                            '"ambiguous":"',$ambiguous,'",',
+                             '"icon":"resources/images/mix_volume.png",',
+                            
+                            '"children":[{',  
+                            '"icon":"resources/images/details-xml.png",',
                             '"tstamp":"',$tstamp,'",',
                             '"tstamp2":"',$tstamp2,'",',
-                            '"curvedir":"',$curvedir,'",',
-                            '"docUri":"',substring-after(document-uri($doc),$freidi-pmd:ce-data),'",',
+                            '"place":"',$place,'",',
+                            '"form":"',$form,'",',
+                            '"tag":"",', 
                             '"staff":"',$staffText,'",',
-                            '"startStaffID":"',$staff/@xml:id,'",',
-                            '"endStaffID":"',$endStaff/@xml:id,'",',
-                            (:'"endPageName":"',$endPageName,'",',:)
-                            '"placement":"',$placement,'",',
-                            '"xml":"',replace(replace(serialize($elem),'"','\\"'),'\n','\\n'),'"',(:serialize(replace(replace(serialize($elem),'"','&amp;#x0027;'),'\n','')),'"',:)
-                            '}')
-                    
-                        (:concat('{"id":"',$id,'",',
-                        '"type":"slur",',
-                        
-                        
-                        '"measureID":"',$measureID,'",',
-                        '"measureN":"',$measureN,'",',
-                        '"startLabel":"m',$measureN,', e',count($predecessors) + 1,'",',
-                        '"endLabel":"m',$endMeasure/@n,', e',count($endPredecessors) + 1,'",',
-                        '"endMeasureID":"',$endMeasure/@xml:id,'",',
-                        '"curvedir":"',$curvedir,'",',
-                        '"placement":"',$placement,'",',
-                        
-                        '"staff":"',$staffText,'",',
-                        
-                        '"startID":"',substring($startID,2),'",',
-                        '"endID":"',substring($endID,2),'",',
-                        
-                        '"startStaffID":"',$staff/@xml:id,'",',
-                        '"endStaffID":"',$endStaff/@xml:id,'"',
-                        '}'):)
+                             '"leaf":true,',
+                            
+                            
+                            '}],',
+                       
+                        '}')
     
     return 
         string-join($strings,',')
+
     
 };
 
@@ -238,7 +136,7 @@ declare function local:jsonifyDirs($dirs) {
   (
     '{"slurs":[',
         local:jsonifySlurs($slurs),
-    '],"hairpins":[',
+    '],"text": "Root", "children":[',
         local:jsonifyHairpins($hairpins),
     '],"dynams":[',
         local:jsonifyDynams($dynams),

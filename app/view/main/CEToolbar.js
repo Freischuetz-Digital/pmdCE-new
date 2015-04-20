@@ -251,6 +251,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
          var app = pmdCE.getApplication();
         // var store = app.getHairpinsStore();
         var store = app.getHairpinDataStore();
+        store.getProxy().extraParams.path = item.text;
+
         store.load();
          Ext.getCmp('cegridpanel').getView().bindStore(store);   
     },
