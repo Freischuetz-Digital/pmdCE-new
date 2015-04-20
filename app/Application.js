@@ -57,6 +57,7 @@ Ext.define('pmdCE.Application', {
     //hairpinsDataStore: null,
     hairpinDataStore: null,
     hairpinStart: null,
+    facsimilePath: null,
     
     pageNr: null,
     
@@ -93,10 +94,29 @@ Ext.define('pmdCE.Application', {
              },
              autoLoad: false
          }),
+         
+   Ext.Ajax.request({
+    url: 'resources/xql/pmd_ce_getFacsimilePage.xql',
+    //async: false,
+    method: 'GET',
+    params: {
+        path: "A_surface101"
+    },
+    success: function(response){
+       this.facsimilePath = response.responseText;
+       console.log(this.facsimilePath);
+       
+    }
+});
     
        
          sourcesStore.load();
         
+    },
+    
+    getFacsimilePath: function(){
+    console.log(this.facsimilePath);
+    return this.facsimilePath;
     },
     
     getSourcesStore: function(){
