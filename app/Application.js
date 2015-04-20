@@ -69,8 +69,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                 url: 'data/pmd_ce_getNavigation.xql',
-                 //url: 'resources/xql/getSources.xql',
+                 //url: 'data/pmd_ce_getNavigation.xql',
+                 url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sigle'
@@ -126,18 +126,42 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Hairpin',
              proxy: {
                  type: 'ajax',
-                // url: 'data/getControlEvents.xql',
-                 //url: 'data/pmd_ce_getHairpins.xql',
-                 url: 'resources/data/tree/treegrid.json'
-                // mode: 'name'
-                 //url: 'data/pmd_ce_getHairpinData.xql',
-                 //url: 'http://localhost:8080/exist/apps/proofMEIdata/pmdCE/resources/xql/getControlEvents.xql',
+                 extraParams: {path: 'A/A_mov6/A_surface100.xml'},
+                 //url: 'resources/data/tree/treegrid.json'
+                   url: 'resources/xql/getControlEvents.xql'
             /* reader: {
             type: 'json',
             typeProperty: 'name'
         }*/
         
              },
+          /*   listeners: {
+            beforeload: function (store, operation, eOpts) {
+            console.log("Tree Store");
+            console.log(store);
+            console.log(operation);
+            console.log(eOpts);
+            
+            var sourcePath = Ext.getCmp('source').getText();
+            var movePath = Ext.getCmp('movement').getText();
+            var pagePath = Ext.getCmp('pages').getText();
+            console.log(sourcePath);
+            console.log(movePath);
+            console.log(pagePath);
+            var path = sourcePath +"/"+movePath+"/"+pagePath+".xml";
+            console.log(path);
+            operation.params.node=path;*/
+            
+               /* if (operation.node.attributes.record.data) {
+                    var nodeType = operation.node.attributes.record.data["ItemType"];
+                    var nodeId = operation.node.attributes.record.data["ItemId"];
+                    operation.params.ItemType = nodeType;
+                    operation.params.node = nodeId;
+                } else {
+                    operation.params.node = "root";
+                }*/
+         //   }
+       // },
           
              autoLoad: false
          }),

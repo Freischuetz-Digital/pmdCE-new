@@ -1,6 +1,6 @@
 xquery version "3.0";
 
-module namespace freidi-pmd = 'http://www.freischuetz-digital.de/proofMEIdata';
+module namespace freidi-pmd = 'http://www.freischuetz-digital.de/pmdCE-new';
 
 declare variable $freidi-pmd:facsimileServerURI := 'http://www.freischuetz-digital.de';
 declare variable $freidi-pmd:ce-data := '/db/apps/controlevents-data/';
