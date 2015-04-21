@@ -93,13 +93,13 @@ for (var i = 0; i < elements.length; i++) {
                  if(tstamp !== null && this.tstampShift1 !== null){
                   if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
                             var avValue = (tstamp+this.tstampShift1)/2;
-                            Ext.getCmp('tstampField2Obv').setValue(avValue);
+                            Ext.getCmp('tstampField2Obv').setValue("m+"+avValue);
                             break;
                         } 
                         else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined'){
                             var avValue = (tstamp+this.tstampShift1)/2;
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
-                            Ext.getCmp(selectedId).setValue(avValue);
+                            Ext.getCmp(selectedId).setValue("m+"+avValue);
                             break;
                         }
                  }
@@ -124,11 +124,11 @@ for (var i = 0; i < elements.length; i++) {
                         var tstamp = elementXML.getAttribute('tstamp');  
                          this.tstampShift1 = elementXML.getAttribute('tstamp');
                         if(typeof Ext.getCmp('tstampField2Obv') !== 'undefined'){
-                            Ext.getCmp('tstampField2Obv').setValue(tstamp);
+                            Ext.getCmp('tstampField2Obv').setValue("m+"+tstamp);
                         }
                        else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined'){
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
-                            Ext.getCmp(selectedId).setValue(tstamp);
+                            Ext.getCmp(selectedId).setValue("m+"+tstamp);
                         }
                         $(note).css('fill','#3adf00');
                         $(note).children().css('stroke','#3adf00');
