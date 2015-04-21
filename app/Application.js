@@ -24,6 +24,7 @@ Ext.define('pmdCE.Application', {
        'main.CEGridPanel',
        'main.AddObviousElDialog',
        'main.AddAmbiguousElDialog',
+       'main.EditDialog',
        'main.AmbiguousCard',
        'main.ObviousCard',
        'main.ChangeToAmDialog',
@@ -72,8 +73,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                 //url: 'data/pmd_ce_getNavigation.xql',
-                 url: 'resources/xql/pmd_ce_getNavigation.xql',
+                 url: 'data/pmd_ce_getNavigation.xql',
+                 //url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sigle'
@@ -89,8 +90,8 @@ Ext.define('pmdCE.Application', {
              proxy: {
                  type: 'ajax',
                  extraParams: {path: ''},
-                 //url: 'resources/data/tree/treegrid.json'
-                   url: 'resources/xql/getControlEvents.xql'
+                 url: 'resources/data/tree/treegrid.json'
+                   //url: 'resources/xql/getControlEvents.xql'
              },
              autoLoad: false
          }),
@@ -103,7 +104,7 @@ Ext.define('pmdCE.Application', {
         path: "A_surface101"
     },
     success: function(response){
-       this.facsimilePath = response.responseText;
+       //this.facsimilePath = response.responseText;
        console.log(this.facsimilePath);
        
     }
@@ -115,7 +116,7 @@ Ext.define('pmdCE.Application', {
     },
     
     getFacsimilePath: function(){
-    console.log(this.facsimilePath);
+    //console.log(this.facsimilePath);
     return this.facsimilePath;
     },
     

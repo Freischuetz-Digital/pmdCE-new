@@ -326,7 +326,7 @@ var states = new Array("above", "below", "between");
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-    valueField: 'abbr',
+   // valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);

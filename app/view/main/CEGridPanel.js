@@ -222,7 +222,13 @@ return false;
     }
    });
    return eColumn;
-   }
+   },
+   
+   changeElementDialog: function(){    
+    var win = new pmdCE.view.main.EditDialog();
+    win.show();
+}
+
     
 });
 

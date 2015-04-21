@@ -19,7 +19,7 @@ Ext.define('pmdCE.view.main.EditDialog', {
     
         
 staffField = this.createTextField('staffField', 'Staff');
-formField = this.createTextField('formField', 'Form');
+formField = this.createRadioGroup('formField', 'Form');
 placeField = this.createComboBox('Place');
 tstampField = this.createTextField('tstampField', 'Tstamp');
 tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
@@ -35,26 +35,30 @@ tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
     this.buttons = [{
         text:'Update',
         handler: function(){
-         var testId = 'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId();       
+         /*var testId = 'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId();       
          var target = Ext.getCmp(testId).getSelectionModel().getSelection()[0];
-         if(staffField.value !== null && typeof staffField.value !== 'undefined'){
-             target.set('element', staffField.value);
+         */
+         target = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+         
+         if(staffField.getValue() !== ""){
+             target.set('staff', staffField.getValue());
          }
-         console.log('startField.value');
-         console.log(startField.value);
-          if(startField.getValue() !== ""){
-             target.set('start', startField.value);
+          if(tstampField.getValue() !== ""){
+             target.set('tstamp', tstampField.value);
          }
-          if(endField.getValue() !== ""){
-             target.set('end', endField.value);
+          if(tstamp2Field.getValue() !== ""){
+             target.set('tstamp2', tstamp2Field.getValue());
          }
-         if(placeField.getValue() !== ""){
-              target.set('place', placeField.value);
+         if(placeField.getValue() !== null){
+              target.set('place', placeField.getValue());
+         }       
+         if(typeof formField.getValue().Form !== 'undefined'){
+             var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
+          if(formValue !== ""){
+               target.set('form', formValue);
          }
-          if(formField.getValue() !== ""){
-               target.set('form', formField.value);
          }
-       
+ 
              this.up('window').close();
         }
     },{
@@ -86,15 +90,8 @@ return ceTextField;
 },
     
         createComboBox: function(fieldName){
-    
-    var states = Ext.create('Ext.data.Store', {
-    fields: ['abbr', 'name'],
-    data : [
-        {"abbr":"above", "name":"above"},
-        {"abbr":"below", "name":"below"},
-         {"abbr":"between", "name":"between"}
-    ]
-});
+        
+        var states = new Array("above", "below", "between"); 
     
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
@@ -102,7 +99,7 @@ return ceTextField;
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-    valueField: 'abbr',
+    //valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
@@ -112,6 +109,22 @@ return ceTextField;
 });
 
 return ceTextField;
+},
+
+createRadioGroup: function(){
+    var radios = new Ext.form.RadioGroup({
+            xtype: 'radiogroup',
+            fieldLabel: 'Form',
+            cls: 'x-check-group-alt',           
+            items: [
+                {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0'},
+                {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0'}
+                
+            ]
+   
+   });
+   return radios;
+    
 }
     
     

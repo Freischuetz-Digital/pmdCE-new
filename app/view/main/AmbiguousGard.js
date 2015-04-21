@@ -37,6 +37,8 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
    
    verovioImageStart: null,
    verovioImageEnd: null,
+   
+   selectedFieldId:null,
     
          initComponent: function() {
          
@@ -219,18 +221,30 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
         createTextField: function(fieldName, fieldLabel){
     var ceTextField = Ext.create('Ext.form.field.Text',{
         name: fieldName,
+        id: fieldName,
         fieldLabel: fieldLabel,
       //  allowBlank: false , // requires a non-empty value
-        listeners: {'render': function(c) {
-            c.getEl().on('keyup', function() {   
+        listeners: {
+        focus: function(e, eOpts ){
+           selectedFieldId = fieldName;
+        }
+        }
+        
+       /* {'render': function(c) {
+            c.getEl().on('keyup', function() {  
+            
            // Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
                // modelTest.set('start', startField.value);
             }, c);
         }
-  }
+  }*/
    });
 
 return ceTextField;
+},
+
+getSelectedFieldId: function(){    
+    return selectedFieldId;
 },
 
     createComboBox: function(fieldName){

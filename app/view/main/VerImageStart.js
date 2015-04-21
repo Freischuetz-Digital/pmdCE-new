@@ -16,6 +16,8 @@ extend: 'Ext.form.Panel',
      renderer: null,
      me: null,
      currId: null,
+     // var for compute av. value
+     tstampShift1: null,
      
  
 initComponent: function() {
@@ -25,9 +27,6 @@ me = this;
 //me.id = Ext.getCmp('cemain').getEditorId()+'_start';
 //id = this.id;
 currId = this.id;
-
-console.log("currId");
-console.log(currId);
 
 app = pmdCE.getApplication();
 renderer = app.getRenderer();
@@ -45,7 +44,7 @@ Ext.Ajax.request({
 	scale: 30
     });
     renderer.setOptions(options);
-                  renderer.loadData(text);
+    renderer.loadData(text);
     var svg = renderer.renderPage( 1, options );
    //var svg = renderer.renderData( text, options );
     
@@ -87,18 +86,39 @@ for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
     var elId = element.id;     
     if(elId.indexOf('Start') != -1 && elId === note.id){ 
+    var tstamp1 = null;
         for(var j = 0; j < meiElements.length; j++){
             var elementXML = meiElements[j];
             var elXMLId = elementXML.getAttribute('xml:id');
+           
             if(elXMLId === note.id){  
                 if(note.style.fill === '#000000'){
-                        // TODO: set tstamp field
-                        var tstamp = elementXML.getAttribute('tstamp');                        
+                        tstamp1 = elementXML.getAttribute('tstamp');                        
                         $(note).css('fill','#3adf00');
                         $(note).children().css('stroke','#3adf00');
+                        
                  }
+                 if(tstamp1 !== null && this.tstampShift1 !== null){
+                  if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
+                            var avValue = (tstamp1+this.tstampShift1)/2;
+                            Ext.getCmp('tstampFieldObv').setValue(avValue);
+                            break;
+                        }
+                        else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined'){
+                            var avValue = (tstamp1+this.tstampShift1)/2;
+                            var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
+                            Ext.getCmp(selectedId).setValue(avValue);
+                            break;
+                        }
+                 }
+                 
+                
              }
+            
+            
         }
+        
+              
     } 
   } 
 },
@@ -114,22 +134,29 @@ for (var i = 0; i < elements.length; i++) {
             if(elXMLId === note.id){
             // set color           
                 if(note.style.fill === '#000000'){
-                        // TODO: set tstamp field
-                        var tstamp = elementXML.getAttribute('tstamp');                       
+                        var tstamp = elementXML.getAttribute('tstamp'); 
+                        // for av. case
+                        this.tstampShift1 = elementXML.getAttribute('tstamp'); 
                         if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
                             Ext.getCmp('tstampFieldObv').setValue(tstamp);
                         }
-                      /*  else if(Ext.getCmp('tstampFieldObv') !== 'undefined'){
-                            
-                        }*/
+                       else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined'){
+                            var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
+                            Ext.getCmp(selectedId).setValue(tstamp);
+                        }
                         
                         $(note).css('fill','#3adf00');
                         $(note).children().css('stroke','#3adf00');
                  }
                  // set color back after second note click
                  else if(note.style.fill === '#3adf00'){
+                        tstampShift1 = null;
                         if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
                             Ext.getCmp('tstampFieldObv').setValue('');
+                        }
+                        else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined'){
+                            var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
+                            Ext.getCmp(selectedId).setValue('');
                         }
                         $(note).css('fill','#000000');
                         $(note).children().css('stroke','#000000');                       
@@ -139,6 +166,7 @@ for (var i = 0; i < elements.length; i++) {
     } 
     // other note was clicked: set color back
     else if(elId.indexOf('Start') != -1){
+          tstampShift1 = null;
           $(element).css('fill','#000000');
           $(element).children().css('stroke','#000000');  
     }

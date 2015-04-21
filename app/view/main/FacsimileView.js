@@ -67,10 +67,20 @@ divElement.innerHTML = <img src=??? />
 
 }*/
 
-facsimilePath = pmdCE.getApplication().getFacsimilePath();
+/*facsimilePath = pmdCE.getApplication().getFacsimilePath();
 console.log(facsimilePath);
 var image = Ext.create('Ext.Img', {
     src: pmdCE.getApplication().getFacsimilePath(),
+    renderTo: Ext.getBody()
+});
+image.on("load", function() {
+    console.log("loaded");
+});
+*/
+
+
+/*var image = Ext.create('Ext.Img', {
+    src: "http://www.freischuetz-digital.de/digilib/Scaler/freidi/sources/A/00000111.jpg?dw=1200&amp;wx=0&amp;wy=0&amp;ww=1&amp;wh=1",
     renderTo: Ext.getBody()
 });
 image.on("load", function() {
@@ -85,7 +95,7 @@ image
   
  
     
-    ]
+    ]*/
         this.callParent()
 
 }
