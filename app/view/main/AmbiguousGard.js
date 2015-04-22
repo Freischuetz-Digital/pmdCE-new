@@ -49,13 +49,13 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
         formField = this.createRadioGroup();
         
     tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp orig');
-    tstamp2FieldOrig = this.createTextField('tstampField2Orig', 'Tstamp2 orig');
+    tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2 orig');
 
 tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
-tstamp2FieldReg1 = this.createTextField('tstampField2Reg1', 'Tstamp2 reg1');
+tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
 
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
-tstamp2FieldReg2 = this.createTextField('tstampField2Reg2', 'Tstamp2 reg2');
+tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
 
 verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
         verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
@@ -179,6 +179,7 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
 	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    var parent = root.appendChild(hairpin);
 	    parent.expand();
+	    Ext.getCmp('saveButton').setDisabled(false);
             this.up('window').close();
            
        }
@@ -271,17 +272,21 @@ return ceTextField;
 
 
    createComboBoxStaff: function(fieldName){
+  
+   var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
+   var selectedPage = Ext.getCmp('pages').getText();
    
-   var staffNrCurrent = Ext.getCmp('cetoolbar').staffNr;
+   var test = pageStaffMap[selectedPage];
   
-   var dataStaffNr = new Array(staffNrCurrent);  
-   for(var i = 0; i < staffNrCurrent ; i++){
-   dataStaffNr[i] = i+1;       
+   var dataMeasureNr = new Array(test.length); 
+   var value = test[0];
+   for(var i = 0; i < test.length ; i++){
+        dataMeasureNr[i] = value++;       
    }
-  
+   
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
-    store: dataStaffNr,
+    store: dataMeasureNr,
     queryMode: 'local',
     displayField: 'name',
     editable: false,
@@ -298,18 +303,15 @@ return ceTextField;
 
  createComboBoxMeasureNr: function(fieldName){
    
-   var staffNrCurrent = Ext.getCmp('cetoolbar').staffNr;
    var pageMeasuresMap = Ext.getCmp('cetoolbar').pageMeasuresMap;
    var selectedPage = Ext.getCmp('pages').getText();
    
    var test = pageMeasuresMap[selectedPage];
-   var nr = test[1] - test[0]+1;
-   
-   var dataMeasureNr = new Array(nr); 
-  // dataMeasureNr[0] = test[0];
+  
+   var dataMeasureNr = new Array(test.length); 
    var value = test[0];
-   for(var i = 0; i < nr ; i++){
-   dataMeasureNr[i] = value++;       
+   for(var i = 0; i < test.length ; i++){
+        dataMeasureNr[i] = value++;       
    }
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,

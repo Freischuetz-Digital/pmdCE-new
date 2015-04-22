@@ -1,5 +1,7 @@
 xquery version "3.0";
 
+import module namespace freidi-pmd="http://www.freischuetz-digital.de/pmdCE-new" at "../../modules/app.xql";
+
 declare namespace mei="http://www.music-encoding.org/ns/mei";
 
 declare option exist:serialize "method=text media-type=text/plain omit-xml-declaration=yes";
@@ -31,10 +33,44 @@ declare function local:getSurfaces($source as xs:string, $mdiv as xs:string) as 
     let $xml := doc('/db/apps/controlevents-data/' || $source || '/' || $mdiv)
     return
         for $surface in $xml//mei:surface
+        
+        let $doc := collection($freidi-pmd:ce-data)//mei:surface[@xml:id = $surface/@xml:id]/root()
+        let $pb.before := $doc//mei:pb[@facs = '#' || $surface/@xml:id ]
+        let $pb := $pb.before//mei:staffDef
+        
+        let $snippet := <controlEvents>{
+                                for $elem in $doc//mei:measure[preceding::mei:pb[1]/@xml:id = $pb.before/@xml:id]
+                                return
+                                    $elem
+                             }</controlEvents>
+        
+        let $measure := $snippet//ancestor::mei:measure/@n
+        
         return
             '{"id": "' || $surface/@xml:id || '",' ||
+            '"staffs":[' || local:jsonifyStaffNr($pb) || '],' ||
+            '"measures":[' || local:jsonifyStaffNr($measure) || '],' ||
             '"n": "' || $surface/@n || '"' ||
             '}'
+};
+
+
+declare function local:jsonifyStaffNr($pb) {
+    let $strings := for $elem in $pb
+        let $number := $elem//@n
+     return 
+         concat($number,'')
+   return 
+        string-join($strings,',')
+};
+
+declare function local:jsonifyMeasureNr($measure) {
+    let $strings := for $elem in $measure
+        let $number := $elem//@n
+     return 
+         concat($number,'')
+   return 
+        string-join($strings,',')
 };
 
 declare function local:getMovements($source as xs:string) as xs:string* {
@@ -44,6 +80,7 @@ declare function local:getMovements($source as xs:string) as xs:string* {
         order by $mdiv
         return
             '{"id": "' || substring-before($mdiv, '.xml') || '",' ||
+           
             '"pages": [' || string-join(local:getSurfaces($source, $mdiv), ',') || ']' ||
             '}'
 };

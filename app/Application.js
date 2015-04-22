@@ -73,8 +73,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                 url: 'data/pmd_ce_getNavigation.xql',
-                 //url: 'resources/xql/pmd_ce_getNavigation.xql',
+                // url: 'data/pmd_ce_getNavigation.xql',
+                 url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sigle'
@@ -90,13 +90,13 @@ Ext.define('pmdCE.Application', {
              proxy: {
                  type: 'ajax',
                  extraParams: {path: ''},
-                 url: 'resources/data/tree/treegrid.json'
-                   //url: 'resources/xql/getControlEvents.xql'
+                // url: 'resources/data/tree/treegrid_1.json'
+                  url: 'resources/xql/getControlEvents.xql'
              },
              autoLoad: false
          }),
          
-   Ext.Ajax.request({
+  /* Ext.Ajax.request({
     url: 'resources/xql/pmd_ce_getFacsimilePage.xql',
     //async: false,
     method: 'GET',
@@ -108,17 +108,18 @@ Ext.define('pmdCE.Application', {
        console.log(this.facsimilePath);
        
     }
-});
+});*/
     
        
          sourcesStore.load();
+         console.log(sourcesStore);
         
     },
     
-    getFacsimilePath: function(){
+  /*  getFacsimilePath: function(){
     //console.log(this.facsimilePath);
     return this.facsimilePath;
-    },
+    },*/
     
     getSourcesStore: function(){
     return sourcesStore;

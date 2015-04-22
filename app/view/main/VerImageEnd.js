@@ -96,7 +96,8 @@ for (var i = 0; i < elements.length; i++) {
                             Ext.getCmp('tstampField2Obv').setValue("m+"+avValue);
                             break;
                         } 
-                        else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined'){
+                        else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' &&
+                        Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2')){
                             var avValue = (tstamp+this.tstampShift1)/2;
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue("m+"+avValue);
@@ -126,7 +127,9 @@ for (var i = 0; i < elements.length; i++) {
                         if(typeof Ext.getCmp('tstampField2Obv') !== 'undefined'){
                             Ext.getCmp('tstampField2Obv').setValue("m+"+tstamp);
                         }
-                       else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined'){
+                       else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' &&
+                        Ext.getCmp('ambiguouscard').getSelectedFieldId().contains('tstamp2')){
+                        console.log(Ext.getCmp('ambiguouscard').getSelectedFieldId());
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue("m+"+tstamp);
                         }
@@ -139,7 +142,8 @@ for (var i = 0; i < elements.length; i++) {
                         if(typeof Ext.getCmp('tstampField2Obv') !== 'undefined'){
                             Ext.getCmp('tstampField2Obv').setValue('');
                         }
-                         else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined'){
+                         else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined'&&
+                        Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2')){
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue('');
                         }

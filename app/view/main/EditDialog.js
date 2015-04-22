@@ -38,7 +38,12 @@ tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
          /*var testId = 'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId();       
          var target = Ext.getCmp(testId).getSelectionModel().getSelection()[0];
          */
-         target = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+          var target = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+          var store = pmdCE.getApplication().getHairpinDataStore();
+          console.log(store);
+       console.log(target.parentNode.data.id);
+       console.log(target.get("id"));
+       console.log(target.data.id);
          
          if(staffField.getValue() !== ""){
              target.set('staff', staffField.getValue());
@@ -54,11 +59,16 @@ tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
          }       
          if(typeof formField.getValue().Form !== 'undefined'){
              var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
-          if(formValue !== ""){
+            if(formValue !== ""){
                target.set('form', formValue);
+            }
          }
-         }
- 
+         
+         store.getNodeById(target.parentNode.data.id).set('staff', '44');
+         store.sync();
+         
+         
+    Ext.getCmp('saveButton').setDisabled(false);
              this.up('window').close();
         }
     },{

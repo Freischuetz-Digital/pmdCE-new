@@ -131,6 +131,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
 	 
         var hairpin = Ext.create('pmdCE.model.Hairpin', {      
+                    id: "ELENA",
                     name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_obvious',
                     icon: 'resources/images/mix_volume.png',
                     obvious: true,
@@ -153,6 +154,11 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    var parent = root.appendChild(hairpin);
         parent.expand();
+        
+        hairpin.save();
+        
+        
+        Ext.getCmp('saveButton').setDisabled(false);
             this.up('window').close();
            
        }
@@ -233,16 +239,20 @@ return ceTextField;
 
    createComboBoxStaff: function(fieldName){
    
-   var staffNrCurrent = Ext.getCmp('cetoolbar').staffNr;
+   var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
+   var selectedPage = Ext.getCmp('pages').getText();
+   
+   var test = pageStaffMap[selectedPage];
   
-   var dataStaffNr = new Array(staffNrCurrent);  
-   for(var i = 0; i < staffNrCurrent ; i++){
-   dataStaffNr[i] = i+1;       
+   var dataMeasureNr = new Array(test.length); 
+   var value = test[0];
+   for(var i = 0; i < test.length ; i++){
+        dataMeasureNr[i] = value++;       
    }
   
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
-    store: dataStaffNr,
+    store: dataMeasureNr,
     queryMode: 'local',
     displayField: 'name',
     editable: false,
@@ -260,17 +270,15 @@ return ceTextField;
 
  createComboBoxMeasureNr: function(fieldName){
    
-   var staffNrCurrent = Ext.getCmp('cetoolbar').staffNr;
    var pageMeasuresMap = Ext.getCmp('cetoolbar').pageMeasuresMap;
    var selectedPage = Ext.getCmp('pages').getText();
    
    var test = pageMeasuresMap[selectedPage];
-   var nr = test[1] - test[0]+1;
-   
-   var dataMeasureNr = new Array(nr); 
-  // dataMeasureNr[0] = test[0];
+  
+   var dataMeasureNr = new Array(test.length); 
+ 
    var value = test[0];
-   for(var i = 0; i < nr ; i++){
+   for(var i = 0; i < test.length ; i++){
    dataMeasureNr[i] = value++;       
    }
     var ceTextField = Ext.create('Ext.form.ComboBox', {

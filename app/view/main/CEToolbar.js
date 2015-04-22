@@ -38,13 +38,13 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     sourceButton = this.createCEButton('splitbutton', 'Source', 'source',[{handler: this.sourceOnItemClick}], this.click);
     movementButton = this.createCEButton('splitbutton', 'Movement', 'movement',[{handler: this.moveOnItemClick}], this.click2);
     movementButton.setDisabled(true);
-    arrowLeft = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/page-prev-disabled.gif');
+    arrowLeft = this.createCEIcon('arrowL', 'resources/images/page-prev-disabled.gif');
     arrowLeft.setDisabled(true);
     pagesButton = this.createCEButton('splitbutton', 'Pages', 'pages',[{handler: this.pagesOnItemClick}], this.click3);
     pagesButton.setDisabled(true);    
-    arrowR = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/page-next-disabled.gif');
+    arrowR = this.createCEIcon('arrowR', 'resources/images/page-next-disabled.gif');
     arrowR.setDisabled(true);
-    saveButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/Save.png', this.saveComponents);
+    saveButton = this.createCEIcon('saveButton', 'resources/images/Save.png', this.saveComponents);
     saveButton.setDisabled(true);
     //createButton = this.createCEIcon1();
     //('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
@@ -81,6 +81,11 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     },
  
     saveComponents: function(btn){ 
+        var app = pmdCE.getApplication();
+        var store = app.getHairpinDataStore();
+        
+        
+        store.sync();
        
     },
     
@@ -147,15 +152,16 @@ Ext.define('pmdCE.view.main.CEToolbar', {
             var itemsArray = store.data.items; 
             
             this.pageMeasuresMap = new Object();
+            this.staffNr = new Object();
 
             for(var i = 0; i < itemsArray.length ; i++){                    
                 if(sourceButton.getText() === itemsArray[i].data.sigle){   
                     for(var j = 0; j < itemsArray[i].data.mdivs.length ; j++){
                         if(movementButton.getText() === itemsArray[i].data.mdivs[j].id){
-                            this.staffNr = itemsArray[i].data.mdivs[j].staffNr;
                             for(var k = 0; k < itemsArray[i].data.mdivs[j].pages.length ; k++){
                             var key = itemsArray[i].data.mdivs[j].pages[k].id;
-                            this.pageMeasuresMap[key] = itemsArray[i].data.mdivs[j].pages[k].measureNr;                         
+                            this.pageMeasuresMap[key] = itemsArray[i].data.mdivs[j].pages[k].measures;                         
+                            this.staffNr[key] = itemsArray[i].data.mdivs[j].pages[k].staffs;  
                             var menuItem = Ext.create('Ext.menu.Item', {
                             itemId: itemsArray[i].data.mdivs[j].pages[k].id, 
                             text: itemsArray[i].data.mdivs[j].pages[k].id,
@@ -255,6 +261,10 @@ Ext.define('pmdCE.view.main.CEToolbar', {
 
         store.load();
          Ext.getCmp('cegridpanel').getView().bindStore(store);   
+         
+         console.log(store);
+         
+         
     },
       
     homeOnItemToggle: function(){
@@ -299,9 +309,10 @@ return ceBox;
 },
 
 
-createCEIcon: function(ceCls, ceIcon, ceHandler){
+createCEIcon: function(ceId, ceIcon, ceHandler){
     var ceIcon = Ext.create('Ext.button.Button', {   
       //  cls: ceCls,
+        id: ceId,
         icon: ceIcon,
         scale: 'medium',
         handler: ceHandler

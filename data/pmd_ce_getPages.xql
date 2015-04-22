@@ -1,8 +1,5 @@
 xquery version "3.0";
 
-declare option exist:serialize "method=text media-type=text/plain omit-xml-declaration=yes";
-
-
 "{
     pages: [
         {id: 'A_page111', path: 'A/A_mov6/A_page111.xml', movement_id: 'A_mov6'},

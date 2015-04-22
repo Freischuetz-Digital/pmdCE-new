@@ -51,6 +51,8 @@ let $strings := for $elem in $slurs
     
 };
 
+
+
 declare function local:jsonifyDynams($dynams) {
     let $strings := for $dynam in $dynams
                     let $id := if($dynam/@xml:id) then($dynam/@xml:id) else(generate-id($dynam))
@@ -61,6 +63,7 @@ declare function local:jsonifyDynams($dynams) {
         string-join($strings,',')
     
 };
+
 
 declare function local:jsonifyHairpins($hairpins) {
    let $strings := for $elem in $hairpins
@@ -85,17 +88,17 @@ declare function local:jsonifyHairpins($hairpins) {
                                          else('multiResolve')
                                       ):)
             
-                    let $place := $elem//@place[1]
-                    let $staffText := $elem//@staff[1]
+                    let $place := $elem/string(@place)
+                    let $staffText := $elem/@staff
                     
-                    let $tstamp := $elem//(@tstamp)[1]
-                    let $tstamp2 := $elem//(@tstamp2)[1]
+                    let $tstamp := $elem/(@tstamp)
+                    let $tstamp2 := $elem/(@tstamp2)
                     
-                     let $form := $elem//@form[1]
+                     let $form := $elem/@form
                  
                     return 
                         concat('{"id":"',$id,'",',
-                            '"name":"hairpin",',                      
+                            '"name":"hairpin",', 
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',
                              '"icon":"resources/images/mix_volume.png",',
@@ -108,10 +111,10 @@ declare function local:jsonifyHairpins($hairpins) {
                             '"form":"',$form,'",',
                             '"tag":"",', 
                             '"staff":"',$staffText,'",',
-                             '"leaf":true,',
+                             '"leaf":true',
                             
                             
-                            '}],',
+                            '}]',
                        
                         '}')
     
