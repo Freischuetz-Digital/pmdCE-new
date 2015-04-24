@@ -51,7 +51,18 @@
     
     <target name="xar">
         <mkdir dir="build-xar"/>
-        <zip basedir="." destfile="build-xar/${project.app}-${project.version}.xar" excludes="build-xar/, add/, .sencha/, build.xml, build.sh, README.md" />
+        <mkdir dir="temp"/>
+        <copy todir="temp">
+          <fileset dir="${basedir}/add"/>
+          <fileset dir="${basedir}/build/production/pmdCE"/>
+          <file file="index.html"/>
+        </copy>
+        <copydir dest="temp/data" src="data"/>
+        <copydir dest="temp/modules" src="modules"/>
+      
+        <zip basedir="temp" destfile="build-xar/${project.app}-${project.version}.xar"  />
+      
+      <delete dir="temp/"/>
     </target>
 
 </project>
