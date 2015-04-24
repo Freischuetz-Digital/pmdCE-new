@@ -103,8 +103,8 @@ declare function local:jsonifyHairpins($hairpins) {
                             '"ambiguous":"',$ambiguous,'",',
                              '"icon":"resources/images/mix_volume.png",',
                             
-                            '"children":[{',  
-                            '"icon":"resources/images/details-xml.png",',
+                           (: '"children":[{',  
+                            '"icon":"resources/images/details-xml.png",',:)
                             '"tstamp":"',$tstamp,'",',
                             '"tstamp2":"',$tstamp2,'",',
                             '"place":"',$place,'",',
@@ -114,7 +114,7 @@ declare function local:jsonifyHairpins($hairpins) {
                              '"leaf":true',
                             
                             
-                            '}]',
+                           (: '}]',:)
                        
                         '}')
     
@@ -139,7 +139,7 @@ declare function local:jsonifyDirs($dirs) {
   (
     '{"slurs":[',
         local:jsonifySlurs($slurs),
-    '],"text": "Root", "children":[',
+    '],"children":[',
         local:jsonifyHairpins($hairpins),
     '],"dynams":[',
         local:jsonifyDynams($dynams),

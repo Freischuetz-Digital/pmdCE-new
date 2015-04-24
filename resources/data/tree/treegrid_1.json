@@ -1,6 +1,4 @@
 {
-   "text": "Root",
-  
     "children": [
         {
             "name": "cres_1_below_obvious",
@@ -8,18 +6,13 @@
             "icon": 'resources/images/mix_volume.png',
              "obvious": true,
              "ambiguous": false,
-               "children": [
-                {
-                    "icon": 'resources/images/details-xml.png',
+             "leaf": true,
                     "staff": "1",                   
                     "tstamp": "1",
                     "tstamp2": "m+6.5",
                     "place": "below",
                     "form": "cres",
-                    "tag": "",
-                    "leaf": true
-                }
-                ]            
+                    "tag": ""
         }, 
         {
             
@@ -28,9 +21,6 @@
             "icon": 'resources/images/mix_volume.png',
             "obvious": true,
             "ambiguous": false,
-            "children": [
-                { 
-                    "icon": 'resources/images/details-xml.png',
                     "staff": "1",
                     "tstamp": 2,
                     "tstamp2": "m+5",
@@ -38,8 +28,6 @@
                     "form": "dim",
                      "tag": "",
                     "leaf": true
-                }
-            ]
         }
     ]
    }

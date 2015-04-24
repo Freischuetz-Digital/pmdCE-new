@@ -10,7 +10,8 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
     ],
    
     flex: 4,
-    region: 'west',   
+    region: 'west',  
+    //store: store,
   
     id: 'cegridpanel',
     
@@ -58,7 +59,7 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
                 text: 'Name',
                 flex: 3,
                 sortable: true,
-                dataIndex: 'name'
+                dataIndex: 'id'
                 
             }, 
             {
@@ -109,56 +110,6 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
     var win = new pmdCE.view.main.AddDialog();
     win.show();
 },
-
-
-//deleteElement: function(grid, rowIndex, colIndex, actionItem, event, record, row){    
-     /*     console.log("grid");
-            console.log(grid);
-            console.log("rowIndex");
-            console.log(rowIndex);
-             console.log('colIndex');
-              console.log(colIndex);
-            console.log("actionItem");
-            console.log(actionItem);
-            console.log("event");
-            console.log(event);
-            console.log("record");
-            console.log(record);
-             console.log("row");
-            console.log(row);
-            console.log("***************");*/
-                 /*   Ext.MessageBox.confirm('Deletion', 'Are you sure you want to delete this element?', this.showResult, this);
-                    
-                  //  var record = tree.getSelectionModel().getSelection()[0];
-    record.remove(true);
-    app.getHairpinsDataStore().sync();*/
-                    
-                    //pmdCE.getApplication().getHairpinsDataStore().remove(record);
-                    //this.remove(row);
-                //var store = app.getHairpinsDataStore();grid.getStore().removeAt(rowIndex)
-                
-                
-               /* combo.currVal = record.get('value');
-Ext.Msg.confirm('Changing Status', 'Are you sure you want to change the Status ?', function (id, value) {
-if (id === 'yes') {
-combo.setValue(combo.currVal);
-}
-}, this);
-return false;
-*/
-
-/*Ext.Msg.confirm("Deletion", "The element will be deleted", function(btnText){
-            /\*if(btnText === "no"){
-              
-            }
-            else *\/
-            if(btnText === "yes"){
-            pmdCE.getApplication().getHairpinsDataStore().remove(record);
-            // record.remove(true);
-             pmdCE.getApplication().getHairpinsDataStore().sync();
-            }
-        }, this);
-},*/
     
     createObColumn: function(){
     var eColumn = Ext.create('Ext.grid.column.Check', {
@@ -189,7 +140,6 @@ return false;
                 width: 40,
                 align: 'center',
                 menuDisabled: true,
-                //disabled: true,
                 renderer: function (val, metadata, record) {
                 if (record.data.depth === 1) {
                     this.items[0].icon = '';

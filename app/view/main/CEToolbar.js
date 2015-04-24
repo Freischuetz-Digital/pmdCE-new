@@ -247,6 +247,7 @@ Ext.define('pmdCE.view.main.CEToolbar', {
    
          controllsView = new pmdCE.view.main.CEGridPanel();
         
+        
          xmlView = new pmdCE.view.main.XMLEditorView();
          
          Ext.getCmp('hairpinsitem').add(controllsView);
@@ -255,16 +256,13 @@ Ext.define('pmdCE.view.main.CEToolbar', {
                 //Ext.getCmp('centertabeditor').setActiveItem(ceEditor);
          
          var app = pmdCE.getApplication();
-        // var store = app.getHairpinsStore();
-        var store = app.getHairpinDataStore();
+         var store = app.getHairpinDataStore();
         store.getProxy().extraParams.path = item.text;
 
         store.load();
-         Ext.getCmp('cegridpanel').getView().bindStore(store);   
+       Ext.getCmp('cegridpanel').getView().bindStore(store);   
          
-         console.log(store);
-         
-         
+        
     },
       
     homeOnItemToggle: function(){

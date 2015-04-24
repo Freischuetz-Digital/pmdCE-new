@@ -73,8 +73,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                // url: 'data/pmd_ce_getNavigation.xql',
-                 url: 'resources/xql/pmd_ce_getNavigation.xql',
+                 url: 'data/pmd_ce_getNavigation.xql',
+                // url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sigle'
@@ -83,18 +83,41 @@ Ext.define('pmdCE.Application', {
              autoLoad: true
          });
          
-     
          hairpinDataStore = Ext.create('Ext.data.TreeStore', {
+    model: 'pmdCE.model.Hairpin',
+   /* root: {
+        name: 'People',
+        expanded: true
+    },*/
+    extraParams: {path: ''},
+             proxy:{
+        type: 'ajax',
+      //  url: 'resources/xql/getControlEvents.xql'
+        //url: 'resources/data/tree/testTree.json',
+        url: 'resources/data/tree/treegrid_1.json'
+      
+    },
+    autoLoad: false
+});
+       
+     
+     /*    hairpinDataStore = Ext.create('Ext.data.TreeStore', {
          storeId:'hairpinDataStore',
             model: 'pmdCE.model.Hairpin',
+             root: {
+        name: 'People',
+        expanded: true
+    },
+            
              proxy: {
+            
                  type: 'ajax',
                  extraParams: {path: ''},
-                // url: 'resources/data/tree/treegrid_1.json'
-                  url: 'resources/xql/getControlEvents.xql'
+                 url: 'resources/data/tree/treegrid_1.json'
+                 // url: 'resources/xql/getControlEvents.xql'
              },
              autoLoad: false
-         }),
+         }),*/
          
   /* Ext.Ajax.request({
     url: 'resources/xql/pmd_ce_getFacsimilePage.xql',
@@ -112,7 +135,7 @@ Ext.define('pmdCE.Application', {
     
        
          sourcesStore.load();
-         console.log(sourcesStore);
+        
         
     },
     

@@ -39,8 +39,12 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
    verovioImageEnd: null,
    
    selectedFieldId:null,
+   
+    me: null,
     
          initComponent: function() {
+         
+         me = this;
          
          staffField= this.createComboBoxStaff('Staff');  
         startTaktField= this.createComboBoxMeasureNr('Start measure');
@@ -227,7 +231,7 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
       //  allowBlank: false , // requires a non-empty value
         listeners: {
         focus: function(e, eOpts ){
-           selectedFieldId = fieldName;
+           me.selectedFieldId = fieldName;
         }
         }
         
@@ -244,8 +248,9 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
 return ceTextField;
 },
 
-getSelectedFieldId: function(){    
-    return selectedFieldId;
+getSelectedFieldId: function(){  
+console.log(me.selectedFieldId);
+    return me.selectedFieldId;
 },
 
     createComboBox: function(fieldName){

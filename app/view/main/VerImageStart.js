@@ -31,6 +31,7 @@ currId = this.id;
 app = pmdCE.getApplication();
 renderer = app.getRenderer();
 
+//TODO: Param: A_mov6_measure11_ce2 -ce2 + staff; path: A_surface101
 Ext.Ajax.request({
     url: "resources/verovio/test.mei",
     success: function(response){
@@ -100,13 +101,22 @@ for (var i = 0; i < elements.length; i++) {
                  }
                  if(tstamp1 !== null && this.tstampShift1 !== null){
                   if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
-                            var avValue = (tstamp1+this.tstampShift1)/2;
+                            
+                             var tstamp1Int = parseFloat(tstamp1);
+                             var tstampShift1Int = parseFloat(this.tstampShift1);
+                            
+                            var avValue = (tstamp1Int+tstampShift1Int)/2;
                             Ext.getCmp('tstampFieldObv').setValue(avValue);
                             break;
                         }
-                        else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' &&
-                        !(Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2'))){
-                            var avValue = (tstamp1+this.tstampShift1)/2;
+                        else if(typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' 
+                        && Ext.getCmp('ambiguouscard').getSelectedFieldId() !== null 
+                        && !(Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2') > -1)
+                        ){                        
+                            var tstamp1Int = parseFloat(tstamp1);
+                             var tstampShift1Int = parseFloat(this.tstampShift1);
+                             
+                            var avValue = (tstamp1Int+tstampShift1Int)/2;
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue(avValue);
                             break;
@@ -141,8 +151,10 @@ for (var i = 0; i < elements.length; i++) {
                         if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
                             Ext.getCmp('tstampFieldObv').setValue(tstamp);
                         }
-                       else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' &&
-                        !(Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2'))){
+                       else if(typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' 
+                       && Ext.getCmp('ambiguouscard').getSelectedFieldId() !== null 
+                       && !(Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2')> -1)
+                        ){
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue(tstamp);
                         }
@@ -156,8 +168,10 @@ for (var i = 0; i < elements.length; i++) {
                         if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
                             Ext.getCmp('tstampFieldObv').setValue('');
                         }
-                        else if(Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' &&
-                        !(Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2'))){
+                        else if(typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' 
+                        && Ext.getCmp('ambiguouscard').getSelectedFieldId() !== null 
+                        && !(Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2') > -1)
+                        ){
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue('');
                         }

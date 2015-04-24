@@ -1,7 +1,8 @@
 Ext.define('pmdCE.view.main.ObviousCard', {
     extend: 'Ext.panel.Panel',
     requires: [
-        'Ext.layout.container.Card'
+        'Ext.layout.container.Card',
+        'pmdCE.model.Hairpin'
     ],
     id: "obviouscard",
     //xtype: 'layout-card',
@@ -128,15 +129,16 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         function(){
         
         //TODO: generate Id
-        var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
+       /* var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
 	 
         var hairpin = Ext.create('pmdCE.model.Hairpin', {      
-                    id: "ELENA",
+                    id: 'ELENA',
+                    name:'TEST_ELENA',
                     name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_obvious',
                     icon: 'resources/images/mix_volume.png',
                     obvious: true,
                     ambiguous: false,
-                     children: [
+                    children: [
                 {
                     icon: 'resources/images/details-xml.png',
                     staff: staffField.getValue(),                   
@@ -151,12 +153,50 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                 
 	    });
 	  
-	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+	    var store = pmdCE.getApplication().getHairpinDataStore();
+	    var root = store.getRootNode();
 	    var parent = root.appendChild(hairpin);
         parent.expand();
         
         hairpin.save();
-        
+        store.sync();*/
+        /*var target = Ext.getCmp('cegridpanel').getSelectionModel();
+        console.log("getSelectionModel");
+        console.log(target);*/
+    
+   // var root = Ext.getCmp('cegridpanel').getRootNode();
+    
+   /* var newPerson = Ext.create('pmdCE.model.Hairpin', {
+     
+            name: 'ELENA', 
+            id: 'elena_test', 
+              icon: 'resources/images/mix_volume.png',
+             obvious: true,
+             ambiguous: false,
+             expanded: true
+            
+             });*/
+             
+     var store = Ext.getCmp('cegridpanel').store;
+     
+     store.getNodeById('A_mov6_measure75_ce1').set('tstamp', '33+el');
+  
+ /*   var newPerson1 = Ext.create('pmdCE.model.Hairpin', {staff: '1',
+                    icon: 'resources/images/details-xml.png',
+                    tstamp: "33",
+                    tstamp2: "m+6.5",
+                    place: "below",
+                    form: "cres",
+                    leaf: true});
+
+ store.getNodeById('A_mov6_measure75_ce1').appendChild(newPerson1);*/
+ 
+ //store.sync();
+ 
+ store.update();
+ 
+        console.log("create");
+        console.log(store);
         
         Ext.getCmp('saveButton').setDisabled(false);
             this.up('window').close();
