@@ -64,8 +64,8 @@ tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
             }
          }
         // target.update();
-        store.getNodeById(target.parentNode.data.id).save();
-         store.sync();
+       // store.getNodeById(target.parentNode.data.id).save();
+       //  store.sync();
          
          
     Ext.getCmp('saveButton').setDisabled(false);

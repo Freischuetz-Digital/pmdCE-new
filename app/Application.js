@@ -59,6 +59,7 @@ Ext.define('pmdCE.Application', {
     hairpinDataStore: null,
     hairpinStart: null,
     facsimilePath: null,
+    saveStore: null,
     
     pageNr: null,
     
@@ -99,7 +100,23 @@ Ext.define('pmdCE.Application', {
     },
     autoLoad: false
 });
-       
+
+
+         saveStore = Ext.create('Ext.data.Store', {
+            model: 'pmdCE.model.Hairpin',
+        extraParams: {path: ''},
+             proxy:{
+        type: 'ajax',
+        method: 'POST'
+        //  url: 'resources/xql/saveMEI.xql'
+    },
+    autoLoad: false
+});
+//      new Ext.data.proxy.Ajax({
+//    url: 'users.json',
+//    model: 'User',
+//    reader: 'json'
+//}); 
      
      /*    hairpinDataStore = Ext.create('Ext.data.TreeStore', {
          storeId:'hairpinDataStore',
@@ -148,7 +165,9 @@ Ext.define('pmdCE.Application', {
     return sourcesStore;
     },
     
-    
+    getSaveStore: function(){
+    return saveStore;
+    },
     
      getExtStaffStart: function(){
     return extStaff_start;

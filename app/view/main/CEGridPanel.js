@@ -141,7 +141,7 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
                 align: 'center',
                 menuDisabled: true,
                 renderer: function (val, metadata, record) {
-                if (record.data.depth === 1) {
+                if (record.data.depth === 1 && record.data.ambiguous === true) {
                     this.items[0].icon = '';
                 } else {
                     this.items[0].icon = 'resources/images/edit.png';
@@ -174,7 +174,8 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
    return eColumn;
    },
    
-   changeElementDialog: function(){    
+   changeElementDialog: function(object, cell, row){ 
+    object.selectionModel.select(cell);
     var win = new pmdCE.view.main.EditDialog();
     win.show();
 }
