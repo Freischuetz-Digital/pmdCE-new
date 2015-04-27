@@ -74,7 +74,7 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                // url: 'data/pmd_ce_getNavigation.xql',
+               //  url: 'data/pmd_ce_getNavigation.xql',
                  url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',

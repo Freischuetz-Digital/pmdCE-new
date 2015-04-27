@@ -34,8 +34,7 @@ this.title = pageNr;
         path: pageNr
     },
     success: function(response){
-        console.log(response);
-                console.log(typeof response);
+       
        me.createImage(response.responseText);
        
     }

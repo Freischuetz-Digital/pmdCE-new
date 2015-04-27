@@ -303,12 +303,10 @@ var objects = '<div><div><div id="slur_c9096393-a14a-4050-a4b9-454e330afc33" ope
      
        
        
-       if(typeof Ext.getCmp('facsimileview') !== 'undefined'){
+      if(typeof Ext.getCmp('facsimileview') !== 'undefined'){
            Ext.getCmp('cepanel').remove('facsimileview');
            
        }
- 
-
     facsimileView = new pmdCE.view.main.FacsimileView();
     Ext.getCmp('cepanel').add(facsimileView);
        

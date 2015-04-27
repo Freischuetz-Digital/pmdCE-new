@@ -18,14 +18,11 @@ extend: 'Ext.form.Panel',
      currId: null,
      // var for compute av. value
      tstampShift1: null,
-     
- 
+     currId: null,
+      
 initComponent: function() {
 
 me = this;
-
-//me.id = Ext.getCmp('cemain').getEditorId()+'_start';
-//id = this.id;
 currId = this.id;
 
 app = pmdCE.getApplication();
@@ -42,9 +39,11 @@ Ext.Ajax.request({
     params:{ 
        path: pageNr, 
        staffID: measurePath, 
-       id_prefix: 'slurStart___'
+       id_prefix: 'hairpinStart___',
+       endPageName: pageNr
             },
     success: function(response){
+    
         var text = response.responseText;
         
         var options = JSON.stringify({
@@ -56,17 +55,16 @@ Ext.Ajax.request({
     });
     renderer.setOptions(options);
     renderer.loadData(text);
-    var svg = renderer.renderPage( 1, options );
-   //var svg = renderer.renderData( text, options );
-    
-    //$('#'+Ext.getCmp('cemain').getEditorId()+'_start'+'-body').html(svg);
+   // var svg = renderer.renderPage( 1, options );
+   var svg = renderer.renderData( text, options );
+   
     $('#'+currId+'-body').html(svg);
+    var xmlFile = jQuery.parseXML(text);
    
-    var xmlFile = response.responseXML;
     var meiElements = xmlFile.getElementsByTagName('note');
-   
+     
    var elements = document.getElementsByClassName('note');
-  
+    
     for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
     var elId = element.id;
@@ -158,7 +156,9 @@ for (var i = 0; i < elements.length; i++) {
                         var tstamp = elementXML.getAttribute('tstamp'); 
                         // for av. case
                         this.tstampShift1 = elementXML.getAttribute('tstamp'); 
+                       
                         if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
+                            
                             Ext.getCmp('tstampFieldObv').setValue(tstamp);
                         }
                        else if(typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' 

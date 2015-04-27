@@ -27,8 +27,20 @@ currId2 = this.id;
 app = pmdCE.getApplication();
 renderer = app.getRenderer();
 
+var pageNr = Ext.getCmp('pages').getText();
+var measureId = Ext.getCmp('cemain').getEndMeasure();
+var staffNr = Ext.getCmp('cemain').getStaffNr();
+var movement = Ext.getCmp('movement').getText();
+var measurePath = movement+"_measure"+measureId+"_s"+staffNr;
+
 Ext.Ajax.request({
-    url: "resources/verovio/testEnd.mei",
+    url: "resources/xql/getExtendedStaff.xql",
+    params:{ 
+        path: pageNr, 
+       staffID: measurePath, 
+       id_prefix: 'hairpinEnd___',
+       endPageName: pageNr
+            },
     success: function(response){
         var text = response.responseText;
         
@@ -45,7 +57,7 @@ Ext.Ajax.request({
     //$('#'+Ext.getCmp('cemain').getEditorId()+'_end'+'-body').html(svg);
     $('#'+currId2+'-body').html(svg);
     
-    var xmlFile = response.responseXML;
+    var xmlFile = jQuery.parseXML(text);
     var meiElements = xmlFile.getElementsByTagName('note');
    
    var elements = document.getElementsByClassName('note');

@@ -46,9 +46,6 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         tstampField = this.createTextField('tstampFieldObv', 'tstampField', 'Tstamp');
         tstamp2Field = this.createTextField('tstampField2Obv', 'tstampField2', 'Tstamp2');
        
-       verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
-         
-         
           this.items  = [
         {
             id: 'card-0',
@@ -59,6 +56,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
             endTaktField,
             placeField,
             formField
+            //verovioImageStart
         ]
         },
         {
@@ -77,19 +75,20 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                 },        
                 items: [
                     tstampField
-                    //verovioImageStart
+                   // verovioImageStart
                 ]
             },
             {
             xtype: 'fieldset',
             title: 'End time',
+            id: 'endtime',
             defaultType: 'textfield',
                 defaults: {
                     anchor: '100%'
                 },       
                 items: [
-                    tstamp2Field,
-                    verovioImageEnd
+                    tstamp2Field
+                  //  verovioImageEnd
                 ]
             }
         ]
@@ -214,8 +213,11 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 
     showNext: function () {
         this.doCardNavigation(1);
-         verovioImageStart = new pmdCE.view.main.VerovioImageStart();
-         Ext.getCmp('starttime').addItem(verovioImageStart);
+            verovioImageStart = new pmdCE.view.main.VerovioImageStart();
+         Ext.getCmp('starttime').add(verovioImageStart);
+         
+          verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
+         Ext.getCmp('endtime').add(verovioImageEnd);
         
         
     },
@@ -337,6 +339,10 @@ return ceTextField;
     select: function(combo, record, index) {
     if(fieldName.indexOf('Start') > -1){
         Ext.getCmp('cemain').setStartMeasure(combo.getValue());
+        
+    }
+    if(fieldName.indexOf('End') > -1){
+        Ext.getCmp('cemain').setEndMeasure(combo.getValue());
         
     }
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);

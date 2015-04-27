@@ -33,11 +33,9 @@ Ext.define('pmdCE.view.main.Main', {
     startMeasure: null,
     endMeasure: null,
     staffNr: null,
-    
-    
-    
+   
     initComponent: function() {
-    
+  
     ceToolbar = new pmdCE.view.main.CEToolbar(),
     cePanel = new pmdCE.view.main.CEPanel(),
      
@@ -54,8 +52,8 @@ this.callParent()
         this.startMeasure = startMeasure;
     },
     
-     setEndMeasure: function(startMeasure){
-        this.startMeasure = startMeasure;
+     setEndMeasure: function(endMeasure){
+        this.endMeasure = endMeasure;
     },
     
      setStaffNr: function(staffNr){
