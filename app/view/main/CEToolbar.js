@@ -45,7 +45,7 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     arrowR = this.createCEIcon('arrowR', 'resources/images/page-next-disabled.gif');
     arrowR.setDisabled(true);
     saveButton = this.createCEIcon('saveButton', 'resources/images/Save.png', this.saveComponents);
-    saveButton.setDisabled(true);
+   // saveButton.setDisabled(true);
     //createButton = this.createCEIcon1();
     //('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
    // createButton.setDisabled(true);
@@ -81,11 +81,74 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     },
  
     saveComponents: function(btn){ 
-        var app = pmdCE.getApplication();
+        /*var app = pmdCE.getApplication();
         var store = app.getHairpinDataStore();
+        store.sync();*/
+       // var objects = $('<div>​<div>​<div id=​"slur_b34720fd-a1ad-4db6-86d8-ELENA" operation=​"create" sourcepath=​"A_surface101">​<slur xmlns=​"http:​/​/​www.music-encoding.org/​ns/​mei" xml:id=​"slur_b34720fd-a1ad-4db6-86d8-ELENA" sameas startid endid staff curvedir=​"above">​</slur>​</div>​</div>​</div>​');
+        //var objectsOutput = $(objects).html();
+//var objects = $('<div>​<div><div id="slur_640cc069-e1e2-469d-8dd1-fc0b4ccef7f4" operation="create" sourcepath="A_surface102"><slur xmlns="http://www.music-encoding.org/ns/mei" xml:id="slur_640cc069-e1e2-469d-8dd1-fc0b4ccef7f4" sameas="" startid="" endid="" staff="" curvedir="above"></slur></div></div></div>');
+//var s = $('<div><div id="slur_640cc069-e1e2-469d-8dd1-fc0b4ccef333" operation="create" sourcepath="A_surface102"><slur xmlns="http://www.music-encoding.org/ns/mei" xml:id="slur_640cc069-e1e2-469d-8dd1-fc0b4ccef333" sameas="" startid="" endid="" staff="" curvedir="above"></slur></div></div>');
+/*console.log("objects");
+console.log($(objects).html());*/
+
+//var s = '<div id="myDiv"></div>';
+/*var htmlObject = document.createElement('div');
+htmlObject.innerHTML = s;*/
+
+var objects = '<div><div><div id="slur_c9096393-a14a-4050-a4b9-454e330afc33" operation="create" sourcepath="A_surface103"><slur curvedir="above" staff="" endid="" startid="" sameas="" xml:id="slur_c9096393-a14a-4050-a4b9-454e330afc33" xmlns="http://www.music-encoding.org/ns/mei"></slur></div></div></div>';
+
+   $.ajax({
+            url:'resources/xql/saveMEI.xql',
+            type:"POST",
+            data: $(objects).html(),
+            contentType:"application/xml; charset=utf-8",
+            dataType:"xml",
+            success: function(){
+                console.log('guiEditor.save success');
+               // guiEditor.changedArray = [];
+            }
+        });
+
+
+
+/*Ext.Ajax.request({
+
+    method: "POST",
+    url: 'resources/xql/saveMEI.xql',
+    params:{ 
+        data: objectsOutput,
+        contentType:"application/xml; charset=utf-8",
+            dataType:"xml"
+            },
+       
+    success: function (response) {
+        console.log(objectsOutput);
+        console.log('success: ' + response.responseText);
+
+    },
+    failure: function (e, jqxhr) {
+        console.log('failure!');
+        console.log(e.status);
+    }
+});*/
         
+        /* Ext.Ajax.request({
+            url: 'resources/xql/saveMEI.xql',
+            async: false,
+            method: 'POST',
+            params: {
+                data: $(objects).html()
+                },success: function(response){
+                console.log('guiEditor.save success');
+               // this.langFiles.add(lang, Ext.JSON.decode(response.responseText));
+            },
+            scope: this
+        });*/
         
-        store.sync();
+      
+        
+           
+        
        
     },
     
@@ -193,12 +256,12 @@ Ext.define('pmdCE.view.main.CEToolbar', {
         arrowR.setDisabled(true);
        // createButton.setDisabled(true);
        // deleteButton.setDisabled(true);
-        if(!saveButton.isDisabled()){
+      /*  if(!saveButton.isDisabled()){
         // TODO
         alert('save?')
         saveButton.setDisabled(true);
         } 
-        
+        */
      
     },
     
@@ -208,11 +271,11 @@ Ext.define('pmdCE.view.main.CEToolbar', {
        // createButton.setDisabled(true);
        // deleteButton.setDisabled(true);
         
-         if(!saveButton.isDisabled()){
+       /*  if(!saveButton.isDisabled()){
         // TODO
         alert('save?')
         saveButton.setDisabled(true);
-        } 
+        } */
         
         if(pagesButton.getText() !== 'Pages'){
             pagesButton.setText('Pages');
@@ -236,6 +299,19 @@ Ext.define('pmdCE.view.main.CEToolbar', {
         alert('save?')
         saveButton.setDisabled(true);
         } */
+       
+     
+       
+       
+       if(typeof Ext.getCmp('facsimileview') !== 'undefined'){
+           Ext.getCmp('cepanel').remove('facsimileview');
+           
+       }
+ 
+
+    facsimileView = new pmdCE.view.main.FacsimileView();
+    Ext.getCmp('cepanel').add(facsimileView);
+       
        
         if(typeof Ext.getCmp('verovioview') !== 'undefined'){
             // TODO: save?

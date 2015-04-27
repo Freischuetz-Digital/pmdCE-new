@@ -64,7 +64,7 @@ Ext.define('pmdCE.Application', {
     pageNr: null,
     
     storeT: null,
-    
+   
     
     launch: function () {
  
@@ -74,8 +74,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                 url: 'data/pmd_ce_getNavigation.xql',
-                // url: 'resources/xql/pmd_ce_getNavigation.xql',
+                // url: 'data/pmd_ce_getNavigation.xql',
+                 url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sigle'
@@ -93,25 +93,26 @@ Ext.define('pmdCE.Application', {
     extraParams: {path: ''},
              proxy:{
         type: 'ajax',
-      //  url: 'resources/xql/getControlEvents.xql'
-        //url: 'resources/data/tree/testTree.json',
-        url: 'resources/data/tree/treegrid_1.json'
+        url: 'resources/xql/getControlEvents.xql'
+       
+       // url: 'resources/data/tree/treegrid_1.json'
       
     },
     autoLoad: false
 });
 
 
-         saveStore = Ext.create('Ext.data.Store', {
+
+   /*      saveStore = Ext.create('Ext.data.Store', {
             model: 'pmdCE.model.Hairpin',
-        extraParams: {path: ''},
+      //  extraParams: {path: ''},
              proxy:{
         type: 'ajax',
         method: 'POST'
         //  url: 'resources/xql/saveMEI.xql'
     },
     autoLoad: false
-});
+});*/
 //      new Ext.data.proxy.Ajax({
 //    url: 'users.json',
 //    model: 'User',
@@ -136,22 +137,23 @@ Ext.define('pmdCE.Application', {
              autoLoad: false
          }),*/
          
-  /* Ext.Ajax.request({
+ /* Ext.Ajax.request({
     url: 'resources/xql/pmd_ce_getFacsimilePage.xql',
-    //async: false,
+    async: false,
     method: 'GET',
     params: {
         path: "A_surface101"
     },
     success: function(response){
-       //this.facsimilePath = response.responseText;
-       console.log(this.facsimilePath);
+       facsimilePath = response;
+       console.log(facsimilePath);
        
     }
-});*/
-    
+});
+    */
        
          sourcesStore.load();
+         
         
         
     },
@@ -164,6 +166,8 @@ Ext.define('pmdCE.Application', {
     getSourcesStore: function(){
     return sourcesStore;
     },
+    
+   
     
     getSaveStore: function(){
     return saveStore;

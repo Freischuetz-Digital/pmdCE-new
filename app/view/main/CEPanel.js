@@ -29,19 +29,19 @@ Ext.define('pmdCE.view.main.CEPanel', {
     
     ceTabView: null,
     //editorView: null,
-    facsimileView: null,
+   // facsimileView: null,
     
     
     initComponent: function() {
    
     ceTabView = new pmdCE.view.main.CETabPanel(),
     //editorView = new pmdCE.view.main.CECenterPanel(),
-    facsimileView = new pmdCE.view.main.FacsimileView(),
+  //  facsimileView = new pmdCE.view.main.FacsimileView(),
    
     this.items = [
-        ceTabView,
+        ceTabView
        // editorView
-       facsimileView
+     //  facsimileView
     ],
      this.callParent();
    }

@@ -31,9 +31,19 @@ currId = this.id;
 app = pmdCE.getApplication();
 renderer = app.getRenderer();
 
-//TODO: Param: A_mov6_measure11_ce2 -ce2 + staff; path: A_surface101
+var pageNr = Ext.getCmp('pages').getText();
+var measureId = Ext.getCmp('cemain').getStartMeasure();
+var staffNr = Ext.getCmp('cemain').getStaffNr();
+var movement = Ext.getCmp('movement').getText();
+var measurePath = movement+"_measure"+measureId+"_s"+staffNr;
+
 Ext.Ajax.request({
-    url: "resources/verovio/test.mei",
+    url: "resources/xql/getExtendedStaff.xql",
+    params:{ 
+       path: pageNr, 
+       staffID: measurePath, 
+       id_prefix: 'slurStart___'
+            },
     success: function(response){
         var text = response.responseText;
         

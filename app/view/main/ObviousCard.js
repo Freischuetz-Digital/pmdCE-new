@@ -29,9 +29,13 @@ Ext.define('pmdCE.view.main.ObviousCard', {
       
       verovioImageStart: null,
       verovioImageEnd: null,
+      
+      //me: null,
   
     
          initComponent: function() {
+         
+        // me = this;
          
         staffField= this.createComboBoxStaff('Staff');  
         startTaktField= this.createComboBoxMeasureNr('Start measure');
@@ -42,8 +46,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         tstampField = this.createTextField('tstampFieldObv', 'tstampField', 'Tstamp');
         tstamp2Field = this.createTextField('tstampField2Obv', 'tstampField2', 'Tstamp2');
        
-        verovioImageStart = new pmdCE.view.main.VerovioImageStart(), 
-        verovioImageEnd = new pmdCE.view.main.VerovioImageEnd()
+       verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
          
          
           this.items  = [
@@ -67,13 +70,14 @@ Ext.define('pmdCE.view.main.ObviousCard', {
             {
             xtype: 'fieldset',
             title: 'Start time',
+            id: 'starttime',
             defaultType: 'textfield',        
                 defaults: {
                     anchor: '100%'
                 },        
                 items: [
-                    tstampField,
-                    verovioImageStart
+                    tstampField
+                    //verovioImageStart
                 ]
             },
             {
@@ -129,28 +133,21 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         function(){
         
         //TODO: generate Id
-       /* var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
+        var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
 	 
         var hairpin = Ext.create('pmdCE.model.Hairpin', {      
                     id: 'ELENA',
-                    name:'TEST_ELENA',
                     name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_obvious',
                     icon: 'resources/images/mix_volume.png',
                     obvious: true,
                     ambiguous: false,
-                    children: [
-                {
-                    icon: 'resources/images/details-xml.png',
                     staff: staffField.getValue(),                   
                     tstamp: tstampField.getValue(),
                     tstamp2: tstamp2Field.getValue(),
                     place: placeField.getValue(),
                     form: formValue,
                     tag: "",
-                    leaf: true
-                }
-                ] 
-                
+                    leaf: true                
 	    });
 	  
 	    var store = pmdCE.getApplication().getHairpinDataStore();
@@ -158,8 +155,9 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 	    var parent = root.appendChild(hairpin);
         parent.expand();
         
-        hairpin.save();
-        store.sync();*/
+       // hairpin.save();
+       // store.sync();
+       
         /*var target = Ext.getCmp('cegridpanel').getSelectionModel();
         console.log("getSelectionModel");
         console.log(target);*/
@@ -177,9 +175,9 @@ Ext.define('pmdCE.view.main.ObviousCard', {
             
              });*/
              
-     var store = Ext.getCmp('cegridpanel').store;
+  //   var store = Ext.getCmp('cegridpanel').store;
      
-     store.getNodeById('A_mov6_measure75_ce1').set('tstamp', '33+el');
+//     store.getNodeById('A_mov6_measure75_ce1').set('tstamp', '33+el');
   
  /*   var newPerson1 = Ext.create('pmdCE.model.Hairpin', {staff: '1',
                     icon: 'resources/images/details-xml.png',
@@ -193,10 +191,10 @@ Ext.define('pmdCE.view.main.ObviousCard', {
  
  //store.sync();
  
- store.update();
+ //store.update();
  
-        console.log("create");
-        console.log(store);
+      /*  console.log("create");
+        console.log(store);*/
         
         Ext.getCmp('saveButton').setDisabled(false);
             this.up('window').close();
@@ -216,6 +214,10 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 
     showNext: function () {
         this.doCardNavigation(1);
+         verovioImageStart = new pmdCE.view.main.VerovioImageStart();
+         Ext.getCmp('starttime').addItem(verovioImageStart);
+        
+        
     },
 
     showPrevious: function (btn) {
@@ -299,6 +301,9 @@ return ceTextField;
     valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
+    console.log(combo);
+        Ext.getCmp('cemain').setStaffNr(combo.getValue());
+    
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
      // modelTest.set('curvedir', combo.getValue());
     }
@@ -330,6 +335,10 @@ return ceTextField;
     valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
+    if(fieldName.indexOf('Start') > -1){
+        Ext.getCmp('cemain').setStartMeasure(combo.getValue());
+        
+    }
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
      // modelTest.set('curvedir', combo.getValue());
     }

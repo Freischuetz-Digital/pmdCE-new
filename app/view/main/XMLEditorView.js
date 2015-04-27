@@ -40,18 +40,18 @@ extend: 'Ext.form.Panel',
         
 initComponent: function() {
 
-//test = $.get( '../../../resources/verovio/hairpin.xml', function( data ) {
-//    test = Ext.DomQuery.selectNode('hairpin', data);
-//    test2 = document.createElement("div");
-//        //test.cloneNode();
-//        test2.appendChild(test.cloneNode(true));
-//        //console.log('test2.innerHTML', test2.innerHTML);
-//        
-//        $('#xmleditorview-body').html(Ext.String.htmlEncode(test2.innerHTML));
+test = $.get( 'resources/verovio/hairpin.xml', function( data ) {
+    test = Ext.DomQuery.selectNode('hairpin', data);
+    test2 = document.createElement("div");
+        //test.cloneNode();
+        test2.appendChild(test.cloneNode(true));
+        //console.log('test2.innerHTML', test2.innerHTML);
+        
+        $('#xmleditorview-body').html(Ext.String.htmlEncode(test2.innerHTML));
  
 
 
-//}),
+}),
 
         this.callParent()
 

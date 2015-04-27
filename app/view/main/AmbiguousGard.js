@@ -249,7 +249,6 @@ return ceTextField;
 },
 
 getSelectedFieldId: function(){  
-console.log(me.selectedFieldId);
     return me.selectedFieldId;
 },
 

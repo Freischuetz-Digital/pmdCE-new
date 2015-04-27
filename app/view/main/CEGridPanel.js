@@ -59,7 +59,7 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
                 text: 'Name',
                 flex: 3,
                 sortable: true,
-                dataIndex: 'id'
+                dataIndex: 'name'
                 
             }, 
             {

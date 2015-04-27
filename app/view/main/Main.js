@@ -20,7 +20,7 @@ Ext.define('pmdCE.view.main.Main', {
     },
     
     bodyPadding: 5,
-    
+   
     defaults: {
         //frame: true,
         border: true
@@ -30,19 +30,48 @@ Ext.define('pmdCE.view.main.Main', {
     ceToolbar: null,
     cePanel: null,
     
+    startMeasure: null,
+    endMeasure: null,
+    staffNr: null,
+    
+    
+    
     initComponent: function() {
     
-  ceToolbar = new pmdCE.view.main.CEToolbar(),
+    ceToolbar = new pmdCE.view.main.CEToolbar(),
     cePanel = new pmdCE.view.main.CEPanel(),
      
 this.items = [
      ceToolbar,
        cePanel
-       
-    ]
-
+       ]
+ 
 this.callParent()
 
+    },
+       
+    setStartMeasure: function(startMeasure){
+        this.startMeasure = startMeasure;
+    },
+    
+     setEndMeasure: function(startMeasure){
+        this.startMeasure = startMeasure;
+    },
+    
+     setStaffNr: function(staffNr){
+        this.staffNr = staffNr;
+    },
+    
+    getStartMeasure: function(){
+        return this.startMeasure;
+    },
+    
+     getEndMeasure: function(){
+        return this.endMeasure;
+    },
+    
+     getStaffNr: function(){
+        return this.staffNr;
     }
 
     });
