@@ -61,9 +61,6 @@ tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
 
-verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
-        verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
-        
           this.items  = [
         {
             id: 'card-0',
@@ -82,6 +79,7 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
                  {
         xtype: 'fieldset',
         title: 'Start Time',
+        id: 'starttime',
         defaultType: 'textfield',
         defaults: {
             anchor: '100%'
@@ -90,13 +88,13 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
         items: [
                 tstampFieldOrig,
                 tstampFieldReg1,
-                tstampFieldReg2,
-                verovioImageStart
+                tstampFieldReg2
         ]
     },
      {
         xtype: 'fieldset',
         title: 'End Time',
+        id: 'endtime',
         defaultType: 'textfield',
         defaults: {
             anchor: '100%'
@@ -105,8 +103,7 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
         items: [            
                 tstamp2FieldOrig,
                 tstamp2FieldReg1,
-                tstamp2FieldReg2,
-                verovioImageEnd  
+                tstamp2FieldReg2
         ]
     }
         ]
@@ -136,12 +133,17 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
        // disabled: true,
         handler: 
         function(){
-            //TODO: generate Id
+        
+        var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
+
              var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
         
 	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
+	               id: hairId,
 	               name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_ambigous',
                     icon: 'resources/images/mix_volume.png',
+                    measureId: Ext.getCmp('cemain').getMeasureId(),
+                    operation: 'create',
                     obvious: false,
                     ambiguous: true,
                      children: [
@@ -201,6 +203,12 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
 
     showNext: function () {
         this.doCardNavigation(1);
+        
+         verovioImageStart = new pmdCE.view.main.VerovioImageStart();
+         Ext.getCmp('starttime').add(verovioImageStart);
+         
+          verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
+         Ext.getCmp('endtime').add(verovioImageEnd);
     },
 
     showPrevious: function (btn) {
@@ -234,15 +242,7 @@ verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
            me.selectedFieldId = fieldName;
         }
         }
-        
-       /* {'render': function(c) {
-            c.getEl().on('keyup', function() {  
-            
-           // Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-               // modelTest.set('start', startField.value);
-            }, c);
-        }
-  }*/
+     
    });
 
 return ceTextField;

@@ -3,6 +3,7 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
    title: 'Change to Obvious Element',
    flex: 1,
    modal: true,
+   id: "changetoamdialog",
  
     staffField: null,
     placeField: null,
@@ -13,19 +14,6 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
     layout: 'hbox',
   
     initComponent: function() {
-    
-    this.id = "changetoamdialog";
-         Ext.getCmp('cemain').setEditorId(this.id);
-         
-       /*  if(Ext.getCmp('cemain').getVerovioView().getVerStartView() !== null){
-             Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerStartView(), true);
-         }
-         if(Ext.getCmp('cemain').getVerovioView().getVerEndView() !== null){
-            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getVerEndView(), true);
-         }
-         if(Ext.getCmp('cemain').getVerovioView().getRadioGroup() !== null){
-            Ext.getCmp('cemain').getVerovioView().remove(Ext.getCmp('cemain').getVerovioView().getRadioGroup(), true);
-         }*/
     
     staffField = this.createComboBoxStaff('Staff');  
     placeField = this.createComboBox('Place');
@@ -100,6 +88,38 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
        },*/
         handler: 
         function(){
+        
+       var selectedNode = null;
+        selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+	  
+	  for(var i = 0; i < rootNode.childNodes.length ; i++){
+	  if(rootNode.childNodes[i].data.id === selection.data.id){
+	      selectedNode = rootNode.childNodes[i];	
+	      
+	      break;
+	  }	      
+	  }    
+  
+        var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
+	 
+        selectedNode.data.name = formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_obvious';
+	  selectedNode.data.obvious = true;
+         selectedNode.data.ambiguous = false;
+         selectedNode.data.staff = staffField.getValue();
+          selectedNode.data.tstamp = tstampField.getValue();
+           selectedNode.data.tstamp2 = tstamp2Field.getValue();
+            selectedNode.data.form = formValue;
+             selectedNode.data.place = placeField.getValue();
+             selectedNode.data.operation =  'update';
+             selectedNode.data.leaf = true;
+             selectedNode.data.tag = "";
+             
+             selectedNode.removeAll();
+             
+             console.log(selectedNode);
+    
+        Ext.getCmp('saveButton').setDisabled(false);
       
             this.up('window').close();
            

@@ -100,9 +100,9 @@ declare function local:jsonifyHairpins($hairpins) {
                         concat('{"id":"',$id,'",',
                             '"name":"hairpin",', 
                             '"obvious":"',$obvious,'",',
-                            '"ambiguous":"',$ambiguous,'",',
+                            '"ambiguous":"',$ambiguous,'",',                           
                              '"icon":"resources/images/mix_volume.png",',
-                            
+                            '"measureId":"',$measureID,'",',
                            (: '"children":[{',  
                             '"icon":"resources/images/details-xml.png",',:)
                             '"tstamp":"',$tstamp,'",',

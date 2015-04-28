@@ -31,7 +31,6 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     selection: null,
     rootNode: null,
     selectedNode: null,
-    nodeToDelete: null,
     vordStaff: null,
 	vordForm: null,
 	vordPlace: null,
@@ -39,21 +38,26 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
 	vordTStamp2: null,
     
     layout: 'hbox',
+    
+    selectedFieldId:null,
+   
+    me: null,
   
     initComponent: function() {
     
+    me = this;
+    
       selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-
+	  
 	  for(var i = 0; i < rootNode.childNodes.length ; i++){
 	  if(rootNode.childNodes[i].data.id === selection.data.id){
 	      selectedNode = rootNode.childNodes[i];	
-	      nodeToDelete = selectedNode.childNodes[0];
-	      vordStaff = nodeToDelete.data.staff;
-	      vordForm = nodeToDelete.data.form ;
-	      vordPlace = nodeToDelete.data.place;
-	      vordTStamp = nodeToDelete.data.tstamp;
-	      vordTStamp2 = nodeToDelete.data.tstamp2;
+	      vordStaff = selectedNode.data.staff;
+	      vordForm = selectedNode.data.form ;
+	      vordPlace = selectedNode.data.place;
+	      vordTStamp = selectedNode.data.tstamp;
+	      vordTStamp2 = selectedNode.data.tstamp2;
 	      break;
 	  }	      
 	  }    
@@ -63,7 +67,6 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     placeFieldOrig = this.createComboBox('Place');
     placeFieldOrig.setValue(vordPlace);
     formFieldOrig = this.createRadioGroup();
-    console.log(formFieldOrig);
     if(vordForm === 'dim'){
         formFieldOrig.items.items[1].setValue(true);
     }
@@ -104,10 +107,10 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     tstampField2Reg2.setValue(vordTStamp2);
     
     tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
-    tstamp2FieldReg1 = this.createTextField('tstampField2Reg1', 'Tstamp2 reg1');
+    tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
 
      tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp orig');
-    tstamp2FieldOrig = this.createTextField('tstampField2Orig', 'Tstamp2 orig');
+    tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2 orig');
     
     verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
         verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
@@ -237,11 +240,18 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
         var formValueReg1= formFieldReg1.getValue().Form === 2 ? "dim" : 'cres';
       
 	  if(selectedNode !== null){
-	  // TODO: ? erase : Boolean (optional); True to erase the record using the configured proxy. Defaults to: false
+	 
 	  selectedNode.data.name = vordForm+'_'+vordStaff+'_'+vordPlace+'_ambiguous';
 	  selectedNode.data.obvious = false;
          selectedNode.data.ambiguous = true;
-	      selectedNode.removeChild(nodeToDelete);
+         selectedNode.data.staff = null;
+          selectedNode.data.tstamp = null;
+           selectedNode.data.tstamp2 = null;
+            selectedNode.data.form = null;
+             selectedNode.data.place = null;
+             selectedNode.data.operation =  'update',
+             
+	     // selectedNode.removeChild(nodeToDelete);
 	         selectedNode.appendChild({
                     icon: 'resources/images/details-xml.png',
                     staff: staffFieldOrig.getValue(),                   
@@ -274,7 +284,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
         });	
 	  }
 	  selectedNode.expand();
-
+       Ext.getCmp('saveButton').setDisabled(false);
       this.up('window').close();
            
        }
@@ -357,17 +367,20 @@ createRadioGroup: function(){
     var ceTextField = Ext.create('Ext.form.field.Text',{
         name: fieldName,
         fieldLabel: fieldLabel,
+        id: fieldName,
       //  allowBlank: false , // requires a non-empty value
-        listeners: {'render': function(c) {
-            c.getEl().on('keyup', function() {   
-           // Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-               // modelTest.set('start', startField.value);
-            }, c);
+        listeners: {
+        focus: function(e, eOpts ){
+           me.selectedFieldId = fieldName;
         }
   }
    });
 
 return ceTextField;
+},
+
+getSelectedFieldId: function(){  
+    return me.selectedFieldId;
 }
     
 

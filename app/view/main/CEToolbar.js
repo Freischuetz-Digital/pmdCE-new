@@ -118,7 +118,7 @@ htmlObject.innerHTML = s;*/
         objects = $('<div></div>').append($(objects));*/
 
 var store = pmdCE.getApplication().getHairpinDataStore();
-var modRecords = store.getModifiedRecords();
+var modRecords = store.getUpdatedRecords();
 
 console.log("******DATA******");
 console.log(modRecords);
@@ -126,13 +126,14 @@ console.log(modRecords);
 var objects = $('<div></div>');
 
 for(var i = 0; i < modRecords.length ; i++){
+    if(modRecords[i].data.obvious){
         var object = $('<div></div>', {
                 id: modRecords[i].data.id,
-                operation: modRecords[i].data.status,
+                operation: modRecords[i].data.operation,
                 sourcePath: pagesButton.getText(),
                 measureId: modRecords[i].data.measureId
-         });
-         var code = $('<hairpin></hairpin>', {
+         });        
+            var code = $('<hairpin></hairpin>', {
                staff : modRecords[i].data.staff,
                 place: modRecords[i].data.place,
                 form: modRecords[i].data.form,
@@ -142,9 +143,55 @@ for(var i = 0; i < modRecords.length ; i++){
                 xmlns: "http://www.music-encoding.org/ns/mei",
                 sameas: ""
          });
-        
-        $(object).append(code);
-        $(objects).append($(object));
+         $(object).append(code);
+         $(objects).append($(object));        
+         }
+         else{
+            var head = $('<div></div>', {
+                id: modRecords[i].data.id,
+                operation: modRecords[i].data.operation,
+                sourcePath: pagesButton.getText(),
+                measureId: modRecords[i].data.measureId
+            }); 
+         
+         
+          var choice = $('<choice></choice>', {
+              'xml:id': modRecords[i].data.id,
+                xmlns: "http://www.music-encoding.org/ns/mei"
+             
+            });  
+         
+            for(var j = 0; j < modRecords[i].childNodes.length ; j++){
+                if(modRecords[i].childNodes[j].data.tag === 'orig'){
+                    var orig = $('<orig></orig>');
+                    var hair =  $('<hairpin></hairpin>', {
+                        staff : modRecords[i].childNodes[j].data.staff,
+                        place: modRecords[i].childNodes[j].data.place,
+                        form: modRecords[i].childNodes[j].data.form,
+                        tstamp: modRecords[i].childNodes[j].data.tstamp,
+                        tstamp2: modRecords[i].childNodes[j].data.tstamp2,              
+                        sameas: ""
+                    });
+                    $(orig).append($(hair)); 
+                    $(choice).append($(orig)); 
+                }
+                if(modRecords[i].childNodes[j].data.tag === 'reg'){
+                        var reg = $('<reg></reg>');
+                        var hair =  $('<hairpin></hairpin>', {
+                        staff : modRecords[i].childNodes[j].data.staff,
+                        place: modRecords[i].childNodes[j].data.place,
+                        form: modRecords[i].childNodes[j].data.form,
+                        tstamp: modRecords[i].childNodes[j].data.tstamp,
+                        tstamp2: modRecords[i].childNodes[j].data.tstamp2,              
+                        sameas: ""
+                    }); 
+                    $(reg).append($(hair)); 
+                    $(choice).append($(reg)); 
+                }              
+            } 
+           $(head).append(choice);
+             $(objects).append($(head));              
+         }              
  }
  
  objects = $('<div></div>').append($(objects));
@@ -153,9 +200,9 @@ for(var i = 0; i < modRecords.length ; i++){
  console.log( $(objects).html());
  
 
-//var objects = '<div><div><div id="slur_c9096393-a14a-4050-a4b9-454e330afc33" operation="create" sourcepath="A_surface103"><slur curvedir="above" staff="" endid="" startid="" sameas="" xml:id="slur_c9096393-a14a-4050-a4b9-454e330afc33" xmlns="http://www.music-encoding.org/ns/mei"></slur></div></div></div>';
+//var objects = '<div><div><div id="hair_c9096393-a14a-4050-a4b9-454e330afELE" operation="create" sourcepath="A_surface105"><slur place="above" staff="5" startid="#A_mov6_measure73_s5l1_e1" endid="#A_mov6_measure73_s5l1_e8" sameas="" xml:id="hair_c9096393-a14a-4050-a4b9-454e330afELE" xmlns="http://www.music-encoding.org/ns/mei"></slur></div></div></div>';
 
-  /* $.ajax({
+   $.ajax({
             url:'resources/xql/saveMEI.xql',
             type:"POST",
             data: $(objects).html(),
@@ -164,10 +211,7 @@ for(var i = 0; i < modRecords.length ; i++){
             success: function(){
                 console.log('save success');
             }
-        });*/
-
-
-       
+        });
     },
     
      createComponent: function(btn){      
