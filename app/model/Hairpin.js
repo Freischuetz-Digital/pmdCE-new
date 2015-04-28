@@ -3,8 +3,10 @@ Ext.define('pmdCE.model.Hairpin', {
     fields: [
         {name: 'name',   type: 'string'},
         {name: 'id',   type: 'string'},
+        {name: 'status',   type: 'string'},
          {name: 'type',   type: 'string'},
         {name: 'staff',   type: 'string'},
+         {name: 'measureId',   type: 'string'},
         {name: 'tstamp',   type: 'string'},
         {name: 'tstamp2',   type: 'string'},
         {name: 'place',   type: 'string'},

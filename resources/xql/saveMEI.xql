@@ -20,6 +20,7 @@ let $change :=
     let $source := $x/string(@sourcepath)
     let $id := $x/string(@id)
     let $operation := $x/string(@operation)
+    let $measureId := $x/string(@measureId)   
     let $content := $x/*
     let $startIDs := for $slur in $xml/div/div/*/descendant-or-self::mei:slur[@startid] return $slur/string(@startid)
     let $doc := if(ends-with($source,'.xml'))then(doc('/db/apps/controlevents-data/' || $source))else(collection('/db/apps/controlevents-data/')/id($source)/root())

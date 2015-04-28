@@ -95,60 +95,78 @@ console.log($(objects).html());*/
 /*var htmlObject = document.createElement('div');
 htmlObject.innerHTML = s;*/
 
-var objects = '<div><div><div id="slur_c9096393-a14a-4050-a4b9-454e330afc33" operation="create" sourcepath="A_surface103"><slur curvedir="above" staff="" endid="" startid="" sameas="" xml:id="slur_c9096393-a14a-4050-a4b9-454e330afc33" xmlns="http://www.music-encoding.org/ns/mei"></slur></div></div></div>';
 
-   $.ajax({
+ /*var objects = $('<div></div>');
+        
+        for(var i=0; i<changedArray.length;i++) {
+            var object = $('<div></div>', {
+                id: changedArray[i].id,
+                operation: changedArray[i].operation,
+                sourcePath: changedArray[i].sourcePath
+            });
+            console.log("append");
+            console.log("objects");
+             console.log(changedArray[i]);
+             console.log(object);
+             console.log("+++++++++++++++++++");
+            $(object).append(changedArray[i].code);
+            $(objects).append($(object));
+            
+             console.log(objects);
+        }
+        
+        objects = $('<div></div>').append($(objects));*/
+
+var store = pmdCE.getApplication().getHairpinDataStore();
+var modRecords = store.getModifiedRecords();
+
+console.log("******DATA******");
+console.log(modRecords);
+
+var objects = $('<div></div>');
+
+for(var i = 0; i < modRecords.length ; i++){
+        var object = $('<div></div>', {
+                id: modRecords[i].data.id,
+                operation: modRecords[i].data.status,
+                sourcePath: pagesButton.getText(),
+                measureId: modRecords[i].data.measureId
+         });
+         var code = $('<hairpin></hairpin>', {
+               staff : modRecords[i].data.staff,
+                place: modRecords[i].data.place,
+                form: modRecords[i].data.form,
+                tstamp: modRecords[i].data.tstamp,
+                tstamp2: modRecords[i].data.tstamp2,
+                'xml:id': modRecords[i].data.id,
+                xmlns: "http://www.music-encoding.org/ns/mei",
+                sameas: ""
+         });
+        
+        $(object).append(code);
+        $(objects).append($(object));
+ }
+ 
+ objects = $('<div></div>').append($(objects));
+ console.log("******SAVE******");
+ console.log(objects);
+ console.log( $(objects).html());
+ 
+
+//var objects = '<div><div><div id="slur_c9096393-a14a-4050-a4b9-454e330afc33" operation="create" sourcepath="A_surface103"><slur curvedir="above" staff="" endid="" startid="" sameas="" xml:id="slur_c9096393-a14a-4050-a4b9-454e330afc33" xmlns="http://www.music-encoding.org/ns/mei"></slur></div></div></div>';
+
+  /* $.ajax({
             url:'resources/xql/saveMEI.xql',
             type:"POST",
             data: $(objects).html(),
             contentType:"application/xml; charset=utf-8",
             dataType:"xml",
             success: function(){
-                console.log('guiEditor.save success');
-               // guiEditor.changedArray = [];
+                console.log('save success');
             }
-        });
-
-
-
-/*Ext.Ajax.request({
-
-    method: "POST",
-    url: 'resources/xql/saveMEI.xql',
-    params:{ 
-        data: objectsOutput,
-        contentType:"application/xml; charset=utf-8",
-            dataType:"xml"
-            },
-       
-    success: function (response) {
-        console.log(objectsOutput);
-        console.log('success: ' + response.responseText);
-
-    },
-    failure: function (e, jqxhr) {
-        console.log('failure!');
-        console.log(e.status);
-    }
-});*/
-        
-        /* Ext.Ajax.request({
-            url: 'resources/xql/saveMEI.xql',
-            async: false,
-            method: 'POST',
-            params: {
-                data: $(objects).html()
-                },success: function(response){
-                console.log('guiEditor.save success');
-               // this.langFiles.add(lang, Ext.JSON.decode(response.responseText));
-            },
-            scope: this
         });*/
-        
-      
-        
-           
-        
+
+
        
     },
     

@@ -33,6 +33,7 @@ Ext.define('pmdCE.view.main.Main', {
     startMeasure: null,
     endMeasure: null,
     staffNr: null,
+    measureId: null,
    
     initComponent: function() {
   
@@ -60,6 +61,10 @@ this.callParent()
         this.staffNr = staffNr;
     },
     
+    setMeasureId: function(measureId){
+        this.measureId = measureId;
+    },
+    
     getStartMeasure: function(){
         return this.startMeasure;
     },
@@ -70,7 +75,13 @@ this.callParent()
     
      getStaffNr: function(){
         return this.staffNr;
+    },
+    
+     getMeasureId: function(){
+        return this.measureId;
     }
+    
+    
 
     });
     

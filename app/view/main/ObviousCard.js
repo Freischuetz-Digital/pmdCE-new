@@ -56,7 +56,6 @@ Ext.define('pmdCE.view.main.ObviousCard', {
             endTaktField,
             placeField,
             formField
-            //verovioImageStart
         ]
         },
         {
@@ -75,7 +74,6 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                 },        
                 items: [
                     tstampField
-                   // verovioImageStart
                 ]
             },
             {
@@ -88,7 +86,6 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                 },       
                 items: [
                     tstamp2Field
-                  //  verovioImageEnd
                 ]
             }
         ]
@@ -132,19 +129,25 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         function(){
         
         //TODO: generate Id
+        
+        var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
+
+        
         var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
 	 
         var hairpin = Ext.create('pmdCE.model.Hairpin', {      
-                    id: 'ELENA',
+                    id: hairId,
                     name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_obvious',
                     icon: 'resources/images/mix_volume.png',
                     obvious: true,
                     ambiguous: false,
+                    status: "create",
                     staff: staffField.getValue(),                   
                     tstamp: tstampField.getValue(),
                     tstamp2: tstamp2Field.getValue(),
                     place: placeField.getValue(),
                     form: formValue,
+                    measureId: Ext.getCmp('cemain').getMeasureId(),
                     tag: "",
                     leaf: true                
 	    });
@@ -153,6 +156,16 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 	    var root = store.getRootNode();
 	    var parent = root.appendChild(hairpin);
         parent.expand();
+        
+       /* console.log("*******NEW HAIRPIN********");
+        console.log(hairId);
+        console.log(store.getNewRecords( ) );
+        console.log(store.getModifiedRecords( ) );
+        console.log(store.getUpdatedRecords( )  );
+        console.log(store.getRemovedRecords( )  );*/
+       // console.log(root);
+       // console.log(Ext.getCmp('cegridpanel').getSelectionModel());
+       // console.log(Ext.getCmp('cegridpanel').getRootNode());
         
        // hairpin.save();
        // store.sync();
@@ -303,7 +316,6 @@ return ceTextField;
     valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
-    console.log(combo);
         Ext.getCmp('cemain').setStaffNr(combo.getValue());
     
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
