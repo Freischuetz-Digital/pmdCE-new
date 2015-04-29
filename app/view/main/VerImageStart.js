@@ -64,6 +64,9 @@ Ext.Ajax.request({
    
     $('#'+currId+'-body').html(svg);
     var xmlFile = jQuery.parseXML(text);
+    console.log("*******VERSTART********");
+    console.log(response);
+    console.log(xmlFile);
    
     var meiElements = xmlFile.getElementsByTagName('note');
      

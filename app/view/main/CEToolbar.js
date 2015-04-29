@@ -81,44 +81,9 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     },
  
     saveComponents: function(btn){ 
-        /*var app = pmdCE.getApplication();
-        var store = app.getHairpinDataStore();
-        store.sync();*/
-       // var objects = $('<div>​<div>​<div id=​"slur_b34720fd-a1ad-4db6-86d8-ELENA" operation=​"create" sourcepath=​"A_surface101">​<slur xmlns=​"http:​/​/​www.music-encoding.org/​ns/​mei" xml:id=​"slur_b34720fd-a1ad-4db6-86d8-ELENA" sameas startid endid staff curvedir=​"above">​</slur>​</div>​</div>​</div>​');
-        //var objectsOutput = $(objects).html();
-//var objects = $('<div>​<div><div id="slur_640cc069-e1e2-469d-8dd1-fc0b4ccef7f4" operation="create" sourcepath="A_surface102"><slur xmlns="http://www.music-encoding.org/ns/mei" xml:id="slur_640cc069-e1e2-469d-8dd1-fc0b4ccef7f4" sameas="" startid="" endid="" staff="" curvedir="above"></slur></div></div></div>');
-//var s = $('<div><div id="slur_640cc069-e1e2-469d-8dd1-fc0b4ccef333" operation="create" sourcepath="A_surface102"><slur xmlns="http://www.music-encoding.org/ns/mei" xml:id="slur_640cc069-e1e2-469d-8dd1-fc0b4ccef333" sameas="" startid="" endid="" staff="" curvedir="above"></slur></div></div>');
-/*console.log("objects");
-console.log($(objects).html());*/
-
-//var s = '<div id="myDiv"></div>';
-/*var htmlObject = document.createElement('div');
-htmlObject.innerHTML = s;*/
-
-
- /*var objects = $('<div></div>');
-        
-        for(var i=0; i<changedArray.length;i++) {
-            var object = $('<div></div>', {
-                id: changedArray[i].id,
-                operation: changedArray[i].operation,
-                sourcePath: changedArray[i].sourcePath
-            });
-            console.log("append");
-            console.log("objects");
-             console.log(changedArray[i]);
-             console.log(object);
-             console.log("+++++++++++++++++++");
-            $(object).append(changedArray[i].code);
-            $(objects).append($(object));
-            
-             console.log(objects);
-        }
-        
-        objects = $('<div></div>').append($(objects));*/
-
+ 
 var store = pmdCE.getApplication().getHairpinDataStore();
-var modRecords = store.getUpdatedRecords();
+var modRecords = store.getUpdatedRecords() && store.getRemovedRecords() ;
 
 console.log("******DATA******");
 console.log(modRecords);
@@ -215,12 +180,12 @@ for(var i = 0; i < modRecords.length ; i++){
     },
     
      createComponent: function(btn){      
-     // TODO: create anpassen
+    
         var win = new pmdCE.view.main.AddDialog();
         win.show();
     },
     
-     deleteComponent: function(btn){ 
+   /*  deleteComponent: function(btn){ 
     Ext.Msg.confirm("Deletion", "The element will be deleted", function(btnText){
             if(btnText === "yes"){     
             var target = Ext.getCmp('hairpinsitem').getSelectionModel().getSelection()[0];           
@@ -229,7 +194,7 @@ for(var i = 0; i < modRecords.length ; i++){
              // TODO: delete daten from HirpinsDataStore?
             }
         }, this);
-    },
+    },*/
    
     click: function() {
        if(sourceButton.getText() === 'Source'){

@@ -138,22 +138,28 @@ this.callParent()
     
        createComboBoxStaff: function(fieldName){
    
-   var staffNrCurrent = Ext.getCmp('cetoolbar').staffNr;
+    var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
+   var selectedPage = Ext.getCmp('pages').getText();
+   
+   var test = pageStaffMap[selectedPage];
   
-   var dataStaffNr = new Array(staffNrCurrent);  
-   for(var i = 0; i < staffNrCurrent ; i++){
-   dataStaffNr[i] = i+1;       
+   var dataMeasureNr = new Array(test.length); 
+   var value = test[0];
+   for(var i = 0; i < test.length ; i++){
+        dataMeasureNr[i] = value++;       
    }
   
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
-    store: dataStaffNr,
+    store: dataMeasureNr,
     queryMode: 'local',
     displayField: 'name',
     editable: false,
     valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
+        Ext.getCmp('cemain').setStaffNr(combo.getValue());
+    
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
      // modelTest.set('curvedir', combo.getValue());
     }

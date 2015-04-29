@@ -297,6 +297,8 @@ return ceTextField;
     valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
+        Ext.getCmp('cemain').setStaffNr(combo.getValue());
+    
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
      // modelTest.set('curvedir', combo.getValue());
     }
@@ -325,9 +327,15 @@ return ceTextField;
     editable: false,
     valueField: 'abbr',
     listeners: {
-    select: function(combo, record, index) {
-    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-     // modelTest.set('curvedir', combo.getValue());
+       select: function(combo, record, index) {
+    if(fieldName.indexOf('Start') > -1){
+        Ext.getCmp('cemain').setStartMeasure(combo.getValue());
+        
+    }
+    if(fieldName.indexOf('End') > -1){
+        Ext.getCmp('cemain').setEndMeasure(combo.getValue());
+        
+    }
     }
   }
   });

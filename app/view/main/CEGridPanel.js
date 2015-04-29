@@ -36,14 +36,14 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
   
         selectionchange: function(selected, eOpts){
         
-        if(eOpts[0].data.depth === 1){
+        if(typeof eOpts[0] !== 'undefined' && eOpts[0].data.depth === 1){
         // TODO: handle menus
             Ext.getCmp('deleteButton').setDisabled(false);
             Ext.getCmp('addelementbutton').setDisabled(false);
             Ext.getCmp('changetobutton').setDisabled(false);
            // editColumn.setDisabled(true);
         }
-        else if(eOpts[0].data.depth === 2){
+        else if(typeof eOpts[0] !== 'undefined'&& eOpts[0].data.depth === 2){
         // TODO handle delete
         // TODO: handle menus
             Ext.getCmp('deleteButton').setDisabled(false);

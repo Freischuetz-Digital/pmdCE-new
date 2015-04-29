@@ -162,14 +162,24 @@ deleteElementButton: function(){
                    // icon: "resources/images/drop-add.gif",
                     margin: '0 0 10 0', 
                    // glyph: null,
-                    text: 'Delete'
+                    text: 'Delete',
                     //scale: 'medium'
-                   // width: 120   
-                  //  handler: ceHandler,
+                   // width: 120
+                   listeners: {
+                   
+                   click: function() {
+                   
+                   var win = new pmdCE.view.main.DeleteDialog();
+                            win.show();
+                   }
+                   }
+                  
           });
 
 return ceButton;
 },
+
+
    setRadioGroup: function(radioGroup){
         this.radioGroup = radioGroup;       
     },
@@ -180,7 +190,30 @@ return ceButton;
     
     setNew: function(){
         this.isElemenGroupNew = true;
-    }
+    },
+    
+    deleteElement: function(){    
+     
+
+Ext.Msg.confirm("Deletion", "The element will be deleted", function(btnText){
+            if(btnText === "yes"){
+            
+            rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+            console.log(rootNode);
+            selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+              for(var i = 0; i < rootNode.childNodes.length ; i++){
+	       if(rootNode.childNodes[i].data.id === selection.data.id){
+	               selectedNode = rootNode.childNodes[i];	
+	      
+	      break;
+	  }	      
+	  }    
+            
+            
+            rootNode.remove(selection);
+            }
+        }, this);
+}
 
 
 });
