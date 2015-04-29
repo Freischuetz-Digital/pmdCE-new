@@ -200,7 +200,7 @@ for(var i = 0; i < modRecords.length ; i++){
  console.log( $(objects).html());
  
 
-//var objects = '<div><div><div id="hair_c9096393-a14a-4050-a4b9-454e330afELE" operation="create" sourcepath="A_surface105"><slur place="above" staff="5" startid="#A_mov6_measure73_s5l1_e1" endid="#A_mov6_measure73_s5l1_e8" sameas="" xml:id="hair_c9096393-a14a-4050-a4b9-454e330afELE" xmlns="http://www.music-encoding.org/ns/mei"></slur></div></div></div>';
+//var objects1 = '<div><div><div id="hair_c9096393-a14a-4050-a4b9-454e330afELE" operation="create" sourcepath="A_surface105" measureid="A_mov6_measure73"><hairpin place="above" staff="5" startid="#A_mov6_measure73" endid="#A_mov6_measure73_s5l1_e8" sameas="" xml:id="hair_c9096393-a14a-4050-a4b9-454e330afELE" xmlns="http://www.music-encoding.org/ns/mei"></hairpin></div></div></div>';
 
    $.ajax({
             url:'resources/xql/saveMEI.xql',

@@ -6,6 +6,14 @@ import module namespace functx="http://www.functx.com";
 
 declare option exist:serialize "method=xml media-type=text/plain omit-xml-declaration=yes";
 
+declare function local:findMeasure($doc, $startIds) {
+    let $measures := for $startId in $startIds
+                        return
+                            $doc/id(substring-after($startId, '#'))/self::mei:measure
+    return $measures[1]
+  
+};
+
 let $xml := request:get-data()
 let $user := xmldb:get-current-user()
 let $change :=
@@ -13,10 +21,13 @@ let $change :=
     let $source := $x/string(@sourcepath)
     let $id := $x/string(@id)
     let $operation := $x/string(@operation)
-    let $measureId := $x/string(@measureId) 
+    let $test := $x/string(@measureid)
+   (: let $measureID := for $test in $xml/div/div/* return $test/string(@measureId):)
     let $content := $x/*
+     let $startIDs := for $slur in $xml/div/div/*/descendant-or-self::mei:hairpin[@startid] return $slur/string(@startid)
     let $doc := if(ends-with($source,'.xml'))then(doc('/db/apps/controlevents-data/' || $source))else(collection('/db/apps/controlevents-data/')/id($source)/root())
-     let $measure := $doc/id($measureId)/mei:measure
+    (:let $measure := local:findMeasure($doc, $measureID[1]):)
+   let $measure := $doc/id($test)/self::mei:measure
     let $change := 
         switch($operation)
             case 'create' return
@@ -36,7 +47,7 @@ let $change :=
                                 <persName>{$user}</persName>
                             </respStmt>
                             <changeDesc>
-                                <p>pmdCE on {$source}: {string-join($change, ', ')}</p>
+                                <p>pmdCE on {$test}: {string-join($change, ', ')}</p>
                             </changeDesc>
                             <date isodate="{substring(string(current-dateTime()),1,19)}"/>
                         </change>

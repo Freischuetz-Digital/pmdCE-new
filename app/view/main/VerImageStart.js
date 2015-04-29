@@ -37,8 +37,8 @@ var measurePath = movement+"_measure"+measureId+"_s"+staffNr;
 Ext.getCmp('cemain').setMeasureId(movement+"_measure"+measureId);
 
 Ext.Ajax.request({
-    url: "resources/verovio/testEnd.mei",
-    //url: "resources/xql/getExtendedStaff.xql",
+    //url: "resources/verovio/testEnd.mei",
+    url: "resources/xql/getExtendedStaff.xql",
     method: 'GET',
     params:{ 
        path: pageNr, 
