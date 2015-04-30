@@ -83,7 +83,8 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     saveComponents: function(btn){ 
  
 var store = pmdCE.getApplication().getHairpinDataStore();
-var modRecords = store.getUpdatedRecords() && store.getRemovedRecords() ;
+var modRecords = store.getUpdatedRecords() 
+//modRecords.add(store.getRemovedRecords()) ;
 
 console.log("******DATA******");
 console.log(modRecords);
@@ -174,7 +175,7 @@ for(var i = 0; i < modRecords.length ; i++){
             contentType:"application/xml; charset=utf-8",
             dataType:"xml",
             success: function(){
-                console.log('save success');
+                alert('save success');
             }
         });
     },

@@ -1,7 +1,7 @@
 {
     "children": [
         {
-            "name": "cres_1_below_obvious",
+            "name": "cres_s1_m55_below",
             "id": "12345678",
             "icon": 'resources/images/mix_volume.png',
              "obvious": true,
@@ -16,7 +16,7 @@
         }, 
         {
             
-            "name": "dim_1_below_obvious",
+            "name": "dim_s1_m63_below",
             "id": "elena",
             "icon": 'resources/images/mix_volume.png',
             "obvious": true,
@@ -28,7 +28,55 @@
                     "form": "dim",
                      "tag": "",
                     "leaf": true
+        },
+         {
+            
+            "name": "dim_s8_m62_between",
+            "id": "hairpin_d639e5b4-a5a6-414b-b163-e266cfd28549",
+            "icon": 'resources/images/details-xml.png',
+            "obvious": false,
+            "ambiguous": true,
+            
+             "children": [
+        {
+                "name": "orig",
+            "icon": 'resources/images/mix_volume.png',
+             "leaf": true,
+                    "staff": "8",                   
+                    "tstamp": "2",
+                    "tstamp2": "m+5",
+                    "place": "below",
+                    "form": "dim",
+                    "tag": "orig"
+        }, 
+        
+        {
+            "name": "reg",
+            "icon": 'resources/images/mix_volume.png',
+             "leaf": true,
+                    "staff": "8",                   
+                    "tstamp": "2",
+                    "tstamp2": "m+5",
+                    "place": "below",
+                    "form": "dim",
+                    "tag": "reg"
+        }, 
+        {
+             "name": "reg",
+            "icon": 'resources/images/mix_volume.png',
+             "leaf": true,
+                    "staff": "8",                   
+                    "tstamp": "2",
+                    "tstamp2": "m+5",
+                    "place": "below",
+                    "form": "dim",
+                    "tag": "reg"
+        } 
+        
+        ]
+         
         }
     ]
    }
+   
  

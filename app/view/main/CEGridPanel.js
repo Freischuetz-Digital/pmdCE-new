@@ -56,23 +56,24 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
      
             this.columns = [{
                 xtype: 'treecolumn', //this is so we know which column will show the tree
-                text: 'Name',
+                text: 'Name/Orig/Reg',
                 flex: 3,
                 sortable: true,
                 dataIndex: 'name'
                 
             }, 
-            {
-                text: 'Orig/Reg',
-                flex: 1,
-                sortable: true,
-                dataIndex: 'tag'
-            },
+            
             {
                 text: 'Staff',
                 flex: 1,
                 sortable: true,
                 dataIndex: 'staff'
+            },
+            {
+                text: 'Measure',
+                flex: 1,
+                sortable: true,
+                dataIndex: 'measurenr'
             },
             {
                 text: 'Tstamp',

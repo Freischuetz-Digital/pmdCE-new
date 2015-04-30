@@ -10,12 +10,31 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
     formField: null,  
     tstampField: null,
     tstampField2: null,
+    selectedNode: null,
     
     layout: 'hbox',
   
     initComponent: function() {
     
-    staffField = this.createComboBoxStaff('Staff');  
+     selectedNode = null;
+      selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+	  
+	  for(var i = 0; i < rootNode.childNodes.length ; i++){
+	  if(rootNode.childNodes[i].data.id === selection.data.id){
+	      selectedNode = rootNode.childNodes[i];	
+	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+	      Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
+	      Ext.getCmp('cemain').setStaffNr(selectedNode.data.staff);
+	      break;
+	  }	      
+	  }    
+    
+    
+    
+    staffField = this.createComboBoxStaff('Staff');
+    staffField.setValue(selectedNode.data.staff);
+     staffField.setDisabled(true);
     placeField = this.createComboBox('Place');
     formField = this.createRadioGroup();
      tstampField = this.createTextField('tstampField', 'Tstamp');
@@ -89,17 +108,7 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
         handler: 
         function(){
         
-       var selectedNode = null;
-        selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
-	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-	  
-	  for(var i = 0; i < rootNode.childNodes.length ; i++){
-	  if(rootNode.childNodes[i].data.id === selection.data.id){
-	      selectedNode = rootNode.childNodes[i];	
-	      
-	      break;
-	  }	      
-	  }    
+      
   
         var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
 	 
@@ -158,7 +167,7 @@ this.callParent()
     valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
-        Ext.getCmp('cemain').setStaffNr(combo.getValue());
+        //Ext.getCmp('cemain').setStaffNr(combo.getValue());
     
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
      // modelTest.set('curvedir', combo.getValue());

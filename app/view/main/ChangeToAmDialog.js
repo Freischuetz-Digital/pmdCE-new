@@ -58,12 +58,16 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
 	      vordPlace = selectedNode.data.place;
 	      vordTStamp = selectedNode.data.tstamp;
 	      vordTStamp2 = selectedNode.data.tstamp2;
+	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+	      Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
+	      Ext.getCmp('cemain').setStaffNr(vordStaff);
 	      break;
 	  }	      
 	  }    
     
     staffFieldOrig = this.createComboBoxStaff('Staff'); 
     staffFieldOrig.setValue(vordStaff);
+    staffFieldOrig.setDisabled(true);
     placeFieldOrig = this.createComboBox('Place');
     placeFieldOrig.setValue(vordPlace);
     formFieldOrig = this.createRadioGroup();
@@ -75,6 +79,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     }
     staffFieldReg1 = this.createComboBoxStaff('Staff'); 
     staffFieldReg1.setValue(vordStaff);
+     staffFieldReg1.setDisabled(true);
     placeFieldReg1 = this.createComboBox('Place');
     placeFieldReg1.setValue(vordPlace);
     formFieldReg1 = this.createRadioGroup();

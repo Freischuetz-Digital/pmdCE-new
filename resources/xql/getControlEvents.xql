@@ -33,9 +33,11 @@ declare variable $snippet := <controlEvents>{
 declare variable $surface := $doc//id($path);
 
 declare variable $slurs := $snippet//(mei:slur[not(./parent::mei:*/parent::mei:choice)]|mei:choice[.//mei:slur]);
-declare variable $hairpins := $snippet//mei:hairpin;
+declare variable $hairpins := $snippet//(mei:hairpin[not(./parent::mei:*/parent::mei:choice)]|mei:choice[.//mei:hairpin]);
 declare variable $dynams := $snippet//mei:dynam;
 declare variable $dirs := $snippet//mei:dir;
+declare variable $choices := $snippet//(mei:choice[.//mei:hairpin]);
+
 
 declare function local:jsonifySlurs($slurs) {
 
@@ -64,6 +66,68 @@ declare function local:jsonifyDynams($dynams) {
     
 };
 
+declare function local:jsonifyElements($elements) {
+    let $strings := for $x in $elements
+                        (:let $testelem := $x//mei:hairpin:)
+                        let $name1 := local-name($x)
+                        let $place := $x//@place
+                        let $staffText := $x//@staff
+                    
+                        let $tstamp := $x//@tstamp
+                        let $tstamp2 := $x//@tstamp2
+                    
+                        let $form := $x//@form
+    
+                   
+                    return 
+                        concat('{"name":"',$name1,'",',                         
+                             '"icon":"resources/images/mix_volume.png",',
+                            '"tstamp":"',$tstamp,'",',
+                            '"tstamp2":"',$tstamp2,'",',
+                            '"place":"',$place,'",',
+                            '"form":"',$form,'",',
+                            '"tag":"",', 
+                            '"staff":"',$staffText,'",',
+                             '"leaf":true',
+                        '}')
+    
+    return 
+        string-join($strings,',')
+    
+};
+
+declare function local:jsonifyChoices($choices) {
+    let $strings := for $elem in $choices
+                    
+                    let $id := if($elem//@xml:id) then($elem//@xml:id[1]) else(generate-id($elem))
+                    let $measureID := $elem/ancestor::mei:measure/@xml:id
+                    let $measureN := $elem/ancestor::mei:measure/@n
+                    
+                    let $obvious := 'false'                                        
+                    let $ambiguous := 'true'
+                    
+                    let $name := local-name($elem)
+                    
+                    let $testarray := local:jsonifyElements($elem/*)
+                 
+                    return 
+                        concat('{"id":"',$id,'",',
+                            '"name":"',$name,'",',
+                            '"obvious":"',$obvious,'",',
+                            '"ambiguous":"',$ambiguous,'",',                           
+                             '"icon":"resources/images/details-xml.png",',
+                            '"measureid":"',$measureID,'",',
+                            '"measurenr":"',$measureN,'",',
+                            '"children":[',  
+                                $testarray,                          
+                           ']',
+                       
+                        '}')
+    
+    return 
+        string-join($strings,',')
+};
+
 
 declare function local:jsonifyHairpins($hairpins) {
    let $strings := for $elem in $hairpins
@@ -72,21 +136,11 @@ declare function local:jsonifyHairpins($hairpins) {
                     let $measureID := $elem/ancestor::mei:measure/@xml:id
                     let $measureN := $elem/ancestor::mei:measure/@n
                     
-                    let $obvious := if(local-name($elem) eq 'hairpin')
-                                      then('true')
-                                      else('false')
-                                      
-                    let $ambiguous := if(local-name($elem) ne 'hairpin')
-                                      then('true')
-                                      else('false')
+                    let $obvious := 'true'
+                                         
+                    let $ambiguous := 'false'
                     
-                    (:let $placement := if(local-name($elem) eq 'hairpin')
-                                      then('obvious')
-                                      else(
-                                         if(count($elem//mei:reg) = 1)
-                                         then('ambiguous')
-                                         else('multiResolve')
-                                      ):)
+                  
             
                     let $place := $elem/string(@place)
                     let $staffText := $elem/@staff
@@ -95,14 +149,17 @@ declare function local:jsonifyHairpins($hairpins) {
                     let $tstamp2 := $elem/(@tstamp2)
                     
                      let $form := $elem/@form
-                 
+                     
+                      let $name := concat($form, '_s', $staffText, '_m', $measureN, '_', $place)
+                      
                     return 
                         concat('{"id":"',$id,'",',
-                            '"name":"hairpin",', 
+                            '"name":"',$name,'",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
                              '"icon":"resources/images/mix_volume.png",',
-                            '"measureId":"',$measureID,'",',
+                            '"measureid":"',$measureID,'",',
+                            '"measurenr":"',$measureN,'",',
                            (: '"children":[{',  
                             '"icon":"resources/images/details-xml.png",',:)
                             '"tstamp":"',$tstamp,'",',
@@ -111,6 +168,9 @@ declare function local:jsonifyHairpins($hairpins) {
                             '"form":"',$form,'",',
                             '"tag":"",', 
                             '"staff":"',$staffText,'",',
+                            (:'"test":"',$test,'",',
+                           
+                            '"choces":[',local:jsonifyChoices($choices, $test),'],',:)
                              '"leaf":true',
                             
                             
@@ -135,12 +195,25 @@ declare function local:jsonifyDirs($dirs) {
     
 };
 
+declare function local:jsonifyHairChoice($hairpins, $choices) {
+        let $test4 := local:jsonifyHairpins($hairpins)
+        let $test3 :=  local:jsonifyChoices($choices)
+
+    return if($test4 != '')
+    then( concat($test4, ',', $test3))
+    else(concat($test4, $test3))
+   
+    
+};
+
+
+
 (:concat('["',string-join($sources/@xml:id,'","'),'"]'):)
   (
     '{"slurs":[',
         local:jsonifySlurs($slurs),
     '],"children":[',
-        local:jsonifyHairpins($hairpins),
+        local:jsonifyHairChoice($hairpins, $choices), 
     '],"dynams":[',
         local:jsonifyDynams($dynams),
     '],"dirs":[',
