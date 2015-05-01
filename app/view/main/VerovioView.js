@@ -56,7 +56,7 @@ createCEButton: function(){
                    // icon: "resources/images/drop-add.gif",
                    // glyph: null,
                    id: 'addelementbutton',
-                    text: 'Add element',
+                    text: 'Add',
                    // scale: 'medium',
                    // width: 120,
                     margin: '0 0 10 0', 
@@ -64,7 +64,7 @@ createCEButton: function(){
                   //  handler: ceHandler,
                      menu: [Ext.create('Ext.menu.Item', {
                         text: "Orig",
-                        icon: 'resources/images/details-xml.png'
+                        icon: 'resources/images/mix_volume.png'
                         /*handler: function() {
                            var win = new pmdCE.view.main.AddObviousElDialog();
                             win.show();
@@ -73,7 +73,7 @@ createCEButton: function(){
                      
                      Ext.create('Ext.menu.Item', {
                 text: "Reg",
-                icon: 'resources/images/details-xml.png'
+                icon: 'resources/images/mix_volume.png'
                /* handler: function() {
                    var win = new pmdCE.view.main.AddAmbiguousElDialog();
                     win.show();
@@ -94,11 +94,13 @@ createChangeToButton: function(){
                     text: 'Change to ...',
                    // scale: 'medium',
                    // width: 120,
-                    margin: '0 0 10 0', 
+                    margin: '0 0 10 0',
+                    
                   //  flex: 1,         
                   //  handler: ceHandler,
                      menu: [Ext.create('Ext.menu.Item', {
-                        text: "Ambiguous",
+                        text: "Choice",
+                        icon: 'resources/images/details-xml.png',
                        // icon: 'resources/images/details-xml.png'
                         handler: function() {
                             var win = new pmdCE.view.main.ChangeToAmDialog();
@@ -107,7 +109,8 @@ createChangeToButton: function(){
                      }),
                      
                      Ext.create('Ext.menu.Item', {
-                text: "Obvious",
+                text: "Hairpin",
+                icon: 'resources/images/mix_volume.png',
                // icon: 'resources/images/details-xml.png'
                 handler: function() {
                     var win = new pmdCE.view.main.ChangeToObDialog();
@@ -126,15 +129,15 @@ createHairpinButton: function(){
                     id: "createhairpinbutton",
                    // icon: "resources/images/drop-add.gif",
                    // glyph: null,
-                    text: 'Create hairpin',
+                    text: 'Create element',
                      margin: '0 0 10 0', 
                    // scale: 'medium',
                    //   width: 120, 
                   // bodyPadding: 10,
                   //  handler: ceHandler,
                      menu: [Ext.create('Ext.menu.Item', {
-                        text: "Ambiguous",
-                        icon: 'resources/images/mix_volume.png',
+                        text: "Choice",
+                        icon: 'resources/images/details-xml.png',
                         handler: function() {
                            var win = new pmdCE.view.main.AddAmbiguousElDialog();
                             win.show();
@@ -142,7 +145,7 @@ createHairpinButton: function(){
                      }),
                      
                      Ext.create('Ext.menu.Item', {
-                text: "Obvious",
+                text: "Hairpin",
                 icon: 'resources/images/mix_volume.png',
                 handler: function() {
                     var win = new pmdCE.view.main.AddObviousElDialog();

@@ -106,7 +106,7 @@ declare function local:jsonifyChoices($choices) {
                     let $obvious := 'false'                                        
                     let $ambiguous := 'true'
                     
-                    let $name := local-name($elem)
+                    let $name := concat('choice_m', $measureN)
                     
                     let $testarray := local:jsonifyElements($elem/*)
                  

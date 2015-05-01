@@ -98,8 +98,8 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
                 dataIndex: 'form',
                 sortable: true
             },
-             ambiguousColumn,
-             obviousColumn,
+           //  ambiguousColumn,
+          //   obviousColumn,
              editColumn
            
             ]

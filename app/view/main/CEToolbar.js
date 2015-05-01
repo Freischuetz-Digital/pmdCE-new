@@ -174,8 +174,9 @@ for(var i = 0; i < modRecords.length ; i++){
             data: $(objects).html(),
             contentType:"application/xml; charset=utf-8",
             dataType:"xml",
-            success: function(){
-                alert('save success');
+            success: function(result){
+                console.log(result);
+                alert('save success: '+ result);
             }
         });
     },
