@@ -117,7 +117,7 @@ for(var i = 0; i < modRecords.length ; i++){
                 id: modRecords[i].data.id,
                 operation: modRecords[i].data.operation,
                 sourcePath: pagesButton.getText(),
-                measureId: modRecords[i].data.measureId
+                measureId: modRecords[i].data.measureid
             }); 
          
          

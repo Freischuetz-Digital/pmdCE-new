@@ -254,7 +254,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
            selectedNode.data.tstamp2 = null;
             selectedNode.data.form = null;
              selectedNode.data.place = null;
-             selectedNode.data.operation =  'update',
+             selectedNode.data.operation =  'change',
              
 	     // selectedNode.removeChild(nodeToDelete);
 	         selectedNode.appendChild({

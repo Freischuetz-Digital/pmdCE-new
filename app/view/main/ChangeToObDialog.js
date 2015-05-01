@@ -120,7 +120,7 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
            selectedNode.data.tstamp2 = tstamp2Field.getValue();
             selectedNode.data.form = formValue;
              selectedNode.data.place = placeField.getValue();
-             selectedNode.data.operation =  'update';
+             selectedNode.data.operation =  'change';
              selectedNode.data.leaf = true;
              selectedNode.data.tag = "";
              

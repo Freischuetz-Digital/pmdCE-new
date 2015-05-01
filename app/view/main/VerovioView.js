@@ -41,8 +41,8 @@ Ext.define('pmdCE.view.main.VerovioView', {
   
 this.items = [
 createHairpinButton,
-addElementButton,
 changeToButton,
+addElementButton,
 deleteElementButton
         ],
         this.callParent()
