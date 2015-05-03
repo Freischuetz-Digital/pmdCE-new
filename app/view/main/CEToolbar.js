@@ -97,7 +97,7 @@ for(var i = 0; i < modRecords.length ; i++){
                 id: modRecords[i].data.id,
                 operation: modRecords[i].data.operation,
                 sourcePath: pagesButton.getText(),
-                measureId: modRecords[i].data.measureId
+                measureid: modRecords[i].data.measureid
          });        
             var code = $('<hairpin></hairpin>', {
                staff : modRecords[i].data.staff,
@@ -117,7 +117,7 @@ for(var i = 0; i < modRecords.length ; i++){
                 id: modRecords[i].data.id,
                 operation: modRecords[i].data.operation,
                 sourcePath: pagesButton.getText(),
-                measureId: modRecords[i].data.measureid
+                measureid: modRecords[i].data.measureid
             }); 
          
          

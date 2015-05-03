@@ -142,7 +142,8 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
 	               id: hairId,
 	               name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_ambigous',
                     icon: 'resources/images/mix_volume.png',
-                    measureId: Ext.getCmp('cemain').getMeasureId(),
+                    measureid: Ext.getCmp('cemain').getMeasureId(),
+                    measurenr: startTaktField.getValue(), 
                     operation: 'create',
                     obvious: false,
                     ambiguous: true,
@@ -154,7 +155,7 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
                     tstamp2: tstamp2FieldOrig.getValue(),
                     place: placeField.getValue(),
                     form: formValue,
-                    tag: "orig",
+                    name: "orig",
                     leaf: true
                 },
                 {
@@ -164,7 +165,7 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
                     tstamp2: tstamp2FieldReg1.getValue(),
                     place: placeField.getValue(),
                     form: formValue,
-                    tag: "reg",
+                    name: "reg",
                     leaf: true
                 },
                 {
@@ -174,7 +175,7 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
                     tstamp2: tstamp2FieldReg2.getValue(),
                     place: placeField.getValue(),
                     form: formValue,
-                    tag: "reg",
+                    name: "reg",
                     leaf: true
                 }
                 ] 

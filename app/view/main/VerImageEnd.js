@@ -28,10 +28,10 @@ app = pmdCE.getApplication();
 renderer = app.getRenderer();
 
 var pageNr = Ext.getCmp('pages').getText();
-var measureId = Ext.getCmp('cemain').getEndMeasure();
+var measureid = Ext.getCmp('cemain').getEndMeasure();
 var staffNr = Ext.getCmp('cemain').getStaffNr();
 var movement = Ext.getCmp('movement').getText();
-var measurePath = movement+"_measure"+measureId+"_s"+staffNr;
+var measurePath = movement+"_measure"+measureid+"_s"+staffNr;
 
 Ext.Ajax.request({
 //url: "resources/verovio/testEnd.mei",

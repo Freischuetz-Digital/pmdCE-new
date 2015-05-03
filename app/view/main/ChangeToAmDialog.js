@@ -246,7 +246,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
       
 	  if(selectedNode !== null){
 	 
-	  selectedNode.data.name = vordForm+'_'+vordStaff+'_'+vordPlace+'_ambiguous';
+	  selectedNode.data.name = 'choice_m'+selectedNode.data.measurenr;
 	  selectedNode.data.obvious = false;
          selectedNode.data.ambiguous = true;
          selectedNode.data.staff = null;
@@ -255,36 +255,37 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
             selectedNode.data.form = null;
              selectedNode.data.place = null;
              selectedNode.data.operation =  'change',
+             selectedNode.data.icon = 'resources/images/details-xml.png',
              
 	     // selectedNode.removeChild(nodeToDelete);
 	         selectedNode.appendChild({
-                    icon: 'resources/images/details-xml.png',
+                    icon: 'resources/images/mix_volume.png',
                     staff: staffFieldOrig.getValue(),                   
                     tstamp: tstampFieldOrig.getValue(),
                     tstamp2: tstamp2FieldOrig.getValue(),
                     place: placeFieldOrig.getValue(),
                     form: formValueOrig,
-                    tag: "orig",
+                    name: "orig",
                     leaf: true
         });	
         selectedNode.appendChild({
-                    icon: 'resources/images/details-xml.png',
+                    icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg1.getValue(),                   
                     tstamp: tstampFieldReg1.getValue(),
                     tstamp2: tstamp2FieldReg1.getValue(),
                     place: placeFieldReg1.getValue(),
                     form: formValueReg1,
-                    tag: "reg",
+                    name: "reg",
                     leaf: true
         });
         selectedNode.appendChild({
-                    icon: 'resources/images/details-xml.png',
+                    icon: 'resources/images/mix_volume.png',
                     staff: vordStaff,                   
                     tstamp: vordTStamp,
                     tstamp2: vordTStamp2,
                     place: vordPlace,
                     form: vordForm,
-                    tag: "reg",
+                    name: "reg",
                     leaf: true
         });	
 	  }

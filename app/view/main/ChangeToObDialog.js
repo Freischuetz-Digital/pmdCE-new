@@ -16,7 +16,6 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
   
     initComponent: function() {
     
-     selectedNode = null;
       selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	  
@@ -112,10 +111,10 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
   
         var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
 	 
-        selectedNode.data.name = formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_obvious';
+        selectedNode.data.name = formValue+'_s'+staffField.getValue()+'_m'+placeField.getValue();
 	  selectedNode.data.obvious = true;
          selectedNode.data.ambiguous = false;
-         selectedNode.data.staff = staffField.getValue();
+        // selectedNode.data.staff = staffField.getValue();
           selectedNode.data.tstamp = tstampField.getValue();
            selectedNode.data.tstamp2 = tstamp2Field.getValue();
             selectedNode.data.form = formValue;

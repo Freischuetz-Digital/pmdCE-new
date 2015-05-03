@@ -144,7 +144,8 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                     tstamp2: tstamp2Field.getValue(),
                     place: placeField.getValue(),
                     form: formValue,
-                    measureId: Ext.getCmp('cemain').getMeasureId(),
+                    measureid: Ext.getCmp('cemain').getMeasureId(),
+                    measurenr: startTaktField.getValue(), 
                     tag: "",
                     leaf: true                
 	    });
@@ -258,6 +259,7 @@ return ceTextField;
     queryMode: 'local',
     displayField: 'name',
     editable: false,
+    icon: 'resources/images/mix_volume.png',
     valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
