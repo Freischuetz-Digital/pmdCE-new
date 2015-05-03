@@ -18,7 +18,9 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 
     defaultListenerScope: true,
     
-    staffField: null,  
+    staffField: null,
+    satffFieldBetween: null,
+    staffFieldCopy: null,
     startTaktField: null,
     endTaktField: null,
     placeField: null,
@@ -37,9 +39,13 @@ Ext.define('pmdCE.view.main.ObviousCard', {
          
         // me = this;
          
-        staffField= this.createComboBoxStaff('Staff');  
-        startTaktField= this.createComboBoxMeasureNr('Start measure');
-        endTaktField= this.createComboBoxMeasureNr('End measure');
+        staffField = this.createComboBoxStaff('Staff'); 
+        satffFieldBetween = this.createComboBoxStaff('Second staff'); 
+        staffFieldCopy = this.createTextField('staffFieldCopy', 'staffFieldCopy', 'Staff');
+        staffFieldCopy.setDisabled(true);
+        
+        startTaktField = this.createComboBoxMeasureNr('Start measure');
+        endTaktField = this.createComboBoxMeasureNr('End measure');
         placeField = this.createComboBox('Place');
         formField = this.createRadioGroup();
         
@@ -50,12 +56,12 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         {
             id: 'card-0',
              bodyPadding: 5,
+             text: 'Fields for verovio load',
             items: [
             staffField,
             startTaktField,
-            endTaktField,
-            placeField,
-            formField
+            endTaktField
+           
         ]
         },
         {
@@ -64,6 +70,21 @@ Ext.define('pmdCE.view.main.ObviousCard', {
             bodyPadding: 5,
            // margin: '0 10 10 0',
            items: [
+            {
+            xtype: 'fieldset',
+            title: 'Values',
+            id: 'values',
+            defaultType: 'textfield',        
+                defaults: {
+                    anchor: '100%'
+                },        
+                items: [
+                staffFieldCopy,
+                satffFieldBetween,
+                 placeField,
+                formField
+                ]
+            },
             {
             xtype: 'fieldset',
             title: 'Start time',
@@ -85,6 +106,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                     anchor: '100%'
                 },       
                 items: [
+                
                     tstamp2Field
                 ]
             }
@@ -131,15 +153,17 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
        
         var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
+        
+        var staffValue = staffField.getValue() + (satffFieldBetween.getValue() !== null ? " "+satffFieldBetween.getValue() : '')
 	 
         var hairpin = Ext.create('pmdCE.model.Hairpin', {      
                     id: hairId,
-                    name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_obvious',
+                    name: formValue+'_s'+staffField.getValue()+'_m'+staffField.getValue()+'_'+placeField.getValue(),
                     icon: 'resources/images/mix_volume.png',
                     obvious: true,
                     ambiguous: false,
                     operation: 'create',
-                    staff: staffField.getValue(),                   
+                    staff: staffValue,                   
                     tstamp: tstampField.getValue(),
                     tstamp2: tstamp2Field.getValue(),
                     place: placeField.getValue(),
@@ -172,13 +196,25 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 
     showNext: function () {
         this.doCardNavigation(1);
-            verovioImageStart = new pmdCE.view.main.VerovioImageStart();
-         Ext.getCmp('starttime').add(verovioImageStart);
+        if( typeof Ext.getCmp('cemain').getVerStartId() != 'undefined'){
+            Ext.getCmp('starttime').removeAll(true);
+        }
+        if(typeof Ext.getCmp('cemain').getVerEndId() != 'undefined'){
+             Ext.getCmp('endtime').removeAll(true);
+        }
+                                   
+             tstampField = this.createTextField('tstampFieldObv', 'tstampField', 'Tstamp');
+            tstamp2Field = this.createTextField('tstampField2Obv', 'tstampField2', 'Tstamp2');
+            Ext.getCmp('starttime').add(tstampField);
+            Ext.getCmp('endtime').add(tstamp2Field);
+            
+             verovioImageStart = new pmdCE.view.main.VerovioImageStart();
+            Ext.getCmp('starttime').add(verovioImageStart);
          
-          verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
-         Ext.getCmp('endtime').add(verovioImageEnd);
-        
-        
+             verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
+             Ext.getCmp('endtime').add(verovioImageEnd);
+                   
+             staffFieldCopy.setValue(staffField.getValue());
     },
 
     showPrevious: function (btn) {
@@ -263,8 +299,10 @@ return ceTextField;
     valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
-        Ext.getCmp('cemain').setStaffNr(combo.getValue());
-    
+     if(fieldName.indexOf('Second') === -1){
+         Ext.getCmp('cemain').setStaffNr(combo.getValue());
+     }
+       
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
      // modelTest.set('curvedir', combo.getValue());
     }

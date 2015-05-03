@@ -24,6 +24,7 @@ initComponent: function() {
 
 me = this;
 currId = this.id;
+Ext.getCmp('cemain').setVerStartId(currId);
 
 app = pmdCE.getApplication();
 renderer = app.getRenderer();

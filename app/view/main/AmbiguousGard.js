@@ -21,6 +21,8 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
      autoScroll: true,
     
     staffField: null,  
+    satffFieldBetween: null,
+    staffFieldCopy: null,
     startTaktField: null,
     endTaktField: null,
     placeField: null,
@@ -47,6 +49,9 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
          me = this;
          
          staffField= this.createComboBoxStaff('Staff');  
+           satffFieldBetween = this.createComboBoxStaff('Second staff'); 
+        staffFieldCopy = this.createTextField('staffFieldCopy', 'staffFieldCopy', 'Staff');
+        staffFieldCopy.setDisabled(true);
         startTaktField= this.createComboBoxMeasureNr('Start measure');
         endTaktField= this.createComboBoxMeasureNr('End measure');
         placeField = this.createComboBox('Place');
@@ -67,15 +72,30 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
             items: [
             staffField,
             startTaktField,
-            endTaktField,
-            placeField,
-            formField
+            endTaktField
+            
         ]
         },
         {
            id: 'card-1',
            layout: 'hbox',
            items: [
+           {
+        xtype: 'fieldset',
+        title: 'Values',
+        id: 'values',
+        defaultType: 'textfield',
+        defaults: {
+            anchor: '100%'
+        },
+        
+        items: [
+                staffFieldCopy,
+                satffFieldBetween,
+                placeField,
+                formField
+        ]
+    },
                  {
         xtype: 'fieldset',
         title: 'Start Time',
@@ -137,13 +157,15 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
         var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
 
              var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
+             
+             var staffValue = staffField.getValue() + (satffFieldBetween.getValue() !== null ? " "+satffFieldBetween.getValue() : '');
         
 	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
 	               id: hairId,
-	               name: formValue+'_'+staffField.getValue()+'_'+placeField.getValue()+'_ambigous',
+	               name: formValue+'_s'+staffField.getValue()+'_m'+staffField.getValue()+'_'+placeField.getValue(),
                     icon: 'resources/images/mix_volume.png',
                     measureid: Ext.getCmp('cemain').getMeasureId(),
-                    measurenr: startTaktField.getValue(), 
+                    measurenr: staffValue, 
                     operation: 'create',
                     obvious: false,
                     ambiguous: true,
@@ -205,11 +227,38 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
     showNext: function () {
         this.doCardNavigation(1);
         
-         verovioImageStart = new pmdCE.view.main.VerovioImageStart();
-         Ext.getCmp('starttime').add(verovioImageStart);
+         if( typeof Ext.getCmp('cemain').getVerStartId() != 'undefined'){
+            Ext.getCmp('starttime').removeAll(true);
+        }
+        if(typeof Ext.getCmp('cemain').getVerEndId() != 'undefined'){
+             Ext.getCmp('endtime').removeAll(true);
+        }
+           
+               tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp orig');
+            tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2 orig');
+
+        tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
+        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
+
+        tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
+        tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
+        
+        Ext.getCmp('starttime').add(tstampFieldOrig);
+                Ext.getCmp('starttime').add(tstampFieldReg1);
+                Ext.getCmp('starttime').add(tstampFieldReg2);
+                
+                Ext.getCmp('endtime').add(tstamp2FieldOrig);
+                Ext.getCmp('endtime').add(tstamp2FieldReg1);
+                Ext.getCmp('endtime').add(tstamp2FieldReg2);
+                
+                 verovioImageStart = new pmdCE.view.main.VerovioImageStart();
+            Ext.getCmp('starttime').add(verovioImageStart);
          
-          verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
-         Ext.getCmp('endtime').add(verovioImageEnd);
+             verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
+             Ext.getCmp('endtime').add(verovioImageEnd);
+                          
+          
+         staffFieldCopy.setValue(staffField.getValue());
     },
 
     showPrevious: function (btn) {
@@ -298,7 +347,9 @@ return ceTextField;
     valueField: 'abbr',
     listeners: {
     select: function(combo, record, index) {
+    if(fieldName.indexOf('Second') === -1){
         Ext.getCmp('cemain').setStaffNr(combo.getValue());
+        }
     
     //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
      // modelTest.set('curvedir', combo.getValue());

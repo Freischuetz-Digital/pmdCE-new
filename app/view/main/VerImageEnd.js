@@ -23,6 +23,7 @@ initComponent: function() {
 
 me2 = this;
 currId2 = this.id;
+Ext.getCmp('cemain').setVerEndId(currId2);
 
 app = pmdCE.getApplication();
 renderer = app.getRenderer();
