@@ -52,7 +52,7 @@ Ext.Ajax.request({
 	pageWidth: 800,
 	//ignoreLayout: 5,
 	border: 10,
-	scale: 30
+	scale: 35
     });
     renderer.setOptions(options);
                   renderer.loadData(text);

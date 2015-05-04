@@ -1,11 +1,12 @@
 Ext.define('pmdCE.view.main.AddAmbiguousElDialog', {
    extend: 'Ext.window.Window',
-   title: 'Add Ambiguous Element',
+   title: 'Add Choice Element',
    flex: 1,
    //height: 200,
    //width: 500, 
    modal: true,
   // bodyPadding: 10,
+  border:false,
    
    staffField: null,  
     tstampField: null,

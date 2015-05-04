@@ -17,6 +17,7 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
     },
 
     defaultListenerScope: true,
+    border:false,
     
      autoScroll: true,
     
@@ -31,9 +32,17 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
     tstampFieldOrig: null,
     tstampField2Orig: null,
  
+    staffFieldReg1: null,
+    satffFieldBetweenReg1: null,
+    placeFieldReg1: null,
+    formFieldReg1: null,
     tstampFieldReg1: null,
     tstampField2Reg1: null,
 
+    staffFieldReg2: null,
+    satffFieldBetweenReg2: null,
+    placeFieldReg2: null,
+    formFieldReg2: null,
     tstampFieldReg2: null,
     tstampField2Reg2: null,
    
@@ -49,20 +58,28 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
          me = this;
          
          staffField= this.createComboBoxStaff('Staff');  
-           satffFieldBetween = this.createComboBoxStaff('Second staff'); 
-        staffFieldCopy = this.createTextField('staffFieldCopy', 'staffFieldCopy', 'Staff');
+         satffFieldBetween = this.createComboBoxStaff('Second staff'); 
+        staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
         staffFieldCopy.setDisabled(true);
         startTaktField= this.createComboBoxMeasureNr('Start measure');
         endTaktField= this.createComboBoxMeasureNr('End measure');
         placeField = this.createComboBox('Place');
-        formField = this.createRadioGroup();
+        formField = this.createRadioGroup('radioorig');
         
     tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp orig');
     tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2 orig');
 
-tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
-tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
+        staffFieldReg1= this.createComboBoxStaff('Staff');  
+         satffFieldBetweenReg1 = this.createComboBoxStaff('Second staff'); 
+        placeFieldReg1 = this.createComboBox('Place');
+        formFieldReg1 = this.createRadioGroup('radioreg1');
+        tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
+        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
 
+staffFieldReg2= this.createComboBoxStaff('Staff');  
+         satffFieldBetweenReg2 = this.createComboBoxStaff('Second staff'); 
+        placeFieldReg2 = this.createComboBox('Place');
+        formFieldReg2 = this.createRadioGroup('radioreg2');
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
 
@@ -78,58 +95,116 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
         },
         {
            id: 'card-1',
-           layout: 'hbox',
+           layout: 'vbox',
+           border:false,
            items: [
-           {
-        xtype: 'fieldset',
-        title: 'Values',
-        id: 'values',
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
-        },
+        {
+           id: 'card-11',
+           layout: 'hbox',
+           border:false,
+           items: [
+                {
+                    xtype: 'fieldset',
+                    title: 'Orig',
+                    id: 'orig',
+                    defaultType: 'textfield',
+                    defaults: {
+                        anchor: '100%'
+                    },
         
-        items: [
-                staffFieldCopy,
-                satffFieldBetween,
-                placeField,
-                formField
-        ]
-    },
+                    items: [
+                        staffFieldCopy,
+                        satffFieldBetween,
+                        placeField,
+                        formField,
+                        tstampFieldOrig,
+                        tstamp2FieldOrig
+                    ]
+                 },
                  {
-        xtype: 'fieldset',
-        title: 'Start Time',
-        id: 'starttime',
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
-        },
+                    xtype: 'fieldset',
+                    title: 'Reg1',
+                    id: 'starttime',
+                    defaultType: 'textfield',
+                    defaults: {
+                        anchor: '100%'
+                     },
         
-        items: [
-                tstampFieldOrig,
-                tstampFieldReg1,
-                tstampFieldReg2
-        ]
-    },
-     {
-        xtype: 'fieldset',
-        title: 'End Time',
-        id: 'endtime',
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
-        },
+                    items: [
+                        staffFieldReg1,
+                        satffFieldBetweenReg1,
+                        placeFieldReg1,
+                        formFieldReg1,
+                        tstampFieldReg1,
+                         tstamp2FieldReg1
+               
+                    ]
+                 },
+                 {
+                    xtype: 'fieldset',
+                    title: 'Reg2',
+                    id: 'endtime',
+                    defaultType: 'textfield',
+                    defaults: {
+                        anchor: '100%'
+                    },
         
-        items: [            
-                tstamp2FieldOrig,
-                tstamp2FieldReg1,
-                tstamp2FieldReg2
-        ]
-    }
-        ]
+                    items: [            
+                        staffFieldReg2,
+                        satffFieldBetweenReg2,
+                        placeFieldReg2,
+                        formFieldReg2,
+                        tstampFieldReg2,
+                        tstamp2FieldReg2
+                    ]
+                 }
+                
+        ] // end card-1 items
            
-        }
-    ],
+        }, // end card-1
+        {
+           id: 'card-111',
+           layout: 'hbox',
+           border:false,
+           items: [
+        {
+                    xtype: 'fieldset',
+                    title: 'Start Time (tstamp)',
+                    id: 'verovio1',
+                    border:false,
+                    width: 415,
+                    defaultType: 'textfield',
+                    defaults: {
+                        anchor: '100%'
+                    },
+        
+                    items: [            
+                
+                    ]
+                },
+                 {
+                    xtype: 'fieldset',
+                    title: 'End Time (tstamp2)',
+                    id: 'verovio2',
+                    border:false,
+                    width: 415,
+                    defaultType: 'textfield',
+                    defaults: {
+                        anchor: '100%'
+                    },
+        
+                    items: [            
+                
+                    ]
+                }
+        
+         ] // end card-1 items
+           
+        } // end card-1
+         ] // end card-1 items
+           
+        } // end card-1
+    ], // end this irems
          
      
      this.bbar = ['->',
@@ -157,47 +232,56 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
         var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
 
              var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
+              var formValueReg1 = formFieldReg1.getValue().Form === 2 ? "dim" : 'cresc';
+               var formValueReg2 = formFieldReg2.getValue().Form === 2 ? "dim" : 'cresc';
              
              var staffValue = staffField.getValue() + (satffFieldBetween.getValue() !== null ? " "+satffFieldBetween.getValue() : '');
+             
+             var staffValueReg1 = staffFieldReg1.getValue() + (satffFieldBetweenReg1.getValue() !== null ? " "+satffFieldBetweenReg1.getValue() : '');
         
+	        var staffValueReg2 = staffFieldReg2.getValue() + (satffFieldBetweenReg2.getValue() !== null ? " "+satffFieldBetweenReg2.getValue() : '');
+	        
 	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
 	               id: hairId,
-	               name: formValue+'_s'+staffField.getValue()+'_m'+staffField.getValue()+'_'+placeField.getValue(),
-                    icon: 'resources/images/mix_volume.png',
+	               name: 'choice_m'+startTaktField.getValue(),
+                    icon: 'resources/images/details-xml.png',
                     measureid: Ext.getCmp('cemain').getMeasureId(),
-                    measurenr: staffValue, 
+                    measurenr: startTaktField.getValue(), 
                     operation: 'create',
                     obvious: false,
                     ambiguous: true,
                      children: [
                 {
-                    icon: 'resources/images/details-xml.png',
-                    staff: staffField.getValue(),                  
+                    icon: 'resources/images/mix_volume.png',
+                    staff: staffValue,                  
                     tstamp: tstampFieldOrig.getValue(),
                     tstamp2: tstamp2FieldOrig.getValue(),
                     place: placeField.getValue(),
                     form: formValue,
                     name: "orig",
+                    tag: "orig",
                     leaf: true
                 },
                 {
-                    icon: 'resources/images/details-xml.png',
-                    staff: staffField.getValue(),                    
+                    icon: 'resources/images/mix_volume.png',
+                    staff: staffValueReg1,                    
                     tstamp: tstampFieldReg1.getValue(),
                     tstamp2: tstamp2FieldReg1.getValue(),
-                    place: placeField.getValue(),
-                    form: formValue,
+                    place: placeFieldReg1.getValue(),
+                    form: formValueReg1,
                     name: "reg",
+                    tag: "reg",
                     leaf: true
                 },
                 {
-                    icon: 'resources/images/details-xml.png',
-                    staff: staffField.getValue(),                    
+                    icon: 'resources/images/mix_volume.png',
+                    staff: staffValueReg2,                    
                     tstamp: tstampFieldReg2.getValue(),
                     tstamp2: tstamp2FieldReg2.getValue(),
-                    place: placeField.getValue(),
-                    form: formValue,
+                    place: placeFieldReg1.getValue(),
+                    form: formValueReg2,
                     name: "reg",
+                    tag: "reg",
                     leaf: true
                 }
                 ] 
@@ -228,34 +312,19 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
         this.doCardNavigation(1);
         
          if( typeof Ext.getCmp('cemain').getVerStartId() != 'undefined'){
-            Ext.getCmp('starttime').removeAll(true);
+            Ext.getCmp('verovio1').removeAll(true);
         }
         if(typeof Ext.getCmp('cemain').getVerEndId() != 'undefined'){
-             Ext.getCmp('endtime').removeAll(true);
+             Ext.getCmp('verovio2').removeAll(true);
         }
            
-               tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp orig');
-            tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2 orig');
-
-        tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
-        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
-
-        tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
-        tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
         
-        Ext.getCmp('starttime').add(tstampFieldOrig);
-                Ext.getCmp('starttime').add(tstampFieldReg1);
-                Ext.getCmp('starttime').add(tstampFieldReg2);
-                
-                Ext.getCmp('endtime').add(tstamp2FieldOrig);
-                Ext.getCmp('endtime').add(tstamp2FieldReg1);
-                Ext.getCmp('endtime').add(tstamp2FieldReg2);
                 
                  verovioImageStart = new pmdCE.view.main.VerovioImageStart();
-            Ext.getCmp('starttime').add(verovioImageStart);
-         
+            Ext.getCmp('verovio1').add(verovioImageStart);
+           
              verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
-             Ext.getCmp('endtime').add(verovioImageEnd);
+             Ext.getCmp('verovio2').add(verovioImageEnd);
                           
           
          staffFieldCopy.setValue(staffField.getValue());
@@ -394,15 +463,16 @@ return ceTextField;
 return ceTextField;
 },
 
-createRadioGroup: function(){
+createRadioGroup: function(radioid){
     var radios = new Ext.form.RadioGroup({
      xtype: 'radiogroup',
+     id: radioid,
             fieldLabel: 'Form',
             cls: 'x-check-group-alt',
             
             items: [
-                {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0'},
-                {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0'}
+                {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0', id:radioid+'cres'},
+                {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0', id:radioid+'dim'}
                 
             ]
    });

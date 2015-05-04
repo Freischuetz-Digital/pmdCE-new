@@ -83,7 +83,10 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     saveComponents: function(btn){ 
  
 var store = pmdCE.getApplication().getHairpinDataStore();
-var modRecords = store.getUpdatedRecords() 
+var modAndCreateElements = store.getUpdatedRecords();
+var deletedElements = store.getRemovedRecords();
+var modRecords = modAndCreateElements.concat(deletedElements);
+//store.getUpdatedRecords() 
 //modRecords.add(store.getRemovedRecords()) ;
 
 console.log("******DATA******");
@@ -138,6 +141,7 @@ for(var i = 0; i < modRecords.length ; i++){
                         tstamp2: modRecords[i].childNodes[j].data.tstamp2,              
                         sameas: ""
                     });
+                    
                     $(orig).append($(hair)); 
                     $(choice).append($(orig)); 
                 }
@@ -176,7 +180,11 @@ for(var i = 0; i < modRecords.length ; i++){
             dataType:"xml",
             success: function(result){
                 console.log(result);
-                alert('save success: '+ result);
+               // console.log(result.getAttribute('result')); 
+               // console.log(result.result); 
+                var stringXML = (new XMLSerializer()).serializeToString(result);
+                console.log(stringXML);
+                alert('save success: '+ stringXML);
             }
         });
     },

@@ -1,6 +1,6 @@
 Ext.define('pmdCE.view.main.AddObviousElDialog', {
    extend: 'Ext.window.Window',
-   title: 'Add Obvious Element',
+   title: 'Add Element',
    flex: 1,
    //height: 200,
    //width: 500, 

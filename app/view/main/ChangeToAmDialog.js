@@ -1,29 +1,32 @@
 Ext.define('pmdCE.view.main.ChangeToAmDialog', {
    extend: 'Ext.window.Window',
-   title: 'Change to Ambiguous Element',
-   id: "changetoamdialog",
+   title: 'Change to Choice Element',
+   id: "ambiguouscard",
    flex: 1,
    modal: true,
  
     staffFieldOrig: null,
     placeFieldOrig: null,
     formFieldOrig: null,
+    satffFieldBetweenOrig: null,
     
     staffFieldReg1: null,
     placeFieldReg1: null,
     formFieldReg1: null,
+    satffFieldBetweenReg1: null,
     
     staffFieldReg2: null,
     placeFieldReg2: null,
     formFieldReg2: null,
     tstampFieldReg2: null,
-    tstampField2Reg2: null,
+    tstamp2FieldReg2: null,
+    satffFieldBetweenReg2: null,
     
     tstampFieldOrig: null,
-    tstampField2Orig: null,
+    tstamp2FieldOrig: null,
  
     tstampFieldReg1: null,
-    tstampField2Reg1: null,
+    tstamp2FieldReg1: null,
     
     verovioImageStart: null,
     verovioImageEnd: null,
@@ -37,7 +40,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
 	vordTStamp: null,
 	vordTStamp2: null,
     
-    layout: 'hbox',
+    layout: 'vbox',
     
     selectedFieldId:null,
    
@@ -70,6 +73,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     staffFieldOrig.setDisabled(true);
     placeFieldOrig = this.createComboBox('Place');
     placeFieldOrig.setValue(vordPlace);
+    placeFieldOrig.setDisabled(true);
     formFieldOrig = this.createRadioGroup();
     if(vordForm === 'dim'){
         formFieldOrig.items.items[1].setValue(true);
@@ -77,11 +81,13 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     else{
         formFieldOrig.items.items[0].setValue(true);
     }
+   formFieldOrig.setDisabled(true);
+    
     staffFieldReg1 = this.createComboBoxStaff('Staff'); 
     staffFieldReg1.setValue(vordStaff);
-     staffFieldReg1.setDisabled(true);
+    staffFieldReg1.setDisabled(true);
     placeFieldReg1 = this.createComboBox('Place');
-    placeFieldReg1.setValue(vordPlace);
+   // placeFieldReg1.setValue(vordPlace);
     formFieldReg1 = this.createRadioGroup();
      if(vordForm === 'dim'){
         formFieldReg1.items.items[1].setValue(true);
@@ -94,10 +100,10 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     staffFieldReg2.setValue(vordStaff);
     staffFieldReg2.setDisabled(true);
     placeFieldReg2 = this.createComboBox('Place');
-    placeFieldReg2.setValue(vordPlace);
-    placeFieldReg2.setDisabled(true);
+   // placeFieldReg2.setValue(vordPlace);
+   // placeFieldReg2.setDisabled(true);
     formFieldReg2 = this.createRadioGroup();
-    formFieldReg2.setDisabled(true);
+   // formFieldReg2.setDisabled(true);
     if(vordForm === 'dim'){
         formFieldReg2.items.items[1].setValue(true);
     }
@@ -105,113 +111,128 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
         formFieldReg2.items.items[0].setValue(true);
     }
     tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
-    tstampFieldReg2.setDisabled(true);
-    tstampFieldReg2.setValue(vordTStamp);
-    tstampField2Reg2 = this.createTextField('tstampField2Reg2', 'Tstamp2 reg2');
-    tstampField2Reg2.setDisabled(true);
-    tstampField2Reg2.setValue(vordTStamp2);
+    //tstampFieldReg2.setDisabled(true);
+   // tstampFieldReg2.setValue(vordTStamp);
+    tstamp2FieldReg2 = this.createTextField('tstampField2Reg2', 'Tstamp2 reg2');
+   // tstampField2Reg2.setDisabled(true);
+  //  tstampField2Reg2.setValue(vordTStamp2);
     
     tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
     tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
 
      tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp orig');
     tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2 orig');
+     tstampFieldOrig.setValue(vordTStamp);
+    tstamp2FieldOrig.setValue(vordTStamp2);
+    tstampFieldOrig.setDisabled(true);
+    tstamp2FieldOrig.setDisabled(true);
+    
+    satffFieldBetweenOrig = this.createComboBoxStaff('Second staff'); 
+    satffFieldBetweenOrig.setDisabled(true);
+    satffFieldBetweenReg1 = this.createComboBoxStaff('Second staff'); 
+    satffFieldBetweenReg2 = this.createComboBoxStaff('Second staff'); 
     
     verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
         verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
     
     this.items =  [
-     
-     {
+    
+      {
         xtype: 'fieldset',
         border: false,
-        //layout: 'vbox',
+        layout: 'hbox',
         defaultType: 'textfield',
         defaults: {
             anchor: '100%'
         },
         
         items: [{
-        xtype: 'fieldset',
-        title: 'Orig Values',
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
-        },
+            xtype: 'fieldset',
+            title: 'Orig',
+            defaultType: 'textfield',
+            defaults: {
+                anchor: '100%'
+            },
         
-        items: [       
-            staffFieldOrig,
-            placeFieldOrig,
-            formFieldOrig
+            items: [  
+                staffFieldOrig,
+                satffFieldBetweenOrig,
+                 placeFieldOrig,
+                formFieldOrig, 
+                tstampFieldOrig,
+                tstamp2FieldOrig              
+            ]
+        },
+        {
+            xtype: 'fieldset',
+            title: 'Reg1 Values',
+            defaultType: 'textfield',
+            defaults: {
+                anchor: '100%'
+            },
+        
+            items: [
+                staffFieldReg1,
+                satffFieldBetweenReg1,
+                placeFieldReg1,
+                formFieldReg1,
+                tstampFieldReg1,
+                tstamp2FieldReg1
+            ]
+        },
+        {
+            xtype: 'fieldset',
+            title: 'Reg2 Values',
+            defaultType: 'textfield',
+            defaults: {
+                anchor: '100%'
+            },
+        
+            items: [       
+                staffFieldReg2,
+                satffFieldBetweenReg2,
+                placeFieldReg2,
+                formFieldReg2,
+                tstampFieldReg2,
+                tstamp2FieldReg2
+            ]
+        }
+    
         ]
     },
     {
         xtype: 'fieldset',
-        title: 'Reg1 Values',
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
-        },
-        
-        items: [
-            staffFieldReg1,
-            placeFieldReg1,
-            formFieldReg1
-        ]
-    },
-     {
-        xtype: 'fieldset',
-        title: 'Reg2',
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
-        },
-        
-        items: [       
-            staffFieldReg2,
-            tstampFieldReg2,
-            tstampField2Reg2,
-            placeFieldReg2,
-            formFieldReg2           
-        ]
-    }
-    
-        ]
-    },
-     {
-        xtype: 'fieldset',
         defaultType: 'textfield',
          border: false,
+         layout: 'hbox',
         defaults: {
             anchor: '100%'
         },
         
         items: [
         {
-        xtype: 'fieldset',
-        title: 'Start Time',
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
-        },
+            xtype: 'fieldset',
+            title: 'Start Time',
+            defaultType: 'textfield',
+             width: 415,
+            defaults: {
+                anchor: '100%'
+            },
         
-        items: [
-                tstampFieldOrig,
-                tstampFieldReg1,
+            items: [           
                 verovioImageStart
-        ]
-    },
-     {
+            ]
+        },
+        {
         xtype: 'fieldset',
         title: 'End Time',
         defaultType: 'textfield',
+         width: 415,
         defaults: {
             anchor: '100%'
         },
         
-        items: [            
-                 tstamp2FieldOrig,
-                tstamp2FieldReg1,
+        items: [                        
                 verovioImageEnd   
         ]
     }       
@@ -266,6 +287,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
                     place: placeFieldOrig.getValue(),
                     form: formValueOrig,
                     name: "orig",
+                    tag: "orig",
                     leaf: true
         });	
         selectedNode.appendChild({
@@ -276,6 +298,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
                     place: placeFieldReg1.getValue(),
                     form: formValueReg1,
                     name: "reg",
+                    tag: "reg",
                     leaf: true
         });
         selectedNode.appendChild({
@@ -286,6 +309,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
                     place: vordPlace,
                     form: vordForm,
                     name: "reg",
+                    tag: "reg",
                     leaf: true
         });	
 	  }

@@ -1,6 +1,6 @@
 Ext.define('pmdCE.view.main.ChangeToObDialog', {
    extend: 'Ext.window.Window',
-   title: 'Change to Obvious Element',
+   title: 'Change to Element',
    flex: 1,
    modal: true,
    id: "changetoamdialog",
@@ -11,6 +11,7 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
     tstampField: null,
     tstampField2: null,
     selectedNode: null,
+    satffFieldBetween: null,
     
     layout: 'hbox',
   
@@ -20,11 +21,12 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
 	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	  
 	  for(var i = 0; i < rootNode.childNodes.length ; i++){
-	  if(rootNode.childNodes[i].data.id === selection.data.id){
+	  if(rootNode.childNodes[i].data.id === selection.data.id
+	  && rootNode.childNodes[i].data.name === selection.data.name){
 	      selectedNode = rootNode.childNodes[i];	
 	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
 	      Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
-	      Ext.getCmp('cemain').setStaffNr(selectedNode.data.staff);
+	      Ext.getCmp('cemain').setStaffNr(selectedNode.childNodes[0].data.staff);
 	      break;
 	  }	      
 	  }    
@@ -34,10 +36,11 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
     staffField = this.createComboBoxStaff('Staff');
     staffField.setValue(selectedNode.data.staff);
      staffField.setDisabled(true);
+     satffFieldBetween = this.createComboBoxStaff('Second staff'); 
     placeField = this.createComboBox('Place');
     formField = this.createRadioGroup();
-     tstampField = this.createTextField('tstampField', 'Tstamp');
-    tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
+     tstampField = this.createTextField('tstampFieldObv', 'tstampField', 'Tstamp');
+    tstamp2Field = this.createTextField('tstampField2Obv', 'tstampField2', 'Tstamp2');
     
     verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
         verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
@@ -54,6 +57,7 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
         
         items: [
             staffField,
+            satffFieldBetween,
             placeField,
             formField
         ]
@@ -214,9 +218,10 @@ createRadioGroup: function(){
     
 },
 
-        createTextField: function(fieldName, fieldLabel){
+        createTextField: function(fieldId, fieldName, fieldLabel){
     var ceTextField = Ext.create('Ext.form.field.Text',{
         name: fieldName,
+        id: fieldId,
         fieldLabel: fieldLabel,
       //  allowBlank: false , // requires a non-empty value
         listeners: {'render': function(c) {
