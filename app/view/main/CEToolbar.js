@@ -344,8 +344,7 @@ for(var i = 0; i < modRecords.length ; i++){
         }
       
          verovioView = new pmdCE.view.main.VerovioView();
-        // verovioView.id = 'verovioview',
-   
+       
          controllsView = new pmdCE.view.main.CEGridPanel();
         
         

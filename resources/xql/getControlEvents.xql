@@ -86,7 +86,7 @@ declare function local:jsonifyElements($elements) {
                             '"tstamp2":"',$tstamp2,'",',
                             '"place":"',$place,'",',
                             '"form":"',$form,'",',
-                            '"tag":"",', 
+                            '"tag":"',$name1,'",',
                             '"staff":"',$staffText,'",',
                              '"leaf":true',
                         '}')

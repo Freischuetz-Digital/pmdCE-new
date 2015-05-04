@@ -34,13 +34,17 @@ extend: 'Ext.form.Panel',
        // width: 200,
         height: 100,
         frame: true
-    },
+    }
     
         
         
-initComponent: function() {
+/*initComponent: function() {
 
-/*test = $.get( 'resources/verovio/hairpin.xml', function( data ) {
+/\*this.items =  [
+        
+     ] ,*\/
+
+/\*test = $.get( 'resources/verovio/hairpin.xml', function( data ) {
     test = Ext.DomQuery.selectNode('hairpin', data);
     test2 = document.createElement("div");
         //test.cloneNode();
@@ -49,12 +53,10 @@ initComponent: function() {
         
         $('#xmleditorview-body').html(Ext.String.htmlEncode(test2.innerHTML));
  
-
-
-}),*/
+}),*\/
 
         this.callParent()
 
-}
+}*/
 
     });

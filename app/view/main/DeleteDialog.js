@@ -2,27 +2,24 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
    extend: 'Ext.window.Window',
    title: 'Delete Element',
    flex: 1,
-   //height: 200,
-   //width: 500, 
-   modal: true,
-   bodyPadding: 10,
+  
+   defaults: {
+        width: 250,
+        height: 100,
+        bodyPadding: 10
+    },
+    
+    selection: null,
+    
+   // layout: 'hbox',
  
     initComponent: function() {
- 
-     this.items =  [
-             
-            ] , 
-   
-    this.buttons = [{
-        text:'Delete',
-        handler: function(){
-        
-         var store = pmdCE.getApplication().getHairpinDataStore();
+    
+     var store = pmdCE.getApplication().getHairpinDataStore();
 	    var root = store.getRootNode();
         
-          
-            console.log(root);
-            selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+    
+     selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
               for(var i = 0; i < root.childNodes.length ; i++){
 	       if(root.childNodes[i].data.id === selection.data.id){
 	               selectedNode = root.childNodes[i];	
@@ -30,10 +27,19 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
 	      break;
 	  }	      
 	  }    
-	  // TODO: set Measure ID?
-            selectedNode.data.operation =  'delete';
-           
-            
+ 
+     this.items =  [
+     {
+         html: "Element \n"+selectedNode.data.name +"\n will be removed."
+     }
+             
+     ] , 
+   
+    this.buttons = [{
+        text:'Remove',
+        handler: function(){
+        
+            selectedNode.data.operation =  'remove';
             selectedNode.remove();
            
     Ext.getCmp('saveButton').setDisabled(false);
