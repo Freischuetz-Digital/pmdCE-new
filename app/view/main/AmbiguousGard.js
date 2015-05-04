@@ -66,22 +66,22 @@ Ext.define('pmdCE.view.main.AmbiguousCard', {
         placeField = this.createComboBox('Place');
         formField = this.createRadioGroup('radioorig');
         
-    tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp orig');
-    tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2 orig');
+    tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp');
+    tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
 
         staffFieldReg1= this.createComboBoxStaff('Staff');  
          satffFieldBetweenReg1 = this.createComboBoxStaff('Second staff'); 
         placeFieldReg1 = this.createComboBox('Place');
         formFieldReg1 = this.createRadioGroup('radioreg1');
-        tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
-        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
+        tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
+        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
 
 staffFieldReg2= this.createComboBoxStaff('Staff');  
          satffFieldBetweenReg2 = this.createComboBoxStaff('Second staff'); 
         placeFieldReg2 = this.createComboBox('Place');
         formFieldReg2 = this.createRadioGroup('radioreg2');
-tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
-tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
+tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
+tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
 
           this.items  = [
         {
@@ -123,7 +123,7 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
                  },
                  {
                     xtype: 'fieldset',
-                    title: 'Reg1',
+                    title: 'Reg',
                     id: 'starttime',
                     defaultType: 'textfield',
                     defaults: {
@@ -142,7 +142,7 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2 reg2');
                  },
                  {
                     xtype: 'fieldset',
-                    title: 'Reg2',
+                    title: 'Reg',
                     id: 'endtime',
                     defaultType: 'textfield',
                     defaults: {

@@ -50,8 +50,8 @@ Ext.Ajax.request({
         var options = JSON.stringify({
 	pageHeight: 450,
 	pageWidth: 800,
-	//ignoreLayout: 5,
-	border: 10,
+	ignoreLayout: 25,
+	border: 0,
 	scale: 35
     });
     renderer.setOptions(options);

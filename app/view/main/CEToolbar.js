@@ -45,7 +45,7 @@ Ext.define('pmdCE.view.main.CEToolbar', {
     arrowR = this.createCEIcon('arrowR', 'resources/images/page-next-disabled.gif');
     arrowR.setDisabled(true);
     saveButton = this.createCEIcon('saveButton', 'resources/images/Save.png', this.saveComponents);
-   // saveButton.setDisabled(true);
+    saveButton.setDisabled(true);
     //createButton = this.createCEIcon1();
     //('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
    // createButton.setDisabled(true);
@@ -185,6 +185,7 @@ for(var i = 0; i < modRecords.length ; i++){
                 var stringXML = (new XMLSerializer()).serializeToString(result);
                 console.log(stringXML);
                 alert('save success: '+ stringXML);
+                saveButton.setDisabled(true);
             }
         });
     },
@@ -194,18 +195,7 @@ for(var i = 0; i < modRecords.length ; i++){
         var win = new pmdCE.view.main.AddDialog();
         win.show();
     },
-    
-   /*  deleteComponent: function(btn){ 
-    Ext.Msg.confirm("Deletion", "The element will be deleted", function(btnText){
-            if(btnText === "yes"){     
-            var target = Ext.getCmp('hairpinsitem').getSelectionModel().getSelection()[0];           
-            pmdCE.getApplication().getHairpinsStore().remove(target);
-             pmdCE.getApplication().getHairpinsStore().sync();
-             // TODO: delete daten from HirpinsDataStore?
-            }
-        }, this);
-    },*/
-   
+  
     click: function() {
        if(sourceButton.getText() === 'Source'){
             sourceButton.getMenu().removeAll();

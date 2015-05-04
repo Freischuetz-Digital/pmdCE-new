@@ -84,8 +84,8 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
    formFieldOrig.setDisabled(true);
     
     staffFieldReg1 = this.createComboBoxStaff('Staff'); 
-    staffFieldReg1.setValue(vordStaff);
-    staffFieldReg1.setDisabled(true);
+   // staffFieldReg1.setValue(vordStaff);
+    //staffFieldReg1.setDisabled(true);
     placeFieldReg1 = this.createComboBox('Place');
    // placeFieldReg1.setValue(vordPlace);
     formFieldReg1 = this.createRadioGroup();
@@ -97,8 +97,8 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     }
     
     staffFieldReg2 = this.createComboBoxStaff('Staff'); 
-    staffFieldReg2.setValue(vordStaff);
-    staffFieldReg2.setDisabled(true);
+   // staffFieldReg2.setValue(vordStaff);
+   // staffFieldReg2.setDisabled(true);
     placeFieldReg2 = this.createComboBox('Place');
    // placeFieldReg2.setValue(vordPlace);
    // placeFieldReg2.setDisabled(true);
@@ -110,18 +110,18 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     else{
         formFieldReg2.items.items[0].setValue(true);
     }
-    tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp reg2');
+    tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
     //tstampFieldReg2.setDisabled(true);
    // tstampFieldReg2.setValue(vordTStamp);
-    tstamp2FieldReg2 = this.createTextField('tstampField2Reg2', 'Tstamp2 reg2');
+    tstamp2FieldReg2 = this.createTextField('tstampField2Reg2', 'Tstamp2');
    // tstampField2Reg2.setDisabled(true);
   //  tstampField2Reg2.setValue(vordTStamp2);
     
-    tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp reg1');
-    tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2 reg1');
+    tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
+    tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
 
-     tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp orig');
-    tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2 orig');
+     tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp');
+    tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
      tstampFieldOrig.setValue(vordTStamp);
     tstamp2FieldOrig.setValue(vordTStamp2);
     tstampFieldOrig.setDisabled(true);
@@ -165,7 +165,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
         },
         {
             xtype: 'fieldset',
-            title: 'Reg1 Values',
+            title: 'Reg',
             defaultType: 'textfield',
             defaults: {
                 anchor: '100%'
@@ -182,7 +182,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
         },
         {
             xtype: 'fieldset',
-            title: 'Reg2 Values',
+            title: 'Reg',
             defaultType: 'textfield',
             defaults: {
                 anchor: '100%'
@@ -214,6 +214,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
             xtype: 'fieldset',
             title: 'Start Time',
             defaultType: 'textfield',
+            border: false,
              width: 415,
             defaults: {
                 anchor: '100%'
@@ -227,6 +228,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
         xtype: 'fieldset',
         title: 'End Time',
         defaultType: 'textfield',
+        border: false,
          width: 415,
         defaults: {
             anchor: '100%'
