@@ -25,8 +25,12 @@ Ext.define('pmdCE.view.main.VerovioView', {
         align: 'stretch'
     },
     
+    me: null,
+    
        
     initComponent: function() {
+    
+    me = this;
   
    addElementButton = this.createCEButton();
    addElementButton.setDisabled(true);
@@ -64,26 +68,29 @@ createCEButton: function(){
                   //  handler: ceHandler,
                      menu: [Ext.create('Ext.menu.Item', {
                         text: "Orig",
-                        icon: 'resources/images/mix_volume.png'
-                        /*handler: function() {
-                           var win = new pmdCE.view.main.AddObviousElDialog();
+                        icon: 'resources/images/mix_volume.png',
+                        handler: function() {
+                           var win = new pmdCE.view.main.AddOrigDialog();
+                         
                             win.show();
-                        }*/
+                        }
                      }),
                      
                      Ext.create('Ext.menu.Item', {
                 text: "Reg",
-                icon: 'resources/images/mix_volume.png'
-               /* handler: function() {
-                   var win = new pmdCE.view.main.AddAmbiguousElDialog();
+                icon: 'resources/images/mix_volume.png',
+                handler: function() {
+                   var win = new pmdCE.view.main.AddRegDialog();
+          
                     win.show();
-                }*/
+                }
              })
                     ]
           });
 
 return ceButton;
 },
+
 
 createChangeToButton: function(){
     var ceButton = Ext.create('Ext.button.Button', {  

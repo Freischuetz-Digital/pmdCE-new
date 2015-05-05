@@ -130,9 +130,10 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
              selectedNode.data.tag = "";
              selectedNode.data.icon =  'resources/images/mix_volume.png';
              
-             Ext.getCmp('cegridpanel').setSelection(selectedNode);
-             
              selectedNode.removeAll();
+             
+             Ext.getCmp('cegridpanel').setSelection(selectedNode);
+             Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
     
         Ext.getCmp('saveButton').setDisabled(false);
       

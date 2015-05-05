@@ -26,6 +26,8 @@ Ext.define('pmdCE.Application', {
        'main.AddAmbiguousElDialog',
        'main.EditDialog',
        'main.AmbiguousCard',
+       'main.AddOrigDialog',
+       'main.AddRegDialog',
        'main.ObviousCard',
        'main.ChangeToAmDialog',
        'main.DeleteDialog',
@@ -96,7 +98,7 @@ Ext.define('pmdCE.Application', {
         type: 'ajax',
       url: 'resources/xql/getControlEvents.xql'
        
-        //url: 'resources/data/tree/treegrid_1.json'
+       // url: 'resources/data/tree/treegrid_1.json'
       
     },
     autoLoad: false
