@@ -111,13 +111,11 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
             } 
           
              $(objects).append($(choice));              
-         }              
-
-  $('#xmleditorview-body').html(Ext.String.htmlEncode($(objects).html()));
-        
-        
-        
-        
+         }   
+       
+         var tmp = hljs.highlightAuto($(objects).html()).value;
+        $('#xmleditorview-body').html(tmp);
+       
         
         }
         };

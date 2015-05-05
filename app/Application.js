@@ -75,7 +75,7 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                 //url: 'data/pmd_ce_getNavigation.xql',
+                // url: 'data/pmd_ce_getNavigation.xql',
                  url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',
@@ -96,7 +96,7 @@ Ext.define('pmdCE.Application', {
         type: 'ajax',
       url: 'resources/xql/getControlEvents.xql'
        
-      //  url: 'resources/data/tree/treegrid_1.json'
+        //url: 'resources/data/tree/treegrid_1.json'
       
     },
     autoLoad: false

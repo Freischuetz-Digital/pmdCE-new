@@ -179,6 +179,8 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 	    var parent = root.appendChild(hairpin);
         parent.expand();
         
+        Ext.getCmp('cegridpanel').setSelection(hairpin);
+        
         Ext.getCmp('saveButton').setDisabled(false);
             this.up('window').close();          
        }

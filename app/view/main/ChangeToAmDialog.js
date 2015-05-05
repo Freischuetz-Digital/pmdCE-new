@@ -316,6 +316,9 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
         });	
 	  }
 	  selectedNode.expand();
+	  
+	  Ext.getCmp('cegridpanel').setSelection(selectedNode);
+	  
        Ext.getCmp('saveButton').setDisabled(false);
       this.up('window').close();
            

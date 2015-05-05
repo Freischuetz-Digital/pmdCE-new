@@ -114,6 +114,8 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
       
   
         var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
+        
+        
 	 
         selectedNode.data.name = formValue+'_s'+staffField.getValue()+'_m'+placeField.getValue();
 	  selectedNode.data.obvious = true;
@@ -126,10 +128,11 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
              selectedNode.data.operation =  'change';
              selectedNode.data.leaf = true;
              selectedNode.data.tag = "";
+             selectedNode.data.icon =  'resources/images/mix_volume.png';
+             
+             Ext.getCmp('cegridpanel').setSelection(selectedNode);
              
              selectedNode.removeAll();
-             
-             console.log(selectedNode);
     
         Ext.getCmp('saveButton').setDisabled(false);
       

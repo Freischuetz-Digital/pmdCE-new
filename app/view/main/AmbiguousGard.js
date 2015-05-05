@@ -292,6 +292,9 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
 	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    var parent = root.appendChild(hairpin);
 	    parent.expand();
+	    
+	    Ext.getCmp('cegridpanel').setSelection(hairpin);
+	    
 	    Ext.getCmp('saveButton').setDisabled(false);
             this.up('window').close();
            
