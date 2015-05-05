@@ -58,6 +58,30 @@ Ext.define('pmdCE.view.main.ObviousCard', {
              bodyPadding: 5,
              text: 'Fields for verovio load',
             items: [
+            
+            
+          /*  {
+            xtype: 'fieldcontainer',
+            fieldLabel: 'Phone',
+            combineErrors: true,
+            layout: 'hbox',
+            msgTarget: 'under',
+            defaults: {
+                hideLabel: true,
+                anchor: '100%'
+            },
+            items: [
+                {icon: 'resources/images/Mandatory.gif'},
+                {xtype: 'textfield',    fieldLabel: 'Phone 1', name: 'phone-1', width: 45, allowBlank: false},
+                {xtype: 'displayfield', value: ')'},
+                {xtype: 'textfield',    fieldLabel: 'Phone 2', name: 'phone-2', width: 45, allowBlank: false, margin: '0 5 0 0'},
+                {xtype: 'displayfield', value: '-'},
+                {xtype: 'textfield',    fieldLabel: 'Phone 3', name: 'phone-3', width: 60, allowBlank: false}
+            ]
+        },*/
+        
+        
+        
             staffField,
             startTaktField,
             endTaktField
@@ -233,6 +257,9 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         me.down('#card-prev').setDisabled(next===0);
         me.down('#card-next').setDisabled(next===1);
         
+       console.log("active item");
+       console.log(l.activeItem);
+        
         // TODO
         /*if(l.activeItem.id === 'card-1'){
             Ext.getCmp('createItem').setDisabled(false);
@@ -297,8 +324,9 @@ return ceTextField;
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-    icon: 'resources/images/mix_volume.png',
+    //icon: 'resources/images/mix_volume.png',
     valueField: 'abbr',
+    
     listeners: {
     select: function(combo, record, index) {
      if(fieldName.indexOf('Second') === -1){

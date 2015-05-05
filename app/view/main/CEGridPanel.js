@@ -61,9 +61,12 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
         selectedObject = selected.selected.items[0].parentNode;
         
         }
-        
-        this.showXMLforSelectedElement(selectedObject);
-        
+        console.log("Grid");
+        console.log(selectedObject);
+        if(typeof selectedObject !== 'undefined'){
+            this.showXMLforSelectedElement(selectedObject);
+        }
+             
          /*var objects = $('<div></div>');
         if(selectedObject.data.obvious){
              

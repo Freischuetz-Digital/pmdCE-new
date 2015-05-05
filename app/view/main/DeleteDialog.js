@@ -10,18 +10,21 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
     },
     
     selection: null,
+    selectedId: null,
+    root: null,
     
    // layout: 'hbox',
  
     initComponent: function() {
     
      var store = pmdCE.getApplication().getHairpinDataStore();
-	    var root = store.getRootNode();
+	  root = store.getRootNode();
         
     
      selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
               for(var i = 0; i < root.childNodes.length ; i++){
 	       if(root.childNodes[i].data.id === selection.data.id){
+	               selectedId = i;
 	               selectedNode = root.childNodes[i];	
 	      
 	      break;
@@ -41,6 +44,25 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
         
             selectedNode.data.operation =  'remove';
             selectedNode.remove();
+            
+            if(selectedId === root.childNodes.length){
+                selectedId --;
+            }
+            
+             console.log("New selection");
+             console.log(selectedId);
+             console.log(root.childNodes.length);
+            console.log(newSelection);
+            
+            if(selectedId === -1){
+                 $('#xmleditorview-body').html('');
+            }
+            else{
+                var newSelection = root.childNodes[selectedId];
+      
+                Ext.getCmp('cegridpanel').setSelection(newSelection);
+            }
+            
            
     Ext.getCmp('saveButton').setDisabled(false);
              this.up('window').close();

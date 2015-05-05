@@ -318,6 +318,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
         selectedNode.expand();
 	  
 	  Ext.getCmp('cegridpanel').setSelection(selectedNode);
+	  Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
 	  
        Ext.getCmp('saveButton').setDisabled(false);
 	  }
