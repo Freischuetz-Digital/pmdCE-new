@@ -74,7 +74,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     placeFieldOrig = this.createComboBox('Place');
     placeFieldOrig.setValue(vordPlace);
     placeFieldOrig.setDisabled(true);
-    formFieldOrig = this.createRadioGroup();
+    formFieldOrig = this.createRadioGroup('radioorig');
     if(vordForm === 'dim'){
         formFieldOrig.items.items[1].setValue(true);
     }
@@ -88,7 +88,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     //staffFieldReg1.setDisabled(true);
     placeFieldReg1 = this.createComboBox('Place');
    // placeFieldReg1.setValue(vordPlace);
-    formFieldReg1 = this.createRadioGroup();
+    formFieldReg1 = this.createRadioGroup('radioreg1');
      if(vordForm === 'dim'){
         formFieldReg1.items.items[1].setValue(true);
     }
@@ -102,7 +102,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
     placeFieldReg2 = this.createComboBox('Place');
    // placeFieldReg2.setValue(vordPlace);
    // placeFieldReg2.setDisabled(true);
-    formFieldReg2 = this.createRadioGroup();
+    formFieldReg2 = this.createRadioGroup('radioreg2');
    // formFieldReg2.setDisabled(true);
     if(vordForm === 'dim'){
         formFieldReg2.items.items[1].setValue(true);
@@ -385,14 +385,14 @@ var states = new Array("above", "below", "between");
 return ceTextField;
 },
 
-createRadioGroup: function(){
+createRadioGroup: function(radioid){
     var radios = new Ext.form.RadioGroup({
             xtype: 'radiogroup',
             fieldLabel: 'Form',
-            cls: 'x-check-group-alt',           
+            id: radioid,          
             items: [
-                {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0'},
-                {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0'}
+                {boxLabel: 'Cres', name: 'Form'+radioid, inputValue: 1, margin: '0 10 10 0'},
+                {boxLabel: 'Dim', name: 'Form'+radioid, inputValue: 2, margin: '0 10 10 0'}
                 
             ]
    

@@ -49,11 +49,6 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
                 selectedId --;
             }
             
-             console.log("New selection");
-             console.log(selectedId);
-             console.log(root.childNodes.length);
-            console.log(newSelection);
-            
             if(selectedId === -1){
                  $('#xmleditorview-body').html('');
             }

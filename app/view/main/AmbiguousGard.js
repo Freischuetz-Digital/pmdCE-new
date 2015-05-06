@@ -470,14 +470,13 @@ createRadioGroup: function(radioid){
     var radios = new Ext.form.RadioGroup({
      xtype: 'radiogroup',
      id: radioid,
-            fieldLabel: 'Form',
-            cls: 'x-check-group-alt',
-            
-            items: [
-                {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0', id:radioid+'cres'},
-                {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0', id:radioid+'dim'}
+     fieldLabel: 'Form',
+     items: [
+         {boxLabel: 'Cres', name: 'Form'+radioid, margin: '0 10 10 0'},
+         {boxLabel: 'Dim', name: 'Form'+radioid, margin: '0 10 10 0'}
                 
-            ]
+     ]
+           
    });
    return radios;
     
