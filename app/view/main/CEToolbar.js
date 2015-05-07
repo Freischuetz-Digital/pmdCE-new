@@ -103,7 +103,7 @@ for(var i = 0; i < modRecords.length ; i++){
                 measureid: modRecords[i].data.measureid
          });        
             var code = $('<hairpin></hairpin>', {
-               staff : modRecords[i].data.staff+' '+selectedObject.childNodes[j].data.staff2,
+               staff : modRecords[i].data.staff+' '+selectedObject.data.staff2,
                 place: modRecords[i].data.place,
                 form: modRecords[i].data.form,
                 tstamp: modRecords[i].data.tstamp,

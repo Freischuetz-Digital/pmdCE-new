@@ -138,7 +138,7 @@ showXMLforSelectedElement: function(selectedObject){
         if(selectedObject.data.obvious){
              
             var object = $('<hairpin></hairpin>', {
-               staff : selectedObject.data.staff+' '+selectedObject.childNodes[j].data.staff2,
+               staff : selectedObject.data.staff+' '+selectedObject.data.staff2,
                 place: selectedObject.data.place,
                 form: selectedObject.data.form,
                 tstamp: selectedObject.data.tstamp,
