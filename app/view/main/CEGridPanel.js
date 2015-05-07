@@ -162,6 +162,7 @@ showXMLforSelectedElement: function(selectedObject){
                 if(selectedObject.childNodes[j].data.tag === 'orig'){
                     var orig = $('<orig></orig>');
                     var hair =  $('<hairpin></hairpin>', {
+                     // DOTO: leerzeichen
                         staff : selectedObject.childNodes[j].data.staff+' '+selectedObject.childNodes[j].data.staff2,
                         place: selectedObject.childNodes[j].data.place,
                         form: selectedObject.childNodes[j].data.form,
