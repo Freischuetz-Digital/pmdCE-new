@@ -8,20 +8,36 @@ Ext.define('pmdCE.view.main.AddAmbiguousElDialog', {
   // bodyPadding: 10,
   border:false,
   
-   
+   autoScroll: true, 
  
   ambiguousCard: null,
  
     initComponent: function() {
     
-   // if(Ext.getCmp('verovioview').getCard() === 1){
+    switch (Ext.getCmp('verovioview').getCard()) {
+      case 1 :
         ambiguousCard = new pmdCE.view.main.ChoiceTstampCard();
-   /* }
-    else if(Ext.getCmp('verovioview').getCard() === 2){
+        break;
+      case 2: 
         ambiguousCard = new pmdCE.view.main.ChoiceTstamp2Card();
-    }*/
-        
-    
+        break;
+      case 3:
+        ambiguousCard = new pmdCE.view.main.ChoiceStaffCard();
+        break;
+      case 4: 
+        ambiguousCard = new pmdCE.view.main.ChoiceTimeCard();
+        break;
+      case 5:
+        ambiguousCard = new pmdCE.view.main.ChoiceTstampStaffCard();
+        break;
+      case 6:
+        ambiguousCard = new pmdCE.view.main.ChoiceTstamp2Card();
+        break;
+      case 7:
+         ambiguousCard = new pmdCE.view.main.ChoiceTimeStaffCard();
+         break;
+   }
+ 
    // ambiguousCard = new pmdCE.view.main.AmbiguousCard(),
     
      this.items =  [

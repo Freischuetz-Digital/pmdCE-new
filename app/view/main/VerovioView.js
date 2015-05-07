@@ -27,12 +27,12 @@ Ext.define('pmdCE.view.main.VerovioView', {
         align: 'stretch'
     },
     
-    me: null,
+   // me: null,
     
        
     initComponent: function() {
     
-    me = this;
+   // me = this;
   
    addElementButton = this.createCEButton();
    addElementButton.setDisabled(true);
@@ -134,80 +134,40 @@ return ceButton;
 },
 
 createHairpinButton: function(){
+    var me = this;
+    
+    var menuTstamp2Reg = this.createMenuItem("for Tstamp (2 regs)", 1, me);
+    
+    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (2 regs)", 2, me);
+    
+    var menuStaff2Reg  = this.createMenuItem("for Staff (2 regs)", 3, me);
+    
+     var menuTime4Reg  = this.createMenuItem("for Time (4 regs)", 4, me);
+     
+     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (4 regs)", 5, me);
+     
+     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (4 regs)", 6, me);
+     
+      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (6 regs)", 7, me);
+    
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
                     id: "createhairpinbutton",
-                   // icon: "resources/images/drop-add.gif",
-                   // glyph: null,
                     text: 'Create element',
                      margin: '0 0 10 0', 
-                   // scale: 'medium',
-                   //   width: 120, 
-                  // bodyPadding: 10,
-                  //  handler: ceHandler,
                      menu: [Ext.create('Ext.menu.Item', {
                         text: "Choice ...",
                         icon: 'resources/images/details-xml.png',
                         
-                        menu:[Ext.create('Ext.menu.Item', {
-                                text: "for Tstamp (2 regs)",
-                                icon: 'resources/images/mix_volume.png',
-                                handler: function() {
-                               // me.setCard(1);
-                                var win = new pmdCE.view.main.AddAmbiguousElDialog(); 
-                                win.show();
-                                }                       
-                         }),
-                         Ext.create('Ext.menu.Item', {
-                                text: "for Tstamp2 (2 regs)",
-                                icon: 'resources/images/mix_volume.png',
-                                handler: function() {
-                                //me.setCard(2);
-                                var win = new pmdCE.view.main.ChoiceTstamp2Dialog(); 
-                                win.show();
-                                }                       
-                         }),
-                         Ext.create('Ext.menu.Item', {
-                                text: "for Staff (2 regs)",
-                                icon: 'resources/images/mix_volume.png',
-                                handler: function() {
-                                var win = new pmdCE.view.main.ChoiceStaffDialog();          
-                                    win.show();
-                                }                       
-                         }),
-                         Ext.create('Ext.menu.Item', {
-                                text: "for Time (4 regs)",
-                                icon: 'resources/images/mix_volume.png',
-                                handler: function() {
-                                var win = new pmdCE.view.main.ChoiceTimeDialog();          
-                                    win.show();
-                                }                       
-                         }),
-                         Ext.create('Ext.menu.Item', {
-                                text: "for Tstamp and Staff (4 regs)",
-                                icon: 'resources/images/mix_volume.png',
-                                handler: function() {
-                                var win = new pmdCE.view.main.ChoiceTstampStaffDialog();          
-                                    win.show();
-                                }                       
-                         }),
-                         Ext.create('Ext.menu.Item', {
-                                text: "for Tstamp2 and Staff (4 regs)",
-                                icon: 'resources/images/mix_volume.png',
-                                handler: function() {
-                                var win = new pmdCE.view.main.ChoiceTstamp2StaffDialog();          
-                                    win.show();
-                                }                       
-                         }),
-                         Ext.create('Ext.menu.Item', {
-                                text: "for Time and Staff (6 regs)",
-                                icon: 'resources/images/mix_volume.png',
-                                handler: function() {
-                                var win = new pmdCE.view.main.ChoiceTimeStaffDialog();          
-                                    win.show();
-                                }                       
-                         })
-                         ]
+                        menu:[
+                        menuTstamp2Reg,
+                        menuTStamp22Reg,
+                        menuStaff2Reg,
+                        menuTime4Reg,
+                        menuTStampAndStaff4Reg,
+                        menuTStamp2AndStaff4Reg,
+                        menuTimeAndStaff4Reg
+                        ]
                      }),
                      
                      Ext.create('Ext.menu.Item', {
@@ -224,13 +184,26 @@ createHairpinButton: function(){
 return ceButton;
 },
 
-    setCard:function(card){
-        
+createMenuItem: function(itemText, type, me){
+     var item = Ext.create('Ext.menu.Item', {
+                                text: itemText,
+                                icon: 'resources/images/mix_volume.png',
+                                handler: function() {
+                                me.setCard(type);
+                                var win = new pmdCE.view.main.AddAmbiguousElDialog();          
+                                    win.show();
+                                }                       
+                         });
+                         
+    return item;                     
+    
+},
+
+    setCard:function(card){        
         this.card = card;
     },
     
-     getCard:function(){
-        
+     getCard:function(){        
         return this.card;
     },
 

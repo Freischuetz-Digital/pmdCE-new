@@ -353,9 +353,7 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
         function(){
         
         var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
-
-             var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
-           
+        
 	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
 	               id: hairId,
 	               name: 'choice_m'+startTaktField.getValue(),
