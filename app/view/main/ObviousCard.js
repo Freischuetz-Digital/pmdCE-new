@@ -19,7 +19,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
     defaultListenerScope: true,
     
     staffField: null,
-    satffFieldBetween: null,
+    //satffFieldBetween: null,
     staffFieldCopy: null,
     startTaktField: null,
     endTaktField: null,
@@ -40,7 +40,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         // me = this;
          
         staffField = this.createComboBoxStaff('Staff'); 
-        satffFieldBetween = this.createComboBoxStaff('Second staff'); 
+        //satffFieldBetween = this.createComboBoxStaff('Second staff'); 
         staffFieldCopy = this.createTextField('staffFieldCopy', 'staffFieldCopy', 'Staff');
         staffFieldCopy.setDisabled(true);
         
@@ -104,7 +104,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                 },        
                 items: [
                 staffFieldCopy,
-                satffFieldBetween,
+               // satffFieldBetween,
                  placeField,
                 formField
                 ]
@@ -178,7 +178,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
        
         var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
         
-        var staffValue = staffField.getValue() + (satffFieldBetween.getValue() !== null ? " "+satffFieldBetween.getValue() : '')
+       // var staffValue = staffField.getValue() + (satffFieldBetween.getValue() !== null ? " "+satffFieldBetween.getValue() : '')
 	 
         var hairpin = Ext.create('pmdCE.model.Hairpin', {      
                     id: hairId,
@@ -187,7 +187,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                     obvious: true,
                     ambiguous: false,
                     operation: 'create',
-                    staff: staffValue,                   
+                    staff: staffField.getValue(), 
                     tstamp: tstampField.getValue(),
                     tstamp2: tstamp2Field.getValue(),
                     place: placeField.getValue(),
@@ -286,7 +286,7 @@ return ceTextField;
 
     createComboBox: function(fieldName){
     
-var states = new Array("above", "below", "between"); 
+var states = new Array("above", "below"); 
 
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,

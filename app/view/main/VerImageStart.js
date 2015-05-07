@@ -5,8 +5,8 @@ extend: 'Ext.form.Panel',
       //flex: 1,
       height: 100,
       width: 250,
-       border: true,
-       margin: '0 10 10 0',
+       border: false,
+       margin: '0 0 0 35',
       // title: 'Start',
     // id: 'verovioimagestart',
       
@@ -38,7 +38,7 @@ var measurePath = movement+"_measure"+measureid+"_s"+staffNr;
 Ext.getCmp('cemain').setMeasureId(movement+"_measure"+measureid);
 
 Ext.Ajax.request({
-   // url: "resources/verovio/testEnd.mei",
+    //url: "resources/verovio/testEnd.mei",
     url: "resources/xql/getExtendedStaff.xql",
     method: 'GET',
     params:{ 
@@ -53,7 +53,7 @@ Ext.Ajax.request({
         
         var options = JSON.stringify({
 	pageHeight: 450,
-	pageWidth: 800,
+	pageWidth: 850,
 	ignoreLayout: 25,
 	border: 0,
 	scale: 35
@@ -135,6 +135,7 @@ for (var i = 0; i < elements.length; i++) {
                             var avValue = (tstamp1Int+tstampShift1Int)/2;
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue(avValue);
+                            Ext.getCmp(selectedId).focus();
                             break;
                         }
                  }
@@ -175,6 +176,7 @@ for (var i = 0; i < elements.length; i++) {
                         ){
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue(tstamp);
+                            Ext.getCmp(selectedId).focus();
                         }
                         
                         $(note).css('fill','#3adf00');
@@ -192,6 +194,7 @@ for (var i = 0; i < elements.length; i++) {
                         ){
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue('');
+                            Ext.getCmp(selectedId).focus();
                         }
                         $(note).css('fill','#000000');
                         $(note).children().css('stroke','#000000');                       

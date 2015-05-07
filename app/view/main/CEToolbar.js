@@ -134,7 +134,7 @@ for(var i = 0; i < modRecords.length ; i++){
                 if(modRecords[i].childNodes[j].data.tag === 'orig'){
                     var orig = $('<orig></orig>');
                     var hair =  $('<hairpin></hairpin>', {
-                        staff : modRecords[i].childNodes[j].data.staff,
+                        staff : modRecords[i].childNodes[j].data.staff+' '+selectedObject.childNodes[j].data.staff2,
                         place: modRecords[i].childNodes[j].data.place,
                         form: modRecords[i].childNodes[j].data.form,
                         tstamp: modRecords[i].childNodes[j].data.tstamp,
@@ -148,7 +148,7 @@ for(var i = 0; i < modRecords.length ; i++){
                 if(modRecords[i].childNodes[j].data.tag === 'reg'){
                         var reg = $('<reg></reg>');
                         var hair =  $('<hairpin></hairpin>', {
-                        staff : modRecords[i].childNodes[j].data.staff,
+                        staff : modRecords[i].childNodes[j].data.staff+' '+selectedObject.childNodes[j].data.staff2,
                         place: modRecords[i].childNodes[j].data.place,
                         form: modRecords[i].childNodes[j].data.form,
                         tstamp: modRecords[i].childNodes[j].data.tstamp,

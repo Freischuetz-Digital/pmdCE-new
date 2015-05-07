@@ -72,7 +72,10 @@ declare function local:jsonifyElements($elements) {
                         let $name1 := local-name($x)
                         let $place := $x//@place
                         let $staffText := $x//@staff
-                    
+                        
+                         let $staffText1 := if(contains($staffText,' '))then(substring-before($staffText, ' '))else($staffText)
+                         let $staffText2 := if(contains($staffText,' '))then(substring-after($staffText, ' '))else()
+                       
                         let $tstamp := $x//@tstamp
                         let $tstamp2 := $x//@tstamp2
                     
@@ -87,7 +90,8 @@ declare function local:jsonifyElements($elements) {
                             '"place":"',$place,'",',
                             '"form":"',$form,'",',
                             '"tag":"',$name1,'",',
-                            '"staff":"',$staffText,'",',
+                            '"staff":"',$staffText1,'",',
+                            '"staff2":"',$staffText2,'",',
                              '"leaf":true',
                         '}')
     
@@ -145,6 +149,10 @@ declare function local:jsonifyHairpins($hairpins) {
                     let $place := $elem/string(@place)
                     let $staffText := $elem/@staff
                     
+                     let $staffText1 := if(contains($staffText,' '))then(substring-before($staffText, ' '))else($staffText)
+                     let $staffText2 := if(contains($staffText,' '))then(substring-after($staffText, ' '))else()
+                                        
+                    
                     let $tstamp := $elem/(@tstamp)
                     let $tstamp2 := $elem/(@tstamp2)
                     
@@ -167,7 +175,8 @@ declare function local:jsonifyHairpins($hairpins) {
                             '"place":"',$place,'",',
                             '"form":"',$form,'",',
                             '"tag":"",', 
-                            '"staff":"',$staffText,'",',
+                            '"staff":"',$staffText1,'",',
+                            '"staff2":"',$staffText2,'",',
                             (:'"test":"',$test,'",',
                            
                             '"choces":[',local:jsonifyChoices($choices, $test),'],',:)

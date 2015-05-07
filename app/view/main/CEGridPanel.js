@@ -84,6 +84,12 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
                 sortable: true,
                 dataIndex: 'staff'
             },
+             {
+                text: '2. Staff',
+                flex: 1,
+                sortable: true,
+                dataIndex: 'staff2'
+            },
             {
                 text: 'Measure',
                 flex: 1,
@@ -156,7 +162,7 @@ showXMLforSelectedElement: function(selectedObject){
                 if(selectedObject.childNodes[j].data.tag === 'orig'){
                     var orig = $('<orig></orig>');
                     var hair =  $('<hairpin></hairpin>', {
-                        staff : selectedObject.childNodes[j].data.staff,
+                        staff : selectedObject.childNodes[j].data.staff+' '+selectedObject.childNodes[j].data.staff2,
                         place: selectedObject.childNodes[j].data.place,
                         form: selectedObject.childNodes[j].data.form,
                         tstamp: selectedObject.childNodes[j].data.tstamp,
@@ -170,7 +176,7 @@ showXMLforSelectedElement: function(selectedObject){
                 if(selectedObject.childNodes[j].data.tag === 'reg'){
                         var reg = $('<reg></reg>');
                         var hair =  $('<hairpin></hairpin>', {
-                        staff : selectedObject.childNodes[j].data.staff,
+                        staff : selectedObject.childNodes[j].data.staff+' '+selectedObject.childNodes[j].data.staff2,
                         place: selectedObject.childNodes[j].data.place,
                         form: selectedObject.childNodes[j].data.form,
                         tstamp: selectedObject.childNodes[j].data.tstamp,

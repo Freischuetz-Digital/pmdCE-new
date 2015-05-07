@@ -19,6 +19,8 @@ Ext.define('pmdCE.view.main.VerovioView', {
     createNewElButton: null,
     addElementButton: null,
     changeToButton: null,
+    
+    card: 0,
   
      layout: {
         type: 'vbox',
@@ -69,6 +71,7 @@ createCEButton: function(){
                      menu: [Ext.create('Ext.menu.Item', {
                         text: "Orig",
                         icon: 'resources/images/mix_volume.png',
+                    
                         handler: function() {
                            var win = new pmdCE.view.main.AddOrigDialog();
                          
@@ -143,12 +146,68 @@ createHairpinButton: function(){
                   // bodyPadding: 10,
                   //  handler: ceHandler,
                      menu: [Ext.create('Ext.menu.Item', {
-                        text: "Choice",
+                        text: "Choice ...",
                         icon: 'resources/images/details-xml.png',
-                        handler: function() {
-                           var win = new pmdCE.view.main.AddAmbiguousElDialog();
-                            win.show();
-                        }
+                        
+                        menu:[Ext.create('Ext.menu.Item', {
+                                text: "for Tstamp (2 regs)",
+                                icon: 'resources/images/mix_volume.png',
+                                handler: function() {
+                               // me.setCard(1);
+                                var win = new pmdCE.view.main.AddAmbiguousElDialog(); 
+                                win.show();
+                                }                       
+                         }),
+                         Ext.create('Ext.menu.Item', {
+                                text: "for Tstamp2 (2 regs)",
+                                icon: 'resources/images/mix_volume.png',
+                                handler: function() {
+                                //me.setCard(2);
+                                var win = new pmdCE.view.main.ChoiceTstamp2Dialog(); 
+                                win.show();
+                                }                       
+                         }),
+                         Ext.create('Ext.menu.Item', {
+                                text: "for Staff (2 regs)",
+                                icon: 'resources/images/mix_volume.png',
+                                handler: function() {
+                                var win = new pmdCE.view.main.ChoiceStaffDialog();          
+                                    win.show();
+                                }                       
+                         }),
+                         Ext.create('Ext.menu.Item', {
+                                text: "for Time (4 regs)",
+                                icon: 'resources/images/mix_volume.png',
+                                handler: function() {
+                                var win = new pmdCE.view.main.ChoiceTimeDialog();          
+                                    win.show();
+                                }                       
+                         }),
+                         Ext.create('Ext.menu.Item', {
+                                text: "for Tstamp and Staff (4 regs)",
+                                icon: 'resources/images/mix_volume.png',
+                                handler: function() {
+                                var win = new pmdCE.view.main.ChoiceTstampStaffDialog();          
+                                    win.show();
+                                }                       
+                         }),
+                         Ext.create('Ext.menu.Item', {
+                                text: "for Tstamp2 and Staff (4 regs)",
+                                icon: 'resources/images/mix_volume.png',
+                                handler: function() {
+                                var win = new pmdCE.view.main.ChoiceTstamp2StaffDialog();          
+                                    win.show();
+                                }                       
+                         }),
+                         Ext.create('Ext.menu.Item', {
+                                text: "for Time and Staff (6 regs)",
+                                icon: 'resources/images/mix_volume.png',
+                                handler: function() {
+                                var win = new pmdCE.view.main.ChoiceTimeStaffDialog();          
+                                    win.show();
+                                }                       
+                         })
+                         ]
                      }),
                      
                      Ext.create('Ext.menu.Item', {
@@ -164,6 +223,16 @@ createHairpinButton: function(){
 
 return ceButton;
 },
+
+    setCard:function(card){
+        
+        this.card = card;
+    },
+    
+     getCard:function(){
+        
+        return this.card;
+    },
 
 deleteElementButton: function(){
     var ceButton = Ext.create('Ext.button.Button', {  

@@ -1,33 +1,32 @@
-Ext.define('pmdCE.view.main.AddAmbiguousElDialog', {
+Ext.define('pmdCE.view.main.ChoiceTstamp2Dialog', {
    extend: 'Ext.window.Window',
    title: 'Add Choice Element',
    flex: 1,
    //height: 200,
    //width: 500, 
-   modal: true,
+  // modal: true,
   // bodyPadding: 10,
   border:false,
-   
-   staffField: null,  
-    tstampField: null,
- placeField: null,
-  formField: null,
-  tstampField2: null,
   
+   
+ 
   ambiguousCard: null,
  
     initComponent: function() {
-    
-    ambiguousCard = new pmdCE.view.main.AmbiguousCard(),
+        ambiguousCard = new pmdCE.view.main.ChoiceTstamp2Card();
+   
+   // ambiguousCard = new pmdCE.view.main.AmbiguousCard(),
     
      this.items =  [
                ambiguousCard
-            ] , 
+            ] ; 
    
    
-this.callParent()
+this.callParent();
  
     }
+    
+
     
 
 });

@@ -6,11 +6,11 @@ extend: 'Ext.form.Panel',
        height: 100,
        width: 250,
      // id: 'verovioimageend',
-       border: true,
+       border: false,
       // title: 'End',
       tileId: null,
       bodyId: null,
-      margin: '0 10 10 0',
+      margin: '0 0 0 35',
       renderer: null,
       
       me2: null,
@@ -49,7 +49,7 @@ Ext.Ajax.request({
         
         var options = JSON.stringify({
 	pageHeight: 450,
-	pageWidth: 800,
+	pageWidth: 850,
 	ignoreLayout: 25,
 	border: 0,
 	scale: 35
@@ -125,6 +125,7 @@ for (var i = 0; i < elements.length; i++) {
                             var avValue = (tstampInt+tstampShift1Int)/2;
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue("m+"+avValue);
+                            Ext.getCmp(selectedId).focus();
                             break;
                         }
                  }
@@ -158,6 +159,7 @@ for (var i = 0; i < elements.length; i++) {
                         console.log(Ext.getCmp('ambiguouscard').getSelectedFieldId());
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue("m+"+tstamp);
+                            Ext.getCmp(selectedId).focus();
                         }
                         $(note).css('fill','#3adf00');
                         $(note).children().css('stroke','#3adf00');
@@ -174,6 +176,7 @@ for (var i = 0; i < elements.length; i++) {
                         ){
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
                             Ext.getCmp(selectedId).setValue('');
+                            Ext.getCmp(selectedId).focus();
                         }
                         $(note).css('fill','#000000');
                         $(note).children().css('stroke','#000000');                       

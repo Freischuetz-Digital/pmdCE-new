@@ -6,6 +6,7 @@ Ext.define('pmdCE.model.Hairpin', {
         {name: 'operation',   type: 'string'},
          {name: 'type',   type: 'string'},
         {name: 'staff',   type: 'string'},
+         {name: 'staff2',   type: 'string'},
          {name: 'measureid',   type: 'string'},
          {name: 'measurenr',   type: 'string'},
         {name: 'tstamp',   type: 'string'},
