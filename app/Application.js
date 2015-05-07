@@ -89,8 +89,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                 //url: 'data/pmd_ce_getNavigation.xql',
-                 url: 'resources/xql/pmd_ce_getNavigation.xql',
+                 url: 'data/pmd_ce_getNavigation.xql',
+                // url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sigle'
@@ -108,9 +108,9 @@ Ext.define('pmdCE.Application', {
     extraParams: {path: ''},
              proxy:{
         type: 'ajax',
-      url: 'resources/xql/getControlEvents.xql'
+     // url: 'resources/xql/getControlEvents.xql'
        
-       // url: 'resources/data/tree/treegrid_1.json'
+        url: 'resources/data/tree/treegrid_1.json'
       
     },
     autoLoad: false

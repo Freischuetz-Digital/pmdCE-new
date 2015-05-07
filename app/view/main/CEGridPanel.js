@@ -138,7 +138,7 @@ showXMLforSelectedElement: function(selectedObject){
         if(selectedObject.data.obvious){
              
             var object = $('<hairpin></hairpin>', {
-               staff : selectedObject.data.staff+' '+selectedObject.data.staff2,
+               staff : (selectedObject.data.staff2 !== "" ? (selectedObject.data.staff + ' '+selectedObject.data.staff2)  : selectedObject.data.staff),
                 place: selectedObject.data.place,
                 form: selectedObject.data.form,
                 tstamp: selectedObject.data.tstamp,
@@ -157,13 +157,13 @@ showXMLforSelectedElement: function(selectedObject){
                 xmlns: "http://www.music-encoding.org/ns/mei"
              
             });  
-         
+            console.log('***************');
+         console.log(selectedObject);
             for(var j = 0; j < selectedObject.childNodes.length ; j++){
                 if(selectedObject.childNodes[j].data.tag === 'orig'){
                     var orig = $('<orig></orig>');
                     var hair =  $('<hairpin></hairpin>', {
-                     // DOTO: leerzeichen
-                        staff : selectedObject.childNodes[j].data.staff+' '+selectedObject.childNodes[j].data.staff2,
+                        staff : (selectedObject.childNodes[j].data.staff2 !== "" ? (selectedObject.childNodes[j].data.staff + ' '+selectedObject.childNodes[j].data.staff2)  : selectedObject.childNodes[j].data.staff),
                         place: selectedObject.childNodes[j].data.place,
                         form: selectedObject.childNodes[j].data.form,
                         tstamp: selectedObject.childNodes[j].data.tstamp,
@@ -177,7 +177,7 @@ showXMLforSelectedElement: function(selectedObject){
                 if(selectedObject.childNodes[j].data.tag === 'reg'){
                         var reg = $('<reg></reg>');
                         var hair =  $('<hairpin></hairpin>', {
-                        staff : selectedObject.childNodes[j].data.staff+' '+selectedObject.childNodes[j].data.staff2,
+                        staff : (selectedObject.childNodes[j].data.staff2 !== "" ? (selectedObject.childNodes[j].data.staff + ' '+selectedObject.childNodes[j].data.staff2)  : selectedObject.childNodes[j].data.staff),
                         place: selectedObject.childNodes[j].data.place,
                         form: selectedObject.childNodes[j].data.form,
                         tstamp: selectedObject.childNodes[j].data.tstamp,
