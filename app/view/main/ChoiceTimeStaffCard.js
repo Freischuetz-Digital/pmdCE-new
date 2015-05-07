@@ -595,16 +595,16 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
            if(me.selectedFieldId === 'tstampFieldOrig'){
-              tstampFieldReg3.setValue(tstampFielOrig.getValue());
-               tstampFieldReg4.setValue(tstampFielOrig.getValue());
-               tstampFieldReg5.setValue(tstampFielOrig.getValue());
-               tstampFieldReg6.setValue(tstampFielOrig.getValue());
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg5.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg6.setValue(tstampFieldOrig.getValue());
            }
            if(me.selectedFieldId === 'tstamp2FieldOrig'){              
-                tstamp2FieldReg1.setValue(tstamp2FielOrig.getValue());
-               tstamp2FieldReg2.setValue(tstamp2FielOrig.getValue());
-               tstamp2FieldReg5.setValue(tstamp2FielOrig.getValue());
-               tstamp2FieldReg6.setValue(tstamp2FielOrig.getValue());
+                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
                
            }
         }

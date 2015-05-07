@@ -362,8 +362,6 @@ staffFieldReg3= this.createComboBoxStaff('Staff');
         
         var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
 
-             var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
-           
 	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
 	               id: hairId,
 	               name: 'choice_m'+startTaktField.getValue(),
@@ -514,14 +512,14 @@ staffFieldReg3= this.createComboBoxStaff('Staff');
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
            if(me.selectedFieldId === 'tstampFieldOrig'){
-              tstampFieldReg3.setValue(tstampFielOrig.getValue());
-               tstampFieldReg4.setValue(tstampFielOrig.getValue());
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
            }
            if(me.selectedFieldId === 'tstamp2FieldOrig'){              
-                tstamp2FieldReg1.setValue(tstamp2FielOrig.getValue());
-               tstamp2FieldReg2.setValue(tstamp2FielOrig.getValue());
-               tstamp2FieldReg3.setValue(tstamp2FielOrig.getValue());
-               tstamp2FieldReg4.setValue(tstamp2FielOrig.getValue());
+                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
                
            }
         }

@@ -514,14 +514,14 @@ staffFieldReg3= this.createComboBoxStaff('Staff');
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
            if(me.selectedFieldId === 'tstampFieldOrig'){
-                tstampFieldReg1.setValue(tstampFielOrig.getValue());
-               tstampFieldReg2.setValue(tstampFielOrig.getValue());
-              tstampFieldReg3.setValue(tstampFielOrig.getValue());
-               tstampFieldReg4.setValue(tstampFielOrig.getValue());
+                tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
            }
            if(me.selectedFieldId === 'tstamp2FieldOrig'){              
-               tstamp2FieldReg3.setValue(tstamp2FielOrig.getValue());
-               tstamp2FieldReg4.setValue(tstamp2FielOrig.getValue());
+               tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
                
            }
         }
