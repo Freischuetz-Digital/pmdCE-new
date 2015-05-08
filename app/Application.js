@@ -38,6 +38,7 @@ Ext.define('pmdCE.Application', {
        'main.ChangeToAmDialog',
        'main.DeleteDialog',
        'main.ChangeToObDialog',
+       'main.LeafletFacsimile',
        'main.CEPanel',          
        'main.Main'      
     ],

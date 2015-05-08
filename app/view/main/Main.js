@@ -19,6 +19,7 @@ Ext.define('pmdCE.view.main.Main', {
         align: 'stretch'
     },
     
+   
     bodyPadding: 5,
    
     defaults: {
@@ -38,13 +39,35 @@ Ext.define('pmdCE.view.main.Main', {
     verEndId: null,
    
     initComponent: function() {
-  
+   
+  /* Ext.Loader.setConfig({
+		enabled: true,
+		paths:{
+			'Ext.ux':'ux'
+		}
+	});
+ 
+	Ext.require(['pmdCE.view.main.LeafletFacsimile']);
+ 
+	Ext.onReady(function() {
+		Ext.create('Ext.container.Viewport', {
+			layout: 'vbox',
+			items: [
+				{
+					xtype: 'leafletmapview',
+					flex: 1,
+					width: '100%'
+				}
+			]
+		})
+	});*/
+   
     ceToolbar = new pmdCE.view.main.CEToolbar(),
     cePanel = new pmdCE.view.main.CEPanel(),
      
 this.items = [
-     ceToolbar,
-       cePanel
+   ceToolbar,
+      cePanel
        ]
  
 this.callParent()
