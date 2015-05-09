@@ -1,19 +1,41 @@
 Ext.define('pmdCE.view.main.FacsimileView', {
 extend: 'Ext.form.Panel',
+requires: [
+        'pmdCE.view.main.LeafletFacsimile'
+    ],
+layout: 'vbox',
+region:'south',
+flex: 1,
+ id: 'facsimileview',
+ autoScroll: true,
+
+initComponent: function() {
+
+			this.items = [
+				{
+					xtype: 'leafletmapview',
+					flex: 1,
+					width: '100%'
+				}
+			]
+			        this.callParent()
+
+}
+
+ });
+
+
+/*Ext.define('pmdCE.view.main.FacsimileView', {
+extend: 'Ext.form.Panel',
         layout:'absolute',
         region:'south',
            // floatable: false,
         //    margin: '5 0 0 0',
-         /*   height: 100,
-            minHeight: 75,
-            maxHeight: 150,*/
-      
-      //  defaultType: 'textfield',
+         
       flex: 1,
-     // title: "Page NR",
+    
        autoScroll: true,
-    // image:null,
-    // facsimilePath: null,
+    
     me: null,
     id: 'facsimileview',
        
@@ -82,4 +104,4 @@ image
     ]    
     }
 
-    });
+    });*/

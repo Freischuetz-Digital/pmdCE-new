@@ -40,7 +40,7 @@ Ext.define('pmdCE.view.main.Main', {
    
     initComponent: function() {
    
-  /* Ext.Loader.setConfig({
+   /*Ext.Loader.setConfig({
 		enabled: true,
 		paths:{
 			'Ext.ux':'ux'
