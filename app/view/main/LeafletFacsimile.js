@@ -24,7 +24,7 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
 
 
 
-           var originalMaxSize = 3456;
+           var originalMaxSize = 1200;
           var maxZoomLevel = 0;
 		  while(originalMaxSize > 256){
 			originalMaxSize = originalMaxSize/2;
@@ -39,7 +39,7 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
 				this.setMap(map);
             
             
-           var facsimileTile =  L.tileLayer.facsimileLayer('resources/data/example/{z}-{x}-{y}.JPG', {
+           var facsimileTile =  L.tileLayer.facsimileLayer('resources/data/example/{z}-{x}-{y}.jpg', {
                 minZoom: 0,
                 maxZoom: maxZoomLevel,
 		        continuousWorld : true

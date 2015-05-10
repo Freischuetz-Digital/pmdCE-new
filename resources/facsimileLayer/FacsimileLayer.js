@@ -110,8 +110,8 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
     */
     _addTile: function (coords, container) {
     
-    var originalMaxWidth = 2304;   
-    var originalMaxHeight = 3456;
+    var originalMaxWidth = 1200;   
+    var originalMaxHeight = 900;
 	
 	var maxZoom = this._map.getMaxZoom();    
     var currZoom = this._map.getZoom();
