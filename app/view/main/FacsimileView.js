@@ -11,16 +11,37 @@ flex: 1,
 
 initComponent: function() {
 
+var selectedPage = Ext.getCmp('pages').getText(); 
+
+   var pageMeasuresMap = Ext.getCmp('cetoolbar').pageMeasuresMap; 
+   var test = pageMeasuresMap[selectedPage];  
+   var value = test[0];
+   var endValue = test[test.length-1];
+   
+   var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
+   var test = pageStaffMap[selectedPage];
+   var staffNr = test[test.length-1];
+
+    this.title = selectedPage + ' (measures: '+ value + ' - ' + endValue + '; staffNr: ' + staffNr + ')';
+
+    me = this;
+
 			this.items = [
 				{
 					xtype: 'leafletmapview',
 					flex: 1,
-					width: '100%'
+					width: '100%',
+					handler: this.click
 				}
 			]
 			        this.callParent()
 
-}
+},
+
+ click: function() {
+ 
+       console.log("Click");
+    }
 
  });
 

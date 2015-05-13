@@ -70,6 +70,7 @@ Ext.define('pmdCE.Application', {
     hairpinStart: null,
     facsimilePath: null,
     saveStore: null,
+    facsimileStore: null,
     
     pageNr: null,
     
@@ -96,71 +97,30 @@ Ext.define('pmdCE.Application', {
          
          hairpinDataStore = Ext.create('Ext.data.TreeStore', {
     model: 'pmdCE.model.Hairpin',
-   /* root: {
-        name: 'People',
-        expanded: true
-    },*/
+  
     extraParams: {path: ''},
              proxy:{
         type: 'ajax',
      // url: 'resources/xql/getControlEvents.xql'
        
-        url: 'resources/data/tree/treegrid_1.json'
+       url: 'resources/data/tree/treegrid_1.json'
       
     },
     autoLoad: false
 });
 
 
-
-   /*      saveStore = Ext.create('Ext.data.Store', {
-            model: 'pmdCE.model.Hairpin',
-      //  extraParams: {path: ''},
-             proxy:{
-        type: 'ajax',
-        method: 'POST'
-        //  url: 'resources/xql/saveMEI.xql'
-    },
-    autoLoad: false
-});*/
-//      new Ext.data.proxy.Ajax({
-//    url: 'users.json',
-//    model: 'User',
-//    reader: 'json'
-//}); 
-     
-     /*    hairpinDataStore = Ext.create('Ext.data.TreeStore', {
-         storeId:'hairpinDataStore',
-            model: 'pmdCE.model.Hairpin',
-             root: {
-        name: 'People',
-        expanded: true
-    },
-            
+facsimileStore= Ext.create('Ext.data.Store', {
+            model: 'pmdCE.model.Source',
+            extraParams: {path: ''},
              proxy: {
-            
                  type: 'ajax',
-                 extraParams: {path: ''},
-                 url: 'resources/data/tree/treegrid_1.json'
-                 // url: 'resources/xql/getControlEvents.xql'
+                 url: 'data/getZones.xql'
+                //url: 'resources/xql/getZones.xql',             
              },
-             autoLoad: false
-         }),*/
-         
- /* Ext.Ajax.request({
-    url: 'resources/xql/pmd_ce_getFacsimilePage.xql',
-    async: false,
-    method: 'GET',
-    params: {
-        path: "A_surface101"
-    },
-    success: function(response){
-       facsimilePath = response;
-       console.log(facsimilePath);
-       
-    }
-});
-    */
+             autoLoad: true
+         });
+  
        
          sourcesStore.load();
          
@@ -168,16 +128,14 @@ Ext.define('pmdCE.Application', {
         
     },
     
-  /*  getFacsimilePath: function(){
-    //console.log(this.facsimilePath);
-    return this.facsimilePath;
-    },*/
     
     getSourcesStore: function(){
     return sourcesStore;
     },
     
-   
+    getFacsimileStore: function(){
+    return facsimileStore;
+    },
     
     getSaveStore: function(){
     return saveStore;

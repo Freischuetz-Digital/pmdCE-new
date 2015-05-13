@@ -1,4 +1,4 @@
-{"page":{"id":"A_surface102","n":"102","width":"3991","height":"2992"},"zones":[{"id":"A_zoneOf_mov6_measure22"
+{"page":[{"id":"A_surface102","n":"102","width":"3991","height":"2992"}],"zones":[{"id":"A_zoneOf_mov6_measure22"
 ,"type":"measure","ulx":"223","uly":"359","lrx":"665","lry":"2796","targetID":"A_mov6_measure22","n"
 :"22"},{"id":"A_zoneOf_mov6_measure22_s1","type":"staff","ulx":"223","uly":"359","lrx":"665","lry":"654"
 ,"targetID":"A_mov6_measure22_s1","n":"1"},{"id":"A_zoneOf_mov6_measure22_s2","type":"staff","ulx":"223"

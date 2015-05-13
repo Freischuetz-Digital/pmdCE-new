@@ -40,22 +40,28 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
     * @param {number} lrx - right x coordinate.
     * @param {number} lry - right y coordinste.
     */
-     enableRectangle: function(ulx, uly, lrx, lry){
-       if(typeof rectangle === 'undefined' || rectangle === null){
+     enableRectangle: function(ulx, uly, lrx, lry){  
+      // if(typeof rectangle === 'undefined' || rectangle === null){
             // define points in coordinates system
             var pointLeft = L.point(ulx, uly);
             var pointRight = L.point(lrx, lry);
-       
+           
             // convert coordinates in degrees
-            var latLngLeft = this._map.unproject(pointLeft, this._map.getMinZoom());
-            var latLngRight = this._map.unproject(pointRight, this._map.getMinZoom());
+            var latLngLeft = this._map.unproject(pointLeft, this._map.getMaxZoom());
+            var latLngRight = this._map.unproject(pointRight, this._map.getMaxZoom());
+            
+           // var latLngLeft = L.latLng(ulx, uly);
+            // var latLngRight = L.latLng(lrx, lry);
          
 	       // create bounds for a rectangle
 	       bounds = L.latLngBounds(latLngLeft, latLngRight);
      
             // create rectangle
-	       rectangle = L.rectangle(bounds, {color: "#ff7800", weight: 1}).addTo(map);
-	    }
+            console.log(Ext.getCmp('leafletfacsimile').getMap());
+	       var rectangle = L.rectangle(bounds, {color: "#ff7800", weight: 1}).addTo(this._map);
+	      
+	        
+	   // }
        },     
        
      /**
@@ -88,18 +94,35 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
     * @param {number} lrx - right x coordinate.
     * @param {number} lry - right y coordinste.
     */
-     showRectangleCenter: function(ulx, uly, lrx, lry){  
-       if(typeof rectangleCenter === 'undefined' || rectangleCenter === null){
-           var centerPoint = L.point((lrx-ulx)/2+ulx, (lry-uly)/2+uly);
+     showRectangleCenter: function(ulx, uly, lrx, lry, nr){  
+       //if(typeof rectangleCenter === 'undefined' || rectangleCenter === null){
+       
+       ulx = parseInt(ulx);      
+       uly = parseInt(uly);       
+       lrx = parseInt(lrx);       
+       lry = parseInt(lry);
+       
+       var corrd1 = ((lrx-ulx)/2+ulx);
+       var corrd2 = ((lry-uly)/2)+uly;
+           var centerPoint = L.point(corrd1, corrd2);
+          
            // convert coordinates in degrees
-		   var latLngCenterPoint = this._map.unproject(centerPoint, this._map.getMinZoom());
+		   var latLngCenterPoint = this._map.unproject(centerPoint, this._map.getMaxZoom());
 		   // create circle in center          
-           rectangleCenter = L.circle([latLngCenterPoint.lat, latLngCenterPoint.lng], 100, {
+          /* var rectangleCenter = L.circle([latLngCenterPoint.lat, latLngCenterPoint.lng], 100, {
                color: 'red',
                fillColor: '#f03',
                fillOpacity: 0.5
            }).addTo(this._map);
-          }
+           */
+           
+           var myIcon = L.divIcon({ 
+    iconSize: new L.Point(17, 17), 
+    html: nr
+});
+
+L.marker([latLngCenterPoint.lat, latLngCenterPoint.lng], {icon: myIcon}).addTo(this._map); 
+        
         },	
       
 	/**
@@ -110,8 +133,8 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
     */
     _addTile: function (coords, container) {
     
-    var originalMaxWidth = 1200;   
-    var originalMaxHeight = 900;
+    var originalMaxWidth = 3991;   
+    var originalMaxHeight = 2992;
 	
 	var maxZoom = this._map.getMaxZoom();    
     var currZoom = this._map.getZoom();

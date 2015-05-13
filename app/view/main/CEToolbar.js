@@ -346,23 +346,26 @@ for(var i = 0; i < modRecords.length ; i++){
          verovioView = new pmdCE.view.main.VerovioView();
        
          controllsView = new pmdCE.view.main.CEGridPanel();
-        
-        
+                
          xmlView = new pmdCE.view.main.XMLEditorView();
          
          Ext.getCmp('hairpinsitem').add(controllsView);
          Ext.getCmp('hairpinsitem').add(verovioView);
          Ext.getCmp('hairpinsitem').add(xmlView);
-                //Ext.getCmp('centertabeditor').setActiveItem(ceEditor);
+         //Ext.getCmp('centertabeditor').setActiveItem(ceEditor);
          
          var app = pmdCE.getApplication();
          var store = app.getHairpinDataStore();
         store.getProxy().extraParams.path = item.text;
 
         store.load();
-       Ext.getCmp('cegridpanel').getView().bindStore(store);   
-         
-        
+       Ext.getCmp('cegridpanel').getView().bindStore(store);  
+       
+        var facsimileStore = app.getFacsimileStore();
+        facsimileStore.getProxy().extraParams.path = item.text;
+
+        facsimileStore.load();
+ 
     },
       
     homeOnItemToggle: function(){

@@ -1,7 +1,7 @@
 Ext.define('pmdCE.view.main.LeafletFacsimile', {
 		extend: 'Ext.Component',
 		alias: 'widget.leafletmapview',
-		
+		id: 'leafletfacsimile',
 		config:{
 			map: null
 		},
@@ -12,19 +12,22 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
 			if (leafletRef == null){
 				this.update('No leaflet library loaded');
 			} else {
-				/*var map = L.map(this.getId());
 				
-				map.setView([51.505, -0.09], 13);
-				
-				this.setMap(map);
-				
-				L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);*/
-
-
-
-           var originalMaxSize = 1200;
+        var app = pmdCE.getApplication();
+         var store = app.getFacsimileStore();
+         console.log(store);
+         
+         facsimileHeight = store.data.items[0].data.page[0].height;
+        facsimileWidth = store.data.items[0].data.page[0].width;
+        var originalMaxSize = null;
+        
+        if(facsimileHeight > facsimileWidth){
+            originalMaxSize = facsimileHeight;
+        }
+        else{
+            originalMaxSize = facsimileWidth;
+        }
+       
           var maxZoomLevel = 0;
 		  while(originalMaxSize > 256){
 			originalMaxSize = originalMaxSize/2;
@@ -34,7 +37,7 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
           
             var map = L.map(this.getId());
 				
-				map.setView([0, 0], 0);
+				map.setView([0, 0], 1);
 				
 				this.setMap(map);
             
@@ -44,13 +47,46 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
                 maxZoom: maxZoomLevel,
 		        continuousWorld : true
             }); 
-             console.log("create");  
+              
            facsimileTile.addTo(map);
-            console.log("add"); 
+           
+           var selectedPage = Ext.getCmp('pages').getText(); 
+            var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
+            var test = pageStaffMap[selectedPage];
+            var staffNr = test[test.length-1];
+         var pageMeasuresMap = Ext.getCmp('cetoolbar').pageMeasuresMap; 
+            var test = pageMeasuresMap[selectedPage];  
+            var value = test[0];
+           
+           var zones = store.data.items[0].data.zones;
+           for(i=0; i < zones.length; i++){
+               if(zones[i].type === 'measure'){
+                   var lrx = zones[i].lrx;
+                   var lry = zones[i].uly;
+                   var ulx = zones[i].ulx;
+                   var uly = 0;
+                 facsimileTile.showRectangleCenter(ulx, uly, lrx, lry, zones[i].n);
+               }
+               if(zones[i].type === 'staff' && zones[i].n <= staffNr && zones[i].id.indexOf(value) > -1){ 
+                    var lrx = zones[i].ulx;
+                   var lry = zones[i].lry;
+                   var ulx = 0;
+                  var uly = zones[i].uly;
+                 facsimileTile.showRectangleCenter(ulx, uly, lrx, lry, zones[i].n);
+               }
+           }
+           
+           
+           map.on('click', function(e) {
+                  /*  console.log(e.latlng);
+                    console.log(e.layerPoint);
+                    console.log(e.containerPoint);
+                    console.log(e.originalEvent);*/
+            });
 			
 			}
 		},
-		
+
 		onResize: function(w, h, oW, oH){
 		this.callParent(arguments);
 		var map = this.getMap();
@@ -58,4 +94,23 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
 			map.invalidateSize();
 		}
 	}
+	
+	/*listeners: {
+        click : {
+            fn: function() {
+            
+             var app = pmdCE.getApplication();
+               var store = app.getFacsimileStore();
+                console.log(store);
+                console.log(document);
+         
+        // facsimileHeight = store.data.items[0].data.page[0].height;
+        //facsimileWidth = store.data.items[0].data.page[0].width;
+       
+            },
+             element: 'el'
+         
+        }    
+    }*/
+	
 	});
