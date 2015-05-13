@@ -31,24 +31,28 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {
     formField: null,
    
     tstampFieldOrig: null,
-    tstampField2Orig: null,
+    tstamp2FieldOrig: null,
  
     staffFieldReg1: null,
     placeFieldReg1: null,
     formFieldReg1: null,
     tstampFieldReg1: null,
-    tstampField2Reg1: null,
+    tstamp2FieldReg1: null,
 
     staffFieldReg2: null,
     placeFieldReg2: null,
     formFieldReg2: null,
     tstampFieldReg2: null,
-    tstampField2Reg2: null,
+    tstamp2FieldReg2: null,
    
    verovioImageStart: null,
    verovioImageEnd: null,
    
    selectedFieldId:null,
+   
+    nextButton: null,
+   prevButton: null,
+   createElementButton: null,
    
     me: null,
     
@@ -57,15 +61,22 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {
          me = this;
          
          staffField= this.createComboBoxStaff('Staff');  
+         staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
         staffFieldCopy.setDisabled(true);
         startTaktField= this.createComboBoxMeasureNr('Start measure');
+        startTaktField.validate();
         endTaktField= this.createComboBoxMeasureNr('End measure');
+        endTaktField.validate();
         placeField = this.createComboBox('Place');
+        placeField.validate();
         formField = this.createComboBoxForm('Form');
+        formField.validate();
         
     tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp');
+    tstampFieldOrig.validate();
     tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
+    tstamp2FieldOrig.validate();
 
         staffFieldReg1= this.createTextField('staffFieldReg1', 'Staff');  
         staffFieldReg1.setDisabled(true);
@@ -74,8 +85,10 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {
         formFieldReg1 = this.createComboBoxForm('Form');
         formFieldReg1.setDisabled(true);
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
-        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
         tstampFieldReg1.setDisabled(true);
+        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
+        tstamp2FieldReg1.validate();
+        
 
 staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
  staffFieldReg2.setDisabled(true);
@@ -84,8 +97,9 @@ staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');
         formFieldReg2 = this.createComboBoxForm('Form');
         formFieldReg2.setDisabled(true);
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
-tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
 tstampFieldReg2.setDisabled(true);
+tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
+tstamp2FieldReg2.validate();
 
           this.items  = [
         {
@@ -222,30 +236,52 @@ tstampFieldReg2.setDisabled(true);
         } // end card-1
     ], // end this irems
          
+         
+         prevButton = this.createNavigationButton('card-prev', '&laquo; Previous', 'showPrevious');
+    nextButton = this.createNavigationButton('card-next', 'Next &raquo;', 'showNext');
+    createElementButton = this.createNavigationButton('createElement', 'Create', 'createElement');
      
      this.bbar = ['->',
      
-     {
-            itemId: 'card-prev',
-            text: '&laquo; Previous',
-            handler: 'showPrevious',
-            disabled: true
-        },
-        {
-            itemId: 'card-next',
-            text: 'Next &raquo;',
-            handler: 'showNext'
-        },
-     
-     {
-        text:'Create', 
-        itemId: 'createItem',
-        // TODO: handle
-       // disabled: true,
-        handler: 
-        function(){
+     prevButton,
+        nextButton,
+        createElementButton,
+    {
+        text: 'Cancel',
+        handler: function () { this.up('window').close(); }
+    }      
+    ],
+
+    this.callParent()
+ 
+    },
+    
+    handleNavigationButtons: function(){
+      if(staffField.isValid() && startTaktField.isValid() && endTaktField.isValid()
+      ){
+        nextButton.setDisabled(false); 
+      }
+      else{
+          nextButton.setDisabled(true);
+          
+      }       
+    },
+    
+    handleCreateButton: function(){
+     if(placeField.isValid() && formField.isValid() 
+          && tstampFieldOrig.isValid() && tstamp2FieldOrig.isValid()
+          && tstamp2FieldReg1.isValid() && tstamp2FieldReg2.isValid()){ 
+             createElementButton.setDisabled(false); 
+          }
+          else{
+            createElementButton.setDisabled(true); 
+            
+          }
         
-        var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
+    },
+       
+    createElement: function () {
+    var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
 
 	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
 	               id: hairId,
@@ -304,16 +340,7 @@ tstampFieldReg2.setDisabled(true);
 	    Ext.getCmp('saveButton').setDisabled(false);
             this.up('window').close();
            
-       }
-      
-    },{
-        text: 'Cancel',
-        handler: function () { this.up('window').close(); }
-    }      
-    ],
-
-    this.callParent()
- 
+       
     },
 
 
@@ -353,19 +380,17 @@ tstampFieldReg2.setDisabled(true);
 
         me.down('#card-prev').setDisabled(next===0);
         me.down('#card-next').setDisabled(next===1);
-        
-        // TODO
-        /*if(l.activeItem.id === 'card-1'){
-            Ext.getCmp('createItem').setDisabled(false);
-        }*/
+       
     },
     
         createTextField: function(fieldName, fieldLabel){
+        var me1 = this;
     var ceTextField = Ext.create('Ext.form.field.Text',{
         name: fieldName,
         id: fieldName,
         fieldLabel: fieldLabel,
-      //  allowBlank: false , // requires a non-empty value
+      allowBlank: false,
+        invalidCls: '',
         listeners: {
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
@@ -373,6 +398,7 @@ tstampFieldReg2.setDisabled(true);
                tstampFieldReg1.setValue(tstampFieldOrig.getValue());
                tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
+            me1.handleCreateButton();
         }
         }
      
@@ -388,20 +414,20 @@ getSelectedFieldId: function(){
     createComboBox: function(fieldName){
     
     var states = new Array("above", "below"); 
-    
+    var me2 = this;
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
     store: states,
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-    valueField: 'abbr',
+    allowBlank: false,
+    invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
        placeFieldReg1.setValue(combo.getValue());
        placeFieldReg2.setValue(combo.getValue());
-    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-     // modelTest.set('curvedir', combo.getValue());
+        me2.handleCreateButton();
     }
   }
   });
@@ -429,15 +455,14 @@ return ceTextField;
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-    valueField: 'abbr',
+    allowBlank: false,
+    invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
     if(fieldName.indexOf('Second') === -1){
         Ext.getCmp('cemain').setStaffNr(combo.getValue());
         }
-    
-    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-     // modelTest.set('curvedir', combo.getValue());
+        me.handleNavigationButtons();
     }
   }
   });
@@ -462,7 +487,8 @@ return ceTextField;
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-    valueField: 'abbr',
+    allowBlank: false,
+    invalidCls: '',
     listeners: {
        select: function(combo, record, index) {
     if(fieldName.indexOf('Start') > -1){
@@ -473,6 +499,7 @@ return ceTextField;
         Ext.getCmp('cemain').setEndMeasure(combo.getValue());
         
     }
+    me.handleNavigationButtons();
     }
   }
   });
@@ -482,25 +509,37 @@ return ceTextField;
     createComboBoxForm: function(fieldName){
     
     var states = new Array("cres", "dim"); 
-    
+    var me3 = this;
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
     store: states,
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-   // valueField: 'abbr',
+   allowBlank: false,
+       invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
        formFieldReg1.setValue(combo.getValue());
        formFieldReg2.setValue(combo.getValue());
-    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-     // modelTest.set('curvedir', combo.getValue());
+        me3.handleCreateButton();
     }
   }
   });
 
 return ceTextField;
+},
+
+createNavigationButton: function(navItemId, navText, navHandler){
+ var navButton = Ext.create('Ext.button.Button', {  
+                     itemId: navItemId,
+            text: navText,
+            handler: navHandler,
+            disabled: true
+                  
+          })
+
+return navButton;
 }
 
 });

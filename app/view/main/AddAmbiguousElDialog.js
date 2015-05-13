@@ -4,7 +4,7 @@ Ext.define('pmdCE.view.main.AddAmbiguousElDialog', {
    flex: 1,
    //height: 200,
    //width: 500, 
-  // modal: true,
+   modal: true,
   // bodyPadding: 10,
   border:false,
   
@@ -31,7 +31,7 @@ Ext.define('pmdCE.view.main.AddAmbiguousElDialog', {
         ambiguousCard = new pmdCE.view.main.ChoiceTstampStaffCard();
         break;
       case 6:
-        ambiguousCard = new pmdCE.view.main.ChoiceTstamp2Card();
+        ambiguousCard = new pmdCE.view.main.ChoiceTstamp2StaffCard();
         break;
       case 7:
          ambiguousCard = new pmdCE.view.main.ChoiceTimeStaffCard();
