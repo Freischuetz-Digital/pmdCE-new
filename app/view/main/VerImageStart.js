@@ -123,6 +123,7 @@ for (var i = 0; i < elements.length; i++) {
                             
                             var avValue = (tstamp1Int+tstampShift1Int)/2;
                             Ext.getCmp('tstampFieldObv').setValue(avValue);
+                            Ext.getCmp('tstampFieldObv').focus();
                             break;
                         }
                         else if(typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' 
@@ -169,6 +170,7 @@ for (var i = 0; i < elements.length; i++) {
                         if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
                             
                             Ext.getCmp('tstampFieldObv').setValue(tstamp);
+                            Ext.getCmp('tstampFieldObv').focus();
                         }
                        else if(typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' 
                        && Ext.getCmp('ambiguouscard').getSelectedFieldId() !== null 
@@ -187,6 +189,7 @@ for (var i = 0; i < elements.length; i++) {
                         tstampShift1 = null;
                         if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
                             Ext.getCmp('tstampFieldObv').setValue('');
+                            Ext.getCmp('tstampFieldObv').focus();
                         }
                         else if(typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' 
                         && Ext.getCmp('ambiguouscard').getSelectedFieldId() !== null 

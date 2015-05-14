@@ -10,16 +10,18 @@ Ext.define('pmdCE.view.main.ObviousCard', {
    // width: 500,
    // height: 400,
 
-    bodyPadding: 10,
+    //bodyPadding: 10,
     
     defaults: {
-        border:false
+        border:false,
+        autoScroll: true,
+        bodyPadding: 10
     },
 
     defaultListenerScope: true,
+    autoScroll: true,
     
     staffField: null,
-    //satffFieldBetween: null,
     staffFieldCopy: null,
     startTaktField: null,
     endTaktField: null,
@@ -27,30 +29,36 @@ Ext.define('pmdCE.view.main.ObviousCard', {
     formField: null,
     
       tstampField: null,
-      tstampField2: null,
+      tstamp2Field: null,
       
       verovioImageStart: null,
       verovioImageEnd: null,
       
-      //me: null,
+      me: null,
   
     
          initComponent: function() {
          
-        // me = this;
+         me = this;
          
         staffField = this.createComboBoxStaff('Staff'); 
-        //satffFieldBetween = this.createComboBoxStaff('Second staff'); 
+        staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'staffFieldCopy', 'Staff');
         staffFieldCopy.setDisabled(true);
         
         startTaktField = this.createComboBoxMeasureNr('Start measure');
+        startTaktField.validate();
         endTaktField = this.createComboBoxMeasureNr('End measure');
+        endTaktField.validate();
         placeField = this.createComboBox('Place');
-        formField = this.createRadioGroup();
+        placeField.validate();
+        formField = this.createComboBoxForm('Form');
+        formField.validate();
         
-        tstampField = this.createTextField('tstampFieldObv', 'tstampField', 'Tstamp');
-        tstamp2Field = this.createTextField('tstampField2Obv', 'tstampField2', 'Tstamp2');
+        tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
+        tstampField.validate();
+        tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
+        tstamp2Field.validate();
        
           this.items  = [
         {
@@ -58,30 +66,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
              bodyPadding: 5,
              text: 'Fields for verovio load',
             items: [
-            
-            
-          /*  {
-            xtype: 'fieldcontainer',
-            fieldLabel: 'Phone',
-            combineErrors: true,
-            layout: 'hbox',
-            msgTarget: 'under',
-            defaults: {
-                hideLabel: true,
-                anchor: '100%'
-            },
-            items: [
-                {icon: 'resources/images/Mandatory.gif'},
-                {xtype: 'textfield',    fieldLabel: 'Phone 1', name: 'phone-1', width: 45, allowBlank: false},
-                {xtype: 'displayfield', value: ')'},
-                {xtype: 'textfield',    fieldLabel: 'Phone 2', name: 'phone-2', width: 45, allowBlank: false, margin: '0 5 0 0'},
-                {xtype: 'displayfield', value: '-'},
-                {xtype: 'textfield',    fieldLabel: 'Phone 3', name: 'phone-3', width: 60, allowBlank: false}
-            ]
-        },*/
-        
-        
-        
+         
             staffField,
             startTaktField,
             endTaktField
@@ -91,14 +76,22 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         {
             id: 'card-1',
             layout: 'hbox',
-            bodyPadding: 5,
-           // margin: '0 10 10 0',
+            
+             bodyPadding: 10,
+    
+            defaults: {
+                frame: true,
+                bodyPadding: 10
+            },
+       
+           border:false,
            items: [
             {
             xtype: 'fieldset',
             title: 'Values',
             id: 'values',
-            defaultType: 'textfield',        
+            defaultType: 'textfield', 
+             margin: '0 10 0 0',
                 defaults: {
                     anchor: '100%'
                 },        
@@ -113,6 +106,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
             xtype: 'fieldset',
             title: 'Start time',
             id: 'starttime',
+             margin: '0 10 0 0',
             defaultType: 'textfield',        
                 defaults: {
                     anchor: '100%'
@@ -125,6 +119,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
             xtype: 'fieldset',
             title: 'End time',
             id: 'endtime',
+             margin: '0 10 0 0',
             defaultType: 'textfield',
                 defaults: {
                     anchor: '100%'
@@ -139,50 +134,49 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         }
     ],
          
-     
+      prevButton = this.createNavigationButton('card-prev', '&laquo; Previous', 'showPrevious');
+    nextButton = this.createNavigationButton('card-next', 'Next &raquo;', 'showNext');
+    createElementButton = this.createNavigationButton('createElement', 'Create', 'createElement');
      this.bbar = ['->',
-     
+        prevButton,
+        nextButton,
+        createElementButton,
      {
-            itemId: 'card-prev',
-            text: '&laquo; Previous',
-            handler: 'showPrevious',
-            disabled: true
-        },
-        {
-            itemId: 'card-next',
-            text: 'Next &raquo;',
-            handler: 'showNext'
-        },
-     
-     {
-        text:'Create', 
-        itemId: 'createItem',
-        // TODO
-       /* disabled: true,
-        handler: function(){
-	       if(staffField.getValue() !== '' && 
-    startTaktField.getValue() !== '' &&
-    endTaktField.getValue() !== '' &&
-    placeField.getValue() !== '' &&
-    formField.getValue() !== ''){
-	           this.setDisabled(false);
-	           
-	       }
-	       else this.setDisabled(true);
-           
-       },*/
-        handler: 
-        function(){
-        
-        var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
+        text: 'Cancel',
+        handler: function () { this.up('window').close(); }
+    }      
+    ],
+
+    this.callParent()
+ 
+    },
+    
+     handleNavigationButtons: function(){
+      if(staffField.isValid() && startTaktField.isValid() && endTaktField.isValid()){
+        nextButton.setDisabled(false);
+      }
+      else{
+          nextButton.setDisabled(true);
+          
+      }       
+    },
+    
+    handleCreateButton: function(){
+      if(placeField.isValid() && formField.isValid() 
+          && tstampField.isValid() && tstamp2Field.isValid()){ 
+             createElementButton.setDisabled(false); 
+          }
+          else{
+            createElementButton.setDisabled(true);  
+          }
+    },
        
-        var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
-        
-       // var staffValue = staffField.getValue() + (satffFieldBetween.getValue() !== null ? " "+satffFieldBetween.getValue() : '')
-	 
+    createElement: function () {
+     var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
+       
         var hairpin = Ext.create('pmdCE.model.Hairpin', {      
                     id: hairId,
-                    name: formValue+'_s'+staffField.getValue()+'_m'+staffField.getValue()+'_'+placeField.getValue(),
+                    name: formField.getValue()+'_s'+staffField.getValue()+'_m'+staffField.getValue()+'_'+placeField.getValue(),
                     icon: 'resources/images/mix_volume.png',
                     obvious: true,
                     ambiguous: false,
@@ -191,7 +185,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                     tstamp: tstampField.getValue(),
                     tstamp2: tstamp2Field.getValue(),
                     place: placeField.getValue(),
-                    form: formValue,
+                    form: formField.getValue(),
                     measureid: Ext.getCmp('cemain').getMeasureId(),
                     measurenr: startTaktField.getValue(), 
                     tag: "",
@@ -206,17 +200,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         Ext.getCmp('cegridpanel').setSelection(hairpin);
         
         Ext.getCmp('saveButton').setDisabled(false);
-            this.up('window').close();          
-       }
-      
-    },{
-        text: 'Cancel',
-        handler: function () { this.up('window').close(); }
-    }      
-    ],
-
-    this.callParent()
- 
+            this.up('window').close();     
     },
 
 
@@ -229,8 +213,10 @@ Ext.define('pmdCE.view.main.ObviousCard', {
              Ext.getCmp('endtime').removeAll(true);
         }
                                    
-             tstampField = this.createTextField('tstampFieldObv', 'tstampField', 'Tstamp');
-            tstamp2Field = this.createTextField('tstampField2Obv', 'tstampField2', 'Tstamp2');
+           tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
+        tstampField.validate();
+        tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
+        tstamp2Field.validate();
             Ext.getCmp('starttime').add(tstampField);
             Ext.getCmp('endtime').add(tstamp2Field);
             
@@ -259,46 +245,44 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         
        console.log("active item");
        console.log(l.activeItem);
-        
-        // TODO
-        /*if(l.activeItem.id === 'card-1'){
-            Ext.getCmp('createItem').setDisabled(false);
-        }*/
+      
     },
     
-        createTextField: function(fieldId, fieldName, fieldLabel){
+
+      createTextField: function(fieldName, fieldLabel){
+        var me1 = this;
     var ceTextField = Ext.create('Ext.form.field.Text',{
-        id: fieldId,
         name: fieldName,
+        id: fieldName,
+        allowBlank: false,
+        invalidCls: '',
         fieldLabel: fieldLabel,
-      //  allowBlank: false , // requires a non-empty value
-        listeners: {'render': function(c) {
-            c.getEl().on('keyup', function() {   
-           // Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-               // modelTest.set('start', startField.value);
-            }, c);
+        listeners: {
+        focus: function(e, eOpts ){
+           me1.handleCreateButton();
         }
-  }
+        }
    });
 
 return ceTextField;
 },
 
+
     createComboBox: function(fieldName){
     
 var states = new Array("above", "below"); 
-
+var me2 = this;
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
     store: states,
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-    valueField: 'abbr',
+    allowBlank: false,
+    invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
-    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-     // modelTest.set('curvedir', combo.getValue());
+    me2.handleCreateButton();
     }
   }
   });
@@ -324,17 +308,14 @@ return ceTextField;
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-    //icon: 'resources/images/mix_volume.png',
-    valueField: 'abbr',
-    
+    allowBlank: false,
+    invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
      if(fieldName.indexOf('Second') === -1){
          Ext.getCmp('cemain').setStaffNr(combo.getValue());
      }
-       
-    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-     // modelTest.set('curvedir', combo.getValue());
+    me.handleNavigationButtons();
     }
   }
   });
@@ -361,7 +342,8 @@ return ceTextField;
     queryMode: 'local',
     displayField: 'name',
     editable: false,
-    valueField: 'abbr',
+     allowBlank: false,
+    invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
     if(fieldName.indexOf('Start') > -1){
@@ -372,29 +354,45 @@ return ceTextField;
         Ext.getCmp('cemain').setEndMeasure(combo.getValue());
         
     }
-    //Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-     // modelTest.set('curvedir', combo.getValue());
+    me.handleNavigationButtons();
     }
   }
   });
 return ceTextField;
 },
 
-createRadioGroup: function(){
-    var radios = new Ext.form.RadioGroup({
-     xtype: 'radiogroup',
-            fieldLabel: 'Form',
-            cls: 'x-check-group-alt',
-            
-            items: [
-                {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0'},
-                {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0'}
-                
-            ]
-   
-   });
-   return radios;
+    createComboBoxForm: function(fieldName){
     
+    var states = new Array("cres", "dim"); 
+    var me3 = this;
+    var ceTextField = Ext.create('Ext.form.ComboBox', {
+    fieldLabel: fieldName,
+    store: states,
+    queryMode: 'local',
+    displayField: 'name',
+    editable: false,
+       allowBlank: false,
+       invalidCls: '',
+    listeners: {
+    select: function(combo, record, index) {
+       me3.handleCreateButton();
+    }
+  }
+  });
+
+return ceTextField;
+},
+
+createNavigationButton: function(navItemId, navText, navHandler){
+ var navButton = Ext.create('Ext.button.Button', {  
+                     itemId: navItemId,
+            text: navText,
+            handler: navHandler,
+            disabled: true
+                  
+          })
+
+return navButton;
 }
 
 });

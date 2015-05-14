@@ -62,6 +62,7 @@ Ext.define('pmdCE.view.main.ChangeToAmDialog', {
 	      vordTStamp = selectedNode.data.tstamp;
 	      vordTStamp2 = selectedNode.data.tstamp2;
 	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+	      // TODO richtige takt
 	      Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
 	      Ext.getCmp('cemain').setStaffNr(vordStaff);
 	      break;

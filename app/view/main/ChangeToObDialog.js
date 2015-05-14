@@ -25,6 +25,7 @@ Ext.define('pmdCE.view.main.ChangeToObDialog', {
 	  && rootNode.childNodes[i].data.name === selection.data.name){
 	      selectedNode = rootNode.childNodes[i];	
 	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+	      // TODO richtige takt
 	      Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
 	      Ext.getCmp('cemain').setStaffNr(selectedNode.childNodes[0].data.staff);
 	      break;
