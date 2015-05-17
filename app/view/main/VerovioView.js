@@ -96,6 +96,22 @@ return ceButton;
 
 
 createChangeToButton: function(){
+var me = this;
+    
+    var menuTstamp2Reg = this.createMenuItem("for Tstamp (2 regs)", 8, me);
+    
+    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (2 regs)", 9, me);
+    
+    var menuStaff2Reg  = this.createMenuItem("for Staff (2 regs)", 10, me);
+    
+     var menuTime4Reg  = this.createMenuItem("for Time (4 regs)", 11, me);
+     
+     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (4 regs)", 12, me);
+     
+     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (4 regs)", 13, me);
+     
+      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (6 regs)", 14, me);
+      
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
                    // icon: "resources/images/drop-add.gif",
@@ -111,19 +127,25 @@ createChangeToButton: function(){
                      menu: [Ext.create('Ext.menu.Item', {
                         text: "Choice",
                         icon: 'resources/images/details-xml.png',
-                       // icon: 'resources/images/details-xml.png'
-                        handler: function() {
-                            var win = new pmdCE.view.main.ChangeToAmDialog();
-                            win.show();
-                        }
+                         menu:[
+                        menuTstamp2Reg,
+                        menuTStamp22Reg,
+                        menuStaff2Reg,
+                        menuTime4Reg,
+                        menuTStampAndStaff4Reg,
+                        menuTStamp2AndStaff4Reg,
+                        menuTimeAndStaff4Reg
+                        ]
+                            //var win = new pmdCE.view.main.ChangeToAmDialog();
+                            //win.show();
+                        
                      }),
                      
                      Ext.create('Ext.menu.Item', {
                 text: "Hairpin",
                 icon: 'resources/images/mix_volume.png',
-               // icon: 'resources/images/details-xml.png'
                 handler: function() {
-                    var win = new pmdCE.view.main.ChangeToObDialog();
+                    var win = new pmdCE.view.main.ChangeObviousElDialog();
                             win.show();
                 }
              })
@@ -183,6 +205,7 @@ createHairpinButton: function(){
 
 return ceButton;
 },
+
 
 createMenuItem: function(itemText, type, me){
      var item = Ext.create('Ext.menu.Item', {

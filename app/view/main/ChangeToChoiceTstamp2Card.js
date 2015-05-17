@@ -1,4 +1,4 @@
-Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {
+Ext.define('pmdCE.view.main.ChangeToChoiceTstamp2Card', {
     extend: 'Ext.panel.Panel',
     requires: [
         'Ext.layout.container.Card'
@@ -50,6 +50,17 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {
    
    selectedFieldId:null,
    
+   selection: null,
+    rootNode: null,
+    selectedNode: null,
+    vordStaff: null,
+	vordForm: null,
+	vordPlace: null,
+	vordTStamp: null,
+	vordTStamp2: null,
+	vordStartMeasure: null,
+	vordEndMeasure: null,
+   
     nextButton: null,
    prevButton: null,
    createElementButton: null,
@@ -60,31 +71,62 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {
          
          me = this;
          
-         staffField= this.createComboBoxStaff('Staff');  
+          selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+	  
+	  for(var i = 0; i < rootNode.childNodes.length ; i++){
+	  if(rootNode.childNodes[i].data.id === selection.data.id){
+	      selectedNode = rootNode.childNodes[i];	
+	      vordStaff = selectedNode.data.staff;
+	      vordStartMeasure = selectedNode.data.measurenr;
+	       vordEndMeasure = selectedNode.data.measurenr;
+	      vordForm = selectedNode.data.form ;
+	      vordPlace = selectedNode.data.place;
+	      vordTStamp = selectedNode.data.tstamp;
+	      vordTStamp2 = selectedNode.data.tstamp2;
+	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+	      // TODO richtige takt
+	      Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
+	      Ext.getCmp('cemain').setStaffNr(vordStaff);
+	      break;
+	  }	      
+	  }    
+         
+         staffField= this.createComboBoxStaff('Staff'); 
+         staffField.setValue(vordStaff);
          staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
         staffFieldCopy.setDisabled(true);
         startTaktField= this.createComboBoxMeasureNr('Start measure');
+        startTaktField.setValue(vordStartMeasure);
         startTaktField.validate();
         endTaktField= this.createComboBoxMeasureNr('End measure');
+        endTaktField.setValue(vordEndMeasure);
         endTaktField.validate();
         placeField = this.createComboBox('Place');
+        placeField.setValue(vordPlace);
         placeField.validate();
         formField = this.createComboBoxForm('Form');
+        formField.setValue(vordForm);
         formField.validate();
         
     tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp');
+    tstampFieldOrig.setValue(vordTStamp);
     tstampFieldOrig.validate();
     tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
+     tstamp2FieldOrig.setValue(vordTStamp2);
     tstamp2FieldOrig.validate();
 
         staffFieldReg1= this.createTextField('staffFieldReg1', 'Staff');  
         staffFieldReg1.setDisabled(true);
         placeFieldReg1 = this.createComboBox('Place');
+         placeFieldReg1.setValue(vordPlace);
         placeFieldReg1.setDisabled(true);
         formFieldReg1 = this.createComboBoxForm('Form');
+        formFieldReg1.setValue(vordForm);
         formFieldReg1.setDisabled(true);
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
+        tstampFieldReg1.setValue(vordTStamp);
         tstampFieldReg1.setDisabled(true);
         tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
         tstamp2FieldReg1.validate();
@@ -93,10 +135,13 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {
 staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
  staffFieldReg2.setDisabled(true);
         placeFieldReg2 = this.createComboBox('Place');
+        placeFieldReg2.setValue(vordPlace);
         placeFieldReg2.setDisabled(true);
         formFieldReg2 = this.createComboBoxForm('Form');
+        formFieldReg2.setValue(vordForm);
         formFieldReg2.setDisabled(true);
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
+ tstampFieldReg2.setValue(vordTStamp);
 tstampFieldReg2.setDisabled(true);
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
 tstamp2FieldReg2.validate();
@@ -239,7 +284,7 @@ tstamp2FieldReg2.validate();
          
          prevButton = this.createNavigationButton('card-prev', '&laquo; Previous', 'showPrevious');
     nextButton = this.createNavigationButton('card-next', 'Next &raquo;', 'showNext');
-    createElementButton = this.createNavigationButton('createElement', 'Create', 'createElement');
+    createElementButton = this.createNavigationButton('createElement', 'Change', 'createElement');
      
      this.bbar = ['->',
      
@@ -281,21 +326,25 @@ tstamp2FieldReg2.validate();
     },
        
     createElement: function () {
-    var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
-
-	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
-	               id: hairId,
-	               name: 'choice_m'+startTaktField.getValue(),
-                    icon: 'resources/images/details-xml.png',
-                    measureid: Ext.getCmp('cemain').getMeasureId(),
-                    measurenr: startTaktField.getValue(), 
-                    operation: 'create',
-                    obvious: false,
-                    ambiguous: true,
-                     children: [
-                {
+     if(selectedNode !== null){
+	 
+	  selectedNode.data.name = 'choice_m'+selectedNode.data.measurenr;
+	  selectedNode.data.obvious = false;
+         selectedNode.data.ambiguous = true;
+         selectedNode.data.staff = null;
+          selectedNode.data.measureid = Ext.getCmp('cemain').getMeasureId();
+          selectedNode.data.measurenr = startTaktField.getValue();
+          selectedNode.data.tstamp = null;
+           selectedNode.data.tstamp2 = null;
+            selectedNode.data.form = null;
+             selectedNode.data.place = null;
+             selectedNode.data.operation =  'change',
+             selectedNode.data.icon = 'resources/images/details-xml.png',
+             
+	     // selectedNode.removeChild(nodeToDelete);
+	         selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(),                  
+                    staff: staffField.getValue(),                   
                     tstamp: tstampFieldOrig.getValue(),
                     tstamp2: tstamp2FieldOrig.getValue(),
                     place: placeField.getValue(),
@@ -303,44 +352,41 @@ tstamp2FieldReg2.validate();
                     name: "orig",
                     tag: "orig",
                     leaf: true
-                },
-                {
+        });	
+        selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(),                    
-                    tstamp: tstampFieldOrig.getValue(),
+                    staff: staffFieldReg1.getValue(),                   
+                    tstamp: tstampFieldReg1.getValue(),
                     tstamp2: tstamp2FieldReg1.getValue(),
-                    place: placeField.getValue(),
-                    form: formField.getValue(),
+                    place: placeFieldReg1.getValue(),
+                    form: formFieldReg1.getValue(),
                     name: "reg",
                     tag: "reg",
                     leaf: true
-                },
-                {
+        });
+        selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(),                    
-                    tstamp: tstampFieldOrig.getValue(),
+                    staff: staffFieldReg2.getValue(),                    
+                    tstamp: tstampFieldReg2.getValue(),
                     tstamp2: tstamp2FieldReg2.getValue(),
-                    place: placeField.getValue(),
-                    form: formField.getValue(),
+                    place: placeFieldReg2.getValue(),
+                    form: formFieldReg2.getValue(),
                     name: "reg",
                     tag: "reg",
                     leaf: true
-                }
-                ] 
-                
-                
-	    });
-	    
-	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-	    var parent = root.appendChild(hairpin);
-	    parent.expand();
-	    
-	    Ext.getCmp('cegridpanel').setSelection(hairpin);
-	    
-	    Ext.getCmp('saveButton').setDisabled(false);
-            this.up('window').close();
-           
+        });	
+        
+        selectedNode.expand();
+	  
+	  Ext.getCmp('cegridpanel').setSelection(selectedNode);
+	  
+	  Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
+	  
+       Ext.getCmp('saveButton').setDisabled(false);
+       Ext.getCmp('addelementbutton').setDisabled(false);
+       }
        
+     this.up('window').close();
     },
 
 

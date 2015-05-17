@@ -1,4 +1,4 @@
-Ext.define('pmdCE.view.main.ObviousCard', {
+Ext.define('pmdCE.view.main.ChangeObviousCard', {
     extend: 'Ext.panel.Panel',
     requires: [
         'Ext.layout.container.Card',
@@ -35,11 +35,28 @@ Ext.define('pmdCE.view.main.ObviousCard', {
       verovioImageEnd: null,
       
       me: null,
+      
+      selectedNode: null,
   
     
          initComponent: function() {
          
          me = this;
+         
+         selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+	  
+	  for(var i = 0; i < rootNode.childNodes.length ; i++){
+	  if(rootNode.childNodes[i].data.id === selection.data.id
+	  && rootNode.childNodes[i].data.name === selection.data.name){
+	      selectedNode = rootNode.childNodes[i];	
+	     // Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+	      // TODO richtige takt
+	     // Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
+	      //Ext.getCmp('cemain').setStaffNr(selectedNode.childNodes[0].data.staff);
+	      break;
+	  }	      
+	  }    
          
         staffField = this.createComboBoxStaff('Staff'); 
         staffField.validate();
@@ -136,7 +153,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
          
       prevButton = this.createNavigationButton('card-prev', '&laquo; Previous', 'showPrevious');
     nextButton = this.createNavigationButton('card-next', 'Next &raquo;', 'showNext');
-    createElementButton = this.createNavigationButton('createElement', 'Create', 'createElement');
+    createElementButton = this.createNavigationButton('createElement', 'Change', 'createElement');
      this.bbar = ['->',
         prevButton,
         nextButton,
@@ -172,35 +189,32 @@ Ext.define('pmdCE.view.main.ObviousCard', {
     },
        
     createElement: function () {
-     var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
-       
-        var hairpin = Ext.create('pmdCE.model.Hairpin', {      
-                    id: hairId,
-                    name: formField.getValue()+'_s'+staffField.getValue()+'_m'+staffField.getValue()+'_'+placeField.getValue(),
-                    icon: 'resources/images/mix_volume.png',
-                    obvious: true,
-                    ambiguous: false,
-                    operation: 'create',
-                    staff: staffField.getValue(), 
-                    tstamp: tstampField.getValue(),
-                    tstamp2: tstamp2Field.getValue(),
-                    place: placeField.getValue(),
-                    form: formField.getValue(),
-                    measureid: Ext.getCmp('cemain').getMeasureId(),
-                    measurenr: startTaktField.getValue(), 
-                    tag: "",
-                    leaf: true                
-	    });
-	  
-	    var store = pmdCE.getApplication().getHairpinDataStore();
-	    var root = store.getRootNode();
-	    var parent = root.appendChild(hairpin);
-        parent.expand();
-        
-        Ext.getCmp('cegridpanel').setSelection(hairpin);
-        
+    
+     selectedNode.data.name = formField.getValue()+'_s'+staffField.getValue()+'_m'+placeField.getValue();
+	  selectedNode.data.obvious = true;
+         selectedNode.data.ambiguous = false;
+        selectedNode.data.staff = staffField.getValue();
+          selectedNode.data.tstamp = tstampField.getValue();
+           selectedNode.data.tstamp2 = tstamp2Field.getValue();
+            selectedNode.data.form = formField.getValue();
+             selectedNode.data.place = placeField.getValue();
+             selectedNode.data.operation =  'change';
+             selectedNode.data.leaf = true;
+             selectedNode.data.tag = "";
+             selectedNode.data.icon =  'resources/images/mix_volume.png';
+             selectedNode.data.measureid = Ext.getCmp('cemain').getMeasureId();
+                    selectedNode.data.measurenr = startTaktField.getValue(); 
+             
+             selectedNode.removeAll();
+             
+             Ext.getCmp('cegridpanel').setSelection(selectedNode);
+             Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
+    
         Ext.getCmp('saveButton').setDisabled(false);
-            this.up('window').close();     
+        Ext.getCmp('addelementbutton').setDisabled(true);
+      
+            this.up('window').close();
+     
     },
 
 

@@ -36,10 +36,29 @@ Ext.define('pmdCE.view.main.AddAmbiguousElDialog', {
       case 7:
          ambiguousCard = new pmdCE.view.main.ChoiceTimeStaffCard();
          break;
+         case 8 :
+        ambiguousCard = new pmdCE.view.main.ChangeToChoiceTstampCard();
+        break;
+      case 9: 
+        ambiguousCard = new pmdCE.view.main.ChangeToChoiceTstamp2Card();
+        break;
+      case 10:
+        ambiguousCard = new pmdCE.view.main.ChangeToChoiceStaffCard();
+        break;
+      case 11: 
+        ambiguousCard = new pmdCE.view.main.ChangeToChoiceTimeCard();
+        break;
+      case 12:
+        ambiguousCard = new pmdCE.view.main.ChangeToChoiceTstampStaffCard();
+        break;
+      case 13:
+        ambiguousCard = new pmdCE.view.main.ChangeToChoiceTstamp2StaffCard();
+        break;
+      case 14:
+         ambiguousCard = new pmdCE.view.main.ChangeToChoiceTimeStaffCard();
+         break;
    }
  
-   // ambiguousCard = new pmdCE.view.main.AmbiguousCard(),
-    
      this.items =  [
                ambiguousCard
             ] ; 

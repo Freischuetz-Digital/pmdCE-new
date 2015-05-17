@@ -40,28 +40,6 @@ Ext.define('pmdCE.view.main.Main', {
    
     initComponent: function() {
    
-   /*Ext.Loader.setConfig({
-		enabled: true,
-		paths:{
-			'Ext.ux':'ux'
-		}
-	});
- 
-	Ext.require(['pmdCE.view.main.LeafletFacsimile']);
- 
-	Ext.onReady(function() {
-		Ext.create('Ext.container.Viewport', {
-			layout: 'vbox',
-			items: [
-				{
-					xtype: 'leafletmapview',
-					flex: 1,
-					width: '100%'
-				}
-			]
-		})
-	});*/
-   
     ceToolbar = new pmdCE.view.main.CEToolbar(),
     cePanel = new pmdCE.view.main.CEPanel(),
      
