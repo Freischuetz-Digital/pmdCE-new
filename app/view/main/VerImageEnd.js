@@ -52,7 +52,7 @@ url: "resources/verovio/testEnd.mei",
 	pageWidth: 850,
 	ignoreLayout: 25,
 	border: 0,
-	scale: 35
+	scale: 33
     });
     renderer.setOptions(options);
                   renderer.loadData(text);

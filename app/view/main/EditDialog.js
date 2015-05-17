@@ -7,7 +7,8 @@ Ext.define('pmdCE.view.main.EditDialog', {
    modal: true,
    bodyPadding: 10,
    
-   staffField: null,  
+   staffField: null, 
+   staffField2: null, 
   placeField: null,
   formField: null,
   tstampField: null,
@@ -19,13 +20,15 @@ Ext.define('pmdCE.view.main.EditDialog', {
     
         
 staffField = this.createTextField('staffField', 'Staff');
-formField = this.createRadioGroup('formField', 'Form');
+staffField2 = this.createTextField('secondStaffField', 'Second staff');
+formField = this.createComboBoxForm('Form');
 placeField = this.createComboBox('Place');
 tstampField = this.createTextField('tstampField', 'Tstamp');
 tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
 
      this.items =  [
                 staffField,
+                staffField2,
                tstampField,
                 tstamp2Field,
                 placeField,
@@ -35,18 +38,15 @@ tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
     this.buttons = [{
         text:'Update',
         handler: function(){
-         /*var testId = 'controlcompview_'+Ext.getCmp('hairpinsitem').getTileId();       
-         var target = Ext.getCmp(testId).getSelectionModel().getSelection()[0];
-         */
+       
           var target = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
           var store = pmdCE.getApplication().getHairpinDataStore();
-          console.log(store);
-       console.log(target.parentNode.data.id);
-       console.log(target.get("id"));
-       console.log(target.data.id);
-         
+       
          if(staffField.getValue() !== ""){
              target.set('staff', staffField.getValue());
+         }
+         if(staffField2.getValue() !== ""){
+             target.set('staff2', staffField2.getValue());
          }
           if(tstampField.getValue() !== ""){
              target.set('tstamp', tstampField.value);
@@ -57,15 +57,10 @@ tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
          if(placeField.getValue() !== null){
               target.set('place', placeField.getValue());
          }       
-         if(typeof formField.getValue().Form !== 'undefined'){
-             var formValue = formField.getValue().Form === 2 ? "dim" : 'cresc';
-            if(formValue !== ""){
-               target.set('form', formValue);
-            }
+         if(typeof formField.getValue() !== null){
+               target.set('form', formField.getValue());
          }
-        // target.update();
-       // store.getNodeById(target.parentNode.data.id).save();
-       //  store.sync();
+ 
          Ext.getCmp('cegridpanel').setSelection(target);
          
     Ext.getCmp('saveButton').setDisabled(false);
@@ -135,6 +130,26 @@ createRadioGroup: function(){
    });
    return radios;
     
+},
+
+createComboBoxForm: function(fieldName){
+    
+    var states = new Array("cres", "dim"); 
+    var me = this;
+    var ceTextField = Ext.create('Ext.form.ComboBox', {
+    fieldLabel: fieldName,
+    store: states,
+    queryMode: 'local',
+    displayField: 'name',
+    editable: false,
+    listeners: {
+    select: function(combo, record, index) {
+       
+    }
+  }
+  });
+
+return ceTextField;
 }
     
     
