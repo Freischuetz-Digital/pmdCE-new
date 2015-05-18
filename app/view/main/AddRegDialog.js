@@ -159,6 +159,11 @@ this.callParent()
         listeners: {
         focus: function(e, eOpts ){
            me.handleCreateButton();
+        },
+        render: function(c) {
+            c.getEl().on('keyup', function() {   
+           me.handleCreateButton();
+            }, c);
         }
         }
    });

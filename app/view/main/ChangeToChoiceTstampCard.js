@@ -443,6 +443,16 @@ tstamp2FieldReg2.setDisabled(true);
                tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
            me1.handleCreateButton();
+        },
+        render: function(c) {
+            c.getEl().on('keyup', function() {   
+          me.selectedFieldId = fieldName;
+           if(me.selectedFieldId === 'tstamp2FieldOrig'){
+               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+           }
+           me1.handleCreateButton();
+            }, c);
         }
         }
    });

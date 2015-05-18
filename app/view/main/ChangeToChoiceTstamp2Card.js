@@ -447,6 +447,16 @@ tstamp2FieldReg2.validate();
                tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
             me1.handleCreateButton();
+        },
+        render: function(c) {
+            c.getEl().on('keyup', function() {   
+          me.selectedFieldId = fieldName;
+           if(me.selectedFieldId === 'tstampFieldOrig'){
+               tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+           }
+            me1.handleCreateButton();
+            }, c);
         }
         }
      

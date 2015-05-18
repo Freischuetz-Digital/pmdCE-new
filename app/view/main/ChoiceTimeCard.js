@@ -531,6 +531,20 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
                tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
             me1.handleCreateButton();
+        },
+        render: function(c) {
+            c.getEl().on('keyup', function() {   
+           me.selectedFieldId = fieldName;        
+           if(me.selectedFieldId === 'tstamp2FieldOrig'){
+               tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
+           }
+           if(me.selectedFieldId === 'tstampFieldOrig'){
+               tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+           }
+            me1.handleCreateButton();
+            }, c);
         }
         }
      

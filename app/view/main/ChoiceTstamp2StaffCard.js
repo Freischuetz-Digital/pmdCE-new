@@ -554,6 +554,23 @@ staffFieldReg3.validate();
                
            }
            me1.handleCreateButton();
+        },
+        render: function(c) {
+            c.getEl().on('keyup', function() {   
+            me.selectedFieldId = fieldName;
+           if(me.selectedFieldId === 'tstampFieldOrig'){
+                tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+           }
+           if(me.selectedFieldId === 'tstamp2FieldOrig'){              
+               tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
+               
+           }
+           me1.handleCreateButton();
+            }, c);
         }
         }
      

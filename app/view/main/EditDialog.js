@@ -57,7 +57,7 @@ tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
          if(placeField.getValue() !== null){
               target.set('place', placeField.getValue());
          }       
-         if(typeof formField.getValue() !== null){
+         if(formField.getValue() !== null){
                target.set('form', formField.getValue());
          }
  

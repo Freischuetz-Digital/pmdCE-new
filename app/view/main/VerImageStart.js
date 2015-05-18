@@ -65,13 +65,13 @@ Ext.Ajax.request({
    
     $('#'+currId+'-body').html(svg);
     var xmlFile = jQuery.parseXML(text);
-   // console.log("*******VERSTART********");
-   // console.log(xmlFile);
+    console.log("*******VERSTART********");
+    console.log(xmlFile);
    
     var meiElements = xmlFile.getElementsByTagName('note');
      
    var elements = document.getElementsByClassName('note');
-  // console.log(elements);
+   //console.log(document);
     
     for (var i = 0; i < elements.length; i++) {
     var element = elements[i];

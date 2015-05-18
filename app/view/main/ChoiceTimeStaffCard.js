@@ -636,6 +636,25 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                
            }
             me1.handleCreateButton();
+        },
+        render: function(c) {
+            c.getEl().on('keyup', function() {   
+            me.selectedFieldId = fieldName;
+           if(me.selectedFieldId === 'tstampFieldOrig'){
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg5.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg6.setValue(tstampFieldOrig.getValue());
+           }
+           if(me.selectedFieldId === 'tstamp2FieldOrig'){              
+                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
+               
+           }
+            me1.handleCreateButton();
+            }, c);
         }
         }
      

@@ -34,6 +34,8 @@ var staffNr = Ext.getCmp('cemain').getStaffNr();
 var movement = Ext.getCmp('movement').getText();
 var measurePath = movement+"_measure"+measureid+"_s"+staffNr;
 
+
+
 Ext.Ajax.request({
 url: "resources/verovio/testEnd.mei",
   // url: "resources/xql/getExtendedStaff.xql",
@@ -112,7 +114,26 @@ for (var i = 0; i < elements.length; i++) {
                              var tstampShift1Int = parseFloat(this.tstampShift1);
                   
                             var avValue = (tstampInt+tstampShift1Int)/2;
-                            Ext.getCmp('tstampField2Obv').setValue("m+"+avValue);
+                            var prefix = null;
+                        var startId = Ext.getCmp('cemain').getStartMeasure();
+                        if(elXMLId.indexOf(startId) > -1){
+                            prefix = 0;
+                        }
+                        else{
+                            var testArr = elXMLId.split("_");
+                            for(var x = 0; x< testArr.length; x++){
+                                if(testArr[x].indexOf('measure') > -1){
+                                var diff = parseInt(testArr[x].substring(7));
+                                console.log(diff);
+                                    prefix = diff-startId;
+                                    console.log(startId);
+                                    console.log(prefix);
+                                    break;
+                                }
+                            }                                                      
+                        }
+                            
+                            Ext.getCmp('tstampField2Obv').setValue(prefix+"m+"+avValue);
                             Ext.getCmp('tstampField2Obv').focus();
                             break;
                         } 
@@ -124,8 +145,28 @@ for (var i = 0; i < elements.length; i++) {
                              var tstampShift1Int = parseFloat(this.tstampShift1);
                             
                             var avValue = (tstampInt+tstampShift1Int)/2;
+                              var prefix = null;
+                        var startId = Ext.getCmp('cemain').getStartMeasure();
+                        if(elXMLId.indexOf(startId) > -1){
+                            prefix = 0;
+                        }
+                        else{
+                            var testArr = elXMLId.split("_");
+                            for(var x = 0; x< testArr.length; x++){
+                                if(testArr[x].indexOf('measure') > -1){
+                                var diff = parseInt(testArr[x].substring(7));
+                                console.log(diff);
+                                    prefix = diff-startId;
+                                    console.log(startId);
+                                    console.log(prefix);
+                                    break;
+                                }
+                            }                                                      
+                        }
+                            
+                            
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
-                            Ext.getCmp(selectedId).setValue("m+"+avValue);
+                            Ext.getCmp(selectedId).setValue(prefix+"m+"+avValue);
                             Ext.getCmp(selectedId).focus();
                             break;
                         }
@@ -151,7 +192,25 @@ for (var i = 0; i < elements.length; i++) {
                         var tstamp = elementXML.getAttribute('tstamp');  
                          this.tstampShift1 = elementXML.getAttribute('tstamp');
                         if(typeof Ext.getCmp('tstampField2Obv') !== 'undefined'){
-                            Ext.getCmp('tstampField2Obv').setValue("m+"+tstamp);
+                        var prefix = null;
+                        var startId = Ext.getCmp('cemain').getStartMeasure();
+                        if(elXMLId.indexOf(startId) > -1){
+                            prefix = 0;
+                        }
+                        else{
+                            var testArr = elXMLId.split("_");
+                            for(var x = 0; x< testArr.length; x++){
+                                if(testArr[x].indexOf('measure') > -1){
+                                var diff = parseInt(testArr[x].substring(7));
+                                console.log(diff);
+                                    prefix = diff-startId;
+                                    console.log(startId);
+                                    console.log(prefix);
+                                    break;
+                                }
+                            }                                                      
+                        }
+                            Ext.getCmp('tstampField2Obv').setValue(prefix+"m+"+tstamp);
                              Ext.getCmp('tstampField2Obv').focus();
                         }
                        else if(typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' 
@@ -159,8 +218,26 @@ for (var i = 0; i < elements.length; i++) {
                        && Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2') > -1
                         ){
                         console.log(Ext.getCmp('ambiguouscard').getSelectedFieldId());
+                        var prefix = null;
+                        var startId = Ext.getCmp('cemain').getStartMeasure();
+                        if(elXMLId.indexOf(startId) > -1){
+                            prefix = 0;
+                        }
+                        else{
+                            var testArr = elXMLId.split("_");
+                            for(var x = 0; x< testArr.length; x++){
+                                if(testArr[x].indexOf('measure') > -1){
+                                var diff = parseInt(testArr[x].substring(7));
+                                console.log(diff);
+                                    prefix = diff-startId;
+                                    console.log(startId);
+                                    console.log(prefix);
+                                    break;
+                                }
+                            }                                                      
+                        }
                             var selectedId = Ext.getCmp('ambiguouscard').getSelectedFieldId();
-                            Ext.getCmp(selectedId).setValue("m+"+tstamp);
+                            Ext.getCmp(selectedId).setValue(prefix+"m+"+tstamp);
                             Ext.getCmp(selectedId).focus();
                         }
                         $(note).css('fill','#3adf00');

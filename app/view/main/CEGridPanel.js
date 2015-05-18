@@ -21,7 +21,7 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
    
     useArrows: true,
     rootVisible: false,
-    
+   
     ambiguousColumn: null,
     obviousColumn: null,
     editColumn: null,
@@ -68,9 +68,10 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
       
         }
         };
-     
+        
+        
             this.columns = [{
-                xtype: 'treecolumn', //this is so we know which column will show the tree
+                xtype: 'treecolumn', 
                 text: 'Name/Orig/Reg',
                 flex: 3,
                 sortable: true,
