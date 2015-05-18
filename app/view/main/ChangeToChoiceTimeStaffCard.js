@@ -93,6 +93,9 @@ Ext.define('pmdCE.view.main.ChangeToChoiceTimeStaffCard', {
    nextButton: null,
    prevButton: null,
    createElementButton: null,
+   checkBoxReg2: null,
+         checkBoxReg4: null,
+   
    
     me: null,
     
@@ -236,6 +239,8 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         tstamp2FieldReg6.setValue(vordTStamp2);
         tstamp2FieldReg6.setDisabled(true);
 
+checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
+checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
 
 
           this.items  = [
@@ -552,6 +557,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                     tag: "reg",
                     leaf: true
         });
+         if(!tstampFieldReg2.isDisabled()){
         selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg2.getValue(),   
@@ -564,6 +570,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                     tag: "reg",
                     leaf: true
         });	
+        }
         selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg3.getValue(), 
@@ -576,6 +583,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                     tag: "reg",
                     leaf: true
         });
+         if(!tstamp2FieldReg4.isDisabled()){
         selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg4.getValue(),   
@@ -588,6 +596,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                     tag: "reg",
                     leaf: true
         });	
+        }
         selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg5.getValue(), 
@@ -868,6 +877,32 @@ createNavigationButton: function(navItemId, navText, navHandler){
           })
 
 return navButton;
+},
+
+      createCheckBox: function(fieldName, filedid){
+       var me9 = this;
+       
+    var ceCheckBox = Ext.create('Ext.form.field.Checkbox',{
+        fieldLabel: fieldName,
+        id: filedid,
+     
+        listeners: {
+        change: function(cb, checked) {
+        if(cb.id === 'checkBoxReg2'){
+            tstampFieldReg2.setDisabled(checked);
+        }
+        else if(cb.id === 'checkBoxReg4'){
+            tstamp2FieldReg4.setDisabled(checked);
+        }
+        
+         me9.handleCreateButton();
+        
+ }
+        }
+     
+   });
+
+return ceCheckBox;
 }
 
 

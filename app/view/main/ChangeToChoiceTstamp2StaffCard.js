@@ -80,6 +80,8 @@ Ext.define('pmdCE.view.main.ChangeToChoiceTstamp2StaffCard', {
    prevButton: null,
    createElementButton: null,
    
+   checkBoxReg2: null,
+   
     me: null,
     
          initComponent: function() {
@@ -193,6 +195,9 @@ staffFieldReg3.validate();
         tstamp2FieldReg4 = this.createTextField('tstamp2FieldReg4', 'Tstamp2');
         tstamp2FieldReg4.setValue(vordTStamp2);
         tstamp2FieldReg4.setDisabled(true);
+        
+        checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
+
 
           this.items  = [
         {
@@ -275,7 +280,8 @@ staffFieldReg3.validate();
                         anchor: '100%'
                     },
         
-                    items: [            
+                    items: [  
+                    checkBoxReg2,
                         staffFieldReg2,
                         satffFieldBetweenReg2,
                         placeFieldReg2,
@@ -487,6 +493,7 @@ staffFieldReg3.validate();
                     tag: "reg",
                     leaf: true
         });
+        if(!tstamp2FieldReg2.isDisabled()){
         selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg2.getValue(), 
@@ -499,6 +506,7 @@ staffFieldReg3.validate();
                     tag: "reg",
                     leaf: true
         });	
+        }
         selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg3.getValue(),  
@@ -771,6 +779,29 @@ createNavigationButton: function(navItemId, navText, navHandler){
           })
 
 return navButton;
+},
+
+      createCheckBox: function(fieldName, filedid){
+       var me9 = this;
+       
+    var ceCheckBox = Ext.create('Ext.form.field.Checkbox',{
+        fieldLabel: fieldName,
+        id: filedid,
+     
+        listeners: {
+        change: function(cb, checked) {
+        if(cb.id === 'checkBoxReg2'){
+            tstamp2FieldReg2.setDisabled(checked);
+        }
+        
+         me9.handleCreateButton();
+        
+ }
+        }
+     
+   });
+
+return ceCheckBox;
 }
 
 

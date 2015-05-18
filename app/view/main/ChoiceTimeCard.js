@@ -15,7 +15,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
     defaults: {
         border:false,
         autoScroll: true,
-        bodyPadding: 10
+        bodyPadding: 8
     },
 
     defaultListenerScope: true,
@@ -65,6 +65,9 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
    nextButton: null,
    prevButton: null,
    createElementButton: null,
+   
+   checkBoxReg1: null,
+   checkBoxReg4: null,
    
     me: null,
     
@@ -135,6 +138,9 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
         tstampFieldReg4.validate();
         tstamp2FieldReg4 = this.createTextField('tstamp2FieldReg4', 'Tstamp2');
         tstamp2FieldReg4.setDisabled(true);
+        
+        checkBoxReg1  = this.createCheckBox('Disable reg', 'checkBoxReg1');
+        checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
 
           this.items  = [
         {
@@ -186,6 +192,7 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
                         tstamp2FieldOrig
                     ]
                  },
+                
                  {
                     xtype: 'fieldset',
                     title: 'Reg',
@@ -197,11 +204,13 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
                      },
         
                     items: [
-                        staffFieldReg1,
-                        placeFieldReg1,
-                        formFieldReg1,
-                        tstampFieldReg1,
-                         tstamp2FieldReg1
+                    staffFieldReg3,
+                        placeFieldReg3,
+                        formFieldReg3,
+                        tstampFieldReg3,
+                         tstamp2FieldReg3
+                    
+                        
                
                     ]
                  },
@@ -245,6 +254,15 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
            border:false,
            
            items: [
+           {
+           xtype: 'fieldset',
+           margin: '0 10 0 0',
+           border:false,
+           width: 275,
+           items: [
+                      
+                    ]
+           },
                 {
                     xtype: 'fieldset',
                     title: 'Reg',
@@ -253,11 +271,13 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
                     margin: '0 10 0 0',
                
                     items: [
-                        staffFieldReg3,
-                        placeFieldReg3,
-                        formFieldReg3,
-                        tstampFieldReg3,
-                         tstamp2FieldReg3
+                    checkBoxReg4,
+                     staffFieldReg4,
+                        placeFieldReg4,
+                        formFieldReg4,
+                        tstampFieldReg4,
+                         tstamp2FieldReg4
+           
                     ]
                  },
                  {
@@ -271,12 +291,13 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
                      },
         
                     items: [
-                        staffFieldReg4,
-                        placeFieldReg4,
-                        formFieldReg4,
-                        tstampFieldReg4,
-                         tstamp2FieldReg4
-               
+                    checkBoxReg1,
+                        staffFieldReg1,
+                        placeFieldReg1,
+                        formFieldReg1,
+                        tstampFieldReg1,
+                         tstamp2FieldReg1
+                         
                     ]
                  }
                  /*{
@@ -408,44 +429,22 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
                     tag: "orig",
                     leaf: true
                 },
-                {
-                    icon: 'resources/images/mix_volume.png',
+                {icon: 'resources/images/mix_volume.png',
                     staff: staffField.getValue(),                    
-                    tstamp: tstampFieldReg1.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
+                    tstamp: tstampFieldReg3.getValue(),
+                    tstamp2: tstamp2FieldReg3.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
                     name: "reg",
                     tag: "reg",
                     leaf: true
+                    
                 },
                 {
                     icon: 'resources/images/mix_volume.png',
                     staff: staffField.getValue(),                    
                     tstamp: tstampFieldReg2.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
-                    place: placeField.getValue(),
-                    form: formField.getValue(),
-                    name: "reg",
-                    tag: "reg",
-                    leaf: true
-                },
-                 {
-                    icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(),                    
-                    tstamp: tstampFieldReg2.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
-                    place: placeField.getValue(),
-                    form: formField.getValue(),
-                    name: "reg",
-                    tag: "reg",
-                    leaf: true
-                },
-                 {
-                    icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(),                    
-                    tstamp: tstampFieldReg2.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
+                    tstamp2: tstamp2FieldReg2.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
                     name: "reg",
@@ -459,6 +458,38 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
 	    
 	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    var parent = root.appendChild(hairpin);
+	    
+	    if(!tstamp2FieldReg1.isDisabled()){
+	    hairpin.appendChild({
+	    icon: 'resources/images/mix_volume.png',
+                    staff: staffField.getValue(),                    
+                    tstamp: tstampFieldReg1.getValue(),
+                    tstamp2: tstamp2FieldReg1.getValue(),
+                    place: placeField.getValue(),
+                    form: formField.getValue(),
+                    name: "reg",
+                    tag: "reg",
+                    leaf: true
+	    
+                    
+        });	
+        }
+        
+        if(!tstampFieldReg4.isDisabled()){
+         hairpin.appendChild({
+                   icon: 'resources/images/mix_volume.png',
+                    staff: staffField.getValue(),                    
+                    tstamp: tstampFieldReg4.getValue(),
+                    tstamp2: tstamp2FieldReg4.getValue(),
+                    place: placeField.getValue(),
+                    form: formField.getValue(),
+                    name: "reg",
+                    tag: "reg",
+                    leaf: true
+        });
+        }
+	    
+	    
 	    parent.expand();
 	    
 	    Ext.getCmp('cegridpanel').setSelection(hairpin);
@@ -690,6 +721,31 @@ createNavigationButton: function(navItemId, navText, navHandler){
           })
 
 return navButton;
+},
+
+       createCheckBox: function(fieldName, filedid){
+       var me9 = this;
+       
+    var ceCheckBox = Ext.create('Ext.form.field.Checkbox',{
+        fieldLabel: fieldName,
+        id: filedid,
+     
+        listeners: {
+        change: function(cb, checked) {
+        if(cb.id === 'checkBoxReg4'){
+            tstampFieldReg4.setDisabled(checked);
+        }
+        else if(cb.id === 'checkBoxReg1'){
+            tstamp2FieldReg1.setDisabled(checked);
+        }
+         me9.handleCreateButton();
+        
+ }
+        }
+     
+   });
+
+return ceCheckBox;
 }
 
 

@@ -69,6 +69,8 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2StaffCard', {
    prevButton: null,
    createElementButton: null,
    
+   checkBoxReg2: null,
+   
     me: null,
     
          initComponent: function() {
@@ -145,6 +147,8 @@ staffFieldReg3.validate();
         tstampFieldReg4.setDisabled(true);
         tstamp2FieldReg4 = this.createTextField('tstamp2FieldReg4', 'Tstamp2');
         tstamp2FieldReg4.setDisabled(true);
+        
+        checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
 
           this.items  = [
         {
@@ -227,7 +231,8 @@ staffFieldReg3.validate();
                         anchor: '100%'
                     },
         
-                    items: [            
+                    items: [     
+                    checkBoxReg2,
                         staffFieldReg2,
                         satffFieldBetweenReg2,
                         placeFieldReg2,
@@ -428,20 +433,8 @@ staffFieldReg3.validate();
                     icon: 'resources/images/mix_volume.png',
                     staff: staffField.getValue(), 
                     staff2: satffFieldBetween.getValue(),
-                    tstamp: tstampFieldOrig.getValue(),
+                    tstamp: tstampFieldReg1.getValue(),
                     tstamp2: tstamp2FieldReg1.getValue(),
-                    place: placeField.getValue(),
-                    form: formField.getValue(),
-                    name: "reg",
-                    tag: "reg",
-                    leaf: true
-                },
-                {
-                    icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(),   
-                    staff2: satffFieldBetween.getValue(),
-                    tstamp: tstampFieldOrig.getValue(),
-                    tstamp2: tstamp2FieldReg2.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
                     name: "reg",
@@ -451,8 +444,8 @@ staffFieldReg3.validate();
                  {
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg3.getValue(),                    
-                    tstamp: tstampFieldOrig.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
+                    tstamp: tstampFieldReg3.getValue(),
+                    tstamp2: tstamp2FieldReg3.getValue(),
                     place: placeFieldReg3.getValue(),
                     form: formField.getValue(),
                     name: "reg",
@@ -462,21 +455,35 @@ staffFieldReg3.validate();
                  {
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg4.getValue(),                    
-                    tstamp: tstampFieldOrig.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
+                    tstamp: tstampFieldReg4.getValue(),
+                    tstamp2: tstamp2FieldReg4.getValue(),
                     place: placeFieldReg4.getValue(),
                     form: formField.getValue(),
                     name: "reg",
                     tag: "reg",
                     leaf: true
                 }
-                ] 
-                
-                
+                ]               
 	    });
 	    
 	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    var parent = root.appendChild(hairpin);
+	    
+	    if(!tstamp2FieldReg2.isDisabled()){
+	    hairpin.appendChild({
+	   icon: 'resources/images/mix_volume.png',
+                    staff: staffField.getValue(),   
+                    staff2: satffFieldBetween.getValue(),
+                    tstamp: tstampFieldReg2.getValue(),
+                    tstamp2: tstamp2FieldReg2.getValue(),
+                    place: placeField.getValue(),
+                    form: formField.getValue(),
+                    name: "reg",
+                    tag: "reg",
+                    leaf: true
+        });	
+        }
+	    
 	    parent.expand();
 	    
 	    Ext.getCmp('cegridpanel').setSelection(hairpin);
@@ -721,6 +728,29 @@ createNavigationButton: function(navItemId, navText, navHandler){
           })
 
 return navButton;
+},
+
+      createCheckBox: function(fieldName, filedid){
+       var me9 = this;
+       
+    var ceCheckBox = Ext.create('Ext.form.field.Checkbox',{
+        fieldLabel: fieldName,
+        id: filedid,
+     
+        listeners: {
+        change: function(cb, checked) {
+        if(cb.id === 'checkBoxReg2'){
+            tstamp2FieldReg2.setDisabled(checked);
+        }
+        
+         me9.handleCreateButton();
+        
+ }
+        }
+     
+   });
+
+return ceCheckBox;
 }
 
 

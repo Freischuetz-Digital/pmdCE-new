@@ -83,6 +83,9 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
    prevButton: null,
    createElementButton: null,
    
+      checkBoxReg2: null,
+         checkBoxReg4: null,
+   
     me: null,
     
          initComponent: function() {
@@ -184,7 +187,8 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         tstamp2FieldReg6 = this.createTextField('tstamp2FieldReg6', 'Tstamp2');
         tstamp2FieldReg6.setDisabled(true);
 
-
+checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
+checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
 
           this.items  = [
         {
@@ -265,6 +269,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                      },
         
                     items: [
+                    checkBoxReg2,
                         staffFieldReg2,
                         satffFieldBetweenReg2,
                         placeFieldReg2,
@@ -323,6 +328,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                     margin: '0 10 0 0',
                
                     items: [
+                    checkBoxReg4,
                         staffFieldReg4,
                         satffFieldBetweenReg4,
                         placeFieldReg4,
@@ -489,19 +495,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                     staff: staffField.getValue(), 
                     staff2: satffFieldBetween.getValue(),
                     tstamp: tstampFieldReg1.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
-                    place: placeField.getValue(),
-                    form: formField.getValue(),
-                    name: "reg",
-                    tag: "reg",
-                    leaf: true
-                },
-                {
-                    icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(),   
-                    staff2: satffFieldBetween.getValue(),
-                    tstamp: tstampFieldReg2.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
+                    tstamp2: tstamp2FieldReg1.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
                     name: "reg",
@@ -512,8 +506,8 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                     icon: 'resources/images/mix_volume.png',
                     staff: staffField.getValue(),  
                     staff2: satffFieldBetween.getValue(),
-                    tstamp: tstampFieldOrig.getValue(),
-                    tstamp2: tstamp2FieldReg4.getValue(),
+                    tstamp: tstampFieldReg3.getValue(),
+                    tstamp2: tstamp2FieldReg3.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
                     name: "reg",
@@ -522,20 +516,9 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                 },
                  {
                     icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(), 
-                    staff2: satffFieldBetween.getValue(),
-                    tstamp: tstampFieldOrig.getValue(),
-                    tstamp2: tstamp2FieldReg4.getValue(),
-                    place: placeField.getValue(),
-                    form: formField.getValue(),
-                    name: "reg",
-                    tag: "reg",
-                    leaf: true
-                },{
-                    icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg5.getValue(),                    
-                    tstamp: tstampFieldOrig.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
+                    tstamp: tstampFieldReg5.getValue(),
+                    tstamp2: tstamp2FieldReg5.getValue(),
                     place: placeFieldReg5.getValue(),
                     form: formField.getValue(),
                     name: "reg",
@@ -544,8 +527,8 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
                 },{
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg6.getValue(),                    
-                    tstamp: tstampFieldOrig.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
+                    tstamp: tstampFieldReg6.getValue(),
+                    tstamp2: tstamp2FieldReg6.getValue(),
                     place: placeFieldReg6.getValue(),
                     form: formField.getValue(),
                     name: "reg",
@@ -559,6 +542,36 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
 	    
 	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    var parent = root.appendChild(hairpin);
+	    
+	       if(!tstampFieldReg2.isDisabled()){
+	    hairpin.appendChild({
+	   icon: 'resources/images/mix_volume.png',
+                    staff: staffField.getValue(),   
+                    staff2: satffFieldBetween.getValue(),
+                    tstamp: tstampFieldReg2.getValue(),
+                    tstamp2: tstamp2FieldReg2.getValue(),
+                    place: placeField.getValue(),
+                    form: formField.getValue(),
+                    name: "reg",
+                    tag: "reg",
+                    leaf: true  
+        });	
+        }
+        if(!tstamp2FieldReg4.isDisabled()){
+	    hairpin.appendChild({
+	    icon: 'resources/images/mix_volume.png',
+                    staff: staffField.getValue(), 
+                    staff2: satffFieldBetween.getValue(),
+                    tstamp: tstampFieldReg4.getValue(),
+                    tstamp2: tstamp2FieldReg4.getValue(),
+                    place: placeField.getValue(),
+                    form: formField.getValue(),
+                    name: "reg",
+                    tag: "reg",
+                    leaf: true
+        });	
+        }
+        
 	    parent.expand();
 	    
 	    Ext.getCmp('cegridpanel').setSelection(hairpin);
@@ -811,6 +824,33 @@ createNavigationButton: function(navItemId, navText, navHandler){
           })
 
 return navButton;
+},
+
+
+      createCheckBox: function(fieldName, filedid){
+       var me9 = this;
+       
+    var ceCheckBox = Ext.create('Ext.form.field.Checkbox',{
+        fieldLabel: fieldName,
+        id: filedid,
+     
+        listeners: {
+        change: function(cb, checked) {
+        if(cb.id === 'checkBoxReg2'){
+            tstampFieldReg2.setDisabled(checked);
+        }
+        else if(cb.id === 'checkBoxReg4'){
+            tstamp2FieldReg4.setDisabled(checked);
+        }
+        
+         me9.handleCreateButton();
+        
+ }
+        }
+     
+   });
+
+return ceCheckBox;
 }
 
 

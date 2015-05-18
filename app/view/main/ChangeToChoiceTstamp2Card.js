@@ -65,6 +65,8 @@ Ext.define('pmdCE.view.main.ChangeToChoiceTstamp2Card', {
    prevButton: null,
    createElementButton: null,
    
+   checkBoxReg2: null,
+   
     me: null,
     
          initComponent: function() {
@@ -146,6 +148,9 @@ tstampFieldReg2.setDisabled(true);
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
 tstamp2FieldReg2.validate();
 
+checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
+
+
           this.items  = [
         {
             id: 'card-0',
@@ -225,7 +230,8 @@ tstamp2FieldReg2.validate();
                         anchor: '100%'
                     },
         
-                    items: [            
+                    items: [ 
+                    checkBoxReg2,
                         staffFieldReg2,
                         placeFieldReg2,
                         formFieldReg2,
@@ -364,6 +370,7 @@ tstamp2FieldReg2.validate();
                     tag: "reg",
                     leaf: true
         });
+         if(!tstamp2FieldReg2.isDisabled()){
         selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg2.getValue(),                    
@@ -375,6 +382,7 @@ tstamp2FieldReg2.validate();
                     tag: "reg",
                     leaf: true
         });	
+        }
         
         selectedNode.expand();
 	  
@@ -598,6 +606,29 @@ createNavigationButton: function(navItemId, navText, navHandler){
           })
 
 return navButton;
+},
+
+      createCheckBox: function(fieldName, filedid){
+       var me9 = this;
+       
+    var ceCheckBox = Ext.create('Ext.form.field.Checkbox',{
+        fieldLabel: fieldName,
+        id: filedid,
+     
+        listeners: {
+        change: function(cb, checked) {
+        if(cb.id === 'checkBoxReg2'){
+            tstamp2FieldReg2.setDisabled(checked);
+        }
+        
+         me9.handleCreateButton();
+        
+ }
+        }
+     
+   });
+
+return ceCheckBox;
 }
 
 });
