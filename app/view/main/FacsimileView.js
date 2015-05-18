@@ -1,4 +1,4 @@
-Ext.define('pmdCE.view.main.FacsimileView', {
+/*Ext.define('pmdCE.view.main.FacsimileView', {
 extend: 'Ext.form.Panel',
 requires: [
         'pmdCE.view.main.LeafletFacsimile'
@@ -43,10 +43,10 @@ var selectedPage = Ext.getCmp('pages').getText();
        console.log("Click");
     }
 
- });
+ });*/
 
 
-/*Ext.define('pmdCE.view.main.FacsimileView', {
+Ext.define('pmdCE.view.main.FacsimileView', {
 extend: 'Ext.form.Panel',
         layout:'absolute',
         region:'south',
@@ -125,4 +125,4 @@ image
     ]    
     }
 
-    });*/
+    });
