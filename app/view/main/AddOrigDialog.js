@@ -31,7 +31,7 @@ Ext.define('pmdCE.view.main.AddOrigDialog', {
 	  && rootNode.childNodes[i].data.name === selection.data.name){
 	      selectedNode = rootNode.childNodes[i];	
 	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
-	      Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
+	      //Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
 	      Ext.getCmp('cemain').setStaffNr(selectedNode.childNodes[0].data.staff);
 	      break;
 	  }	      
@@ -51,7 +51,7 @@ Ext.define('pmdCE.view.main.AddOrigDialog', {
     tstamp2Field.validate();
 
     verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
-        verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
+   //     verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
 
      this.items =  [
       {
@@ -95,8 +95,8 @@ Ext.define('pmdCE.view.main.AddOrigDialog', {
         },
         
         items: [
-                tstamp2Field,
-                verovioImageEnd
+                tstamp2Field
+                //verovioImageEnd
         ]
     }
      

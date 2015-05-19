@@ -126,6 +126,7 @@ var me = this;
                   //  handler: ceHandler,
                      menu: [Ext.create('Ext.menu.Item', {
                         text: "Choice",
+                        id: 'changetobuttonchoice',
                         icon: 'resources/images/details-xml.png',
                          menu:[
                         menuTstamp2Reg,
@@ -143,6 +144,7 @@ var me = this;
                      
                      Ext.create('Ext.menu.Item', {
                 text: "Hairpin",
+                id: 'changetobuttonhairpin',
                 icon: 'resources/images/mix_volume.png',
                 handler: function() {
                     var win = new pmdCE.view.main.ChangeObviousElDialog();

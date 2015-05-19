@@ -95,15 +95,23 @@ Ext.define('pmdCE.view.main.ChangeToChoiceTstampStaffCard', {
 	      selectedNode = rootNode.childNodes[i];	
 	      vordStaff = selectedNode.data.staff;
 	      vordStartMeasure = selectedNode.data.measurenr;
-	      vordEndMeasure = selectedNode.data.measurenr;
 	      vordForm = selectedNode.data.form ;
 	      vordPlace = selectedNode.data.place;
 	      vordTStamp = selectedNode.data.tstamp;
 	      vordTStamp2 = selectedNode.data.tstamp2;
 	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
-	      // TODO richtige takt
-	      Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
 	      Ext.getCmp('cemain').setStaffNr(vordStaff);
+	      
+	       if(typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined'){
+	          var prefix = vordTStamp2.substring(0, 1);
+	          if(prefix !== 'm'){
+	              vordEndMeasure = parseInt(vordStartMeasure) + parseInt(prefix);
+	          }else{
+	              vordEndMeasure = parseInt(vordStartMeasure) + 1;
+	          }
+	          Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
+	      }	     
+	      
 	      break;
 	  }	      
 	  }    
@@ -410,6 +418,7 @@ checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
       prevButton = this.createNavigationButton('card-prev', '&laquo; Previous', 'showPrevious');
     nextButton = this.createNavigationButton('card-next', 'Next &raquo;', 'showNext');
     createElementButton = this.createNavigationButton('createElement', 'Change', 'createElement');
+    this.handleNavigationButtons();
      this.bbar = ['->',
     prevButton,
         nextButton,

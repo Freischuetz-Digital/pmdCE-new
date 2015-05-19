@@ -39,9 +39,19 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
         var selectedObject;
        
         if(typeof eOpts[0] !== 'undefined' && eOpts[0].data.depth === 1){
-        // TODO: handle menus
             Ext.getCmp('deleteButton').setDisabled(false);           
             Ext.getCmp('changetobutton').setDisabled(false);
+            
+            if(selected.selected.items[0].data.obvious){
+                Ext.getCmp('changetobuttonchoice').setDisabled(false);
+                Ext.getCmp('changetobuttonchoice').menu.setDisabled(false);
+                Ext.getCmp('changetobuttonhairpin').setDisabled(true);
+            }
+            else{
+                Ext.getCmp('changetobuttonchoice').setDisabled(true);
+                 Ext.getCmp('changetobuttonchoice').menu.setDisabled(true);
+                 Ext.getCmp('changetobuttonhairpin').setDisabled(false);
+            }
            
             if(selected.selected.items[0].data.obvious){
                 Ext.getCmp('addelementbutton').setDisabled(true);

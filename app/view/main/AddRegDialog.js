@@ -51,7 +51,7 @@ Ext.define('pmdCE.view.main.AddRegDialog', {
     tstamp2Field.validate();
 
     verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
-        verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
+     //   verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
 
      this.items =  [
       {
@@ -92,8 +92,8 @@ Ext.define('pmdCE.view.main.AddRegDialog', {
         },
         
         items: [
-                tstamp2Field,
-                verovioImageEnd
+                tstamp2Field
+               // verovioImageEnd
         ]
     }
      

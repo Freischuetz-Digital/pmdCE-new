@@ -13,6 +13,7 @@
                     "tstamp2": "m+6.5",
                     "place": "below",
                     "form": "cres",
+                    "measurenr":25,
                     "tag": ""
         }, 
         {
@@ -29,6 +30,7 @@
                     "place": "below",
                     "form": "dim",
                      "tag": "",
+                     "measurenr":26,
                     "leaf": true
         },
          {
@@ -50,6 +52,7 @@
                     "tstamp2": "m+5",
                     "place": "between",
                     "form": "dim",
+                    "measurenr":27,
                     "tag": "orig"
         }, 
         
@@ -63,6 +66,7 @@
                     "tstamp2": "m+5",
                     "place": "below",
                     "form": "dim",
+                    "measurenr":27,
                     "tag": "reg"
         }, 
         {
@@ -75,6 +79,7 @@
                     "tstamp2": "m+5",
                     "place": "above",
                     "form": "dim",
+                    "measurenr":27,
                     "tag": "reg"
         } 
         
