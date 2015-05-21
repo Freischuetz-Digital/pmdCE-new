@@ -138,7 +138,8 @@ Ext.define('pmdCE.view.main.ChangeToChoiceTstampCard', {
         tstampFieldReg1.validate();
         tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
         tstamp2FieldReg1.setValue(vordTStamp2);
-        tstamp2FieldReg1.setDisabled(true);
+        //tstamp2FieldReg1.setDisabled(true);
+        tstamp2FieldReg1.validate();
 
 staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
  staffFieldReg2.setDisabled(true);
@@ -152,7 +153,8 @@ tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
 tstampFieldReg2.validate();
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
 tstamp2FieldReg2.setValue(vordTStamp2);
-tstamp2FieldReg2.setDisabled(true);
+ tstamp2FieldReg2.validate();
+//tstamp2FieldReg2.setDisabled(true);
 
 checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
 
@@ -325,7 +327,8 @@ checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
     handleCreateButton: function(){
       if(placeField.isValid() && formField.isValid() 
           && tstampFieldOrig.isValid() && tstamp2FieldOrig.isValid()
-          && tstampFieldReg1.isValid() && tstampFieldReg2.isValid()){ 
+          && tstampFieldReg1.isValid() && tstampFieldReg2.isValid()
+          && tstamp2FieldReg1.isValid() && tstamp2FieldReg2.isValid()){ 
              createElementButton.setDisabled(false); 
           }
           else{
@@ -453,8 +456,8 @@ checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
            if(me.selectedFieldId === 'tstamp2FieldOrig'){
-               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               //tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               //tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
            me1.handleCreateButton();
         },
@@ -462,8 +465,8 @@ checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
             c.getEl().on('keyup', function() {   
           me.selectedFieldId = fieldName;
            if(me.selectedFieldId === 'tstamp2FieldOrig'){
-               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               //tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               //tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
            me1.handleCreateButton();
             }, c);

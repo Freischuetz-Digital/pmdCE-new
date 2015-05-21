@@ -90,9 +90,11 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
         formFieldReg1 = this.createComboBoxForm('Form');
         formFieldReg1.setDisabled(true);
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
-        tstampFieldReg1.setDisabled(true);
+        tstampFieldReg1.validate();
+        //tstampFieldReg1.setDisabled(true);
         tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
-        tstamp2FieldReg1.setDisabled(true);
+        tstamp2FieldReg1.validate();
+        //tstamp2FieldReg1.setDisabled(true);
 
     staffFieldReg2= this.createComboBoxStaff('Staff');  
     staffFieldReg2.validate();
@@ -103,9 +105,11 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
         formFieldReg2 = this.createComboBoxForm('Form');
         formFieldReg2.setDisabled(true);
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
-tstampFieldReg2.setDisabled(true);
+tstampFieldReg2.validate();
+//tstampFieldReg2.setDisabled(true);
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
-tstamp2FieldReg2.setDisabled(true);
+//tstamp2FieldReg2.setDisabled(true);
+tstamp2FieldReg2.validate();
 
           this.items  = [
         {
@@ -275,7 +279,9 @@ tstamp2FieldReg2.setDisabled(true);
           && tstampFieldOrig.isValid() && tstamp2FieldOrig.isValid()
           && staffFieldReg1.isValid() && placeFieldReg1.isValid()
           && satffFieldBetween.isValid()
-          && staffFieldReg2.isValid() && placeFieldReg2.isValid()){ 
+          && staffFieldReg2.isValid() && placeFieldReg2.isValid()
+          && tstampFieldReg1.isValid() && tstamp2FieldReg1.isValid()
+          && tstampFieldReg2.isValid() && tstamp2FieldReg2.isValid()){ 
              createElementButton.setDisabled(false); 
           }
           else{
@@ -302,7 +308,7 @@ tstamp2FieldReg2.setDisabled(true);
                     staff2: satffFieldBetween.getValue(), 
                     tstamp: tstampFieldOrig.getValue(),
                     tstamp2: tstamp2FieldOrig.getValue(),
-                    place: placeFieldReg2.getValue(),
+                    place: placeFieldOrig.getValue(),
                     form: formField.getValue(),
                     name: "orig",
                     tag: "orig",
@@ -311,9 +317,9 @@ tstamp2FieldReg2.setDisabled(true);
                 {
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg1.getValue(),                    
-                    tstamp: tstampFieldOrig.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
-                    place: placeField.getValue(),
+                    tstamp: tstampFieldReg1.getValue(),
+                    tstamp2: tstamp2FieldReg1.getValue(),
+                    place: placeFieldReg1.getValue(),
                     form: formField.getValue(),
                     name: "reg",
                     tag: "reg",
@@ -322,9 +328,9 @@ tstamp2FieldReg2.setDisabled(true);
                 {
                     icon: 'resources/images/mix_volume.png',
                     staff: staffFieldReg2.getValue(),                    
-                    tstamp: tstampFieldOrig.getValue(),
-                    tstamp2: tstamp2FieldOrig.getValue(),
-                    place: placeFieldReg1.getValue(),
+                    tstamp: tstampFieldReg2.getValue(),
+                    tstamp2: tstamp2FieldReg2.getValue(),
+                    place: placeFieldReg2.getValue(),
                     form: formField.getValue(),
                     name: "reg",
                     tag: "reg",
@@ -396,12 +402,12 @@ tstamp2FieldReg2.setDisabled(true);
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
             if(me.selectedFieldId === 'tstamp2FieldOrig'){
-               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               //tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               //tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
             if(me.selectedFieldId === 'tstampFieldOrig'){
-               tstampFieldReg1.setValue(tstampFieldOrig.getValue());
-               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+              // tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               //tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
             me1.handleCreateButton();
         },
@@ -409,12 +415,12 @@ tstamp2FieldReg2.setDisabled(true);
             c.getEl().on('keyup', function() {   
           me.selectedFieldId = fieldName;
             if(me.selectedFieldId === 'tstamp2FieldOrig'){
-               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               //tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               //tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
             if(me.selectedFieldId === 'tstampFieldOrig'){
-               tstampFieldReg1.setValue(tstampFieldOrig.getValue());
-               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+              // tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+              // tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
             me1.handleCreateButton();
             }, c);

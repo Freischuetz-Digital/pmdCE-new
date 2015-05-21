@@ -63,7 +63,6 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
            selectedObject = selected.selected.items[0];
         }
         else if(typeof eOpts[0] !== 'undefined'&& eOpts[0].data.depth === 2){
-        // TODO: handle menus
             Ext.getCmp('deleteButton').setDisabled(false);
         Ext.getCmp('addelementbutton').setDisabled(true);
         Ext.getCmp('changetobutton').setDisabled(true);

@@ -170,7 +170,8 @@ Ext.define('pmdCE.view.main.ChangeToChoiceTimeStaffCard', {
         tstampFieldReg1.validate();
         tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
         tstamp2FieldReg1.setValue(vordTStamp2);
-        tstamp2FieldReg1.setDisabled(true);
+        tstamp2FieldReg1.validate();
+        //tstamp2FieldReg1.setDisabled(true);
 
 staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
  staffFieldReg2.setDisabled(true);
@@ -185,7 +186,8 @@ tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
 tstampFieldReg2.validate();
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
 tstamp2FieldReg2.setValue(vordTStamp2);
-tstamp2FieldReg2.setDisabled(true);
+tstamp2FieldReg2.validate();
+//tstamp2FieldReg2.setDisabled(true);
 
 
 staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');  
@@ -199,7 +201,8 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         formFieldReg3.setDisabled(true);
         tstampFieldReg3 = this.createTextField('tstampFieldReg3', 'Tstamp');
         tstampFieldReg3.setValue(vordTStamp);
-        tstampFieldReg3.setDisabled(true);
+        tstampFieldReg3.validate();
+       // tstampFieldReg3.setDisabled(true);
         tstamp2FieldReg3 = this.createTextField('tstamp2FieldReg3', 'Tstamp2');
         tstamp2FieldReg3.validate();
         
@@ -214,7 +217,8 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         formFieldReg4.setDisabled(true);
         tstampFieldReg4 = this.createTextField('tstampFieldReg4', 'Tstamp');
         tstampFieldReg4.setValue(vordTStamp);
-        tstampFieldReg4.setDisabled(true);
+        tstampFieldReg4.validate();
+       // tstampFieldReg4.setDisabled(true);
         tstamp2FieldReg4 = this.createTextField('tstamp2FieldReg4', 'Tstamp2');
         tstamp2FieldReg4.validate();
                 
@@ -227,10 +231,12 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         formFieldReg5.setDisabled(true);
         tstampFieldReg5 = this.createTextField('tstampFieldReg5', 'Tstamp');
         tstampFieldReg5.setValue(vordTStamp);
-        tstampFieldReg5.setDisabled(true);
+        //tstampFieldReg5.setDisabled(true);
+        tstampFieldReg5.validate();
         tstamp2FieldReg5 = this.createTextField('tstamp2FieldReg5', 'Tstamp2');
         tstamp2FieldReg5.setValue(vordTStamp2);
-        tstamp2FieldReg5.setDisabled(true);
+        tstamp2FieldReg5.validate();
+        //tstamp2FieldReg5.setDisabled(true);
         
         staffFieldReg6= this.createComboBoxStaff('Staff');
         staffFieldReg6.validate();
@@ -241,10 +247,12 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         formFieldReg6.setDisabled(true);
         tstampFieldReg6 = this.createTextField('tstampFieldReg6', 'Tstamp');
         tstampFieldReg6.setValue(vordTStamp);
-        tstampFieldReg6.setDisabled(true);
+        tstampFieldReg6.validate();
+       // tstampFieldReg6.setDisabled(true);
         tstamp2FieldReg6 = this.createTextField('tstamp2FieldReg6', 'Tstamp2');
         tstamp2FieldReg6.setValue(vordTStamp2);
-        tstamp2FieldReg6.setDisabled(true);
+        tstamp2FieldReg6.validate();
+        //tstamp2FieldReg6.setDisabled(true);
 
 checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
 checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
@@ -514,7 +522,11 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
           && tstampFieldOrig.isValid() && tstamp2FieldOrig.isValid()
           && satffFieldBetween.isValid()
           && tstampFieldReg1.isValid() && tstampFieldReg2.isValid()
+          && tstampFieldReg3.isValid() && tstampFieldReg4.isValid()
+          && tstampFieldReg5.isValid() && tstampFieldReg6.isValid()
           && tstamp2FieldReg3.isValid() && tstamp2FieldReg4.isValid()
+          && tstamp2FieldReg1.isValid() && tstamp2FieldReg2.isValid()
+          && tstamp2FieldReg5.isValid() && tstamp2FieldReg6.isValid()
           && staffFieldReg5.isValid() && placeFieldReg5.isValid()
           && staffFieldReg6.isValid() && placeFieldReg6.isValid()
           ){ 
@@ -698,16 +710,16 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
            if(me.selectedFieldId === 'tstampFieldOrig'){
-              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
-               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
-               tstampFieldReg5.setValue(tstampFieldOrig.getValue());
-               tstampFieldReg6.setValue(tstampFieldOrig.getValue());
+              //tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+              // tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+              // tstampFieldReg5.setValue(tstampFieldOrig.getValue());
+               //tstampFieldReg6.setValue(tstampFieldOrig.getValue());
            }
            if(me.selectedFieldId === 'tstamp2FieldOrig'){              
-                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
+             //   tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+              // tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+              // tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
+               //tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
                
            }
             me1.handleCreateButton();
@@ -716,16 +728,16 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
             c.getEl().on('keyup', function() {   
           me.selectedFieldId = fieldName;
            if(me.selectedFieldId === 'tstampFieldOrig'){
-              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
-               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
-               tstampFieldReg5.setValue(tstampFieldOrig.getValue());
-               tstampFieldReg6.setValue(tstampFieldOrig.getValue());
+             // tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+             //  tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+              // tstampFieldReg5.setValue(tstampFieldOrig.getValue());
+              // tstampFieldReg6.setValue(tstampFieldOrig.getValue());
            }
            if(me.selectedFieldId === 'tstamp2FieldOrig'){              
-                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
-               tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
+               // tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+              // tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+              // tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
+              // tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
                
            }
             me1.handleCreateButton();
