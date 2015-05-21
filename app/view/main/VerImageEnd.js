@@ -126,8 +126,6 @@ for (var i = 0; i < elements.length; i++) {
                                 var diff = parseInt(testArr[x].substring(7));
                                 console.log(diff);
                                     prefix = diff-startId;
-                                    console.log(startId);
-                                    console.log(prefix);
                                     break;
                                 }
                             }                                                      

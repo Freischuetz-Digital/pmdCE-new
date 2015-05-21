@@ -271,10 +271,15 @@ showXMLforSelectedElement: function(selectedObject){
    return eColumn;
    },
    
-   changeElementDialog: function(object, cell, row){ 
-    object.selectionModel.select(cell);
+   changeElementDialog: function(object, cell, row){
+   object.selectionModel.select(cell);  
+   selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+   if(selection.data.obvious || selection.data.depth === 2){     
     var win = new pmdCE.view.main.EditDialog();
     win.show();
+       
+   }
+   
 }
 
     

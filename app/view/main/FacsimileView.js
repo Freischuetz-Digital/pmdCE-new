@@ -92,19 +92,19 @@ initComponent: function() {
     }
 });
 
-Ext.Ajax.request({
-    //url: 'resources/xql/getZones.xql',
-    url: 'data/getZones.xql',
-    async: false,
-    method: 'GET',
-    params: {
-        path: selectedPage
-    },
-    success: function(response){
-       console.log(response)
-      
-    }
-});
+//Ext.Ajax.request({
+//    //url: 'resources/xql/getZones.xql',
+//    url: 'data/getZones.xql',
+//    async: false,
+//    method: 'GET',
+//    params: {
+//        path: selectedPage
+//    },
+//    success: function(response){
+//       console.log(response)
+//      
+//    }
+//});
 
         this.callParent()
 

@@ -98,19 +98,19 @@ return ceButton;
 createChangeToButton: function(){
 var me = this;
     
-    var menuTstamp2Reg = this.createMenuItem("for Tstamp (2 regs)", 8, me);
+    var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 8, me);
     
-    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (2 regs)", 9, me);
+    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (1-2 regs)", 9, me);
     
-    var menuStaff2Reg  = this.createMenuItem("for Staff (2 regs)", 10, me);
+    var menuStaff2Reg  = this.createMenuItem("for Staff (1-2 regs)", 10, me);
     
-     var menuTime4Reg  = this.createMenuItem("for Time (4 regs)", 11, me);
+     var menuTime4Reg  = this.createMenuItem("for Time (2-4 regs)", 11, me);
      
-     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (4 regs)", 12, me);
+     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (3-4 regs)", 12, me);
      
-     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (4 regs)", 13, me);
+     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (3-4 regs)", 13, me);
      
-      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (6 regs)", 14, me);
+      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (4-6 regs)", 14, me);
       
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
@@ -160,19 +160,19 @@ return ceButton;
 createHairpinButton: function(){
     var me = this;
     
-    var menuTstamp2Reg = this.createMenuItem("for Tstamp (2 regs)", 1, me);
+    var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 1, me);
     
-    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (2 regs)", 2, me);
+    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (1-2 regs)", 2, me);
     
-    var menuStaff2Reg  = this.createMenuItem("for Staff (2 regs)", 3, me);
+    var menuStaff2Reg  = this.createMenuItem("for Staff (1-2 regs)", 3, me);
     
-     var menuTime4Reg  = this.createMenuItem("for Time (4 regs)", 4, me);
+     var menuTime4Reg  = this.createMenuItem("for Time (2-4 regs)", 4, me);
      
-     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (4 regs)", 5, me);
+     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (3-4 regs)", 5, me);
      
-     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (4 regs)", 6, me);
+     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (3-4 regs)", 6, me);
      
-      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (6 regs)", 7, me);
+      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (4-6 regs)", 7, me);
     
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
