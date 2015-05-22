@@ -1,6 +1,6 @@
 Ext.define('pmdCE.view.main.EditDialog', {
    extend: 'Ext.window.Window',
-   title: 'Change Element',
+   title: 'Edit Values',
    flex: 1,
    //height: 200,
    //width: 500, 
@@ -13,12 +13,8 @@ Ext.define('pmdCE.view.main.EditDialog', {
   formField: null,
   tstampField: null,
    tstampField2: null,
-  
-   modelTest: null,
-   
-  
+ 
     selection: null,
-    rootNode: null,
     selectedNode: null,
     parentNode: null,
     
@@ -34,15 +30,11 @@ Ext.define('pmdCE.view.main.EditDialog', {
     initComponent: function() {
     
     selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
-	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-       console.log("selection");
-       console.log(rootNode);
-       console.log(selection);
+	  
        if(selection.data.depth === 1){
-           for(var i = 0; i < rootNode.childNodes.length ; i++){
-	       if(rootNode.childNodes[i].data.id === selection.data.id){
-	           selectedNode = rootNode.childNodes[i];
-	      vordStaff = selectedNode.data.staff;
+       selectedNode = selection;
+       
+       vordStaff = selectedNode.data.staff;
 	      vordStaff2 = selectedNode.data.staff2;
 	      vordStartMeasure = selectedNode.data.measurenr;
 	      vordForm = selectedNode.data.form ;
@@ -64,80 +56,33 @@ Ext.define('pmdCE.view.main.EditDialog', {
 	      
 	      var movement = Ext.getCmp('movement').getText();
 	      Ext.getCmp('cemain').setMeasureId(movement+"_measure"+vordStartMeasure);
-	      break;
-	      }
-	  }    
        }
        else if(selection.data.depth === 2){
        selectedNode = selection;
        parentNode = selection.parentNode;
-       //parentNode = rootNode.childNodes[i];
 	           vordStartMeasure = parentNode.data.measurenr;
 	           Ext.getCmp('cemain').setStartMeasure(parentNode.data.measurenr);
 	           var movement = Ext.getCmp('movement').getText();
 	           Ext.getCmp('cemain').setMeasureId(movement+"_measure"+vordStartMeasure);
+	           if(typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined'){
+	                       var prefix = vordTStamp2.substring(0, 1);
+	                       if(prefix !== 'm'){
+	                           vordEndMeasure = parseInt(vordStartMeasure) + parseInt(prefix);
+	                       }else{
+	                           vordEndMeasure = parseInt(vordStartMeasure) + 1;
+	                       }
+	                       Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
+	            }	
+	                      
 	           vordStaff = selectedNode.data.staff;
+	           Ext.getCmp('cemain').setStaffNr(vordStaff);
 	                   vordStaff2 = selectedNode.data.staff2;
 	      
 	                   vordForm = selectedNode.data.form ;
 	                   vordPlace = selectedNode.data.place;
 	                   vordTStamp = selectedNode.data.tstamp;
 	                   vordTStamp2 = selectedNode.data.tstamp2;
-	      
-	                   Ext.getCmp('cemain').setStaffNr(vordStaff);
-	      
-	                   if(typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined'){
-	                       var prefix = vordTStamp2.substring(0, 1);
-	                       if(prefix !== 'm'){
-	                           vordEndMeasure = parseInt(vordStartMeasure) + parseInt(prefix);
-	                       }else{
-	                           vordEndMeasure = parseInt(vordStartMeasure) + 1;
-	                       }
-	                       Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
-	                   }	
-       
-          /* for(var i = 0; i < rootNode.childNodes.length ; i++){
-	       if(rootNode.childNodes[i].data.id === selection.data.parentId){
-	           parentNode = rootNode.childNodes[i];
-	           vordStartMeasure = parentNode.data.measurenr;
-	           Ext.getCmp('cemain').setStartMeasure(parentNode.data.measurenr);
-	           var movement = Ext.getCmp('movement').getText();
-	           Ext.getCmp('cemain').setMeasureId(movement+"_measure"+vordStartMeasure);
 	           
-	           console.log(rootNode.childNodes);
-	           
-	           for(var j= 0; j< rootNode.childNodes.childNodes.length; j++){
-	           console.log(rootNode.childNodes[i].childNodes[j].data.id);
-	           console.log(selection.data.id);
-	           
-	               if(rootNode.childNodes[i].childNodes[j].data.id === selection.data.id){
-	                   selectedNode = rootNode.childNodes[i].childNodes[j];
-	                   console.log(selectedNode);
-	                   vordStaff = selectedNode.data.staff;
-	                   vordStaff2 = selectedNode.data.staff2;
-	      
-	                   vordForm = selectedNode.data.form ;
-	                   vordPlace = selectedNode.data.place;
-	                   vordTStamp = selectedNode.data.tstamp;
-	                   vordTStamp2 = selectedNode.data.tstamp2;
-	      
-	                   Ext.getCmp('cemain').setStaffNr(vordStaff);
-	      
-	                   if(typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined'){
-	                       var prefix = vordTStamp2.substring(0, 1);
-	                       if(prefix !== 'm'){
-	                           vordEndMeasure = parseInt(vordStartMeasure) + parseInt(prefix);
-	                       }else{
-	                           vordEndMeasure = parseInt(vordStartMeasure) + 1;
-	                       }
-	                       Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
-	                   }	
-	                   break;	      
-	               }
-	           }	     
-	           break;	     
-	      }
-	  }*/    
     }
 	  
     
@@ -212,6 +157,7 @@ tstamp2Field.setValue(vordTStamp2);
 	  Ext.getCmp('cegridpanel').setSelection(parentNode);
 	  
 	  Ext.getCmp('cegridpanel').showXMLforSelectedElement(parentNode);
+	   Ext.getCmp('addelementbutton').setDisabled(false);
          }
 else{
      
@@ -222,7 +168,7 @@ else{
          
 	  
        Ext.getCmp('saveButton').setDisabled(false);
-       Ext.getCmp('addelementbutton').setDisabled(false);
+      
      
              this.up('window').close();
         }

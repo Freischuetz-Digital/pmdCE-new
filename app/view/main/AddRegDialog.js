@@ -6,7 +6,7 @@ Ext.define('pmdCE.view.main.AddRegDialog', {
    //width: 500, 
    modal: true,
    bodyPadding: 10,
-   layout: 'hbox',
+   layout: 'vbox',
    autoScroll: true,
    
    staffField: null,  
@@ -26,14 +26,16 @@ Ext.define('pmdCE.view.main.AddRegDialog', {
     selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	  
-	  for(var i = 0; i < rootNode.childNodes.length ; i++){
-	  if(rootNode.childNodes[i].data.id === selection.data.id
-	  && rootNode.childNodes[i].data.name === selection.data.name){
+	  
+	   for(var i = 0; i < rootNode.childNodes.length ; i++){
+	  if(rootNode.childNodes[i].data.id === selection.data.id){
 	      selectedNode = rootNode.childNodes[i];	
 	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
-	      Ext.getCmp('cemain').setEndMeasure(selectedNode.data.measurenr);
 	      Ext.getCmp('cemain').setStaffNr(selectedNode.childNodes[0].data.staff);
+	      var movement = Ext.getCmp('movement').getText();
+	      Ext.getCmp('cemain').setMeasureId(movement+"_measure"+selectedNode.data.measurenr);
 	      break;
+	     
 	  }	      
 	  }    
  
@@ -50,53 +52,14 @@ Ext.define('pmdCE.view.main.AddRegDialog', {
     tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
     tstamp2Field.validate();
 
-    verovioImageStart = new pmdCE.view.main.VerovioImageStart(),
-     //   verovioImageEnd = new pmdCE.view.main.VerovioImageEnd(),
-
      this.items =  [
-      {
-        xtype: 'fieldset',
-        title: 'Values',
-        defaultType: 'textfield',
-        margin: '0 10 0 0',
-        defaults: {
-            anchor: '100%'
-        },
-        
-        items: [
-            staffField,
+     
+      staffField,
             satffFieldBetween,
             placeField,
-            formField
-        ]
-    }, {
-        xtype: 'fieldset',
-        defaultType: 'textfield',
-         title: 'Start Time',
-         margin: '0 10 0 0',
-        defaults: {
-            anchor: '100%'
-        },
-        
-        items: [
-                tstampField,
-                verovioImageStart
-        ]
-    }, {
-        xtype: 'fieldset',
-        defaultType: 'textfield',
-         title: 'End Time',
-         margin: '0 10 0 0',
-        defaults: {
-            anchor: '100%'
-        },
-        
-        items: [
-                tstamp2Field
-               // verovioImageEnd
-        ]
-    }
-     
+            formField,
+            tstampField,
+            tstamp2Field
             ] , 
    createElementButton = this.createNavigationButton('createElement', 'Add', this.createElement);
     this.buttons = [
@@ -115,9 +78,13 @@ this.callParent()
     
         if(selectedNode !== null){
         
+           selectedNode.set('operation', 'change');
+	       selectedNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
+        
            selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(),                   
+                    staff: staffField.getValue(),
+                    staff2: satffFieldBetween.getValue(), 
                     tstamp: tstampField.getValue(),
                     tstamp2: tstamp2Field.getValue(),
                     place: placeField.getValue(),
@@ -126,7 +93,7 @@ this.callParent()
                     tag: 'reg',
                     leaf: true
         });	
-        
+       
         selectedNode.expand();
 	  
 	  Ext.getCmp('cegridpanel').setSelection(selectedNode);
@@ -134,6 +101,7 @@ this.callParent()
 	  Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
 	  
        Ext.getCmp('saveButton').setDisabled(false);
+       Ext.getCmp('addelementbutton').setDisabled(false);
         
         }
        
