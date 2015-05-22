@@ -16,15 +16,103 @@ Ext.define('pmdCE.view.main.EditDialog', {
   
    modelTest: null,
    
+  
+    selection: null,
+    rootNode: null,
+    selectedNode: null,
+    parentNode: null,
+   
     initComponent: function() {
+    
+    selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+       console.log("selection");
+       console.log(selection);
+       if(selection.data.depth === 1){
+           for(var i = 0; i < rootNode.childNodes.length ; i++){
+	       if(rootNode.childNodes[i].data.id === selection.data.id){
+	           selectedNode = rootNode.childNodes[i];
+	      vordStaff = selectedNode.data.staff;
+	      vordStaff2 = selectedNode.data.staff2;
+	      vordStartMeasure = selectedNode.data.measurenr;
+	      vordForm = selectedNode.data.form ;
+	      vordPlace = selectedNode.data.place;
+	      vordTStamp = selectedNode.data.tstamp;
+	      vordTStamp2 = selectedNode.data.tstamp2;
+	      Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+	      Ext.getCmp('cemain').setStaffNr(vordStaff);
+	      
+	       if(typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined'){
+	          var prefix = vordTStamp2.substring(0, 1);
+	          if(prefix !== 'm'){
+	              vordEndMeasure = parseInt(vordStartMeasure) + parseInt(prefix);
+	          }else{
+	              vordEndMeasure = parseInt(vordStartMeasure) + 1;
+	          }
+	          Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
+	      }	
+	      
+	      var movement = Ext.getCmp('movement').getText();
+	      Ext.getCmp('cemain').setMeasureId(movement+"_measure"+vordStartMeasure);
+	      break;
+	      }
+	  }    
+       }
+       else if(selection.data.depth === 2){
+           for(var i = 0; i < rootNode.childNodes.length ; i++){
+	       if(rootNode.childNodes[i].data.id === selection.data.parentId){
+	           parentNode = rootNode.childNodes[i];
+	           vordStartMeasure = parentNode.data.measurenr;
+	           Ext.getCmp('cemain').setStartMeasure(parentNode.data.measurenr);
+	           var movement = Ext.getCmp('movement').getText();
+	           Ext.getCmp('cemain').setMeasureId(movement+"_measure"+vordStartMeasure);
+	     
+	           
+	           for(var j= 0; j< parentNode.childNodes.length; j++){
+	               if(parentNode.childNodes[j].data.id === selection.data.id){
+	                   selectedNode = parentNode.childNodes[j];
+	                   vordStaff = selectedNode.data.staff;
+	                   vordStaff2 = selectedNode.data.staff2;
+	      
+	                   vordForm = selectedNode.data.form ;
+	                   vordPlace = selectedNode.data.place;
+	                   vordTStamp = selectedNode.data.tstamp;
+	                   vordTStamp2 = selectedNode.data.tstamp2;
+	      
+	                   Ext.getCmp('cemain').setStaffNr(vordStaff);
+	      
+	                   if(typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined'){
+	                       var prefix = vordTStamp2.substring(0, 1);
+	                       if(prefix !== 'm'){
+	                           vordEndMeasure = parseInt(vordStartMeasure) + parseInt(prefix);
+	                       }else{
+	                           vordEndMeasure = parseInt(vordStartMeasure) + 1;
+	                       }
+	                       Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
+	                   }	
+	                   break;	      
+	               }
+	           }	     
+	           break;	     
+	      }
+	  }    
+    }
+	  
     
         
 staffField = this.createTextField('staffField', 'Staff');
+ staffField.setValue(vordStaff);
+        
 staffField2 = this.createTextField('secondStaffField', 'Second staff');
+staffField2.setValue(vordStaff2);
 formField = this.createComboBoxForm('Form');
+formField.setValue(vordForm);
 placeField = this.createComboBox('Place');
+placeField.setValue(vordPlace);
 tstampField = this.createTextField('tstampField', 'Tstamp');
+tstampField.setValue(vordTStamp);
 tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
+tstamp2Field.setValue(vordTStamp2);
 
      this.items =  [
                 staffField,
@@ -38,32 +126,62 @@ tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
     this.buttons = [{
         text:'Update',
         handler: function(){
-       
-          var target = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
-          var store = pmdCE.getApplication().getHairpinDataStore();
-       
-         if(staffField.getValue() !== ""){
-             target.set('staff', staffField.getValue());
+        
+        if(typeof parentNode !== 'undefined'){
+             parentNode.set('operation', 'change');
+	           parentNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
+        }
+        else{
+           selectedNode.set('operation', 'change');
+	   selectedNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
+        
+            
+        }
+     	 
+          if(staffField.getValue() !== ""){
+             selectedNode.set('staff', staffField.getValue());
+           
          }
          if(staffField2.getValue() !== ""){
-             target.set('staff2', staffField2.getValue());
+             selectedNode.set('staff2', staffField2.getValue());
+            
          }
+         
           if(tstampField.getValue() !== ""){
-             target.set('tstamp', tstampField.value);
+             selectedNode.set('tstamp', tstampField.value);
+         
          }
           if(tstamp2Field.getValue() !== ""){
-             target.set('tstamp2', tstamp2Field.getValue());
+             selectedNode.set('tstamp2', tstamp2Field.getValue());
+          
          }
          if(placeField.getValue() !== null){
-              target.set('place', placeField.getValue());
+              selectedNode.set('place', placeField.getValue());
+            
          }       
          if(formField.getValue() !== null){
-               target.set('form', formField.getValue());
+               selectedNode.set('form', formField.getValue());
+        
          }
- 
-         Ext.getCmp('cegridpanel').setSelection(target);
          
-    Ext.getCmp('saveButton').setDisabled(false);
+         if(typeof parentNode !== 'undefined'){
+         parentNode.expand();
+	  
+	  Ext.getCmp('cegridpanel').setSelection(parentNode);
+	  
+	  Ext.getCmp('cegridpanel').showXMLforSelectedElement(parentNode);
+         }
+else{
+     
+	  Ext.getCmp('cegridpanel').setSelection(selectedNode);
+	  
+	  Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
+}
+         
+	  
+       Ext.getCmp('saveButton').setDisabled(false);
+       Ext.getCmp('addelementbutton').setDisabled(false);
+     
              this.up('window').close();
         }
     },{
@@ -114,22 +232,6 @@ return ceTextField;
 });
 
 return ceTextField;
-},
-
-createRadioGroup: function(){
-    var radios = new Ext.form.RadioGroup({
-            xtype: 'radiogroup',
-            fieldLabel: 'Form',
-            cls: 'x-check-group-alt',           
-            items: [
-                {boxLabel: 'Cres', name: 'Form', inputValue: 1, margin: '0 10 10 0'},
-                {boxLabel: 'Dim', name: 'Form', inputValue: 2, margin: '0 10 10 0'}
-                
-            ]
-   
-   });
-   return radios;
-    
 },
 
 createComboBoxForm: function(fieldName){
