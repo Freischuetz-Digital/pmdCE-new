@@ -21,12 +21,22 @@ Ext.define('pmdCE.view.main.EditDialog', {
     rootNode: null,
     selectedNode: null,
     parentNode: null,
+    
+    vordStaff: null,
+    vordStaff2: null,
+	vordForm: null,
+	vordPlace: null,
+	vordTStamp: null,
+	vordTStamp2: null,
+	vordStartMeasure: null,
+	vordEndMeasure: null,
    
     initComponent: function() {
     
     selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
        console.log("selection");
+       console.log(rootNode);
        console.log(selection);
        if(selection.data.depth === 1){
            for(var i = 0; i < rootNode.childNodes.length ; i++){
@@ -59,18 +69,50 @@ Ext.define('pmdCE.view.main.EditDialog', {
 	  }    
        }
        else if(selection.data.depth === 2){
-           for(var i = 0; i < rootNode.childNodes.length ; i++){
+       selectedNode = selection;
+       parentNode = selection.parentNode;
+       //parentNode = rootNode.childNodes[i];
+	           vordStartMeasure = parentNode.data.measurenr;
+	           Ext.getCmp('cemain').setStartMeasure(parentNode.data.measurenr);
+	           var movement = Ext.getCmp('movement').getText();
+	           Ext.getCmp('cemain').setMeasureId(movement+"_measure"+vordStartMeasure);
+	           vordStaff = selectedNode.data.staff;
+	                   vordStaff2 = selectedNode.data.staff2;
+	      
+	                   vordForm = selectedNode.data.form ;
+	                   vordPlace = selectedNode.data.place;
+	                   vordTStamp = selectedNode.data.tstamp;
+	                   vordTStamp2 = selectedNode.data.tstamp2;
+	      
+	                   Ext.getCmp('cemain').setStaffNr(vordStaff);
+	      
+	                   if(typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined'){
+	                       var prefix = vordTStamp2.substring(0, 1);
+	                       if(prefix !== 'm'){
+	                           vordEndMeasure = parseInt(vordStartMeasure) + parseInt(prefix);
+	                       }else{
+	                           vordEndMeasure = parseInt(vordStartMeasure) + 1;
+	                       }
+	                       Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
+	                   }	
+       
+          /* for(var i = 0; i < rootNode.childNodes.length ; i++){
 	       if(rootNode.childNodes[i].data.id === selection.data.parentId){
 	           parentNode = rootNode.childNodes[i];
 	           vordStartMeasure = parentNode.data.measurenr;
 	           Ext.getCmp('cemain').setStartMeasure(parentNode.data.measurenr);
 	           var movement = Ext.getCmp('movement').getText();
 	           Ext.getCmp('cemain').setMeasureId(movement+"_measure"+vordStartMeasure);
-	     
 	           
-	           for(var j= 0; j< parentNode.childNodes.length; j++){
-	               if(parentNode.childNodes[j].data.id === selection.data.id){
-	                   selectedNode = parentNode.childNodes[j];
+	           console.log(rootNode.childNodes);
+	           
+	           for(var j= 0; j< rootNode.childNodes.childNodes.length; j++){
+	           console.log(rootNode.childNodes[i].childNodes[j].data.id);
+	           console.log(selection.data.id);
+	           
+	               if(rootNode.childNodes[i].childNodes[j].data.id === selection.data.id){
+	                   selectedNode = rootNode.childNodes[i].childNodes[j];
+	                   console.log(selectedNode);
 	                   vordStaff = selectedNode.data.staff;
 	                   vordStaff2 = selectedNode.data.staff2;
 	      
@@ -95,7 +137,7 @@ Ext.define('pmdCE.view.main.EditDialog', {
 	           }	     
 	           break;	     
 	      }
-	  }    
+	  }*/    
     }
 	  
     
