@@ -85,6 +85,8 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
    
       checkBoxReg2: null,
          checkBoxReg4: null,
+         
+         expertCheckBox: null,
    
     me: null,
     
@@ -123,7 +125,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp'); 
         tstampFieldReg1.validate();
         tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
-        //tstamp2FieldReg1.setDisabled(true);
+        tstamp2FieldReg1.setDisabled(true);
         tstamp2FieldReg1.validate();
 
 staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
@@ -137,7 +139,7 @@ staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
 tstampFieldReg2.validate();
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
-//tstamp2FieldReg2.setDisabled(true);
+tstamp2FieldReg2.setDisabled(true);
 tstamp2FieldReg2.validate();
 
 
@@ -150,7 +152,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         formFieldReg3 = this.createComboBoxForm('Form');
         formFieldReg3.setDisabled(true);
         tstampFieldReg3 = this.createTextField('tstampFieldReg3', 'Tstamp');
-       // tstampFieldReg3.setDisabled(true);
+        tstampFieldReg3.setDisabled(true);
         tstampFieldReg3.validate();
         tstamp2FieldReg3 = this.createTextField('tstamp2FieldReg3', 'Tstamp2');
         tstamp2FieldReg3.validate();
@@ -164,7 +166,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         formFieldReg4 = this.createComboBoxForm('Form');
         formFieldReg4.setDisabled(true);
         tstampFieldReg4 = this.createTextField('tstampFieldReg4', 'Tstamp');
-        //tstampFieldReg4.setDisabled(true);
+        tstampFieldReg4.setDisabled(true);
         tstampFieldReg4.validate();
         tstamp2FieldReg4 = this.createTextField('tstamp2FieldReg4', 'Tstamp2');
         tstamp2FieldReg4.validate();
@@ -176,10 +178,10 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         formFieldReg5 = this.createComboBoxForm('Form');
         formFieldReg5.setDisabled(true);
         tstampFieldReg5 = this.createTextField('tstampFieldReg5', 'Tstamp');
-        //tstampFieldReg5.setDisabled(true);
+        tstampFieldReg5.setDisabled(true);
         tstampFieldReg5.validate();
         tstamp2FieldReg5 = this.createTextField('tstamp2FieldReg5', 'Tstamp2');
-       // tstamp2FieldReg5.setDisabled(true);
+        tstamp2FieldReg5.setDisabled(true);
          tstamp2FieldReg5.validate();
         
         staffFieldReg6= this.createComboBoxStaff('Staff');
@@ -189,14 +191,16 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         formFieldReg6 = this.createComboBoxForm('Form');
         formFieldReg6.setDisabled(true);
         tstampFieldReg6 = this.createTextField('tstampFieldReg6', 'Tstamp');
-       // tstampFieldReg6.setDisabled(true);
+        tstampFieldReg6.setDisabled(true);
         tstampFieldReg6.validate();
         tstamp2FieldReg6 = this.createTextField('tstamp2FieldReg6', 'Tstamp2');
-       // tstamp2FieldReg6.setDisabled(true);
+        tstamp2FieldReg6.setDisabled(true);
         tstamp2FieldReg6.validate();
 
 checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
 checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
+
+  expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
 
           this.items  = [
         {
@@ -215,6 +219,7 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
            border:false,
         
            items: [
+           expertCheckBox,
           
         {
            id: 'card-11',
@@ -647,17 +652,17 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
         listeners: {
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
-           if(me.selectedFieldId === 'tstampFieldOrig'){
-              //tstampFieldReg3.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg4.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg5.setValue(tstampFieldOrig.getValue());
-               //tstampFieldReg6.setValue(tstampFieldOrig.getValue());
+           if(me.selectedFieldId === 'tstampFieldOrig' && !me.expertCheckBox.getValue()){
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg5.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg6.setValue(tstampFieldOrig.getValue());
            }
-           if(me.selectedFieldId === 'tstamp2FieldOrig'){              
-              //  tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-              // tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
-              // tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
-              // tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !me.expertCheckBox.getValue()){              
+                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
                
            }
             me1.handleCreateButton();
@@ -665,17 +670,17 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
         render: function(c) {
             c.getEl().on('keyup', function() {   
             me.selectedFieldId = fieldName;
-           if(me.selectedFieldId === 'tstampFieldOrig'){
-              //tstampFieldReg3.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg4.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg5.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg6.setValue(tstampFieldOrig.getValue());
+           if(me.selectedFieldId === 'tstampFieldOrig' && !me.expertCheckBox.getValue()){
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg5.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg6.setValue(tstampFieldOrig.getValue());
            }
-           if(me.selectedFieldId === 'tstamp2FieldOrig'){              
-              //  tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-             //  tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
-             //  tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
-              // tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !me.expertCheckBox.getValue()){              
+                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
                
            }
             me1.handleCreateButton();
@@ -849,13 +854,231 @@ return navButton;
         listeners: {
         change: function(cb, checked) {
         if(cb.id === 'checkBoxReg2'){
-            tstampFieldReg2.setDisabled(checked);
+            if(checked){
+            tstampFieldReg2.setDisabled(true);            
+            tstamp2FieldReg2.setDisabled(true);
+            placeFieldReg2.setDisabled(true);
+            satffFieldBetweenReg2.setDisabled(true);
+            }
+            else{
+                if(!checked && expertCheckBox.getValue()){
+                    tstampFieldReg2.setDisabled(false);            
+                tstamp2FieldReg2.setDisabled(false);
+                placeFieldReg2.setDisabled(false);
+                satffFieldBetweenReg2.setDisabled(false);
+                }
+                else if(!checked && !expertCheckBox.getValue()){
+                tstampFieldReg2.setDisabled(false);            
+                tstamp2FieldReg2.setDisabled(true);
+                placeFieldReg2.setDisabled(true);
+                satffFieldBetweenReg2.setDisabled(true);
+            }
+            }        
         }
         else if(cb.id === 'checkBoxReg4'){
-            tstamp2FieldReg4.setDisabled(checked);
+        if(checked){
+            tstampFieldReg4.setDisabled(true);            
+            tstamp2FieldReg4.setDisabled(true);
+            placeFieldReg4.setDisabled(true);
+            satffFieldBetweenReg4.setDisabled(true);
+            }
+            else{
+                if(!checked && expertCheckBox.getValue()){
+                    tstampFieldReg4.setDisabled(false);            
+                tstamp2FieldReg4.setDisabled(false);
+                placeFieldReg4.setDisabled(false); 
+                satffFieldBetweenReg4.setDisabled(false);
+                }
+                else if(!checked && !expertCheckBox.getValue()){
+                tstampFieldReg4.setDisabled(true);            
+                tstamp2FieldReg4.setDisabled(false);
+                placeFieldReg4.setDisabled(true);
+                satffFieldBetweenReg4.setDisabled(true);
+            }
+            }           
         }
         
          me9.handleCreateButton();
+        
+ }
+        }
+     
+   });
+
+return ceCheckBox;
+},
+
+createCheckBox1: function(fieldName, filedid){
+       var me9 = this;
+       
+    var ceCheckBox = Ext.create('Ext.form.field.Checkbox',{
+        fieldLabel: fieldName,
+        id: filedid,
+     
+        listeners: {
+        change: function(cb, checked) {
+        if(checked){
+            satffFieldBetweenReg1.setDisabled(false);
+             satffFieldBetweenReg1.validate();
+            placeFieldReg1.setDisabled(false);
+            placeFieldReg1.validate();
+            tstampFieldReg1.setDisabled(false);
+            tstampFieldReg1.validate();
+            tstamp2FieldReg1.setDisabled(false);
+            tstamp2FieldReg1.validate();
+            
+            satffFieldBetweenReg3.setDisabled(false);
+             satffFieldBetweenReg3.validate();
+            placeFieldReg3.setDisabled(false);
+            placeFieldReg3.validate();
+            tstampFieldReg3.setDisabled(false);
+            tstampFieldReg3.validate();
+            tstamp2FieldReg3.setDisabled(false);
+            tstamp2FieldReg3.validate();  
+            
+            staffFieldReg5.setDisabled(false);
+             staffFieldReg5.validate();
+            placeFieldReg5.setDisabled(false);
+            placeFieldReg5.validate();
+            tstampFieldReg5.setDisabled(false);
+            tstampFieldReg5.validate();
+            tstamp2FieldReg5.setDisabled(false);
+            tstamp2FieldReg5.validate(); 
+                       
+            staffFieldReg6.setDisabled(false);
+             staffFieldReg6.validate();
+            placeFieldReg6.setDisabled(false);
+            placeFieldReg6.validate();
+            tstampFieldReg6.setDisabled(false);
+            tstampFieldReg6.validate();
+            tstamp2FieldReg6.setDisabled(false);
+            tstamp2FieldReg6.validate();  
+          
+            if(checkBoxReg2.getValue() ){
+            satffFieldBetweenReg2.setDisabled(true);
+             satffFieldBetweenReg2.validate();
+                placeFieldReg2.setDisabled(true);
+            placeFieldReg2.validate();
+            tstampFieldReg2.setDisabled(true);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(true);
+            tstamp2FieldReg2.validate();
+            }
+            else{
+                satffFieldBetweenReg2.setDisabled(false);
+             satffFieldBetweenReg2.validate();
+                placeFieldReg2.setDisabled(false);
+            placeFieldReg2.validate();
+            tstampFieldReg2.setDisabled(false);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(false);
+            tstamp2FieldReg2.validate();
+            }
+            
+             if(checkBoxReg4.getValue() ){
+            satffFieldBetweenReg4.setDisabled(true);
+             satffFieldBetweenReg4.validate();
+                placeFieldReg4.setDisabled(true);
+            placeFieldReg4.validate();
+            tstampFieldReg4.setDisabled(true);
+            tstampFieldReg4.validate();
+            tstamp2FieldReg4.setDisabled(true);
+            tstamp2FieldReg4.validate();
+            }
+            else{
+                satffFieldBetweenReg4.setDisabled(false);
+             satffFieldBetweenReg4.validate();
+                placeFieldReg4.setDisabled(false);
+            placeFieldReg4.validate();
+            tstampFieldReg4.setDisabled(false);
+            tstampFieldReg4.validate();
+            tstamp2FieldReg4.setDisabled(false);
+            tstamp2FieldReg4.validate();
+            }
+        }
+        else{
+            satffFieldBetweenReg1.setDisabled(true);
+             satffFieldBetweenReg1.validate();
+            placeFieldReg1.setDisabled(true);
+            placeFieldReg1.validate();
+            tstampFieldReg1.setDisabled(false);
+            tstampFieldReg1.validate();
+            tstamp2FieldReg1.setDisabled(true);
+            tstamp2FieldReg1.validate();
+            
+            
+            satffFieldBetweenReg3.setDisabled(true);
+             satffFieldBetweenReg3.validate();
+            placeFieldReg3.setDisabled(true);
+            placeFieldReg3.validate();
+            tstampFieldReg3.setDisabled(true);
+            tstampFieldReg3.validate();
+            tstamp2FieldReg3.setDisabled(false);
+            tstamp2FieldReg3.validate();
+            
+            staffFieldReg5.setDisabled(false);
+             staffFieldReg5.validate();
+            placeFieldReg5.setDisabled(false);
+            placeFieldReg5.validate();
+            tstampFieldReg5.setDisabled(true);
+            tstampFieldReg5.validate();
+            tstamp2FieldReg5.setDisabled(true);
+            tstamp2FieldReg5.validate(); 
+            
+            staffFieldReg6.setDisabled(false);
+             staffFieldReg6.validate();
+            placeFieldReg6.setDisabled(false);
+            placeFieldReg6.validate();
+            tstampFieldReg6.setDisabled(true);
+            tstampFieldReg6.validate();
+            tstamp2FieldReg6.setDisabled(true);
+            tstamp2FieldReg6.validate(); 
+
+            if(checkBoxReg2.getValue() ){
+            satffFieldBetweenReg2.setDisabled(true);
+             satffFieldBetweenReg2.validate();
+                placeFieldReg2.setDisabled(true);
+            placeFieldReg2.validate();
+            tstampFieldReg2.setDisabled(true);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(true);
+            tstamp2FieldReg2.validate();
+            }
+            else{
+            satffFieldBetweenReg2.setDisabled(true);
+             satffFieldBetweenReg2.validate();
+                placeFieldReg2.setDisabled(true);
+            placeFieldReg2.validate();
+            tstampFieldReg2.setDisabled(false);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(true);
+            tstamp2FieldReg2.validate();
+            }
+            
+            if(checkBoxReg4.getValue() ){
+            satffFieldBetweenReg4.setDisabled(true);
+             satffFieldBetweenReg4.validate();
+                placeFieldReg4.setDisabled(true);
+            placeFieldReg4.validate();
+            tstampFieldReg4.setDisabled(true);
+            tstampFieldReg4.validate();
+            tstamp2FieldReg4.setDisabled(true);
+            tstamp2FieldReg4.validate();
+            }
+            else{
+            satffFieldBetweenReg4.setDisabled(true);
+             satffFieldBetweenReg4.validate();
+                placeFieldReg4.setDisabled(true);
+            placeFieldReg4.validate();
+            tstampFieldReg4.setDisabled(true);
+            tstampFieldReg4.validate();
+            tstamp2FieldReg4.setDisabled(false);
+            tstamp2FieldReg4.validate();
+            }
+            
+        }
+        me9.handleCreateButton();
+       
         
  }
         }

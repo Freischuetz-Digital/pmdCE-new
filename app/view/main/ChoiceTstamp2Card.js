@@ -55,6 +55,8 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {
    createElementButton: null,
    checkBoxReg2: null,
    
+   expertCheckBox: null,
+   
     me: null,
     
          initComponent: function() {
@@ -87,7 +89,7 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {
         formFieldReg1.setDisabled(true);
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
         tstampFieldReg1.validate();
-        //tstampFieldReg1.setDisabled(true);
+        tstampFieldReg1.setDisabled(true);
         tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
         tstamp2FieldReg1.validate();
         
@@ -99,12 +101,14 @@ staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');
         formFieldReg2 = this.createComboBoxForm('Form');
         formFieldReg2.setDisabled(true);
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
-//tstampFieldReg2.setDisabled(true);
+tstampFieldReg2.setDisabled(true);
 tstampFieldReg2.validate();
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
 tstamp2FieldReg2.validate();
 
 checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
+
+expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
 
           this.items  = [
         {
@@ -123,6 +127,7 @@ checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
            border:false,
         
            items: [
+           expertCheckBox,
         {
            id: 'card-11',
            layout: {
@@ -408,18 +413,18 @@ checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
         listeners: {
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
-           if(me.selectedFieldId === 'tstampFieldOrig'){
-              // tstampFieldReg1.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+           if(me.selectedFieldId === 'tstampFieldOrig' && !me.expertCheckBox.getValue()){
+               tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
             me1.handleCreateButton();
         },
         render: function(c) {
             c.getEl().on('keyup', function() {   
             me.selectedFieldId = fieldName;
-           if(me.selectedFieldId === 'tstampFieldOrig'){
-              // tstampFieldReg1.setValue(tstampFieldOrig.getValue());
-               //tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+           if(me.selectedFieldId === 'tstampFieldOrig'&& !me.expertCheckBox.getValue()){
+               tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
             me1.handleCreateButton();
             }, c);
@@ -576,10 +581,124 @@ return navButton;
         listeners: {
         change: function(cb, checked) {
         if(cb.id === 'checkBoxReg2'){
-            tstamp2FieldReg2.setDisabled(checked);
+        if(checked){
+            tstampFieldReg2.setDisabled(true);            
+            tstamp2FieldReg2.setDisabled(true);
+            placeFieldReg2.setDisabled(true);
+            //formFieldReg2.setDisabled(true);
+        }
+        else if(!checked && expertCheckBox.getValue()){
+            tstampFieldReg2.setDisabled(false);            
+            tstamp2FieldReg2.setDisabled(false);
+            placeFieldReg2.setDisabled(false);
+            //formFieldReg2.setDisabled(false);
+            
+        }
+        else if(!checked && !expertCheckBox.getValue()){
+             tstampFieldReg2.setDisabled(true);            
+            tstamp2FieldReg2.setDisabled(false);
+            placeFieldReg2.setDisabled(true);
+            //formFieldReg2.setDisabled(true);
+        }
+       
         }
         
          me9.handleCreateButton();
+        
+ }
+        }
+     
+   });
+
+return ceCheckBox;
+},
+
+createCheckBox1: function(fieldName, filedid){
+       var me9 = this;
+       
+    var ceCheckBox = Ext.create('Ext.form.field.Checkbox',{
+        fieldLabel: fieldName,
+        id: filedid,
+     
+        listeners: {
+        change: function(cb, checked) {
+        if(checked && !checkBoxReg2.getValue()){  
+            tstampFieldReg1.setDisabled(false);
+            tstampFieldReg1.validate();
+            tstamp2FieldReg1.setDisabled(false);
+            tstamp2FieldReg1.validate();
+            tstampFieldReg2.setDisabled(false);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(false);
+            tstamp2FieldReg2.validate();
+            placeFieldReg1.setDisabled(false);
+            placeFieldReg1.validate();
+          //  formFieldReg1.setDisabled(false);
+           // formFieldReg1.validate();
+            placeFieldReg2.setDisabled(false);
+            placeFieldReg2.validate();
+            //formFieldReg2.setDisabled(false);
+            //formFieldReg2.validate();
+        }
+        else if(checked && checkBoxReg2.getValue()){
+            tstampFieldReg2.setDisabled(true);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(true);
+            tstamp2FieldReg2.validate();
+            placeFieldReg2.setDisabled(true);
+            placeFieldReg2.validate();
+            //formFieldReg2.setDisabled(true);
+            //formFieldReg2.validate();
+            
+            tstampFieldReg1.setDisabled(false);
+            tstampFieldReg1.validate();
+            tstamp2FieldReg1.setDisabled(false);
+            tstamp2FieldReg1.validate();
+            placeFieldReg1.setDisabled(false);
+            placeFieldReg1.validate();
+            //formFieldReg1.setDisabled(false);
+            //formFieldReg1.validate();
+        }
+        else if(!checked && !checkBoxReg2.getValue()){
+            tstampFieldReg1.setDisabled(true);
+            tstampFieldReg1.validate();
+            tstamp2FieldReg1.setDisabled(false);
+            tstamp2FieldReg1.validate();
+            placeFieldReg1.setDisabled(true);
+            placeFieldReg1.validate();
+            //formFieldReg1.setDisabled(true);
+            //formFieldReg1.validate();       
+        
+            tstampFieldReg2.setDisabled(true);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(false);
+            tstamp2FieldReg2.validate();
+            placeFieldReg2.setDisabled(true);
+            placeFieldReg2.validate();
+            //formFieldReg2.setDisabled(true);
+            //formFieldReg2.validate();
+        }
+        else if(!checked && checkBoxReg2.getValue()){
+            tstampFieldReg1.setDisabled(true);
+            tstampFieldReg1.validate();
+            tstamp2FieldReg1.setDisabled(false);
+            tstamp2FieldReg1.validate();
+            placeFieldReg1.setDisabled(true);
+            placeFieldReg1.validate();
+            //formFieldReg1.setDisabled(true);
+            //formFieldReg1.validate();       
+        
+            tstampFieldReg2.setDisabled(true);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(true);
+            tstamp2FieldReg2.validate();
+            placeFieldReg2.setDisabled(true);
+            placeFieldReg2.validate();
+            //formFieldReg2.setDisabled(true);
+            //formFieldReg2.validate();
+        }
+        me9.handleCreateButton();
+       
         
  }
         }

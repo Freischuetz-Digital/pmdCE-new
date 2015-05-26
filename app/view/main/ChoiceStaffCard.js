@@ -55,6 +55,8 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
    prevButton: null,
    createElementButton: null,
    
+   expertCheckBox: null,
+   
     me: null,
     
          initComponent: function() {
@@ -91,10 +93,10 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
         formFieldReg1.setDisabled(true);
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
         tstampFieldReg1.validate();
-        //tstampFieldReg1.setDisabled(true);
+        tstampFieldReg1.setDisabled(true);
         tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
         tstamp2FieldReg1.validate();
-        //tstamp2FieldReg1.setDisabled(true);
+        tstamp2FieldReg1.setDisabled(true);
 
     staffFieldReg2= this.createComboBoxStaff('Staff');  
     staffFieldReg2.validate();
@@ -106,10 +108,13 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
         formFieldReg2.setDisabled(true);
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
 tstampFieldReg2.validate();
-//tstampFieldReg2.setDisabled(true);
+tstampFieldReg2.setDisabled(true);
 tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
-//tstamp2FieldReg2.setDisabled(true);
+tstamp2FieldReg2.setDisabled(true);
 tstamp2FieldReg2.validate();
+
+expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
+
 
           this.items  = [
         {
@@ -128,6 +133,8 @@ tstamp2FieldReg2.validate();
            border:false,
         
            items: [
+           
+           expertCheckBox,
         {
            id: 'card-11',
            layout: {
@@ -563,6 +570,72 @@ createNavigationButton: function(navItemId, navText, navHandler){
           })
 
 return navButton;
+},
+
+ createCheckBox1: function(fieldName, filedid){
+       var me9 = this;
+       
+    var ceCheckBox = Ext.create('Ext.form.field.Checkbox',{
+        fieldLabel: fieldName,
+        id: filedid,
+     
+        listeners: {
+        change: function(cb, checked) {
+        if(checked){  
+            tstampFieldReg1.setDisabled(false);
+            tstampFieldReg1.validate();
+            tstamp2FieldReg1.setDisabled(false);
+            tstamp2FieldReg1.validate();
+            tstampFieldReg2.setDisabled(false);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(false);
+            tstamp2FieldReg2.validate();
+            placeFieldReg1.setDisabled(false);
+            placeFieldReg1.validate();
+            //formFieldReg1.setDisabled(false);
+           // formFieldReg1.validate();
+            placeFieldReg2.setDisabled(false);
+            placeFieldReg2.validate();
+            //formFieldReg2.setDisabled(false);
+            //formFieldReg2.validate();
+            staffFieldReg1.setDisabled(false);
+            staffFieldReg1.validate();
+            staffFieldReg1.setDisabled(false);
+            staffFieldReg1.validate();
+        }     
+        else{
+            tstampFieldReg1.setDisabled(true);
+            tstampFieldReg1.validate();
+            tstamp2FieldReg1.setDisabled(true);
+            tstamp2FieldReg1.validate();
+            placeFieldReg1.setDisabled(false);
+            placeFieldReg1.validate();
+            staffFieldReg1.setDisabled(false);
+            staffFieldReg1.validate();
+            //formFieldReg1.setDisabled(true);
+           // formFieldReg1.validate();       
+        
+            tstampFieldReg2.setDisabled(true);
+            tstampFieldReg2.validate();
+            tstamp2FieldReg2.setDisabled(true);
+            tstamp2FieldReg2.validate();
+            placeFieldReg2.setDisabled(false);
+            placeFieldReg2.validate();
+            staffFieldReg2.setDisabled(false);
+            staffFieldReg2.validate();
+           // formFieldReg2.setDisabled(true);
+           // formFieldReg2.validate();
+        }
+        
+        me9.handleCreateButton();
+       
+        
+ }
+        }
+     
+   });
+
+return ceCheckBox;
 }
 
 });
