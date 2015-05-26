@@ -630,6 +630,7 @@ return navButton;
         change: function(cb, checked) {
         if(cb.id === 'checkBoxReg2'){
             tstamp2FieldReg2.setDisabled(checked);
+            tstampFieldReg2.setDisabled(checked);
         }
         
          me9.handleCreateButton();
