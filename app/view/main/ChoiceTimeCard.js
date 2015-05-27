@@ -564,11 +564,11 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
         listeners: {
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;        
-           if(me.selectedFieldId === 'tstamp2FieldOrig'  && !me.expertCheckBox.getValue()){
+           if(me.selectedFieldId === 'tstamp2FieldOrig'  && !expertCheckBox.getValue()){
                tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
                tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
            }
-           if(me.selectedFieldId === 'tstampFieldOrig' && !me.expertCheckBox.getValue()){
+           if(me.selectedFieldId === 'tstampFieldOrig' && !expertCheckBox.getValue()){
                tstampFieldReg1.setValue(tstampFieldOrig.getValue());
                tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
@@ -577,11 +577,11 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
         render: function(c) {
             c.getEl().on('keyup', function() {   
            me.selectedFieldId = fieldName;        
-           if(me.selectedFieldId === 'tstamp2FieldOrig' && !me.expertCheckBox.getValue()){
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){
               tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
                tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
            }
-           if(me.selectedFieldId === 'tstampFieldOrig' && !me.expertCheckBox.getValue()){
+           if(me.selectedFieldId === 'tstampFieldOrig' && !expertCheckBox.getValue()){
                tstampFieldReg1.setValue(tstampFieldOrig.getValue());
               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }

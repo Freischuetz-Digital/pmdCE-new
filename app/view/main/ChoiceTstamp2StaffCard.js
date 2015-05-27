@@ -545,11 +545,7 @@ staffFieldReg3.validate();
 
         me.down('#card-prev').setDisabled(next===0);
         me.down('#card-next').setDisabled(next===1);
-        
-        // TODO
-        /*if(l.activeItem.id === 'card-1'){
-            Ext.getCmp('createItem').setDisabled(false);
-        }*/
+       
     },
     
         createTextField: function(fieldName, fieldLabel){
@@ -563,15 +559,15 @@ staffFieldReg3.validate();
         listeners: {
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
-           if(me.selectedFieldId === 'tstampFieldOrig'){
-               // tstampFieldReg1.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg2.setValue(tstampFieldOrig.getValue());
-              //tstampFieldReg3.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+           if(me.selectedFieldId === 'tstampFieldOrig' && !expertCheckBox.getValue()){
+                tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
            }
-           if(me.selectedFieldId === 'tstamp2FieldOrig'){              
-              // tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
-              // tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){              
+               tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
                
            }
            me1.handleCreateButton();
@@ -579,15 +575,15 @@ staffFieldReg3.validate();
         render: function(c) {
             c.getEl().on('keyup', function() {   
             me.selectedFieldId = fieldName;
-           if(me.selectedFieldId === 'tstampFieldOrig'){
-               // tstampFieldReg1.setValue(tstampFieldOrig.getValue());
-               //tstampFieldReg2.setValue(tstampFieldOrig.getValue());
-              //tstampFieldReg3.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+           if(me.selectedFieldId === 'tstampFieldOrig' && !expertCheckBox.getValue()){
+                tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
            }
-           if(me.selectedFieldId === 'tstamp2FieldOrig'){              
-              // tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
-              // tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){              
+               tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
                
            }
            me1.handleCreateButton();

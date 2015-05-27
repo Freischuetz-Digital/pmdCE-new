@@ -413,7 +413,7 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
         listeners: {
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
-           if(me.selectedFieldId === 'tstampFieldOrig' && !me.expertCheckBox.getValue()){
+           if(me.selectedFieldId === 'tstampFieldOrig' && !expertCheckBox.getValue()){
                tstampFieldReg1.setValue(tstampFieldOrig.getValue());
                tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
@@ -422,7 +422,7 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
         render: function(c) {
             c.getEl().on('keyup', function() {   
             me.selectedFieldId = fieldName;
-           if(me.selectedFieldId === 'tstampFieldOrig'&& !me.expertCheckBox.getValue()){
+           if(me.selectedFieldId === 'tstampFieldOrig'&& !expertCheckBox.getValue()){
                tstampFieldReg1.setValue(tstampFieldOrig.getValue());
                tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }

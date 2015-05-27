@@ -408,26 +408,26 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
         listeners: {
         focus: function(e, eOpts ){
            me.selectedFieldId = fieldName;
-            if(me.selectedFieldId === 'tstamp2FieldOrig'){
-               //tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-               //tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+            if(me.selectedFieldId === 'tstamp2FieldOrig'  && !expertCheckBox.getValue()){
+               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
-            if(me.selectedFieldId === 'tstampFieldOrig'){
-              // tstampFieldReg1.setValue(tstampFieldOrig.getValue());
-               //tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+            if(me.selectedFieldId === 'tstampFieldOrig'  && !expertCheckBox.getValue()){
+               tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
             me1.handleCreateButton();
         },
         render: function(c) {
             c.getEl().on('keyup', function() {   
           me.selectedFieldId = fieldName;
-            if(me.selectedFieldId === 'tstamp2FieldOrig'){
-               //tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-               //tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+            if(me.selectedFieldId === 'tstamp2FieldOrig'  && !expertCheckBox.getValue()){
+               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
-            if(me.selectedFieldId === 'tstampFieldOrig'){
-              // tstampFieldReg1.setValue(tstampFieldOrig.getValue());
-              // tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+            if(me.selectedFieldId === 'tstampFieldOrig'  && !expertCheckBox.getValue()){
+               tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg2.setValue(tstampFieldOrig.getValue());
            }
             me1.handleCreateButton();
             }, c);
