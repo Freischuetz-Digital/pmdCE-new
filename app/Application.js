@@ -13,7 +13,7 @@ Ext.define('pmdCE.Application', {
        'main.FacsimileView',
        'main.XMLEditorView',
        'main.CETabPanel',  
-       'main.VerovioView', 
+       'main.CEButtonPanel', 
        'main.VerovioImageStart',
        'main.VerovioImageEnd',
        'main.ChoiceDialog',

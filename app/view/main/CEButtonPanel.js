@@ -1,9 +1,9 @@
-Ext.define('pmdCE.view.main.dynams.DynamsButtonsPanel', {
+Ext.define('pmdCE.view.main.CEButtonPanel', {
     extend: 'Ext.panel.Panel',
      requires: [
         'Ext.layout.container.VBox'
     ],
-   // xtype: 'layout-vertical-box',
+   
     width: 150,
     region: 'center',
   
@@ -14,8 +14,7 @@ Ext.define('pmdCE.view.main.dynams.DynamsButtonsPanel', {
     },
       
     bodyPadding: 10,
-    id: "dynamsbuttonspanel",
-     
+   
     createNewElButton: null,
     addElementButton: null,
     changeToButton: null,
@@ -26,48 +25,13 @@ Ext.define('pmdCE.view.main.dynams.DynamsButtonsPanel', {
         type: 'vbox',
         align: 'stretch'
     },
-    
-   // me: null,
-    
-       
-    initComponent: function() {
-    
-   // me = this;
-  
-   addElementButton = this.createCEButton();
-   addElementButton.setDisabled(true);
-   
-   createHairpinButton = this.createHairpinButton();
-   
-  deleteElementButton = this.deleteElementButton();
-   deleteElementButton.setDisabled(true);
-   
-   changeToButton = this.createChangeToButton();
-   changeToButton.setDisabled(true);
-  
-this.items = [
-createHairpinButton,
-changeToButton,
-addElementButton,
-deleteElementButton
-        ],
-        this.callParent()
 
-},
-
-
-createCEButton: function(){
+createCEButton: function(buttonId){
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
-                   // icon: "resources/images/drop-add.gif",
-                   // glyph: null,
-                   id: 'addelementbutton'+this.id,
+                   id: buttonId,
                     text: 'Add',
-                   // scale: 'medium',
-                   // width: 120,
                     margin: '0 0 10 0', 
-                  //  flex: 1,         
-                  //  handler: ceHandler,
                      menu: [Ext.create('Ext.menu.Item', {
                         text: "Orig",
                         icon: 'resources/images/mix_volume.png',
@@ -95,7 +59,7 @@ return ceButton;
 },
 
 
-createChangeToButton: function(){
+createChangeToButton: function(buttonId, menuChoiceId, menuHairpinId){
 var me = this;
     
     var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 8, me);
@@ -114,19 +78,13 @@ var me = this;
       
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
-                   // icon: "resources/images/drop-add.gif",
-                   // glyph: null,
-                   id: 'changetobutton'+this.id,
+                   id: buttonId,
                     text: 'Change to ...',
-                   // scale: 'medium',
-                   // width: 120,
                     margin: '0 0 10 0',
-                    
-                  //  flex: 1,         
-                  //  handler: ceHandler,
+                  
                      menu: [Ext.create('Ext.menu.Item', {
                         text: "Choice",
-                        id: 'changetobuttonchoice'+this.id,
+                        id: menuChoiceId,
                         icon: 'resources/images/details-xml.png',
                          menu:[
                         menuTstamp2Reg,
@@ -137,14 +95,12 @@ var me = this;
                         menuTStamp2AndStaff4Reg,
                         menuTimeAndStaff4Reg
                         ]
-                            //var win = new pmdCE.view.main.ChangeToAmDialog();
-                            //win.show();
-                        
+                       
                      }),
                      
                      Ext.create('Ext.menu.Item', {
                 text: "Hairpin",
-                id: 'changetobuttonhairpin'+this.id,
+                id: menuHairpinId,
                 icon: 'resources/images/mix_volume.png',
                 handler: function() {
                     var win = new pmdCE.view.main.ChangeObviousElDialog();
@@ -157,7 +113,7 @@ var me = this;
 return ceButton;
 },
 
-createHairpinButton: function(){
+createHairpinButton: function(buttonId){
     var me = this;
     
     var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 1, me);
@@ -176,7 +132,7 @@ createHairpinButton: function(){
     
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
-                    id: "createhairpinbutton"+this.id,
+                    id: buttonId,
                     text: 'Create element',
                      margin: '0 0 10 0', 
                      menu: [Ext.create('Ext.menu.Item', {
@@ -232,16 +188,12 @@ createMenuItem: function(itemText, type, me){
         return this.card;
     },
 
-deleteElementButton: function(){
+deleteElementButton: function(buttonId){
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
-                    id: "deleteButton"+this.id,
-                   // icon: "resources/images/drop-add.gif",
+                    id: buttonId,
                     margin: '0 0 10 0', 
-                   // glyph: null,
                     text: 'Delete',
-                    //scale: 'medium'
-                   // width: 120
                    listeners: {
                    
                    click: function() {
@@ -256,19 +208,6 @@ deleteElementButton: function(){
 return ceButton;
 },
 
-
-   setRadioGroup: function(radioGroup){
-        this.radioGroup = radioGroup;       
-    },
-    
-    getRadioGroup: function(){
-        return this.radioGroup;
-    },
-    
-    setNew: function(){
-        this.isElemenGroupNew = true;
-    },
-    
     deleteElement: function(){    
      
 
