@@ -1,4 +1,4 @@
-Ext.define('pmdCE.view.main.VerovioView', {
+Ext.define('pmdCE.view.main.dynams.DynamsButtonsPanel', {
     extend: 'Ext.panel.Panel',
      requires: [
         'Ext.layout.container.VBox'
@@ -14,7 +14,7 @@ Ext.define('pmdCE.view.main.VerovioView', {
     },
       
     bodyPadding: 10,
-    //id: "verovioview",
+    id: "dynamsbuttonspanel",
      
     createNewElButton: null,
     addElementButton: null,
@@ -61,7 +61,7 @@ createCEButton: function(){
                     xtype: 'button',
                    // icon: "resources/images/drop-add.gif",
                    // glyph: null,
-                   id: 'addelementbutton',
+                   id: 'addelementbutton'+this.id,
                     text: 'Add',
                    // scale: 'medium',
                    // width: 120,
@@ -116,7 +116,7 @@ var me = this;
                     xtype: 'button',
                    // icon: "resources/images/drop-add.gif",
                    // glyph: null,
-                   id: 'changetobutton',
+                   id: 'changetobutton'+this.id,
                     text: 'Change to ...',
                    // scale: 'medium',
                    // width: 120,
@@ -126,7 +126,7 @@ var me = this;
                   //  handler: ceHandler,
                      menu: [Ext.create('Ext.menu.Item', {
                         text: "Choice",
-                        id: 'changetobuttonchoice',
+                        id: 'changetobuttonchoice'+this.id,
                         icon: 'resources/images/details-xml.png',
                          menu:[
                         menuTstamp2Reg,
@@ -144,7 +144,7 @@ var me = this;
                      
                      Ext.create('Ext.menu.Item', {
                 text: "Hairpin",
-                id: 'changetobuttonhairpin',
+                id: 'changetobuttonhairpin'+this.id,
                 icon: 'resources/images/mix_volume.png',
                 handler: function() {
                     var win = new pmdCE.view.main.ChangeObviousElDialog();
@@ -176,7 +176,7 @@ createHairpinButton: function(){
     
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
-                    id: "createhairpinbutton",
+                    id: "createhairpinbutton"+this.id,
                     text: 'Create element',
                      margin: '0 0 10 0', 
                      menu: [Ext.create('Ext.menu.Item', {
@@ -235,7 +235,7 @@ createMenuItem: function(itemText, type, me){
 deleteElementButton: function(){
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
-                    id: "deleteButton",
+                    id: "deleteButton"+this.id,
                    // icon: "resources/images/drop-add.gif",
                     margin: '0 0 10 0', 
                    // glyph: null,

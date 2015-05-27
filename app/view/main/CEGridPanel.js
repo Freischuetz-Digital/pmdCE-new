@@ -5,137 +5,18 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
         'Ext.data.*',
         'Ext.grid.*',
         'Ext.tree.*',
-        'Ext.ux.CheckColumn',
-        'pmdCE.model.Hairpin'
+        'Ext.ux.CheckColumn'
     ],
    
     flex: 4,
     region: 'west',  
-    //store: store,
-  
-    id: 'cegridpanel',
-    
-    xtype: 'tree-grid',
-    
+   
     reserveScrollbar: true,
    
     useArrows: true,
     rootVisible: false,
    
-    ambiguousColumn: null,
-    obviousColumn: null,
     editColumn: null,
-   
-    initComponent: function() {
-    
-    ambiguousColumn = this.createColumn();
-    obviousColumn = this.createObColumn();
-    editColumn = this.createEditColumn();
-    
-    this.listeners = {
-  
-        selectionchange: function(selected, eOpts){
-        
-        var selectedObject;
-       
-        if(typeof eOpts[0] !== 'undefined' && eOpts[0].data.depth === 1){
-            Ext.getCmp('deleteButton').setDisabled(false);           
-            Ext.getCmp('changetobutton').setDisabled(false);
-            
-            if(selected.selected.items[0].data.obvious){
-                Ext.getCmp('changetobuttonchoice').setDisabled(false);
-                Ext.getCmp('changetobuttonchoice').menu.setDisabled(false);
-                Ext.getCmp('changetobuttonhairpin').setDisabled(true);
-            }
-            else{
-                Ext.getCmp('changetobuttonchoice').setDisabled(true);
-                 Ext.getCmp('changetobuttonchoice').menu.setDisabled(true);
-                 Ext.getCmp('changetobuttonhairpin').setDisabled(false);
-            }
-           
-            if(selected.selected.items[0].data.obvious){
-                Ext.getCmp('addelementbutton').setDisabled(true);
-            }
-            else{
-                Ext.getCmp('addelementbutton').setDisabled(false);
-            }
-                   
-           selectedObject = selected.selected.items[0];
-        }
-        else if(typeof eOpts[0] !== 'undefined'&& eOpts[0].data.depth === 2){
-            Ext.getCmp('deleteButton').setDisabled(false);
-        Ext.getCmp('addelementbutton').setDisabled(true);
-        Ext.getCmp('changetobutton').setDisabled(true);
-       
-        selectedObject = selected.selected.items[0].parentNode;
-        
-        }
-       
-        if(typeof selectedObject !== 'undefined'){
-            this.showXMLforSelectedElement(selectedObject);
-        }
-      
-        }
-        };
-        
-        
-            this.columns = [{
-                xtype: 'treecolumn', 
-                text: 'Name/Orig/Reg',
-                flex: 3,
-                sortable: true,
-                dataIndex: 'name'
-                
-            }, 
-            
-            {
-                text: 'Staff',
-                flex: 1,
-                sortable: true,
-                dataIndex: 'staff'
-            },
-             {
-                text: '2. Staff',
-                flex: 1,
-                sortable: true,
-                dataIndex: 'staff2'
-            },
-            {
-                text: 'Measure',
-                flex: 1,
-                sortable: true,
-                dataIndex: 'measurenr'
-            },
-            {
-                text: 'Tstamp',
-                flex: 1,
-                sortable: true,
-                dataIndex: 'tstamp'
-            },
-            {
-                text: 'Tstamp2',
-                flex: 1,
-                dataIndex: 'tstamp2',
-                sortable: true
-            },
-            {
-                text: 'Place',
-                flex: 1,
-                dataIndex: 'place',
-                sortable: true
-            },{
-                text: 'Form',
-                flex: 1,
-                dataIndex: 'form',
-                sortable: true
-            },
-           //  ambiguousColumn,
-          //   obviousColumn,
-             editColumn
-           
-            ]
-        this.callParent()
-    },
     
     showDialog: function(){ 
     
@@ -206,28 +87,7 @@ showXMLforSelectedElement: function(selectedObject){
         $('#xmleditorview-body').html(tmp);
     
 },
-    
-    createObColumn: function(){
-    var eColumn = Ext.create('Ext.grid.column.Check', {
-        xtype: 'checkcolumn',
-                header: 'Obvious',
-                flex: 1,
-                disabled: true,
-                align: 'center',
-                dataIndex: 'obvious',
-                menuDisabled: true,
-               renderer: function(val, m, rec) {
-                  
-                 if(rec.data.depth === 1){
-               
-                     return (new Ext.ux.CheckColumn()).renderer(val);
-                 }
-                 }
-                 });
-   return eColumn;   
-    },
-    
-    
+       
      createEditColumn: function(){
     var eColumn = Ext.create('Ext.grid.column.Action', {
          
@@ -250,26 +110,7 @@ showXMLforSelectedElement: function(selectedObject){
                  });
    return eColumn;   
     },
-    
-    createColumn: function(){
-     var eColumn = Ext.create('Ext.grid.column.Check', {
-                xtype:'checkcolumn',
-                header: 'Ambiguous',
-                dataIndex: 'ambiguous',
-                disabled: true,
-                flex: 1,
-                align: 'center',
-                menuDisabled: true,
-                renderer: function(val, m, rec) {                 
-                 if(rec.data.depth === 1){              
-                     return (new Ext.ux.CheckColumn()).renderer(val);
-                 }
-        
-    }
-   });
-   return eColumn;
-   },
-   
+ 
    changeElementDialog: function(object, cell, row){
    object.selectionModel.select(cell);  
    selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];

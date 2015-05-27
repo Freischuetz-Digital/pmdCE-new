@@ -408,7 +408,7 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
           && tstamp2FieldReg1.isValid() && tstamp2FieldReg2.isValid()
           && tstampFieldReg1.isValid() && tstampFieldReg2.isValid()
           && tstampFieldReg3.isValid() && tstampFieldReg4.isValid()
-          && tstampField2Reg3.isValid() && tstampField2Reg4.isValid()){ 
+          && tstamp2FieldReg3.isValid() && tstampField2Reg4.isValid()){ 
              createElementButton.setDisabled(false); 
           }
           else{

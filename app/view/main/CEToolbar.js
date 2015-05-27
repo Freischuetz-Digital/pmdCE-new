@@ -328,44 +328,53 @@ for(var i = 0; i < modRecords.length ; i++){
         } */
        
      
+       var app = pmdCE.getApplication();
        
-       
+       // create facsimile view and load facsimile
       if(typeof Ext.getCmp('facsimileview') !== 'undefined'){
            Ext.getCmp('cepanel').remove('facsimileview');
            
        }
-    facsimileView = new pmdCE.view.main.FacsimileView();
-    Ext.getCmp('cepanel').add(facsimileView);
+        facsimileView = new pmdCE.view.main.FacsimileView();
+        Ext.getCmp('cepanel').add(facsimileView);
+        var facsimileStore = app.getFacsimileStore();
+        facsimileStore.getProxy().extraParams.path = item.text;
+        facsimileStore.load();
        
-       
+        // create editor for hairpins and load
         if(typeof Ext.getCmp('verovioview') !== 'undefined'){
             // TODO: save?
             Ext.getCmp('hairpinsitem').removeAll(true);
-        }
-      
-         verovioView = new pmdCE.view.main.VerovioView();
-       
-         controllsView = new pmdCE.view.main.CEGridPanel();
-                
-         xmlView = new pmdCE.view.main.XMLEditorView();
-         
+        }      
+         verovioView = new pmdCE.view.main.hairpins.HairpinsButtonPanel();      
+         controllsView = new pmdCE.view.main.hairpins.HairpinsGridPanel();               
+         xmlView = new pmdCE.view.main.XMLEditorView({
+             id: 'xmleditorview'
+         });        
          Ext.getCmp('hairpinsitem').add(controllsView);
          Ext.getCmp('hairpinsitem').add(verovioView);
          Ext.getCmp('hairpinsitem').add(xmlView);
-         //Ext.getCmp('centertabeditor').setActiveItem(ceEditor);
-         
-         var app = pmdCE.getApplication();
+                 
          var store = app.getHairpinDataStore();
-        store.getProxy().extraParams.path = item.text;
-
-        store.load();
-       Ext.getCmp('cegridpanel').getView().bindStore(store);  
+         store.getProxy().extraParams.path = item.text;
+         store.load();
+         Ext.getCmp('cegridpanel').getView().bindStore(store);  
        
-        var facsimileStore = app.getFacsimileStore();
-        facsimileStore.getProxy().extraParams.path = item.text;
-
-        facsimileStore.load();
- 
+       // dynams
+       if(typeof Ext.getCmp('dynamsxmlview') !== 'undefined'){
+            // TODO: save?
+            Ext.getCmp('dynamsitem').removeAll(true);
+        }  
+       dynamsView = new pmdCE.view.main.dynams.DynamsGridPanel();
+       Ext.getCmp('dynamsitem').add(dynamsView);
+       
+       dynamsButtons = new pmdCE.view.main.dynams.DynamsButtonsPanel();
+       Ext.getCmp('dynamsitem').add(dynamsButtons);
+       
+        dynamsXmlView = new pmdCE.view.main.XMLEditorView({
+             id: 'dynamsxmlview'
+         });  
+        Ext.getCmp('dynamsitem').add(dynamsXmlView);
     },
       
     homeOnItemToggle: function(){

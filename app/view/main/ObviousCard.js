@@ -260,6 +260,11 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         listeners: {
         focus: function(e, eOpts ){
            me1.handleCreateButton();
+        },
+        render: function(c) {
+            c.getEl().on('keyup', function() {              
+            me1.handleCreateButton();
+            }, c);
         }
         }
    });

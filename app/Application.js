@@ -18,6 +18,10 @@ Ext.define('pmdCE.Application', {
        'main.VerovioImageEnd',
        'main.ChoiceDialog',
        'main.CEGridPanel',
+       'main.dynams.DynamsGridPanel',
+       'main.dynams.DynamsButtonsPanel',
+       'main.hairpins.HairpinsGridPanel',
+       'main.hairpins.HairpinsButtonPanel',
        'main.AddObviousElDialog',
        'main.AddAmbiguousElDialog',
        'main.EditDialog',
@@ -53,12 +57,9 @@ Ext.define('pmdCE.Application', {
     models: [
         'Source',
         'Movement',
+        'Dynam',
         'Page',
-        'Hairpins',
         'Hairpin',
-        'HairpinStart',
-        'User',
-        'Task',
         'Slurs'       
     ],
     

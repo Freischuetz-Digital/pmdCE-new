@@ -1,4 +1,4 @@
-Ext.define('pmdCE.view.main.VerovioView', {
+Ext.define('pmdCE.view.main.hairpins.HairpinsButtonPanel', {
     extend: 'Ext.panel.Panel',
      requires: [
         'Ext.layout.container.VBox'
@@ -14,7 +14,7 @@ Ext.define('pmdCE.view.main.VerovioView', {
     },
       
     bodyPadding: 10,
-    //id: "verovioview",
+    id: "verovioview",
      
     createNewElButton: null,
     addElementButton: null,
