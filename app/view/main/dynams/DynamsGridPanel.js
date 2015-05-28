@@ -102,10 +102,17 @@ Ext.define('pmdCE.view.main.dynams.DynamsGridPanel', {
                 flex: 1,
                 dataIndex: 'place',
                 sortable: true
-            },{
+            },
+            {
                 text: 'Form',
                 flex: 1,
-                dataIndex: 'form',
+                dataIndex: 'formvalue',
+                sortable: true
+            },
+             {
+                text: 'Rend',
+                flex: 1,
+                dataIndex: 'rend',
                 sortable: true
             },
           

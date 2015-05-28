@@ -375,6 +375,11 @@ for(var i = 0; i < modRecords.length ; i++){
              id: 'dynamsxmlview'
          });  
         Ext.getCmp('dynamsitem').add(dynamsXmlView);
+        var dynamsStore = app.getDynamDataStore();
+         dynamsStore.getProxy().extraParams.path = item.text;
+         dynamsStore.load();
+         Ext.getCmp('dynamsgridpanel').getView().bindStore(dynamsStore);  
+       
     },
       
     homeOnItemToggle: function(){

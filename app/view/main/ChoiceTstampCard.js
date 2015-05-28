@@ -63,6 +63,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
          
          me = this;
          
+         // create orig fields
+         // common 
          staffField= this.createComboBoxStaff('Staff');  
          staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
@@ -73,37 +75,70 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
         endTaktField.validate();
         placeField = this.createComboBox('Place');
         placeField.validate();
-        formField = this.createComboBoxForm('Form');
-        formField.validate();
-        
-    tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp');
-   tstampFieldOrig.validate();
-    tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
-    tstamp2FieldOrig.validate();
-
-        staffFieldReg1= this.createTextField('staffFieldReg1', 'Staff');  
+        tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp');
+        tstampFieldOrig.validate();       
+         // hairpin
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formField = this.createComboBoxForm('Form'); 
+             tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
+             tstamp2FieldOrig.validate(); 
+         }
+         // dynams
+         else{
+             formField = this.createTextField('formOrig', 'Form'); 
+             tstamp2FieldOrig = this.createTextFieldTstamp2('tstamp2FieldOrig', 'Tstamp2');
+             // TODO rend field
+         }
+         formField.validate();
+         
+         // reg1 fields
+        // common
+       staffFieldReg1= this.createTextField('staffFieldReg1', 'Staff');  
         staffFieldReg1.setDisabled(true);
         placeFieldReg1 = this.createComboBox('Place');
         placeFieldReg1.setDisabled(true);
-        formFieldReg1 = this.createComboBoxForm('Form');
-        formFieldReg1.setDisabled(true);
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
         tstampFieldReg1.validate();
-        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
-        tstamp2FieldReg1.validate();
-        tstamp2FieldReg1.setDisabled(true);
-
-staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
- staffFieldReg2.setDisabled(true);
+       
+        // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formFieldReg1 = this.createComboBoxForm('Form'); 
+              tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');      
+             tstamp2FieldReg1.validate(); 
+         }  
+    // dynams
+    else{
+        formFieldReg1 = this.createTextField('formReg1', 'Form'); 
+         tstamp2FieldReg1 = this.createTextFieldTstamp2('tstamp2FieldReg1', 'Tstamp2');              
+    }
+    formFieldReg1.setDisabled(true);
+    formField.validate();
+    tstamp2FieldReg1.setDisabled(true);
+    
+    // reg2 fields
+    // common
+    staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
+    staffFieldReg2.setDisabled(true);
         placeFieldReg2 = this.createComboBox('Place');
-        placeFieldReg2.setDisabled(true);
+        placeFieldReg2.setDisabled(true);  
+    tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
+    tstampFieldReg2.validate();
+    
+    // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
         formFieldReg2 = this.createComboBoxForm('Form');
-        formFieldReg2.setDisabled(true);
-tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
-tstampFieldReg2.validate();
-tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
-tstamp2FieldReg2.validate();
-tstamp2FieldReg2.setDisabled(true);
+        tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
+        tstamp2FieldReg2.validate();
+    }
+    // dynams
+    else{
+        formFieldReg2 = this.createTextField('formReg2', 'Form'); 
+        tstamp2FieldReg2 = this.createTextFieldTstamp2('tstamp2FieldReg2', 'Tstamp2');
+    
+    }
+    formFieldReg2.setDisabled(true);
+    tstamp2FieldReg2.setDisabled(true);
+        
 
 checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
 
@@ -412,6 +447,10 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
                tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
+           if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
+             formFieldReg1.setValue(formField.getValue());
+                formFieldReg2.setValue(formField.getValue());
+           }
            me1.handleCreateButton();
         },
          render: function(c) {
@@ -421,6 +460,44 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
                tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
+            if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
+             formFieldReg1.setValue(formField.getValue());
+                formFieldReg2.setValue(formField.getValue());
+           }
+           me1.handleCreateButton();
+            }, c);
+        }
+        }
+   });
+
+return ceTextField;
+},
+
+
+        createTextFieldTstamp2: function(fieldName, fieldLabel){
+        var me1 = this;
+    var ceTextField = Ext.create('Ext.form.field.Text',{
+        name: fieldName,
+        id: fieldName,
+        fieldLabel: fieldLabel,
+        listeners: {
+        focus: function(e, eOpts ){
+           me.selectedFieldId = fieldName;
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){
+               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+           }
+           
+           me1.handleCreateButton();
+        },
+         render: function(c) {
+            c.getEl().on('keyup', function() {   
+           me.selectedFieldId = fieldName;
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){
+               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+           }
+          
            me1.handleCreateButton();
             }, c);
         }

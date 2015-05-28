@@ -9,7 +9,7 @@ Ext.define('pmdCE.view.main.dynams.DynamsButtonsPanel', {
    addElementButton = this.createCEButton('addelementbutton_1');
    addElementButton.setDisabled(true);
    
-   createHairpinButton = this.createHairpinButton("createhairpinbutton_1");
+   createHairpinButton = this.createHairpinButton("createhairpinbutton_1", 'Dynam');
    
   deleteElementButton = this.deleteElementButton("deleteButton_1");
    deleteElementButton.setDisabled(true);

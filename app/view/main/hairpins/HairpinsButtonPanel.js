@@ -8,7 +8,7 @@ Ext.define('pmdCE.view.main.hairpins.HairpinsButtonPanel', {
    addElementButton = this.createCEButton('addelementbutton');
    addElementButton.setDisabled(true);
    
-   createHairpinButton = this.createHairpinButton("createhairpinbutton");
+   createHairpinButton = this.createHairpinButton("createhairpinbutton" , 'Hairpin');
    
   deleteElementButton = this.deleteElementButton("deleteButton");
    deleteElementButton.setDisabled(true);

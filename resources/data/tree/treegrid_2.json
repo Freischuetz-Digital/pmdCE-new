@@ -1,0 +1,90 @@
+{
+    "children": [
+        {
+            "name": "cres_s1_m55_below",
+            "id": "dynam_12345678",
+            "icon": 'resources/images/mix_volume.png',
+             "obvious": true,
+             "ambiguous": false,
+             "leaf": true,
+                    "staff": "1",
+                    "staff2": "",
+                    "tstamp": "1",
+                    "tstamp2": "m+6.5",
+                    "place": "below",
+                    "formvalue": "cres",
+                    "measurenr":25,
+                    "tag": ""
+        }, 
+        {
+            
+            "name": "dim_s1_m63_below",
+            "id": "dynam_elena",
+            "icon": 'resources/images/mix_volume.png',
+            "obvious": true,
+            "ambiguous": false,
+                    "staff": "1",
+                    "staff2": "",
+                    "tstamp": 2,
+                    "tstamp2": "m+5",
+                    "place": "below",
+                    "formvalue": "dim",
+                     "tag": "",
+                     "measurenr":26,
+                    "leaf": true
+        },
+         {
+            
+            "name": "dim_s8_m62_between",
+            "id": "dynam_d639e5b4-a5a6-414b-b163-e266cfd28549",
+            "icon": 'resources/images/details-xml.png',
+            "obvious": false,
+            "ambiguous": true,
+            "measurenr":27,
+             "children": [
+        {
+                "name": "orig",
+            "icon": 'resources/images/mix_volume.png',
+             "leaf": true,
+                    "staff": "8", 
+                    "staff2": "9",
+                    "tstamp": "2",
+                    "tstamp2": "m+5",
+                    "place": "between",
+                    "formvalue": "dim",
+                    
+                    "tag": "orig"
+        }, 
+        
+        {
+            "name": "reg",
+            "icon": 'resources/images/mix_volume.png',
+             "leaf": true,
+                    "staff": "8",
+                    "staff2": "",
+                    "tstamp": "2",
+                    "tstamp2": "m+5",
+                    "place": "below",
+                    "formvalue": "dim",
+                   
+                    "tag": "reg"
+        }, 
+        {
+             "name": "reg",
+            "icon": 'resources/images/mix_volume.png',
+             "leaf": true,
+                    "staff": "9", 
+                    "staff2": "",
+                    "tstamp": "2",
+                    "tstamp2": "m+5",
+                    "place": "above",
+                    "formvalue": "dim",
+                    
+                    "tag": "reg"
+        } 
+        
+        ]
+         
+        }
+    ]
+   }

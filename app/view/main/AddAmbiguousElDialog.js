@@ -13,8 +13,8 @@ Ext.define('pmdCE.view.main.AddAmbiguousElDialog', {
   ambiguousCard: null,
  
     initComponent: function() {
-    
-    switch (Ext.getCmp('verovioview').getCard()) {
+   
+    switch (Ext.getCmp('cemain').getCard()) {
       case 1 :
         ambiguousCard = new pmdCE.view.main.ChoiceTstampCard();
         break;

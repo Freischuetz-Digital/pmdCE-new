@@ -113,22 +113,23 @@ var me = this;
 return ceButton;
 },
 
-createHairpinButton: function(buttonId){
-    var me = this;
+createHairpinButton: function(buttonId, elementName){
+
+    Ext.getCmp('cemain').setComponentType(elementName);  
+   
+    var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 1);
     
-    var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 1, me);
+    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (1-2 regs)", 2);
     
-    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (1-2 regs)", 2, me);
+    var menuStaff2Reg  = this.createMenuItem("for Staff (1-2 regs)", 3);
     
-    var menuStaff2Reg  = this.createMenuItem("for Staff (1-2 regs)", 3, me);
-    
-     var menuTime4Reg  = this.createMenuItem("for Time (2-4 regs)", 4, me);
+     var menuTime4Reg  = this.createMenuItem("for Time (2-4 regs)", 4);
      
-     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (3-4 regs)", 5, me);
+     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (3-4 regs)", 5);
      
-     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (3-4 regs)", 6, me);
+     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (3-4 regs)", 6);
      
-      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (4-6 regs)", 7, me);
+      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (4-6 regs)", 7);
     
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
@@ -151,7 +152,7 @@ createHairpinButton: function(buttonId){
                      }),
                      
                      Ext.create('Ext.menu.Item', {
-                text: "Hairpin",
+                text: elementName,
                 icon: 'resources/images/mix_volume.png',
                 handler: function() {
                     var win = new pmdCE.view.main.AddObviousElDialog();
@@ -165,12 +166,12 @@ return ceButton;
 },
 
 
-createMenuItem: function(itemText, type, me){
+createMenuItem: function(itemText, type){
      var item = Ext.create('Ext.menu.Item', {
                                 text: itemText,
                                 icon: 'resources/images/mix_volume.png',
                                 handler: function() {
-                                me.setCard(type);
+                                Ext.getCmp('cemain').setCard(type);  
                                 var win = new pmdCE.view.main.AddAmbiguousElDialog();          
                                     win.show();
                                 }                       
@@ -180,13 +181,6 @@ createMenuItem: function(itemText, type, me){
     
 },
 
-    setCard:function(card){        
-        this.card = card;
-    },
-    
-     getCard:function(){        
-        return this.card;
-    },
 
 deleteElementButton: function(buttonId){
     var ceButton = Ext.create('Ext.button.Button', {  

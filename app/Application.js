@@ -75,6 +75,7 @@ Ext.define('pmdCE.Application', {
     renderer: null,
     //hairpinsDataStore: null,
     hairpinDataStore: null,
+    dynamDataStore: null,
     hairpinStart: null,
     facsimilePath: null,
     saveStore: null,
@@ -112,6 +113,20 @@ Ext.define('pmdCE.Application', {
      // url: 'resources/xql/getControlEvents.xql'
        
        url: 'resources/data/tree/treegrid_1.json'
+      
+    },
+    autoLoad: false
+});
+
+ dynamDataStore = Ext.create('Ext.data.TreeStore', {
+    model: 'pmdCE.model.Dynam',
+  
+    extraParams: {path: ''},
+             proxy:{
+        type: 'ajax',
+     // url: 'resources/xql/getControlEvents.xql'
+       
+       url: 'resources/data/tree/treegrid_2.json'
       
     },
     autoLoad: false
@@ -163,7 +178,11 @@ facsimileStore= Ext.create('Ext.data.Store', {
     
     getHairpinDataStore: function(){
     return hairpinDataStore;
-    }
+    },
     
+    getDynamDataStore: function(){
+    return dynamDataStore;
+    }
+   
 
 });

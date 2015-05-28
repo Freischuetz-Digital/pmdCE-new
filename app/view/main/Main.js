@@ -37,6 +37,8 @@ Ext.define('pmdCE.view.main.Main', {
     measureid: null,
     verStartId: null,
     verEndId: null,
+    card: null,
+    elementName: null,
    
     initComponent: function() {
    
@@ -98,7 +100,24 @@ this.callParent()
     
     getVerEndId: function(){
         return this.verEndId;
+    },
+    
+        setCard:function(card){        
+        this.card = card;
+    },
+    
+     getCard:function(){        
+        return this.card;
+    },
+    
+            setComponentType: function(elementName){        
+        this.elementName = elementName;
+    },
+    
+     getComponentType:function(){        
+        return this.elementName;
     }
+
     
     
 
