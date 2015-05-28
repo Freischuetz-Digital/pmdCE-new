@@ -408,7 +408,7 @@ staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');
           && tstamp2FieldReg1.isValid() && tstamp2FieldReg2.isValid()
           && tstampFieldReg1.isValid() && tstampFieldReg2.isValid()
           && tstampFieldReg3.isValid() && tstampFieldReg4.isValid()
-          && tstamp2FieldReg3.isValid() && tstampField2Reg4.isValid()){ 
+          && tstamp2FieldReg3.isValid() && tstamp2FieldReg4.isValid()){ 
              createElementButton.setDisabled(false); 
           }
           else{
@@ -747,18 +747,15 @@ return navButton;
             if(checked){
             tstampFieldReg4.setDisabled(true);            
             tstamp2FieldReg4.setDisabled(true);
-            placeFieldReg4.setDisabled(true);
             }
             else{
                 if(!checked && expertCheckBox.getValue()){
                     tstampFieldReg4.setDisabled(false);            
-                tstamp2FieldReg4.setDisabled(false);
-                placeFieldReg4.setDisabled(false);                  
+                tstamp2FieldReg4.setDisabled(false);                
                 }
                 else if(!checked && !expertCheckBox.getValue()){
                 tstampFieldReg4.setDisabled(false);            
                 tstamp2FieldReg4.setDisabled(true);
-                placeFieldReg4.setDisabled(true);
             }
             }           
         }
@@ -766,18 +763,15 @@ return navButton;
         if(checked){
             tstampFieldReg1.setDisabled(true);            
             tstamp2FieldReg1.setDisabled(true);
-            placeFieldReg1.setDisabled(true);
             }
             else{
                 if(!checked && expertCheckBox.getValue()){
                     tstampFieldReg1.setDisabled(false);            
-                tstamp2FieldReg1.setDisabled(false);
-                placeFieldReg1.setDisabled(false);                  
+                tstamp2FieldReg1.setDisabled(false);             
                 }
                 else if(!checked && !expertCheckBox.getValue()){
                 tstampFieldReg1.setDisabled(true);            
                 tstamp2FieldReg1.setDisabled(false);
-                placeFieldReg1.setDisabled(true);
             }
             }        
         
@@ -802,31 +796,23 @@ createCheckBox1: function(fieldName, filedid){
         listeners: {
         change: function(cb, checked) {
         if(checked){
-            placeFieldReg2.setDisabled(false);
-            placeFieldReg2.validate();
             tstampFieldReg2.setDisabled(false);
             tstampFieldReg2.validate();
             tstamp2FieldReg2.setDisabled(false);
             tstamp2FieldReg2.validate();
-            
-            placeFieldReg3.setDisabled(false);
-            placeFieldReg3.validate();
+           
             tstampFieldReg3.setDisabled(false);
             tstampFieldReg3.validate();
             tstamp2FieldReg3.setDisabled(false);
             tstamp2FieldReg3.validate();                       
         
             if(checkBoxReg1.getValue() ){
-                placeFieldReg1.setDisabled(true);
-            placeFieldReg1.validate();
             tstampFieldReg1.setDisabled(true);
             tstampFieldReg1.validate();
             tstamp2FieldReg1.setDisabled(true);
             tstamp2FieldReg1.validate();
             }
             else{
-                placeFieldReg1.setDisabled(false);
-            placeFieldReg1.validate();
             tstampFieldReg1.setDisabled(false);
             tstampFieldReg1.validate();
             tstamp2FieldReg1.setDisabled(false);
@@ -834,16 +820,12 @@ createCheckBox1: function(fieldName, filedid){
             }
             
             if(checkBoxReg4.getValue()){
-                placeFieldReg4.setDisabled(true);
-            placeFieldReg4.validate();
             tstampFieldReg4.setDisabled(true);
             tstampFieldReg4.validate();
             tstamp2FieldReg4.setDisabled(true);
             tstamp2FieldReg4.validate(); 
             }
             else{
-               placeFieldReg4.setDisabled(false);
-            placeFieldReg4.validate();
             tstampFieldReg4.setDisabled(false);
             tstampFieldReg4.validate();
             tstamp2FieldReg4.setDisabled(false);
@@ -852,51 +834,55 @@ createCheckBox1: function(fieldName, filedid){
             }
         }
         else{
-            placeFieldReg2.setDisabled(true);
-            placeFieldReg2.validate();
             tstampFieldReg2.setDisabled(true);
+            if(tstampFieldReg2.getValue() === ""){
+             tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+          
+         }
             tstampFieldReg2.validate();
             tstamp2FieldReg2.setDisabled(false);
             tstamp2FieldReg2.validate();
             
-            placeFieldReg3.setDisabled(true);
-            placeFieldReg3.validate();
             tstampFieldReg3.setDisabled(false);
             tstampFieldReg3.validate();
             tstamp2FieldReg3.setDisabled(true);
+            if(tstamp2FieldReg3.getValue() === ""){
+             tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg3.validate();             
             
             if(checkBoxReg1.getValue() ){
-                placeFieldReg1.setDisabled(true);
-            placeFieldReg1.validate();
             tstampFieldReg1.setDisabled(true);
             tstampFieldReg1.validate();
             tstamp2FieldReg1.setDisabled(true);
             tstamp2FieldReg1.validate();
             }
             else{
-                placeFieldReg1.setDisabled(true);
-            placeFieldReg1.validate();
             tstampFieldReg1.setDisabled(true);
+            if(tstampFieldReg1.getValue() === ""){
+             tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+          
+         }
             tstampFieldReg1.validate();
             tstamp2FieldReg1.setDisabled(false);
             tstamp2FieldReg1.validate();
             }
             
             if(checkBoxReg4.getValue()){
-                placeFieldReg4.setDisabled(true);
-            placeFieldReg4.validate();
             tstampFieldReg4.setDisabled(true);
             tstampFieldReg4.validate();
             tstamp2FieldReg4.setDisabled(true);
             tstamp2FieldReg4.validate(); 
             }
             else{
-               placeFieldReg4.setDisabled(true);
-            placeFieldReg4.validate();
             tstampFieldReg4.setDisabled(false);
             tstampFieldReg4.validate();
             tstamp2FieldReg4.setDisabled(true);
+            if(tstamp2FieldReg4.getValue() === ""){
+             tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg4.validate();  
                 
             }

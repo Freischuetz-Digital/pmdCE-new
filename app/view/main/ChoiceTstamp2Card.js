@@ -584,21 +584,17 @@ return navButton;
         if(checked){
             tstampFieldReg2.setDisabled(true);            
             tstamp2FieldReg2.setDisabled(true);
-            placeFieldReg2.setDisabled(true);
-            //formFieldReg2.setDisabled(true);
+           
         }
         else if(!checked && expertCheckBox.getValue()){
             tstampFieldReg2.setDisabled(false);            
             tstamp2FieldReg2.setDisabled(false);
-            placeFieldReg2.setDisabled(false);
-            //formFieldReg2.setDisabled(false);
             
         }
         else if(!checked && !expertCheckBox.getValue()){
              tstampFieldReg2.setDisabled(true);            
             tstamp2FieldReg2.setDisabled(false);
-            placeFieldReg2.setDisabled(true);
-            //formFieldReg2.setDisabled(true);
+           
         }
        
         }
@@ -631,71 +627,51 @@ createCheckBox1: function(fieldName, filedid){
             tstampFieldReg2.validate();
             tstamp2FieldReg2.setDisabled(false);
             tstamp2FieldReg2.validate();
-            placeFieldReg1.setDisabled(false);
-            placeFieldReg1.validate();
-          //  formFieldReg1.setDisabled(false);
-           // formFieldReg1.validate();
-            placeFieldReg2.setDisabled(false);
-            placeFieldReg2.validate();
-            //formFieldReg2.setDisabled(false);
-            //formFieldReg2.validate();
+           
         }
         else if(checked && checkBoxReg2.getValue()){
             tstampFieldReg2.setDisabled(true);
             tstampFieldReg2.validate();
             tstamp2FieldReg2.setDisabled(true);
             tstamp2FieldReg2.validate();
-            placeFieldReg2.setDisabled(true);
-            placeFieldReg2.validate();
-            //formFieldReg2.setDisabled(true);
-            //formFieldReg2.validate();
-            
+           
             tstampFieldReg1.setDisabled(false);
             tstampFieldReg1.validate();
             tstamp2FieldReg1.setDisabled(false);
             tstamp2FieldReg1.validate();
-            placeFieldReg1.setDisabled(false);
-            placeFieldReg1.validate();
-            //formFieldReg1.setDisabled(false);
-            //formFieldReg1.validate();
+            
         }
         else if(!checked && !checkBoxReg2.getValue()){
             tstampFieldReg1.setDisabled(true);
             tstampFieldReg1.validate();
             tstamp2FieldReg1.setDisabled(false);
+            if(tstamp2FieldReg1.getValue() === ""){
+             tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg1.validate();
-            placeFieldReg1.setDisabled(true);
-            placeFieldReg1.validate();
-            //formFieldReg1.setDisabled(true);
-            //formFieldReg1.validate();       
-        
+           
             tstampFieldReg2.setDisabled(true);
             tstampFieldReg2.validate();
             tstamp2FieldReg2.setDisabled(false);
+            if(tstamp2FieldReg2.getValue() === ""){
+             tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg2.validate();
-            placeFieldReg2.setDisabled(true);
-            placeFieldReg2.validate();
-            //formFieldReg2.setDisabled(true);
-            //formFieldReg2.validate();
+          
         }
         else if(!checked && checkBoxReg2.getValue()){
             tstampFieldReg1.setDisabled(true);
             tstampFieldReg1.validate();
             tstamp2FieldReg1.setDisabled(false);
             tstamp2FieldReg1.validate();
-            placeFieldReg1.setDisabled(true);
-            placeFieldReg1.validate();
-            //formFieldReg1.setDisabled(true);
-            //formFieldReg1.validate();       
-        
+           
             tstampFieldReg2.setDisabled(true);
             tstampFieldReg2.validate();
             tstamp2FieldReg2.setDisabled(true);
             tstamp2FieldReg2.validate();
-            placeFieldReg2.setDisabled(true);
-            placeFieldReg2.validate();
-            //formFieldReg2.setDisabled(true);
-            //formFieldReg2.validate();
+           
         }
         me9.handleCreateButton();
        

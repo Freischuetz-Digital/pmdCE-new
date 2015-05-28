@@ -94,11 +94,11 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
          
          me = this;
          
-         staffField= this.createComboBoxStaff('Staff'); 
+         staffField= this.createComboBoxStaff('Staff', "stafforig"); 
          staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
         staffFieldCopy.setDisabled(true);
-        satffFieldBetween = this.createComboBoxStaff('Second staff'); 
+        satffFieldBetween = this.createComboBoxStaff('Second staff' , "secorig"); 
         satffFieldBetween.validate();
         startTaktField= this.createComboBoxMeasureNr('Start measure');
         startTaktField.validate();
@@ -116,7 +116,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
 
         staffFieldReg1= this.createTextField('staffFieldReg1', 'Staff');  
         staffFieldReg1.setDisabled(true);
-        satffFieldBetweenReg1= this.createComboBoxStaff('Second staff');
+        satffFieldBetweenReg1= this.createComboBoxStaff('Second staff', "beet1");
         satffFieldBetweenReg1.setDisabled(true);
         placeFieldReg1 = this.createComboBox('Place', 'placereg1');
         placeFieldReg1.setDisabled(true);
@@ -130,7 +130,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
 
 staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
  staffFieldReg2.setDisabled(true);
- satffFieldBetweenReg2= this.createComboBoxStaff('Second staff');
+ satffFieldBetweenReg2= this.createComboBoxStaff('Second staff', "beet2");
         satffFieldBetweenReg2.setDisabled(true);
         placeFieldReg2 = this.createComboBox('Place', 'placereg2');
         placeFieldReg2.setDisabled(true);
@@ -145,7 +145,7 @@ tstamp2FieldReg2.validate();
 
 staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');  
 staffFieldReg3.setDisabled(true);
-satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
+satffFieldBetweenReg3= this.createComboBoxStaff('Second staff', "sreg3");
         satffFieldBetweenReg3.setDisabled(true);
         placeFieldReg3 = this.createComboBox('Place', 'placereg3');
         placeFieldReg3.setDisabled(true);
@@ -159,7 +159,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         
         staffFieldReg4= this.createTextField('staffFieldReg4', 'Staff'); 
         staffFieldReg4.setDisabled(true);
-        satffFieldBetweenReg4= this.createComboBoxStaff('Second staff');
+        satffFieldBetweenReg4= this.createComboBoxStaff('Second staff', "sreg4");
         satffFieldBetweenReg4.setDisabled(true);
         placeFieldReg4 = this.createComboBox('Place', 'placereg4');
         placeFieldReg4.setDisabled(true);
@@ -171,7 +171,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         tstamp2FieldReg4 = this.createTextField('tstamp2FieldReg4', 'Tstamp2');
         tstamp2FieldReg4.validate();
                 
-        staffFieldReg5= this.createComboBoxStaff('Staff');
+        staffFieldReg5= this.createComboBoxStaff('Staff', "sreg5");
         staffFieldReg5.validate();
         placeFieldReg5 = this.createComboBox('Place', 'placereg5');
         placeFieldReg5.validate();
@@ -184,7 +184,7 @@ satffFieldBetweenReg3= this.createComboBoxStaff('Second staff');
         tstamp2FieldReg5.setDisabled(true);
          tstamp2FieldReg5.validate();
         
-        staffFieldReg6= this.createComboBoxStaff('Staff');
+        staffFieldReg6= this.createComboBoxStaff('Staff', "sreg6");
         staffFieldReg6.validate();
         placeFieldReg6 = this.createComboBox('Place', 'placereg6');
         placeFieldReg6.validate();
@@ -712,7 +712,7 @@ getSelectedFieldId: function(){
     invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
-     if(combo.id === 'placeorig'){
+     if(combo.id === 'placeorig' && !expertCheckBox.getValue()){
         placeFieldReg1.setValue(combo.getValue());
        placeFieldReg2.setValue(combo.getValue());
        placeFieldReg3.setValue(combo.getValue());
@@ -755,7 +755,9 @@ return ceTextField;
 },
 
 
-   createComboBoxStaff: function(fieldName){
+   createComboBoxStaff: function(fieldName,  fieldId){
+   
+   var me10 = this;
   
    var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
    var selectedPage = Ext.getCmp('pages').getText();
@@ -770,6 +772,7 @@ return ceTextField;
    
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
+    id: fieldId,
     store: dataMeasureNr,
     queryMode: 'local',
     displayField: 'name',
@@ -778,16 +781,17 @@ return ceTextField;
     invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
-    if(fieldName.indexOf('Second') === -1){
+    if(fieldName.indexOf('Second') === -1  && fieldId.indexOf('reg') === -1){
         Ext.getCmp('cemain').setStaffNr(combo.getValue());
+        me10.handleNavigationButtons();
         }
         else{
            satffFieldBetweenReg1.setValue(combo.getValue());
            satffFieldBetweenReg2.setValue(combo.getValue());
            satffFieldBetweenReg3.setValue(combo.getValue());
            satffFieldBetweenReg4.setValue(combo.getValue());
+           me10.handleCreateButton();
         }
-    me.handleNavigationButtons();
     }
   }
   });
@@ -996,22 +1000,47 @@ createCheckBox1: function(fieldName, filedid){
             tstamp2FieldReg4.validate();
             }
         }
+        // !checked
         else{
             satffFieldBetweenReg1.setDisabled(true);
+            if(satffFieldBetweenReg1.getValue() === "" || satffFieldBetweenReg1.getValue() === null){
+             satffFieldBetweenReg1.setValue(satffFieldBetween.getValue());
+          
+         }
              satffFieldBetweenReg1.validate();
             placeFieldReg1.setDisabled(true);
+            if(placeFieldReg1.getValue() === "" || placeFieldReg1.getValue() === null){
+             placeFieldReg1.setValue(placeField.getValue());
+          
+         }
             placeFieldReg1.validate();
             tstampFieldReg1.setDisabled(false);
             tstampFieldReg1.validate();
             tstamp2FieldReg1.setDisabled(true);
+            if(tstamp2FieldReg1.getValue() === "" || tstamp2FieldReg1.getValue() === null){
+             tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg1.validate();
             
             
             satffFieldBetweenReg3.setDisabled(true);
+            if(satffFieldBetweenReg3.getValue() === "" || satffFieldBetweenReg3.getValue() === null){
+             satffFieldBetweenReg3.setValue(satffFieldBetween.getValue());
+          
+         }
              satffFieldBetweenReg3.validate();
             placeFieldReg3.setDisabled(true);
+            if(placeFieldReg3.getValue() === "" || placeFieldReg3.getValue() === null){
+             placeFieldReg3.setValue(placeField.getValue());
+          
+         }
             placeFieldReg3.validate();
             tstampFieldReg3.setDisabled(true);
+            if(tstampFieldReg3.getValue() === "" || tstampFieldReg3.getValue() === null){
+             tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+          
+         }
             tstampFieldReg3.validate();
             tstamp2FieldReg3.setDisabled(false);
             tstamp2FieldReg3.validate();
@@ -1021,8 +1050,16 @@ createCheckBox1: function(fieldName, filedid){
             placeFieldReg5.setDisabled(false);
             placeFieldReg5.validate();
             tstampFieldReg5.setDisabled(true);
+            if(tstampFieldReg5.getValue() === "" || tstampFieldReg5.getValue() === null){
+             tstampFieldReg5.setValue(tstampFieldOrig.getValue());
+          
+         }
             tstampFieldReg5.validate();
             tstamp2FieldReg5.setDisabled(true);
+            if(tstamp2FieldReg5.getValue() === "" || tstamp2FieldReg5.getValue() === null){
+             tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg5.validate(); 
             
             staffFieldReg6.setDisabled(false);
@@ -1030,8 +1067,16 @@ createCheckBox1: function(fieldName, filedid){
             placeFieldReg6.setDisabled(false);
             placeFieldReg6.validate();
             tstampFieldReg6.setDisabled(true);
+              if(tstampFieldReg6.getValue() === "" || tstampFieldReg6.getValue() === null){
+             tstampFieldReg6.setValue(tstampFieldOrig.getValue());
+          
+         }
             tstampFieldReg6.validate();
             tstamp2FieldReg6.setDisabled(true);
+             if(tstamp2FieldReg6.getValue() === "" || tstamp2FieldReg6.getValue() === null){
+             tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg6.validate(); 
 
             if(checkBoxReg2.getValue() ){
@@ -1046,12 +1091,24 @@ createCheckBox1: function(fieldName, filedid){
             }
             else{
             satffFieldBetweenReg2.setDisabled(true);
+             if(satffFieldBetweenReg2.getValue() === "" || satffFieldBetweenReg2.getValue() === null){
+             satffFieldBetweenReg2.setValue(satffFieldBetween.getValue());
+          
+         }
              satffFieldBetweenReg2.validate();
                 placeFieldReg2.setDisabled(true);
+                 if(placeFieldReg2.getValue() === "" || placeFieldReg2.getValue() === null){
+             placeFieldReg2.setValue(placeField.getValue());
+          
+         }
             placeFieldReg2.validate();
             tstampFieldReg2.setDisabled(false);
             tstampFieldReg2.validate();
             tstamp2FieldReg2.setDisabled(true);
+             if(tstamp2FieldReg2.getValue() === "" || tstamp2FieldReg2.getValue() === null){
+             tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg2.validate();
             }
             
@@ -1067,10 +1124,22 @@ createCheckBox1: function(fieldName, filedid){
             }
             else{
             satffFieldBetweenReg4.setDisabled(true);
+            if(satffFieldBetweenReg4.getValue() === "" || satffFieldBetweenReg4.getValue() === null){
+             satffFieldBetweenReg4.setValue(satffFieldBetween.getValue());
+          
+         }
              satffFieldBetweenReg4.validate();
                 placeFieldReg4.setDisabled(true);
+                if(placeFieldReg4.getValue() === "" || placeFieldReg4.getValue() === null){
+             placeFieldReg4.setValue(placeField.getValue());
+          
+         }
             placeFieldReg4.validate();
             tstampFieldReg4.setDisabled(true);
+              if(tstampFieldReg4.getValue() === "" || tstampFieldReg4.getValue() === null){
+             tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+          
+         }
             tstampFieldReg4.validate();
             tstamp2FieldReg4.setDisabled(false);
             tstamp2FieldReg4.validate();

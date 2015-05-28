@@ -592,12 +592,8 @@ return navButton;
             tstamp2FieldReg2.validate();
             placeFieldReg1.setDisabled(false);
             placeFieldReg1.validate();
-            //formFieldReg1.setDisabled(false);
-           // formFieldReg1.validate();
             placeFieldReg2.setDisabled(false);
             placeFieldReg2.validate();
-            //formFieldReg2.setDisabled(false);
-            //formFieldReg2.validate();
             staffFieldReg1.setDisabled(false);
             staffFieldReg1.validate();
             staffFieldReg1.setDisabled(false);
@@ -605,26 +601,38 @@ return navButton;
         }     
         else{
             tstampFieldReg1.setDisabled(true);
+            if(tstampFieldReg1.getValue() === ""){
+             tstampFieldReg1.setValue(tstampFieldOrig.getValue());
+          
+         }
             tstampFieldReg1.validate();
             tstamp2FieldReg1.setDisabled(true);
+            if(tstamp2FieldReg1.getValue() === ""){
+             tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg1.validate();
             placeFieldReg1.setDisabled(false);
             placeFieldReg1.validate();
             staffFieldReg1.setDisabled(false);
             staffFieldReg1.validate();
-            //formFieldReg1.setDisabled(true);
-           // formFieldReg1.validate();       
-        
+            
             tstampFieldReg2.setDisabled(true);
+            if(tstampFieldReg2.getValue() === ""){
+             tstampFieldReg2.setValue(tstampFieldOrig.getValue());
+          
+         }
             tstampFieldReg2.validate();
             tstamp2FieldReg2.setDisabled(true);
+            if(tstamp2FieldReg2.getValue() === ""){
+             tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+          
+         }
             tstamp2FieldReg2.validate();
             placeFieldReg2.setDisabled(false);
             placeFieldReg2.validate();
             staffFieldReg2.setDisabled(false);
             staffFieldReg2.validate();
-           // formFieldReg2.setDisabled(true);
-           // formFieldReg2.validate();
         }
         
         me9.handleCreateButton();
