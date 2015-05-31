@@ -13,7 +13,7 @@ Ext.define('pmdCE.model.Dynam', {
         {name: 'tstamp2',   type: 'string'},
         {name: 'place',   type: 'string'},
         {name: 'rend',   type: 'string'},
-        {name: 'formvalue',   type: 'string'},
+        {name: 'form',   type: 'string'},
         {name: 'obvious',   type: 'boolean'},
         {name: 'ambiguous',   type: 'boolean'}        
     ]

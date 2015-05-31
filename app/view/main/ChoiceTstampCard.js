@@ -29,6 +29,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
     endTaktField: null,
     placeField: null,
     formField: null,
+    rend: null,
    
     tstampFieldOrig: null,
     tstamp2FieldOrig: null,
@@ -38,12 +39,14 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
     formFieldReg1: null,
     tstampFieldReg1: null,
     tstamp2FieldReg1: null,
+    rendReg1: null,
 
     staffFieldReg2: null,
     placeFieldReg2: null,
     formFieldReg2: null,
     tstampFieldReg2: null,
     tstamp2FieldReg2: null,
+    rendReg2: null,
    
    verovioImageStart: null,
    verovioImageEnd: null,
@@ -87,7 +90,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
          else{
              formField = this.createTextField('formOrig', 'Form'); 
              tstamp2FieldOrig = this.createTextFieldTstamp2('tstamp2FieldOrig', 'Tstamp2');
-             // TODO rend field
+             rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
          }
          formField.validate();
          
@@ -109,7 +112,9 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
     // dynams
     else{
         formFieldReg1 = this.createTextField('formReg1', 'Form'); 
-         tstamp2FieldReg1 = this.createTextFieldTstamp2('tstamp2FieldReg1', 'Tstamp2');              
+         tstamp2FieldReg1 = this.createTextFieldTstamp2('tstamp2FieldReg1', 'Tstamp2');
+          rendReg1 = this.createTextFieldTstamp2('rendReg1', 'Rend');
+          rendReg1.setDisabled(true);
     }
     formFieldReg1.setDisabled(true);
     formField.validate();
@@ -134,12 +139,12 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
     else{
         formFieldReg2 = this.createTextField('formReg2', 'Form'); 
         tstamp2FieldReg2 = this.createTextFieldTstamp2('tstamp2FieldReg2', 'Tstamp2');
-    
+        rendReg2 = this.createTextFieldTstamp2('rendReg2', 'Rend');
+        rendReg2.setDisabled(true);
     }
     formFieldReg2.setDisabled(true);
     tstamp2FieldReg2.setDisabled(true);
-        
-
+   
 checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
 
 expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
@@ -189,8 +194,15 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                     id: 'orig',
                     defaultType: 'textfield',
                     margin: '0 10 0 0',
-               
-                    items: [
+                    
+                    items : typeof rend !== 'undefined' ? [
+                        staffFieldCopy,
+                        placeField,
+                        formField,
+                        tstampFieldOrig,
+                        tstamp2FieldOrig,
+                       rend                      
+                    ] : [
                         staffFieldCopy,
                         placeField,
                         formField,
@@ -207,14 +219,20 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                     defaults: {
                         anchor: '100%'
                      },
-        
-                    items: [
+                     
+                     items : typeof rendReg1 !== 'undefined' ? [
+                        staffFieldReg1,
+                        placeFieldReg1,
+                        formFieldReg1,
+                        tstampFieldReg1,
+                         tstamp2FieldReg1,
+                       rendReg1                      
+                    ] : [
                         staffFieldReg1,
                         placeFieldReg1,
                         formFieldReg1,
                         tstampFieldReg1,
                          tstamp2FieldReg1
-               
                     ]
                  },
                  {
@@ -227,8 +245,16 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                         anchor: '100%'
                     },
         
-                    items: [   
-                    checkBoxReg2,
+                items : typeof rendReg2 !== 'undefined' ? [
+                        checkBoxReg2,
+                        staffFieldReg2,
+                        placeFieldReg2,
+                        formFieldReg2,
+                        tstampFieldReg2,
+                        tstamp2FieldReg2,
+                       rendReg2                      
+                    ] : [
+                        checkBoxReg2,
                         staffFieldReg2,
                         placeFieldReg2,
                         formFieldReg2,
@@ -325,9 +351,22 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
     },
        
     createElement: function () {
-        var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
+    
+    var modelPath = null;
+    var prefix = null;
+     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+    modelPath = 'pmdCE.model.Hairpin';
+    prefix = 'hairpin_';
+        
+    }
+    else{
+        modelPath = 'pmdCE.model.Dynam';
+         prefix = 'dynam_';
+    }
+    
+        var hairId = prefix + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
 
-	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
+	        var hairpin = Ext.create(modelPath, {
 	               id: hairId,
 	               name: 'choice_m'+startTaktField.getValue(),
                     icon: 'resources/images/details-xml.png',
@@ -344,6 +383,7 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                     tstamp2: tstamp2FieldOrig.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rend!== 'undefined' ? rend.getValue() : null,
                     name: "orig",
                     tag: "orig",
                     leaf: true
@@ -355,6 +395,7 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                     tstamp2: tstamp2FieldReg1.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg1!== 'undefined' ? rendReg1.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -364,7 +405,14 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                 
 	    });
 	    
-	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+	    var root = null;
+	    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+	        root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+	    
+	    }
+	    else{
+	        root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+	    }
 	    var parent = root.appendChild(hairpin);
 	    
 	     if(!tstampFieldReg2.isDisabled()){
@@ -375,6 +423,7 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                     tstamp2: tstamp2FieldReg2.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg2!== 'undefined' ? rendReg2.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -487,6 +536,10 @@ return ceTextField;
                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
                tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
            }
+           if(me.selectedFieldId === 'rendOrig' && !expertCheckBox.getValue()){
+               rendReg1.setValue(rend.getValue());
+               rendReg2.setValue(rend.getValue());
+           }
            
            me1.handleCreateButton();
         },
@@ -496,6 +549,10 @@ return ceTextField;
            if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){
                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
                tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+           }
+           if(me.selectedFieldId === 'rendOrig' && !expertCheckBox.getValue()){
+               rendReg1.setValue(rend.getValue());
+               rendReg2.setValue(rend.getValue());
            }
           
            me1.handleCreateButton();

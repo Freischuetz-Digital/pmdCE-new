@@ -328,19 +328,25 @@ for(var i = 0; i < modRecords.length ; i++){
         } */
        
      
-       var app = pmdCE.getApplication();
+      var app = pmdCE.getApplication();
        
        // create facsimile view and load facsimile
       if(typeof Ext.getCmp('facsimileview') !== 'undefined'){
            Ext.getCmp('cepanel').remove('facsimileview');
            
        }
+       
         facsimileView = new pmdCE.view.main.FacsimileView();
         Ext.getCmp('cepanel').add(facsimileView);
-        var facsimileStore = app.getFacsimileStore();
+         var facsimileStore = app.getFacsimileStore();
         facsimileStore.getProxy().extraParams.path = item.text;
         facsimileStore.load();
-       
+        
+      /*  Ext.getCmp('facsimileview').setBind({
+     store: facsimileStore
+ });*/
+    
+        
         // create editor for hairpins and load
         if(typeof Ext.getCmp('verovioview') !== 'undefined'){
             // TODO: save?
@@ -375,10 +381,10 @@ for(var i = 0; i < modRecords.length ; i++){
              id: 'dynamsxmlview'
          });  
         Ext.getCmp('dynamsitem').add(dynamsXmlView);
-        var dynamsStore = app.getDynamDataStore();
+       var dynamsStore = app.getDynamDataStore();
          dynamsStore.getProxy().extraParams.path = item.text;
          dynamsStore.load();
-         Ext.getCmp('dynamsgridpanel').getView().bindStore(dynamsStore);  
+         Ext.getCmp('dynamsgridpanel').getView().bindStore(dynamsStore); 
        
     },
       

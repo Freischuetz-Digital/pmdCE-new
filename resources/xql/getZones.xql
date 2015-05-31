@@ -1,6 +1,6 @@
-xquery version "3.0";
+    xquery version "3.0";
 
-import module namespace freidi-pmd="http://www.freischuetz-digital.de/proofMEIdata" at "../../../modules/app.xql";
+import module namespace freidi-pmd="http://www.freischuetz-digital.de/pmdCE-new" at "../../modules/app.xql";
 
 declare namespace request="http://exist-db.org/xquery/request";
 declare namespace mei="http://www.music-encoding.org/ns/mei";
@@ -62,4 +62,5 @@ let $json := local:getJson($doc,$types)
 
 return
     $json
+    
     

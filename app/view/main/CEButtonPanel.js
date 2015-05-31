@@ -114,22 +114,20 @@ return ceButton;
 },
 
 createHairpinButton: function(buttonId, elementName){
-
-    Ext.getCmp('cemain').setComponentType(elementName);  
    
-    var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 1);
+    var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 1, elementName);
     
-    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (1-2 regs)", 2);
+    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (1-2 regs)", 2, elementName);
     
-    var menuStaff2Reg  = this.createMenuItem("for Staff (1-2 regs)", 3);
+    var menuStaff2Reg  = this.createMenuItem("for Staff (1-2 regs)", 3, elementName);
     
-     var menuTime4Reg  = this.createMenuItem("for Time (2-4 regs)", 4);
+     var menuTime4Reg  = this.createMenuItem("for Time (2-4 regs)", 4, elementName);
      
-     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (3-4 regs)", 5);
+     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (3-4 regs)", 5, elementName);
      
-     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (3-4 regs)", 6);
+     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (3-4 regs)", 6, elementName);
      
-      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (4-6 regs)", 7);
+      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (4-6 regs)", 7, elementName);
     
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
@@ -166,12 +164,13 @@ return ceButton;
 },
 
 
-createMenuItem: function(itemText, type){
+createMenuItem: function(itemText, type, elementName){
      var item = Ext.create('Ext.menu.Item', {
                                 text: itemText,
                                 icon: 'resources/images/mix_volume.png',
                                 handler: function() {
                                 Ext.getCmp('cemain').setCard(type);  
+                                Ext.getCmp('cemain').setComponentType(elementName);  
                                 var win = new pmdCE.view.main.AddAmbiguousElDialog();          
                                     win.show();
                                 }                       

@@ -24,4 +24,5 @@ let $wh := 1
 let $imgSrc := concat($freidi-pmd:facsimileServerURI, '/digilib/Scaler/freidi/',$path,'?dw=',$dw,'&amp;amp;wx=',$wx,'&amp;amp;wy=',$wy,'&amp;amp;ww=',$ww,'&amp;amp;wh=',$wh)
 
 return
-    $imgSrc
+(:    $imgSrc:)
+$freidi-pmd:ce-imageURI || substring-before(substring-after($surface/mei:graphic/@target, 'sources/'),'.jpg') || '/{z}-{x}-{y}.jpg'

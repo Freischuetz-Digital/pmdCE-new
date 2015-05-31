@@ -13,12 +13,25 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
 				this.update('No leaflet library loaded');
 			} else {
 				
-        var app = pmdCE.getApplication();
-         var store = app.getFacsimileStore();
-         console.log(store);
+       var app = pmdCE.getApplication();
+        
+       var store = app.getFacsimileStore();
+       
+       // var app = pmdCE.getApplication();
+       // var facsimileStore = app.getFacsimileStore();
+       // store.getProxy().extraParams.path = Ext.getCmp('pages').getText();
+      //  store.load();
+       
+        
+      /*  store.getProxy().extraParams.path = Ext.getCmp('pages').getText();
+        store.load();*/
          
-         facsimileHeight = store.data.items[0].data.page[0].height;
-        facsimileWidth = store.data.items[0].data.page[0].width;
+         facsimileHeight = 
+         //4315;
+         store.data.items[0].data.page[0].height;
+        facsimileWidth = 
+        //3525;
+        store.data.items[0].data.page[0].width;
         var originalMaxSize = null;
         
         if(facsimileHeight > facsimileWidth){
@@ -47,6 +60,13 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
                 maxZoom: maxZoomLevel,
 		        continuousWorld : true
             }); 
+           
+           
+          /* L.tileLayer.facsimileLayer('http://localhost:8080/exist/apps/controlevents-data/D1849/D1849_p106/{z}-{x}-{y}.jpg', {
+                minZoom: 0,
+                maxZoom: maxZoomLevel,
+		        continuousWorld : true
+            });*/ 
               
            facsimileTile.addTo(map);
            
@@ -86,16 +106,16 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
 			
 			}
 		},
-
+    
 		onResize: function(w, h, oW, oH){
 		this.callParent(arguments);
 		var map = this.getMap();
 		if (map){
 			map.invalidateSize();
 		}
-	}
+	},
 	
-	/*listeners: {
+	listeners: {
         click : {
             fn: function() {
             
@@ -104,13 +124,13 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
                 console.log(store);
                 console.log(document);
          
-        // facsimileHeight = store.data.items[0].data.page[0].height;
-        //facsimileWidth = store.data.items[0].data.page[0].width;
+         facsimileHeight = store.data.items[0].data.page.height;
+        facsimileWidth = store.data.items[0].data.page.width;
        
             },
              element: 'el'
          
         }    
-    }*/
+    }
 	
 	});
