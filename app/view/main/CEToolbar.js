@@ -172,7 +172,7 @@ for(var i = 0; i < modRecords.length ; i++){
 
 //var objects1 = '<div><div><div id="hair_c9096393-a14a-4050-a4b9-454e330afELE" operation="create" sourcepath="A_surface105" measureid="A_mov6_measure73"><hairpin place="above" staff="5" startid="#A_mov6_measure73" endid="#A_mov6_measure73_s5l1_e8" sameas="" xml:id="hair_c9096393-a14a-4050-a4b9-454e330afELE" xmlns="http://www.music-encoding.org/ns/mei"></hairpin></div></div></div>';
 
-   $.ajax({
+  $.ajax({
             url:'resources/xql/saveMEI.xql',
             type:"POST",
             data: $(objects).html(),
@@ -184,10 +184,18 @@ for(var i = 0; i < modRecords.length ; i++){
                // console.log(result.result); 
                 var stringXML = (new XMLSerializer()).serializeToString(result);
                 console.log(stringXML);
-                alert('save success: '+ stringXML);
-                saveButton.setDisabled(true);
+                
+                Ext.getCmp('cemain').setAfterSaveText(stringXML);
+                 var win = new pmdCE.view.main.AfterSaveDialog();               
+                 win.show();
+                
+               // alert('save success: '+ stringXML);
+               // saveButton.setDisabled(true);
+                //store.reload();
+                
             }
         });
+       
     },
     
      createComponent: function(btn){      
@@ -338,9 +346,9 @@ for(var i = 0; i < modRecords.length ; i++){
        
         facsimileView = new pmdCE.view.main.FacsimileView();
         Ext.getCmp('cepanel').add(facsimileView);
-         var facsimileStore = app.getFacsimileStore();
+        /* var facsimileStore = app.getFacsimileStore();
         facsimileStore.getProxy().extraParams.path = item.text;
-        facsimileStore.load();
+        facsimileStore.load();*/
         
       /*  Ext.getCmp('facsimileview').setBind({
      store: facsimileStore
@@ -381,11 +389,11 @@ for(var i = 0; i < modRecords.length ; i++){
              id: 'dynamsxmlview'
          });  
         Ext.getCmp('dynamsitem').add(dynamsXmlView);
-       var dynamsStore = app.getDynamDataStore();
+      /* var dynamsStore = app.getDynamDataStore();
          dynamsStore.getProxy().extraParams.path = item.text;
          dynamsStore.load();
          Ext.getCmp('dynamsgridpanel').getView().bindStore(dynamsStore); 
-       
+       */
     },
       
     homeOnItemToggle: function(){

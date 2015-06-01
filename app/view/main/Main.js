@@ -39,6 +39,7 @@ Ext.define('pmdCE.view.main.Main', {
     verEndId: null,
     card: null,
     elementName: null,
+    afterSaveText: null,
    
     initComponent: function() {
    
@@ -116,7 +117,17 @@ this.callParent()
     
      getComponentType:function(){        
         return this.elementName;
+    },
+    
+    setAfterSaveText: function(afterSaveText){        
+        this.afterSaveText = afterSaveText;
+    },
+    
+     getAfterSaveText:function(){        
+        return this.afterSaveText;
     }
+    
+    
 
     
     
