@@ -180,19 +180,12 @@ for(var i = 0; i < modRecords.length ; i++){
             dataType:"xml",
             success: function(result){
                 console.log(result);
-               // console.log(result.getAttribute('result')); 
-               // console.log(result.result); 
                 var stringXML = (new XMLSerializer()).serializeToString(result);
                 console.log(stringXML);
                 
                 Ext.getCmp('cemain').setAfterSaveText(stringXML);
                  var win = new pmdCE.view.main.AfterSaveDialog();               
                  win.show();
-                
-               // alert('save success: '+ stringXML);
-               // saveButton.setDisabled(true);
-                //store.reload();
-                
             }
         });
        
@@ -346,9 +339,9 @@ for(var i = 0; i < modRecords.length ; i++){
        
         facsimileView = new pmdCE.view.main.FacsimileView();
         Ext.getCmp('cepanel').add(facsimileView);
-        /* var facsimileStore = app.getFacsimileStore();
+         var facsimileStore = app.getFacsimileStore();
         facsimileStore.getProxy().extraParams.path = item.text;
-        facsimileStore.load();*/
+        facsimileStore.load();
         
       /*  Ext.getCmp('facsimileview').setBind({
      store: facsimileStore
@@ -389,11 +382,11 @@ for(var i = 0; i < modRecords.length ; i++){
              id: 'dynamsxmlview'
          });  
         Ext.getCmp('dynamsitem').add(dynamsXmlView);
-      /* var dynamsStore = app.getDynamDataStore();
+       var dynamsStore = app.getDynamDataStore();
          dynamsStore.getProxy().extraParams.path = item.text;
          dynamsStore.load();
          Ext.getCmp('dynamsgridpanel').getView().bindStore(dynamsStore); 
-       */
+       
     },
       
     homeOnItemToggle: function(){

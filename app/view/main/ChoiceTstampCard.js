@@ -117,7 +117,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
           rendReg1.setDisabled(true);
     }
     formFieldReg1.setDisabled(true);
-    formField.validate();
+    formFieldReg1.validate();
     tstamp2FieldReg1.setDisabled(true);
     
     // reg2 fields
@@ -191,75 +191,78 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                 {
                     xtype: 'fieldset',
                     title: 'Orig',
-                    id: 'orig',
+                   // id: 'orig',
                     defaultType: 'textfield',
                     margin: '0 10 0 0',
                     
-                    items : typeof rend !== 'undefined' ? [
-                        staffFieldCopy,
+                    items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
+                    staffFieldCopy,
                         placeField,
                         formField,
                         tstampFieldOrig,
-                        tstamp2FieldOrig,
-                       rend                      
+                        tstamp2FieldOrig
+                               
                     ] : [
                         staffFieldCopy,
                         placeField,
                         formField,
                         tstampFieldOrig,
-                        tstamp2FieldOrig
+                        tstamp2FieldOrig,
+                       rend               
                     ]
                  },
                  {
                     xtype: 'fieldset',
                     title: 'Reg',
-                    id: 'starttime',
+                   // id: 'starttime',
                     defaultType: 'textfield',
                      margin: '0 10 0 0',
                     defaults: {
                         anchor: '100%'
                      },
                      
-                     items : typeof rendReg1 !== 'undefined' ? [
-                        staffFieldReg1,
-                        placeFieldReg1,
-                        formFieldReg1,
-                        tstampFieldReg1,
-                         tstamp2FieldReg1,
-                       rendReg1                      
-                    ] : [
+                     items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldReg1,
                         placeFieldReg1,
                         formFieldReg1,
                         tstampFieldReg1,
                          tstamp2FieldReg1
+                                   
+                    ] : [
+                         staffFieldReg1,
+                        placeFieldReg1,
+                        formFieldReg1,
+                        tstampFieldReg1,
+                         tstamp2FieldReg1,
+                       rendReg1 
                     ]
                  },
                  {
                     xtype: 'fieldset',
                     title: 'Reg',
-                    id: 'endtime',
+                  //  id: 'endtime',
                     defaultType: 'textfield',
                      margin: '0 10 0 0',
                     defaults: {
                         anchor: '100%'
                     },
         
-                items : typeof rendReg2 !== 'undefined' ? [
-                        checkBoxReg2,
+                items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
+                                  checkBoxReg2,
+                        staffFieldReg2,
+                        placeFieldReg2,
+                        formFieldReg2,
+                        tstampFieldReg2,
+                        tstamp2FieldReg2         
+                    ] : [
+                    checkBoxReg2,
                         staffFieldReg2,
                         placeFieldReg2,
                         formFieldReg2,
                         tstampFieldReg2,
                         tstamp2FieldReg2,
-                       rendReg2                      
-                    ] : [
-                        checkBoxReg2,
-                        staffFieldReg2,
-                        placeFieldReg2,
-                        formFieldReg2,
-                        tstampFieldReg2,
-                        tstamp2FieldReg2
+                       rendReg2   
+                        
                     ]
                  }
                 

@@ -189,19 +189,19 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                     id: 'orig',
                     defaultType: 'textfield',
                     margin: '0 10 0 0',
-                     items : typeof rend !== 'undefined' ? [
+                     items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldCopy,
                         placeField,
                         formField,
                         tstampFieldOrig,
-                        tstamp2FieldOrig,
-                       rend                      
+                        tstamp2FieldOrig        
                     ] : [
                         staffFieldCopy,
                         placeField,
                         formField,
                         tstampFieldOrig,
-                        tstamp2FieldOrig
+                        tstamp2FieldOrig,
+                       rend              
                     ]
                  },
                  {
@@ -213,19 +213,19 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                     defaults: {
                         anchor: '100%'
                      },
-                       items : typeof rendReg1 !== 'undefined' ? [
+                       items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldReg1,
                         placeFieldReg1,
                         formFieldReg1,
                         tstampFieldReg1,
-                         tstamp2FieldReg1,
-                       rendReg1                      
+                         tstamp2FieldReg1           
                     ] : [
                         staffFieldReg1,
                         placeFieldReg1,
                         formFieldReg1,
                         tstampFieldReg1,
-                         tstamp2FieldReg1
+                         tstamp2FieldReg1,
+                       rendReg1           
                     ]
                  },
                  {
@@ -237,21 +237,21 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                     defaults: {
                         anchor: '100%'
                     },
-                    items : typeof rendReg2 !== 'undefined' ? [
+                    items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         checkBoxReg2,
                         staffFieldReg2,
                         placeFieldReg2,
                         formFieldReg2,
                         tstampFieldReg2,
-                        tstamp2FieldReg2,
-                       rendReg2                      
+                        tstamp2FieldReg2            
                     ] : [
                         checkBoxReg2,
                         staffFieldReg2,
                         placeFieldReg2,
                         formFieldReg2,
                         tstampFieldReg2,
-                        tstamp2FieldReg2
+                        tstamp2FieldReg2,
+                       rendReg2          
                     ]
                  }
                 

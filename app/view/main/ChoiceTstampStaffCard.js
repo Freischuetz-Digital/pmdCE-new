@@ -30,7 +30,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
     placeField: null,
     formField: null,
     satffFieldBetween: null,
-   
+   rend: null,
     tstampFieldOrig: null,
     tstamp2FieldOrig: null,
  
@@ -40,6 +40,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
     tstampFieldReg1: null,
     tstamp2FieldReg1: null,
     satffFieldBetweenReg1: null,
+    rendReg1: null,
 
     staffFieldReg2: null,
     placeFieldReg2: null,
@@ -47,18 +48,21 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
     tstampFieldReg2: null,
     tstamp2FieldReg2: null,
     satffFieldBetweenReg2: null,
+    rendReg2: null,
     
     staffFieldReg3: null,
     placeFieldReg3: null,
     formFieldReg3: null,
     tstampFieldReg3: null,
     tstamp2FieldReg3: null,
+    rendReg4: null,
     
     staffFieldReg4: null,
     placeFieldReg4: null,
     formFieldReg4: null,
     tstampFieldReg4: null,
     tstamp2FieldReg4: null,
+    rendReg5: null,
    
    verovioImageStart: null,
    verovioImageEnd: null,
@@ -78,6 +82,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
          
          me = this;
          
+          // create orig fields
+         // common 
          staffField= this.createComboBoxStaff('Staff', "stafforig"); 
          staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
@@ -89,69 +95,125 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
         endTaktField= this.createComboBoxMeasureNr('End measure');
         endTaktField.validate();
         placeField = this.createComboBox('Place', 'placeorig');
-        placeField.validate();
-        formField = this.createComboBoxForm('Form');
-        formField.validate();
-        
+        placeField.validate();    
     tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp');
     tstampFieldOrig.validate();
-    tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
-    tstamp2FieldOrig.validate();
+    // hairpin
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formField = this.createComboBoxForm('Form'); 
+             tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
+             tstamp2FieldOrig.validate(); 
+         }
+         // dynams
+         else{
+             formField = this.createTextField('formOrig', 'Form'); 
+             tstamp2FieldOrig = this.createTextFieldTstamp2('tstamp2FieldOrig', 'Tstamp2');
+             rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
+         }
+         formField.validate();
 
+        // reg1 fields
+        // common
         staffFieldReg1= this.createTextField('staffFieldReg1', 'Staff');  
         staffFieldReg1.setDisabled(true);
         satffFieldBetweenReg1= this.createComboBoxStaff('Second staff', "beet1");
         satffFieldBetweenReg1.setDisabled(true);
         placeFieldReg1 = this.createComboBox('Place', 'placereg1');
         placeFieldReg1.setDisabled(true);
-        formFieldReg1 = this.createComboBoxForm('Form');
-        formFieldReg1.setDisabled(true);
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
         tstampFieldReg1.validate();
-        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
-        tstamp2FieldReg1.setDisabled(true);
-        tstamp2FieldReg1.validate();
+                    // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formFieldReg1 = this.createComboBoxForm('Form'); 
+              tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');      
+             tstamp2FieldReg1.validate(); 
+         }  
+    // dynams
+    else{
+        formFieldReg1 = this.createTextField('formReg1', 'Form'); 
+         tstamp2FieldReg1 = this.createTextFieldTstamp2('tstamp2FieldReg1', 'Tstamp2');
+          rendReg1 = this.createTextFieldTstamp2('rendReg1', 'Rend');
+          rendReg1.setDisabled(true);
+    }
+    formFieldReg1.setDisabled(true);
+    formFieldReg1.validate();
+     tstamp2FieldReg1.setDisabled(true);
 
+    // reg2 fields
+    // common
 staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
  staffFieldReg2.setDisabled(true);
  satffFieldBetweenReg2= this.createComboBoxStaff('Second staff', "beet2");
         satffFieldBetweenReg2.setDisabled(true);
         placeFieldReg2 = this.createComboBox('Place', 'placereg2');
         placeFieldReg2.setDisabled(true);
-        formFieldReg2 = this.createComboBoxForm('Form');
-        formFieldReg2.setDisabled(true);
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
 tstampFieldReg2.validate();
-tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
-tstamp2FieldReg2.setDisabled(true);
-tstamp2FieldReg2.validate();
+ // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        formFieldReg2 = this.createComboBoxForm('Form');
+        tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
+        tstamp2FieldReg2.validate();
+    }
+    // dynams
+    else{
+        formFieldReg2 = this.createTextField('formReg2', 'Form'); 
+        tstamp2FieldReg2 = this.createTextFieldTstamp2('tstamp2FieldReg2', 'Tstamp2');
+        rendReg2 = this.createTextFieldTstamp2('rendReg2', 'Rend');
+        rendReg2.setDisabled(true);
+    }
+    formFieldReg2.setDisabled(true);
+    tstamp2FieldReg2.setDisabled(true);
 
+// reg3 fields
+    // common
 staffFieldReg3= this.createComboBoxStaff('Staff', "reg3"); 
 staffFieldReg3.validate();
         placeFieldReg3 = this.createComboBox('Place', 'placereg3');
         placeFieldReg3.validate();
-        formFieldReg3 = this.createComboBoxForm('Form');
-        formFieldReg3.setDisabled(true);
         tstampFieldReg3 = this.createTextField('tstampFieldReg3', 'Tstamp');
         tstampFieldReg3.validate();
         tstampFieldReg3.setDisabled(true);
+          // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        formFieldReg3 = this.createComboBoxForm('Form');
         tstamp2FieldReg3 = this.createTextField('tstamp2FieldReg3', 'Tstamp2');
         tstamp2FieldReg3.validate();
-        tstamp2FieldReg3.setDisabled(true);
+    }
+    // dynams
+    else{
+        formFieldReg3 = this.createTextField('formReg3', 'Form'); 
+        tstamp2FieldReg3 = this.createTextFieldTstamp2('tstamp2FieldReg3', 'Tstamp2');
+        rendReg3 = this.createTextFieldTstamp2('rendReg3', 'Rend');
+        rendReg3.setDisabled(true);
+    }
+    formFieldReg3.setDisabled(true);
+    tstamp2FieldReg3.setDisabled(true);
         
-        
+        // reg4 fields
+        // common
         staffFieldReg4= this.createComboBoxStaff('Staff', "reg4");
          staffFieldReg4.validate();
         placeFieldReg4 = this.createComboBox('Place', 'placereg4');
          placeFieldReg4.validate();
-        formFieldReg4 = this.createComboBoxForm('Form');
-        formFieldReg4.setDisabled(true);
         tstampFieldReg4 = this.createTextField('tstampFieldReg4', 'Tstamp');
         tstampFieldReg4.setDisabled(true);
         tstampFieldReg4.validate();
+             // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        formFieldReg4 = this.createComboBoxForm('Form');
         tstamp2FieldReg4 = this.createTextField('tstamp2FieldReg4', 'Tstamp2');
-        tstamp2FieldReg4.setDisabled(true);
-         tstamp2FieldReg4.validate();
+        tstamp2FieldReg4.validate();
+    }
+    // dynams
+    else{
+        formFieldReg4 = this.createTextField('formReg4', 'Form'); 
+        tstamp2FieldReg4 = this.createTextFieldTstamp2('tstamp2FieldReg4', 'Tstamp2');
+        rendReg4 = this.createTextFieldTstamp2('rendReg4', 'Rend');
+        rendReg4.setDisabled(true);
+    }
+    formFieldReg4.setDisabled(true);
+    tstamp2FieldReg4.setDisabled(true);
         
         checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
         
@@ -199,14 +261,22 @@ staffFieldReg3.validate();
                     id: 'orig',
                     defaultType: 'textfield',
                     margin: '0 10 0 0',
-               
-                    items: [
+                    
+                     items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldCopy,
                         satffFieldBetween,
                         placeField,
                         formField,
                         tstampFieldOrig,
-                        tstamp2FieldOrig
+                        tstamp2FieldOrig  
+                    ] : [
+                        staffFieldCopy,
+                        satffFieldBetween,
+                        placeField,
+                        formField,
+                        tstampFieldOrig,
+                        tstamp2FieldOrig,
+                       rend               
                     ]
                  },
                  {
@@ -218,16 +288,24 @@ staffFieldReg3.validate();
                     defaults: {
                         anchor: '100%'
                      },
-        
-                    items: [
+                     
+                      items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldReg1,
                         satffFieldBetweenReg1,
                         placeFieldReg1,
                         formFieldReg1,
                         tstampFieldReg1,
-                         tstamp2FieldReg1
-               
+                         tstamp2FieldReg1  
+                    ] : [
+                        staffFieldReg1,
+                        satffFieldBetweenReg1,
+                        placeFieldReg1,
+                        formFieldReg1,
+                        tstampFieldReg1,
+                         tstamp2FieldReg1,
+                       rendReg1               
                     ]
+        
                  },
                  {
                     xtype: 'fieldset',
@@ -238,16 +316,26 @@ staffFieldReg3.validate();
                     defaults: {
                         anchor: '100%'
                     },
-        
-                    items: [  
-                    checkBoxReg2,
+                    
+                     items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
+                        checkBoxReg2,
                         staffFieldReg2,
                         satffFieldBetweenReg2,
                         placeFieldReg2,
                         formFieldReg2,
                         tstampFieldReg2,
                         tstamp2FieldReg2
+                    ] : [
+                        checkBoxReg2,
+                        staffFieldReg2,
+                        satffFieldBetweenReg2,
+                        placeFieldReg2,
+                        formFieldReg2,
+                        tstampFieldReg2,
+                        tstamp2FieldReg2,
+                       rendReg2               
                     ]
+        
                  }
                 
         ] // end card-1 items
@@ -277,13 +365,20 @@ staffFieldReg3.validate();
                     id: 'orig1',
                     defaultType: 'textfield',
                     margin: '0 10 0 0',
-               
-                    items: [
+                    
+                      items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldReg3,
                         placeFieldReg3,
                         formFieldReg3,
                         tstampFieldReg3,
                          tstamp2FieldReg3
+                    ] : [
+                        staffFieldReg3,
+                        placeFieldReg3,
+                        formFieldReg3,
+                        tstampFieldReg3,
+                         tstamp2FieldReg3,
+                       rendReg3               
                     ]
                  },
                  {
@@ -295,34 +390,22 @@ staffFieldReg3.validate();
                     defaults: {
                         anchor: '100%'
                      },
-        
-                    items: [
+                     
+                      items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldReg4,
                         placeFieldReg4,
                         formFieldReg4,
                         tstampFieldReg4,
                          tstamp2FieldReg4
-               
+                    ] : [
+                        staffFieldReg4,
+                        placeFieldReg4,
+                        formFieldReg4,
+                        tstampFieldReg4,
+                         tstamp2FieldReg4,
+                       rendReg4               
                     ]
                  }
-                 /*{
-                    xtype: 'fieldset',
-                    title: 'Reg',
-                    id: 'endtime1',
-                    defaultType: 'textfield',
-                     margin: '0 10 0 0',
-                    defaults: {
-                        anchor: '100%'
-                    },
-        
-                    items: [            
-                        staffFieldReg2,
-                        placeFieldReg2,
-                        formFieldReg2,
-                        tstampFieldReg2,
-                        tstamp2FieldReg2
-                    ]
-                 }*/
                 
         ] // end card-1 items
            },
@@ -416,9 +499,23 @@ staffFieldReg3.validate();
     },
        
     createElement: function () {
-    var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
+    
+     var modelPath = null;
+    var prefix = null;
+     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+    modelPath = 'pmdCE.model.Hairpin';
+    prefix = 'hairpin_';
+        
+    }
+    else{
+        modelPath = 'pmdCE.model.Dynam';
+         prefix = 'dynam_';
+    }
+    
+    
+    var hairId = prefix + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
 
-	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
+	        var hairpin = Ext.create(modelPath, {
 	               id: hairId,
 	               name: 'choice_m'+startTaktField.getValue(),
                     icon: 'resources/images/details-xml.png',
@@ -436,6 +533,7 @@ staffFieldReg3.validate();
                     tstamp2: tstamp2FieldOrig.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rend!== 'undefined' ? rend.getValue() : null,
                     name: "orig",
                     tag: "orig",
                     leaf: true
@@ -448,6 +546,7 @@ staffFieldReg3.validate();
                     tstamp2: tstamp2FieldReg1.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg1!== 'undefined' ? rendReg1.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -459,6 +558,7 @@ staffFieldReg3.validate();
                     tstamp2: tstamp2FieldReg3.getValue(),
                     place: placeFieldReg3.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg3!== 'undefined' ? rendReg3.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -470,6 +570,7 @@ staffFieldReg3.validate();
                     tstamp2: tstamp2FieldReg4.getValue(),
                     place: placeFieldReg4.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg4!== 'undefined' ? rendReg4.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -479,9 +580,16 @@ staffFieldReg3.validate();
                 
 	    });
 	    
-	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-	    var parent = root.appendChild(hairpin);
+	    var root = null;
+	    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+	        root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    
+	    }
+	    else{
+	        root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+	    }
+	    var parent = root.appendChild(hairpin);
+	   
 	     if(!tstampFieldReg2.isDisabled()){
 	    hairpin.appendChild({
 	    icon: 'resources/images/mix_volume.png',
@@ -491,6 +599,7 @@ staffFieldReg3.validate();
                     tstamp2: tstamp2FieldReg2.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg2!== 'undefined' ? rendReg2.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -570,6 +679,12 @@ staffFieldReg3.validate();
                tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
                
            }
+            if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
+             formFieldReg1.setValue(formField.getValue());
+                formFieldReg2.setValue(formField.getValue());
+                formFieldReg3.setValue(formField.getValue());
+                formFieldReg4.setValue(formField.getValue());
+           }
            me1.handleCreateButton();
         },
         render: function(c) {
@@ -586,11 +701,76 @@ staffFieldReg3.validate();
                tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
                
            }
+            if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
+             formFieldReg1.setValue(formField.getValue());
+                formFieldReg2.setValue(formField.getValue());
+                formFieldReg3.setValue(formField.getValue());
+                formFieldReg4.setValue(formField.getValue());
+           }
            me1.handleCreateButton();
             }, c);
         }
         }
      
+   });
+
+return ceTextField;
+},
+
+createTextFieldTstamp2: function(fieldName, fieldLabel){
+        var me1 = this;
+    var ceTextField = Ext.create('Ext.form.field.Text',{
+        name: fieldName,
+        id: fieldName,
+        fieldLabel: fieldLabel,
+        listeners: {
+        focus: function(e, eOpts ){
+           me.selectedFieldId = fieldName;
+             if(me.selectedFieldId === 'tstampFieldOrig' && !expertCheckBox.getValue()){
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+           }
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){              
+                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
+               
+           }
+           if(me.selectedFieldId === 'rendOrig' && !expertCheckBox.getValue()){
+               rendReg1.setValue(rend.getValue());
+               rendReg2.setValue(rend.getValue());
+               rendReg3.setValue(rend.getValue());
+               rendReg4.setValue(rend.getValue());
+           }
+           
+           me1.handleCreateButton();
+        },
+         render: function(c) {
+            c.getEl().on('keyup', function() {   
+           me.selectedFieldId = fieldName;
+             if(me.selectedFieldId === 'tstampFieldOrig' && !expertCheckBox.getValue()){
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+           }
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){              
+                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
+               
+           }
+           if(me.selectedFieldId === 'rendOrig' && !expertCheckBox.getValue()){
+               rendReg1.setValue(rend.getValue());
+               rendReg2.setValue(rend.getValue());
+               rendReg3.setValue(rend.getValue());
+               rendReg4.setValue(rend.getValue());
+           }
+          
+           me1.handleCreateButton();
+            }, c);
+        }
+        }
    });
 
 return ceTextField;

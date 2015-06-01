@@ -95,8 +95,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-              //  url: 'data/pmd_ce_getNavigation.xql',
-                 url: 'resources/xql/pmd_ce_getNavigation.xql',
+                url: 'data/pmd_ce_getNavigation.xql',
+            //     url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sigle'
@@ -111,15 +111,15 @@ Ext.define('pmdCE.Application', {
     extraParams: {path: ''},
              proxy:{
         type: 'ajax',
-      url: 'resources/xql/getControlEvents.xql'
+     // url: 'resources/xql/getControlEvents.xql'
        
-     //  url: 'resources/data/tree/treegrid_1.json'
+       url: 'resources/data/tree/treegrid_1.json'
       
     },
     autoLoad: false
 });
 
- /*dynamDataStore = Ext.create('Ext.data.TreeStore', {
+ dynamDataStore = Ext.create('Ext.data.TreeStore', {
     model: 'pmdCE.model.Dynam',
   
     extraParams: {path: ''},
@@ -131,23 +131,23 @@ Ext.define('pmdCE.Application', {
       
     },
     autoLoad: false
-});*/
+});
 
 
-/*facsimileStore= Ext.create('Ext.data.Store', {
+facsimileStore= Ext.create('Ext.data.Store', {
             model: 'pmdCE.model.Source',
             extraParams: {path: ''},
              proxy: {
                  type: 'ajax',
                  url: 'data/getZones.xql'
                // url: 'resources/xql/getZones.xql',
-               /\* reader: {
-                     type: 'json',
-                     rootProperty: 'sigle'
-                 }*\/
+//                reader: {
+//                     type: 'json',
+//                     rootProperty: 'sigle'
+//                 }
              },
              autoLoad: true
-         });*/
+         });
   
        
          sourcesStore.load(); 
@@ -158,9 +158,9 @@ Ext.define('pmdCE.Application', {
     return sourcesStore;
     },
     
-    /*getFacsimileStore: function(){
+    getFacsimileStore: function(){
     return facsimileStore;
-    },*/
+    },
     
     getSaveStore: function(){
     return saveStore;
@@ -180,11 +180,11 @@ Ext.define('pmdCE.Application', {
     
     getHairpinDataStore: function(){
     return hairpinDataStore;
-    }
+    },
     
-   /* getDynamDataStore: function(){
+    getDynamDataStore: function(){
     return dynamDataStore;
     }
-   */
+   
 
 });

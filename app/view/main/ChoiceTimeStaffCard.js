@@ -30,7 +30,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
     placeField: null,
     formField: null,
     satffFieldBetween: null,
-   
+   rend: null,
     tstampFieldOrig: null,
     tstamp2FieldOrig: null,
  
@@ -40,6 +40,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
     tstampFieldReg1: null,
     tstamp2FieldReg1: null,
     satffFieldBetweenReg1: null,
+    rendReg1: null,
 
     staffFieldReg2: null,
     placeFieldReg2: null,
@@ -47,6 +48,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
     tstampFieldReg2: null,
     tstamp2FieldReg2: null,
     satffFieldBetweenReg2: null,
+    rendReg2: null,
     
     staffFieldReg3: null,
     placeFieldReg3: null,
@@ -54,6 +56,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
     tstampFieldReg3: null,
     tstamp2FieldReg3: null,
     satffFieldBetweenReg3: null,
+    rendReg3: null,
     
     staffFieldReg4: null,
     placeFieldReg4: null,
@@ -61,18 +64,21 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
     tstampFieldReg4: null,
     tstamp2FieldReg4: null,
     satffFieldBetweenReg4: null,
+    rendReg4: null,
     
     staffFieldReg5: null,
     placeFieldReg5: null,
     formFieldReg5: null,
     tstampFieldReg5: null,
     tstamp2FieldReg5: null,
+    rendReg5: null,
     
     staffFieldReg6: null,
     placeFieldReg6: null,
     formFieldReg6: null,
     tstampFieldReg6: null,
     tstamp2FieldReg6: null,
+    rendReg6: null,
    
    verovioImageStart: null,
    verovioImageEnd: null,
@@ -94,6 +100,8 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
          
          me = this;
          
+         // create orig fields
+         // common 
          staffField= this.createComboBoxStaff('Staff', "stafforig"); 
          staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
@@ -105,97 +113,177 @@ Ext.define('pmdCE.view.main.ChoiceTimeStaffCard', {
         endTaktField= this.createComboBoxMeasureNr('End measure');
         endTaktField.validate();
         placeField = this.createComboBox('Place', 'placeorig');
-        placeField.validate();
-        formField = this.createComboBoxForm('Form');
-        formField.validate();
-        
+        placeField.validate();      
     tstampFieldOrig = this.createTextField('tstampFieldOrig', 'Tstamp');
     tstampFieldOrig.validate();
-    tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
-    tstamp2FieldOrig.validate();
+     // hairpin
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formField = this.createComboBoxForm('Form'); 
+             tstamp2FieldOrig = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
+             tstamp2FieldOrig.validate(); 
+         }
+         // dynams
+         else{
+             formField = this.createTextField('formOrig', 'Form'); 
+             tstamp2FieldOrig = this.createTextFieldTstamp2('tstamp2FieldOrig', 'Tstamp2');
+             rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
+         }
+         formField.validate();
 
+        // reg1 fields
+        // common
         staffFieldReg1= this.createTextField('staffFieldReg1', 'Staff');  
         staffFieldReg1.setDisabled(true);
         satffFieldBetweenReg1= this.createComboBoxStaff('Second staff', "beet1");
         satffFieldBetweenReg1.setDisabled(true);
         placeFieldReg1 = this.createComboBox('Place', 'placereg1');
         placeFieldReg1.setDisabled(true);
-        formFieldReg1 = this.createComboBoxForm('Form');
-        formFieldReg1.setDisabled(true);
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp'); 
         tstampFieldReg1.validate();
-        tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');
-        tstamp2FieldReg1.setDisabled(true);
-        tstamp2FieldReg1.validate();
+                // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formFieldReg1 = this.createComboBoxForm('Form'); 
+              tstamp2FieldReg1 = this.createTextField('tstamp2FieldReg1', 'Tstamp2');      
+             tstamp2FieldReg1.validate(); 
+         }  
+    // dynams
+    else{
+        formFieldReg1 = this.createTextField('formReg1', 'Form'); 
+         tstamp2FieldReg1 = this.createTextFieldTstamp2('tstamp2FieldReg1', 'Tstamp2');
+          rendReg1 = this.createTextFieldTstamp2('rendReg1', 'Rend');
+          rendReg1.setDisabled(true);
+    }
+    formFieldReg1.setDisabled(true);
+    formFieldReg1.validate();
+    tstamp2FieldReg1.setDisabled(true);
 
+// reg2 fields
+    // common
 staffFieldReg2= this.createTextField('staffFieldReg2', 'Staff');  
  staffFieldReg2.setDisabled(true);
  satffFieldBetweenReg2= this.createComboBoxStaff('Second staff', "beet2");
         satffFieldBetweenReg2.setDisabled(true);
         placeFieldReg2 = this.createComboBox('Place', 'placereg2');
         placeFieldReg2.setDisabled(true);
-        formFieldReg2 = this.createComboBoxForm('Form');
-        formFieldReg2.setDisabled(true);
 tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
 tstampFieldReg2.validate();
-tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
-tstamp2FieldReg2.setDisabled(true);
-tstamp2FieldReg2.validate();
-
-
+ // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        formFieldReg2 = this.createComboBoxForm('Form');
+        tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
+        tstamp2FieldReg2.validate();
+    }
+    // dynams
+    else{
+        formFieldReg2 = this.createTextField('formReg2', 'Form'); 
+        tstamp2FieldReg2 = this.createTextFieldTstamp2('tstamp2FieldReg2', 'Tstamp2');
+        rendReg2 = this.createTextFieldTstamp2('rendReg2', 'Rend');
+        rendReg2.setDisabled(true);
+    }
+    formFieldReg2.setDisabled(true);
+    tstamp2FieldReg2.setDisabled(true);
+    
+     // reg3 fields
+    // common
 staffFieldReg3= this.createTextField('staffFieldReg3', 'Staff');  
 staffFieldReg3.setDisabled(true);
 satffFieldBetweenReg3= this.createComboBoxStaff('Second staff', "sreg3");
         satffFieldBetweenReg3.setDisabled(true);
         placeFieldReg3 = this.createComboBox('Place', 'placereg3');
         placeFieldReg3.setDisabled(true);
-        formFieldReg3 = this.createComboBoxForm('Form');
-        formFieldReg3.setDisabled(true);
         tstampFieldReg3 = this.createTextField('tstampFieldReg3', 'Tstamp');
         tstampFieldReg3.setDisabled(true);
         tstampFieldReg3.validate();
+         // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        formFieldReg3 = this.createComboBoxForm('Form');
         tstamp2FieldReg3 = this.createTextField('tstamp2FieldReg3', 'Tstamp2');
         tstamp2FieldReg3.validate();
-        
+    }
+    // dynams
+    else{
+        formFieldReg3 = this.createTextField('formReg3', 'Form'); 
+        tstamp2FieldReg3 = this.createTextFieldTstamp2('tstamp2FieldReg3', 'Tstamp2');
+        rendReg3 = this.createTextFieldTstamp2('rendReg3', 'Rend');
+        rendReg3.setDisabled(true);
+    }
+    formFieldReg3.setDisabled(true);
+    
+        // reg4 fields
+        // common 
         staffFieldReg4= this.createTextField('staffFieldReg4', 'Staff'); 
         staffFieldReg4.setDisabled(true);
         satffFieldBetweenReg4= this.createComboBoxStaff('Second staff', "sreg4");
         satffFieldBetweenReg4.setDisabled(true);
         placeFieldReg4 = this.createComboBox('Place', 'placereg4');
         placeFieldReg4.setDisabled(true);
-        formFieldReg4 = this.createComboBoxForm('Form');
-        formFieldReg4.setDisabled(true);
         tstampFieldReg4 = this.createTextField('tstampFieldReg4', 'Tstamp');
         tstampFieldReg4.setDisabled(true);
         tstampFieldReg4.validate();
+                   // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        formFieldReg4 = this.createComboBoxForm('Form');
         tstamp2FieldReg4 = this.createTextField('tstamp2FieldReg4', 'Tstamp2');
         tstamp2FieldReg4.validate();
-                
+    }
+    // dynams
+    else{
+        formFieldReg4 = this.createTextField('formReg4', 'Form'); 
+        tstamp2FieldReg4 = this.createTextFieldTstamp2('tstamp2FieldReg4', 'Tstamp2');
+        rendReg4 = this.createTextFieldTstamp2('rendReg4', 'Rend');
+        rendReg4.setDisabled(true);
+    }
+    formFieldReg4.setDisabled(true);
+   
+            // reg5 fields
+        // common      
         staffFieldReg5= this.createComboBoxStaff('Staff', "sreg5");
         staffFieldReg5.validate();
         placeFieldReg5 = this.createComboBox('Place', 'placereg5');
         placeFieldReg5.validate();
-        formFieldReg5 = this.createComboBoxForm('Form');
-        formFieldReg5.setDisabled(true);
         tstampFieldReg5 = this.createTextField('tstampFieldReg5', 'Tstamp');
         tstampFieldReg5.setDisabled(true);
         tstampFieldReg5.validate();
+           // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        formFieldReg5 = this.createComboBoxForm('Form');
         tstamp2FieldReg5 = this.createTextField('tstamp2FieldReg5', 'Tstamp2');
-        tstamp2FieldReg5.setDisabled(true);
-         tstamp2FieldReg5.validate();
+        tstamp2FieldReg5.validate();
+    }
+    // dynams
+    else{
+        formFieldReg5 = this.createTextField('formReg5', 'Form'); 
+        tstamp2FieldReg5 = this.createTextFieldTstamp2('tstamp2FieldReg5', 'Tstamp2');
+        rendReg5 = this.createTextFieldTstamp2('rendReg5', 'Rend');
+        rendReg5.setDisabled(true);
+    }
+    formFieldReg5.setDisabled(true);
+    tstamp2FieldReg5.setDisabled(true);
         
+          // reg6 fields
+        // common  
         staffFieldReg6= this.createComboBoxStaff('Staff', "sreg6");
         staffFieldReg6.validate();
         placeFieldReg6 = this.createComboBox('Place', 'placereg6');
         placeFieldReg6.validate();
-        formFieldReg6 = this.createComboBoxForm('Form');
-        formFieldReg6.setDisabled(true);
         tstampFieldReg6 = this.createTextField('tstampFieldReg6', 'Tstamp');
         tstampFieldReg6.setDisabled(true);
         tstampFieldReg6.validate();
+         // hairpin
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        formFieldReg6 = this.createComboBoxForm('Form');
         tstamp2FieldReg6 = this.createTextField('tstamp2FieldReg6', 'Tstamp2');
-        tstamp2FieldReg6.setDisabled(true);
         tstamp2FieldReg6.validate();
+    }
+    // dynams
+    else{
+        formFieldReg6 = this.createTextField('formReg6', 'Form'); 
+        tstamp2FieldReg6 = this.createTextFieldTstamp2('tstamp2FieldReg6', 'Tstamp2');
+        rendReg6 = this.createTextFieldTstamp2('rendReg6', 'Rend');
+        rendReg6.setDisabled(true);
+    }
+    formFieldReg6.setDisabled(true);
+    tstamp2FieldReg6.setDisabled(true);
 
 checkBoxReg2  = this.createCheckBox('Disable reg', 'checkBoxReg2');
 checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
@@ -245,15 +333,24 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     id: 'orig',
                     defaultType: 'textfield',
                     margin: '0 10 0 0',
-               
-                    items: [
+                    
+                     items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldCopy,
                         satffFieldBetween,
                         placeField,
                         formField,
                         tstampFieldOrig,
-                        tstamp2FieldOrig
+                        tstamp2FieldOrig      
+                    ] : [
+                        staffFieldCopy,
+                        satffFieldBetween,
+                        placeField,
+                        formField,
+                        tstampFieldOrig,
+                        tstamp2FieldOrig,
+                       rend               
                     ]
+              
                  },
                 {
                     xtype: 'fieldset',
@@ -261,15 +358,24 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     id: 'reg1',
                     defaultType: 'textfield',
                     margin: '0 10 0 0',
-               
-                    items: [
+                    
+                     items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldReg1,
                         satffFieldBetweenReg1,
                         placeFieldReg1,
                         formFieldReg1,
                         tstampFieldReg1,
-                         tstamp2FieldReg1
+                         tstamp2FieldReg1          
+                    ] : [
+                        staffFieldReg1,
+                        satffFieldBetweenReg1,
+                        placeFieldReg1,
+                        formFieldReg1,
+                        tstampFieldReg1,
+                         tstamp2FieldReg1,
+                       rendReg1           
                     ]
+               
                  },
                  {
                     xtype: 'fieldset',
@@ -280,17 +386,26 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     defaults: {
                         anchor: '100%'
                      },
-        
-                    items: [
-                    checkBoxReg2,
+                     
+                     items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
+                        checkBoxReg2,
                         staffFieldReg2,
                         satffFieldBetweenReg2,
                         placeFieldReg2,
                         formFieldReg2,
                         tstampFieldReg2,
-                        tstamp2FieldReg2
-               
+                        tstamp2FieldReg2       
+                    ] : [
+                        checkBoxReg2,
+                        staffFieldReg2,
+                        satffFieldBetweenReg2,
+                        placeFieldReg2,
+                        formFieldReg2,
+                        tstampFieldReg2,
+                        tstamp2FieldReg2,
+                       rendReg2           
                     ]
+        
                  },
                  {
                     xtype: 'fieldset',
@@ -301,15 +416,24 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     defaults: {
                         anchor: '100%'
                     },
-        
-                    items: [            
+                    
+                    items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldReg3,
                         satffFieldBetweenReg3,
                         placeFieldReg3,
                         formFieldReg3,
                         tstampFieldReg3,
-                         tstamp2FieldReg3
+                         tstamp2FieldReg3  
+                    ] : [
+                        staffFieldReg3,
+                        satffFieldBetweenReg3,
+                        placeFieldReg3,
+                        formFieldReg3,
+                        tstampFieldReg3,
+                         tstamp2FieldReg3,
+                       rendReg3           
                     ]
+        
                  }
                 
         ] // end card-1 items
@@ -339,16 +463,26 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     id: 'reg4',
                     defaultType: 'textfield',
                     margin: '0 10 0 0',
-               
-                    items: [
-                    checkBoxReg4,
+                    
+                    items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
+                        checkBoxReg4,
                         staffFieldReg4,
                         satffFieldBetweenReg4,
                         placeFieldReg4,
                         formFieldReg4,
                         tstampFieldReg4,
-                         tstamp2FieldReg4
+                         tstamp2FieldReg4 
+                    ] : [
+                        checkBoxReg4,
+                        staffFieldReg4,
+                        satffFieldBetweenReg4,
+                        placeFieldReg4,
+                        formFieldReg4,
+                        tstampFieldReg4,
+                         tstamp2FieldReg4,
+                       rendReg4          
                     ]
+               
                  },
                  {
                     xtype: 'fieldset',
@@ -359,15 +493,22 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     defaults: {
                         anchor: '100%'
                      },
-        
-                    items: [
+                     
+                     items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldReg5,
                         placeFieldReg5,
                         formFieldReg5,
                         tstampFieldReg5,
                         tstamp2FieldReg5
-               
+                    ] : [
+                        staffFieldReg5,
+                        placeFieldReg5,
+                        formFieldReg5,
+                        tstampFieldReg5,
+                        tstamp2FieldReg5,
+                       rendReg5          
                     ]
+        
                  },
                  {
                     xtype: 'fieldset',
@@ -378,14 +519,22 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     defaults: {
                         anchor: '100%'
                     },
-        
-                    items: [            
+                    
+                    items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
                         staffFieldReg6,
                         placeFieldReg6,
                         formFieldReg6,
                         tstampFieldReg6,
                         tstamp2FieldReg6
+                    ] : [
+                        staffFieldReg6,
+                        placeFieldReg6,
+                        formFieldReg6,
+                        tstampFieldReg6,
+                        tstamp2FieldReg6,
+                       rendReg6         
                     ]
+        
                  }
                 
         ] // end card-1 items
@@ -483,9 +632,22 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
     },
        
     createElement: function () {
-    var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
+    
+    var modelPath = null;
+    var prefix = null;
+     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+    modelPath = 'pmdCE.model.Hairpin';
+    prefix = 'hairpin_';
+        
+    }
+    else{
+        modelPath = 'pmdCE.model.Dynam';
+         prefix = 'dynam_';
+    }
+    
+    var hairId = prefix + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
 
-	        var hairpin = Ext.create('pmdCE.model.Hairpin', {
+	        var hairpin = Ext.create(modelPath, {
 	               id: hairId,
 	               name: 'choice_m'+startTaktField.getValue(),
                     icon: 'resources/images/details-xml.png',
@@ -503,6 +665,7 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     tstamp2: tstamp2FieldOrig.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rend!== 'undefined' ? rend.getValue() : null,
                     name: "orig",
                     tag: "orig",
                     leaf: true
@@ -515,6 +678,7 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     tstamp2: tstamp2FieldReg1.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg1!== 'undefined' ? rendReg1.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -527,6 +691,7 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     tstamp2: tstamp2FieldReg3.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg3!== 'undefined' ? rendReg3.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -538,6 +703,7 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     tstamp2: tstamp2FieldReg5.getValue(),
                     place: placeFieldReg5.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg5!== 'undefined' ? rendReg5.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -548,6 +714,7 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     tstamp2: tstamp2FieldReg6.getValue(),
                     place: placeFieldReg6.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg6!== 'undefined' ? rendReg6.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -556,8 +723,15 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                 
                 
 	    });
+	   
+	    var root = null;
+	    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+	        root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    
-	    var root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+	    }
+	    else{
+	        root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+	    }
 	    var parent = root.appendChild(hairpin);
 	    
 	       if(!tstampFieldReg2.isDisabled()){
@@ -569,6 +743,7 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     tstamp2: tstamp2FieldReg2.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg2!== 'undefined' ? rendReg2.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true  
@@ -583,6 +758,7 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                     tstamp2: tstamp2FieldReg4.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rendReg4!== 'undefined' ? rendReg4.getValue() : null,
                     name: "reg",
                     tag: "reg",
                     leaf: true
@@ -665,6 +841,14 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
                
            }
+             if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
+             formFieldReg1.setValue(formField.getValue());
+                formFieldReg2.setValue(formField.getValue());
+                formFieldReg3.setValue(formField.getValue());
+                formFieldReg4.setValue(formField.getValue());
+                formFieldReg5.setValue(formField.getValue());
+                formFieldReg6.setValue(formField.getValue());
+           }
             me1.handleCreateButton();
         },
         render: function(c) {
@@ -683,11 +867,85 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
                tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
                
            }
+           if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
+             formFieldReg1.setValue(formField.getValue());
+                formFieldReg2.setValue(formField.getValue());
+                formFieldReg3.setValue(formField.getValue());
+                formFieldReg4.setValue(formField.getValue());
+                formFieldReg5.setValue(formField.getValue());
+                formFieldReg6.setValue(formField.getValue());
+           }
             me1.handleCreateButton();
             }, c);
         }
         }
      
+   });
+
+return ceTextField;
+},
+
+createTextFieldTstamp2: function(fieldName, fieldLabel){
+        var me1 = this;
+    var ceTextField = Ext.create('Ext.form.field.Text',{
+        name: fieldName,
+        id: fieldName,
+        fieldLabel: fieldLabel,
+        listeners: {
+        focus: function(e, eOpts ){
+           me.selectedFieldId = fieldName;
+            if(me.selectedFieldId === 'tstampFieldOrig' && !expertCheckBox.getValue()){
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg5.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg6.setValue(tstampFieldOrig.getValue());
+           }
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){              
+                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
+               
+           }
+             if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
+             formFieldReg1.setValue(formField.getValue());
+                formFieldReg2.setValue(formField.getValue());
+                formFieldReg3.setValue(formField.getValue());
+                formFieldReg4.setValue(formField.getValue());
+                formFieldReg5.setValue(formField.getValue());
+                formFieldReg6.setValue(formField.getValue());
+           }
+           
+           me1.handleCreateButton();
+        },
+         render: function(c) {
+            c.getEl().on('keyup', function() {   
+           me.selectedFieldId = fieldName;
+            if(me.selectedFieldId === 'tstampFieldOrig' && !expertCheckBox.getValue()){
+              tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg5.setValue(tstampFieldOrig.getValue());
+               tstampFieldReg6.setValue(tstampFieldOrig.getValue());
+           }
+           if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){              
+                tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg5.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
+               
+           }
+             if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
+             formFieldReg1.setValue(formField.getValue());
+                formFieldReg2.setValue(formField.getValue());
+                formFieldReg3.setValue(formField.getValue());
+                formFieldReg4.setValue(formField.getValue());
+                formFieldReg5.setValue(formField.getValue());
+                formFieldReg6.setValue(formField.getValue());
+           }        
+           me1.handleCreateButton();
+            }, c);
+        }
+        }
    });
 
 return ceTextField;
