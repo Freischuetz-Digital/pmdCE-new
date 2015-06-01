@@ -83,7 +83,8 @@ declare function local:jsonifyElements($elements) {
     
                    
                     return 
-                        concat('{"name":"',$name1,'",',                         
+                        concat('{"name":"',$name1,'",',   
+                            '"type":"hairpin",',
                              '"icon":"resources/images/mix_volume.png",',
                             '"tstamp":"',$tstamp,'",',
                             '"tstamp2":"',$tstamp2,'",',
@@ -117,6 +118,7 @@ declare function local:jsonifyChoices($choices) {
                     return 
                         concat('{"id":"',$id,'",',
                             '"name":"',$name,'",',
+                            '"type":"hairpin",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
                              '"icon":"resources/images/details-xml.png",',
@@ -163,6 +165,7 @@ declare function local:jsonifyHairpins($hairpins) {
                     return 
                         concat('{"id":"',$id,'",',
                             '"name":"',$name,'",',
+                             '"type":"hairpin",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
                              '"icon":"resources/images/mix_volume.png",',

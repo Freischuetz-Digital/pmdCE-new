@@ -26,7 +26,7 @@ Ext.define('pmdCE.view.main.CEButtonPanel', {
         align: 'stretch'
     },
 
-createCEButton: function(buttonId){
+createCEButton: function(buttonId, elementName){
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
                    id: buttonId,
@@ -37,8 +37,8 @@ createCEButton: function(buttonId){
                         icon: 'resources/images/mix_volume.png',
                     
                         handler: function() {
-                           var win = new pmdCE.view.main.AddOrigDialog();
-                         
+                            Ext.getCmp('cemain').setComponentType(elementName); 
+                           var win = new pmdCE.view.main.AddOrigDialog();                        
                             win.show();
                         }
                      }),
@@ -47,8 +47,8 @@ createCEButton: function(buttonId){
                 text: "Reg",
                 icon: 'resources/images/mix_volume.png',
                 handler: function() {
-                   var win = new pmdCE.view.main.AddRegDialog();
-          
+                    Ext.getCmp('cemain').setComponentType(elementName); 
+                   var win = new pmdCE.view.main.AddRegDialog();        
                     win.show();
                 }
              })
@@ -153,6 +153,7 @@ createHairpinButton: function(buttonId, elementName){
                 text: elementName,
                 icon: 'resources/images/mix_volume.png',
                 handler: function() {
+                    Ext.getCmp('cemain').setComponentType(elementName);  
                     var win = new pmdCE.view.main.AddObviousElDialog();
                             win.show();
                 }
@@ -181,7 +182,7 @@ createMenuItem: function(itemText, type, elementName){
 },
 
 
-deleteElementButton: function(buttonId){
+deleteElementButton: function(buttonId, elementName){
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
                     id: buttonId,
@@ -190,7 +191,7 @@ deleteElementButton: function(buttonId){
                    listeners: {
                    
                    click: function() {
-                   
+                   Ext.getCmp('cemain').setComponentType(elementName);  
                    var win = new pmdCE.view.main.DeleteDialog();
                             win.show();
                    }

@@ -17,15 +17,22 @@ Ext.define('pmdCE.view.main.AddOrigDialog', {
   tstampField2: null,
   satffFieldBetween: null,
   selectedNode: null,
-  
+  rend: null,
   titleForAdd: null,
  createElementButton: null,
  
     initComponent: function() {
     
-    selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
-	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-	  
+    
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+	   rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+    }
+    else{
+         selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+	   rootNode = pmdCE.getApplication().getDynamDataStore().getRootNode();
+    }
+    
 	   for(var i = 0; i < rootNode.childNodes.length ; i++){
 	  if(rootNode.childNodes[i].data.id === selection.data.id){
 	      selectedNode = rootNode.childNodes[i];	
@@ -38,27 +45,48 @@ Ext.define('pmdCE.view.main.AddOrigDialog', {
 	  }	      
 	  }    
  
+  // common
     staffField = this.createTextField('staffField', 'Staff');
     staffField.setValue(selectedNode.childNodes[0].data.staff);
      staffField.setDisabled(true);
     satffFieldBetween = this.createComboBoxStaff('Second staff'); 
-    formField = this.createComboBoxForm('Form');
-    formField.validate();
     placeField = this.createComboBox('Place');
     placeField.validate();
     tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
-    tstampField.validate();
-    tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
-    tstamp2Field.validate();
+    tstampField.validate();  
+     // hairpin
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formField = this.createComboBoxForm('Form'); 
+             tstampField2 = this.createTextField('tstampField2Obv', 'Tstamp2');
+             tstampField2.validate(); 
+         }
+         // dynams
+         else{
+             formField = this.createTextField('formOrig', 'Form'); 
+             tstampField2 = this.createTextFieldTstamp2('tstampField2Obv', 'Tstamp2');
+             rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
+         }
+         formField.validate();
+         
 
-     this.items =  [
-     staffField,
+        this.items = Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
+            staffField,
             satffFieldBetween,
             placeField,
             formField,
             tstampField,
-            tstamp2Field
-            ] , 
+            tstampField2
+                               
+                    ] : [
+                        staffField,
+            satffFieldBetween,
+            placeField,
+            formField,
+            tstampField,
+            tstampField2,
+                       rend               
+                    ]
+
    
     createElementButton = this.createNavigationButton('createElement', 'Add', this.createElement);
     this.buttons = [
@@ -87,20 +115,27 @@ this.callParent()
                     staff: staffField.getValue(), 
                     staff2: satffFieldBetween.getValue(), 
                     tstamp: tstampField.getValue(),
-                    tstamp2: tstamp2Field.getValue(),
+                    tstamp2: tstampField2.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rend!== 'undefined' ? rend.getValue() : null,
                     name: 'orig',
                     tag: 'orig',
                     leaf: true
         });	
         
         selectedNode.expand();
-	  
-	  Ext.getCmp('cegridpanel').setSelection(selectedNode);
-	
-	  Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
-	  
+        
+        if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+         Ext.getCmp('cegridpanel').setSelection(selectedNode);	
+	       Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
+        }
+        else{
+            Ext.getCmp('dynamsgridpanel').setSelection(selectedNode);
+            // TODO
+	       //Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(selectedNode);
+        }
+	  	  
        Ext.getCmp('saveButton').setDisabled(false);
        Ext.getCmp('addelementbutton').setDisabled(false);
         
@@ -133,6 +168,30 @@ this.callParent()
         render: function(c) {
             c.getEl().on('keyup', function() {   
           me.handleCreateButton();
+            }, c);
+        }
+        }
+   });
+
+return ceTextField;
+},
+
+ createTextFieldTstamp2: function(fieldName, fieldLabel){
+        var me1 = this;
+    var ceTextField = Ext.create('Ext.form.field.Text',{
+        name: fieldName,
+        id: fieldName,
+        width: 285,
+        fieldLabel: fieldLabel,
+        listeners: {
+        focus: function(e, eOpts ){
+           
+           me1.handleCreateButton();
+        },
+         render: function(c) {
+            c.getEl().on('keyup', function() {   
+           
+           me1.handleCreateButton();
             }, c);
         }
         }
@@ -219,7 +278,7 @@ return ceTextField;
 
  handleCreateButton: function(){
       if(placeField.isValid() && formField.isValid() 
-          && tstampField.isValid() && tstamp2Field.isValid()){ 
+          && tstampField.isValid() && tstampField2.isValid()){ 
              createElementButton.setDisabled(false); 
           }
           else{

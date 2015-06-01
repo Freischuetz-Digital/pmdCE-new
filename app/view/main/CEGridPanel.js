@@ -112,9 +112,23 @@ showXMLforSelectedElement: function(selectedObject){
     },
  
    changeElementDialog: function(object, cell, row){
-   object.selectionModel.select(cell);  
-   selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
-   if(selection.data.obvious || selection.data.depth === 2){     
+   object.selectionModel.select(cell); 
+   
+   if(object.selection.data.type === 'hairpin'){
+       selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+   }
+   else{
+       selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+   }
+  
+   if(selection.data.obvious || selection.data.depth === 2){ 
+   if(selection.data.type === 'hairpin'){
+       Ext.getCmp('cemain').setComponentType('Hairpin'); 
+   }
+   else{
+       Ext.getCmp('cemain').setComponentType('Dynam'); 
+   }
+     
     var win = new pmdCE.view.main.EditDialog();
     win.show();
        

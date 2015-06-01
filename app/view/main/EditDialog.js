@@ -13,11 +13,12 @@ Ext.define('pmdCE.view.main.EditDialog', {
   formField: null,
   tstampField: null,
    tstampField2: null,
+   rend: null,
  
     selection: null,
     selectedNode: null,
     parentNode: null,
-    
+    vordRend: null,
     vordStaff: null,
     vordStaff2: null,
 	vordForm: null,
@@ -29,8 +30,13 @@ Ext.define('pmdCE.view.main.EditDialog', {
    
     initComponent: function() {
     
-    selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
-	  
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+    }
+    else{
+         selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+    }
+    	  
        if(selection.data.depth === 1){
        selectedNode = selection;
        
@@ -53,6 +59,10 @@ Ext.define('pmdCE.view.main.EditDialog', {
 	          }
 	          Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
 	      }	
+	      
+	      if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
+	           vordRend = selectedNode.data.rend;
+	      }
 	      
 	      var movement = Ext.getCmp('movement').getText();
 	      Ext.getCmp('cemain').setMeasureId(movement+"_measure"+vordStartMeasure);
@@ -82,33 +92,57 @@ Ext.define('pmdCE.view.main.EditDialog', {
 	                   vordPlace = selectedNode.data.place;
 	                   vordTStamp = selectedNode.data.tstamp;
 	                   vordTStamp2 = selectedNode.data.tstamp2;
+	                   
+	                   if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
+	           vordRend = selectedNode.data.rend;
+	      }
+	      
 	           
     }
 	  
     
-        
+        // common
 staffField = this.createTextField('staffField', 'Staff');
  staffField.setValue(vordStaff);
         
 staffField2 = this.createTextField('secondStaffField', 'Second staff');
 staffField2.setValue(vordStaff2);
-formField = this.createComboBoxForm('Form');
-formField.setValue(vordForm);
 placeField = this.createComboBox('Place');
 placeField.setValue(vordPlace);
 tstampField = this.createTextField('tstampField', 'Tstamp');
 tstampField.setValue(vordTStamp);
-tstamp2Field = this.createTextField('tstampField2', 'Tstamp2');
-tstamp2Field.setValue(vordTStamp2);
 
-     this.items =  [
-                staffField,
+// hairpin
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formField = this.createComboBoxForm('Form'); 
+             tstampField2 = this.createTextField('tstampField2Obv', 'Tstamp2');
+         }
+         // dynams
+         else{
+             formField = this.createTextField('formOrig', 'Form'); 
+             tstampField2 = this.createTextFieldTstamp2('tstampField2', 'Tstamp2');
+             rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
+             rend.setValue(vordRend);
+         }
+         tstampField2.setValue(vordTStamp2);
+         formField.setValue(vordForm);
+         this.items = Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
+             staffField,
                 staffField2,
                tstampField,
-                tstamp2Field,
+                tstampField2,
                 placeField,
                 formField
-            ] , 
+                               
+                    ] : [
+                         staffField,
+                staffField2,
+               tstampField,
+                tstampField2,
+                placeField,
+                formField,
+                       rend               
+                    ]
    
     this.buttons = [{
         text:'Update',
@@ -129,19 +163,19 @@ tstamp2Field.setValue(vordTStamp2);
              selectedNode.set('staff', staffField.getValue());
            
          }
-         if(staffField2.getValue() !== ""){
+         //if(staffField2.getValue() !== ""){
              selectedNode.set('staff2', staffField2.getValue());
             
-         }
+         //}
          
           if(tstampField.getValue() !== ""){
              selectedNode.set('tstamp', tstampField.value);
          
          }
-          if(tstamp2Field.getValue() !== ""){
-             selectedNode.set('tstamp2', tstamp2Field.getValue());
-          
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1 || tstampField2.getValue() !== ""){
+             selectedNode.set('tstamp2', tstampField2.getValue());
          }
+        
          if(placeField.getValue() !== null){
               selectedNode.set('place', placeField.getValue());
             
@@ -153,17 +187,34 @@ tstamp2Field.setValue(vordTStamp2);
          
          if(typeof parentNode !== 'undefined'){
          parentNode.expand();
+         
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+         Ext.getCmp('cegridpanel').setSelection(parentNode);	
+	       Ext.getCmp('cegridpanel').showXMLforSelectedElement(parentNode);
+	       Ext.getCmp('addelementbutton').setDisabled(false);
+        }
+        else{
+            Ext.getCmp('dynamsgridpanel').setSelection(parentNode);
+            Ext.getCmp('addelementbutton_1').setDisabled(false);
+            // TODO
+	       //Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(parentNode);
+        }
 	  
-	  Ext.getCmp('cegridpanel').setSelection(parentNode);
-	  
-	  Ext.getCmp('cegridpanel').showXMLforSelectedElement(parentNode);
-	   Ext.getCmp('addelementbutton').setDisabled(false);
+	   
          }
 else{
      
-	  Ext.getCmp('cegridpanel').setSelection(selectedNode);
-	  
-	  Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
+     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+         Ext.getCmp('cegridpanel').setSelection(selectedNode);	
+	       Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
+	       
+        }
+        else{
+            Ext.getCmp('dynamsgridpanel').setSelection(selectedNode);
+            
+            // TODO
+	       //Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(parentNode);
+        }
 }
          
 	  
@@ -186,6 +237,7 @@ this.callParent()
             createTextField: function(fieldName, fieldLabel){
     var ceTextField = Ext.create('Ext.form.field.Text',{
         name: fieldName,
+        width: 285,
         fieldLabel: fieldLabel,
       //  allowBlank: false , // requires a non-empty value
         listeners: {'render': function(c) {
@@ -199,6 +251,28 @@ this.callParent()
 
 return ceTextField;
 },
+
+createTextFieldTstamp2: function(fieldName, fieldLabel){
+       
+    var ceTextField = Ext.create('Ext.form.field.Text',{
+        name: fieldName,
+        id: fieldName,
+        width: 285,
+        fieldLabel: fieldLabel,
+        listeners: {
+        focus: function(e, eOpts ){
+          
+        },
+         render: function(c) {
+            c.getEl().on('keyup', function() {   
+           
+            }, c);
+        }
+        }
+   });
+
+return ceTextField;
+},
     
         createComboBox: function(fieldName){
         
@@ -207,6 +281,7 @@ return ceTextField;
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
     store: states,
+    width: 285,
     queryMode: 'local',
     displayField: 'name',
     editable: false,
@@ -229,6 +304,7 @@ createComboBoxForm: function(fieldName){
     var ceTextField = Ext.create('Ext.form.ComboBox', {
     fieldLabel: fieldName,
     store: states,
+    width: 285,
     queryMode: 'local',
     displayField: 'name',
     editable: false,

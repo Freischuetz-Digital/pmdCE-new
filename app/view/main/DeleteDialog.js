@@ -17,11 +17,15 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
  
     initComponent: function() {
     
-     var store = pmdCE.getApplication().getHairpinDataStore();
-	  root = store.getRootNode();
-        
+    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+	   root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+    }
+    else{
+         selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+	   root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+    }
     
-     selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
               for(var i = 0; i < root.childNodes.length ; i++){
 	       if(root.childNodes[i].data.id === selection.data.id){
 	               selectedId = i;
@@ -39,7 +43,7 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
      ] , 
    
     this.buttons = [{
-        text:'Remove',
+        text:'Delete',
         handler: function(){
         
             selectedNode.data.operation =  'remove';

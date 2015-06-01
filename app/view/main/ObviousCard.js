@@ -30,6 +30,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
     
       tstampField: null,
       tstamp2Field: null,
+      rend: null,
       
       verovioImageStart: null,
       verovioImageEnd: null,
@@ -41,24 +42,34 @@ Ext.define('pmdCE.view.main.ObviousCard', {
          
          me = this;
          
+         // common
         staffField = this.createComboBoxStaff('Staff'); 
         staffField.validate();
-        staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
-        staffFieldCopy.setDisabled(true);
-        
         startTaktField = this.createComboBoxMeasureNr('Start measure');
         startTaktField.validate();
         endTaktField = this.createComboBoxMeasureNr('End measure');
         endTaktField.validate();
+        
+        staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
+        staffFieldCopy.setDisabled(true);
         placeField = this.createComboBox('Place');
         placeField.validate();
-        formField = this.createComboBoxForm('Form');
-        formField.validate();
-        
         tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
         tstampField.validate();
-        tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
-        tstamp2Field.validate();
+         // hairpin
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formField = this.createComboBoxForm('Form'); 
+             tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
+             tstamp2Field.validate(); 
+         }
+         // dynams
+         else{
+             formField = this.createTextField('formOrig', 'Form'); 
+             tstamp2Field = this.createTextFieldTstamp2('tstampField2Obv', 'Tstamp2');
+             rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
+         }
+         formField.validate();
+         
        
           this.items  = [
         {
@@ -94,13 +105,20 @@ Ext.define('pmdCE.view.main.ObviousCard', {
              margin: '0 10 0 0',
                 defaults: {
                     anchor: '100%'
-                },        
-                items: [
-                staffFieldCopy,
-               // satffFieldBetween,
-                 placeField,
-                formField
-                ]
+                }, 
+                
+                 items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
+                    staffFieldCopy,
+                    placeField,
+                    formField
+                               
+                    ] : [
+                        staffFieldCopy,
+                        placeField,
+                        formField,
+                       rend               
+                    ]
+                
             },
             {
             xtype: 'fieldset',
@@ -172,9 +190,23 @@ Ext.define('pmdCE.view.main.ObviousCard', {
     },
        
     createElement: function () {
-     var hairId = 'hairpin_' + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
+    
+    var modelPath = null;
+    var prefix = null;
+     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+    modelPath = 'pmdCE.model.Hairpin';
+    prefix = 'hairpin_';
+        
+    }
+    else{
+        modelPath = 'pmdCE.model.Dynam';
+         prefix = 'dynam_';
+    }
+    
+    
+     var hairId = prefix + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
        
-        var hairpin = Ext.create('pmdCE.model.Hairpin', {      
+        var hairpin = Ext.create(modelPath, {      
                     id: hairId,
                     name: formField.getValue()+'_s'+staffField.getValue()+'_m'+staffField.getValue()+'_'+placeField.getValue(),
                     icon: 'resources/images/mix_volume.png',
@@ -186,14 +218,20 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                     tstamp2: tstamp2Field.getValue(),
                     place: placeField.getValue(),
                     form: formField.getValue(),
+                    rend: typeof rend!== 'undefined' ? rend.getValue() : null,
                     measureid: Ext.getCmp('cemain').getMeasureId(),
                     measurenr: startTaktField.getValue(), 
                     tag: "",
                     leaf: true                
 	    });
 	  
-	    var store = pmdCE.getApplication().getHairpinDataStore();
-	    var root = store.getRootNode();
+	    var root = null;
+	    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+	        root = pmdCE.getApplication().getHairpinDataStore().getRootNode();	    
+	    }
+	    else{
+	        root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+	    }
 	    var parent = root.appendChild(hairpin);
         parent.expand();
         
@@ -271,6 +309,30 @@ Ext.define('pmdCE.view.main.ObviousCard', {
 
 return ceTextField;
 },
+
+ createTextFieldTstamp2: function(fieldName, fieldLabel){
+        var me1 = this;
+    var ceTextField = Ext.create('Ext.form.field.Text',{
+        name: fieldName,
+        id: fieldName,
+        fieldLabel: fieldLabel,
+        listeners: {
+        focus: function(e, eOpts ){
+           
+           me1.handleCreateButton();
+        },
+         render: function(c) {
+            c.getEl().on('keyup', function() {   
+           
+           me1.handleCreateButton();
+            }, c);
+        }
+        }
+   });
+
+return ceTextField;
+},
+
 
 
     createComboBox: function(fieldName){
