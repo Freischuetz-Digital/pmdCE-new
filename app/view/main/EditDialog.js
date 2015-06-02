@@ -184,6 +184,9 @@ tstampField.setValue(vordTStamp);
                selectedNode.set('form', formField.getValue());
         
          }
+         if(rend !== null){
+             selectedNode.set('rend', rend.getValue());
+         }
          
          if(typeof parentNode !== 'undefined'){
          parentNode.expand();
@@ -196,8 +199,7 @@ tstampField.setValue(vordTStamp);
         else{
             Ext.getCmp('dynamsgridpanel').setSelection(parentNode);
             Ext.getCmp('addelementbutton_1').setDisabled(false);
-            // TODO
-	       //Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(parentNode);
+	        Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(parentNode);
         }
 	  
 	   
@@ -211,9 +213,7 @@ else{
         }
         else{
             Ext.getCmp('dynamsgridpanel').setSelection(selectedNode);
-            
-            // TODO
-	       //Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(parentNode);
+            Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(selectedNode);
         }
 }
          

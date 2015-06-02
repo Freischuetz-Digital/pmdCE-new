@@ -125,7 +125,7 @@ Ext.define('pmdCE.Application', {
     extraParams: {path: ''},
              proxy:{
         type: 'ajax',
-     // url: 'resources/xql/getControlEvents.xql'
+     // url: 'resources/xql/getDynams.xql'
        
        url: 'resources/data/tree/treegrid_2.json'
       

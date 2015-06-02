@@ -54,12 +54,22 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
             }
             
             if(selectedId === -1){
-                 $('#xmleditorview-body').html('');
+                if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+                    $('#xmleditorview-body').html('');
+                }
+                else{
+                    $('#dynamsxmlview-body').html('');
+                }                
             }
             else{
                 var newSelection = root.childNodes[selectedId];
-      
-                Ext.getCmp('cegridpanel').setSelection(newSelection);
+                if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+                    Ext.getCmp('cegridpanel').setSelection(hairpin);
+                }
+                else{
+                    Ext.getCmp('dynamsgridpanel').setSelection(hairpin);
+            
+                }
             }
             
            

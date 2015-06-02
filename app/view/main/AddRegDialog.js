@@ -127,8 +127,7 @@ this.callParent()
         }
         else{
             Ext.getCmp('dynamsgridpanel').setSelection(selectedNode);
-            // TODO
-	       //Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(selectedNode);
+            Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(selectedNode);
         }
 	 
        Ext.getCmp('saveButton').setDisabled(false);

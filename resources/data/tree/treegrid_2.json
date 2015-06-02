@@ -13,7 +13,7 @@
                     "tstamp": "1",
                     "tstamp2": "m+6.5",
                     "place": "below",
-                    "formvalue": "cres",
+                    "form": "pp",
                     "measurenr":25,
                     "tag": ""
         }, 
@@ -30,7 +30,7 @@
                     "tstamp": 2,
                     "tstamp2": "m+5",
                     "place": "below",
-                    "formvalue": "dim",
+                    "form": "f",
                      "tag": "",
                      "measurenr":26,
                     "leaf": true
@@ -55,7 +55,7 @@
                     "tstamp": "2",
                     "tstamp2": "m+5",
                     "place": "between",
-                    "formvalue": "dim",
+                    "form": "p:",
                     
                     "tag": "orig"
         }, 
@@ -70,7 +70,7 @@
                     "tstamp": "2",
                     "tstamp2": "m+5",
                     "place": "below",
-                    "formvalue": "dim",
+                    "form": "ff",
                    
                     "tag": "reg"
         }, 
@@ -84,7 +84,7 @@
                     "tstamp": "2",
                     "tstamp2": "m+5",
                     "place": "above",
-                    "formvalue": "dim",
+                    "form": "pf",
                     
                     "tag": "reg"
         } 

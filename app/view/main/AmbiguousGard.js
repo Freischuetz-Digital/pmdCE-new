@@ -348,11 +348,7 @@ tstamp2FieldReg2 = this.createTextField('tstamp2FieldReg2', 'Tstamp2');
 
         me.down('#card-prev').setDisabled(next===0);
         me.down('#card-next').setDisabled(next===1);
-        
-        // TODO
-        /*if(l.activeItem.id === 'card-1'){
-            Ext.getCmp('createItem').setDisabled(false);
-        }*/
+       
     },
     
         createTextField: function(fieldName, fieldLabel){

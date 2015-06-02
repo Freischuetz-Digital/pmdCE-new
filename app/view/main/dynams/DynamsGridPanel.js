@@ -120,7 +120,103 @@ Ext.define('pmdCE.view.main.dynams.DynamsGridPanel', {
            
             ]
         this.callParent()
-    }
+    },
+    
+    showXMLforSelectedElement: function(selectedObject){
+    
+       var objects = $('<div></div>');
+        if(selectedObject.data.obvious){            
+            var object = $('<dynam></dynam>', {
+               staff : (selectedObject.data.staff2 !== "" ? (selectedObject.data.staff + ' '+selectedObject.data.staff2)  : selectedObject.data.staff),
+                place: selectedObject.data.place,
+                tstamp: selectedObject.data.tstamp,
+                tstamp2: selectedObject.data.tstamp2,
+                'xml:id': selectedObject.data.id,
+                xmlns: "http://www.music-encoding.org/ns/mei",
+                sameas: ""
+         });
+         if(selectedObject.data.rend !== ''){
+              var rend = $('<rend></rend>', {
+             rend: selectedObject.data.rend
+            });
+            $(rend).append(selectedObject.data.form); 
+            $(object).append($(rend)); 
+         }
+         else{
+              $(object).append(selectedObject.data.form); 
+         }
+            $(objects).append($(object));  
+         
+         }
+         else{
+            
+          var choice = $('<choice></choice>', {
+              'xml:id': selectedObject.data.id,
+                xmlns: "http://www.music-encoding.org/ns/mei"
+             
+            });  
+            console.log('***************');
+         console.log(selectedObject);
+            for(var j = 0; j < selectedObject.childNodes.length ; j++){
+                if(selectedObject.childNodes[j].data.tag === 'orig'){
+                    var orig = $('<orig></orig>');
+                    var hair =  $('<dynam></dynam>', {
+                        staff : (selectedObject.childNodes[j].data.staff2 !== "" ? (selectedObject.childNodes[j].data.staff + ' '+selectedObject.childNodes[j].data.staff2)  : selectedObject.childNodes[j].data.staff),
+                        place: selectedObject.childNodes[j].data.place,
+                        tstamp: selectedObject.childNodes[j].data.tstamp,
+                        tstamp2: selectedObject.childNodes[j].data.tstamp2,              
+                        sameas: ""
+                    });
+                    if(selectedObject.childNodes[j].data.rend !== ''){
+                        var rend = $('<rend></rend>', {
+                        rend: selectedObject.childNodes[j].data.rend
+                        });
+                        $(rend).append(selectedObject.childNodes[j].data.form); 
+                        $(hair).append($(rend)); 
+                    }
+                    else{
+                        $(hair).append(selectedObject.childNodes[j].data.form); 
+                    }  
+                    $(orig).append($(hair)); 
+                    $(choice).append($(orig)); 
+                }
+                if(selectedObject.childNodes[j].data.tag === 'reg'){
+                        var reg = $('<reg></reg>');
+                        var hair =  $('<dynam></dynam>', {
+                        staff : (selectedObject.childNodes[j].data.staff2 !== "" ? (selectedObject.childNodes[j].data.staff + ' '+selectedObject.childNodes[j].data.staff2)  : selectedObject.childNodes[j].data.staff),
+                        place: selectedObject.childNodes[j].data.place,
+                        form: selectedObject.childNodes[j].data.form,
+                        tstamp: selectedObject.childNodes[j].data.tstamp,
+                        tstamp2: selectedObject.childNodes[j].data.tstamp2,              
+                        sameas: ""
+                    }); 
+                    if(selectedObject.childNodes[j].data.rend !== ''){
+                        var rend = $('<rend></rend>', {
+                        rend: selectedObject.childNodes[j].data.rend
+                        });
+                        $(rend).append(selectedObject.childNodes[j].data.form); 
+                        $(hair).append($(rend)); 
+                    }
+                    else{
+                        $(hair).append(selectedObject.childNodes[j].data.form); 
+                    }  
+                    $(reg).append($(hair)); 
+                    $(choice).append($(reg)); 
+                }              
+            } 
+          
+             $(objects).append($(choice));              
+         }   
+       
+         var tmp = hljs.highlightAuto($(objects).html()).value;
+         
+         if(selectedObject.data.type === 'hairpin'){
+             $('#xmleditorview-body').html(tmp);
+         }
+         else{
+             $('#dynamsxmlview-body').html(tmp);
+         }
+}
   
 });
 

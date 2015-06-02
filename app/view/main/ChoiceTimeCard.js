@@ -608,8 +608,14 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
 	    
 	    parent.expand();
 	    
-	    Ext.getCmp('cegridpanel').setSelection(hairpin);
-	    
+	     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+            Ext.getCmp('cegridpanel').setSelection(hairpin);
+        }
+        else{
+            Ext.getCmp('dynamsgridpanel').setSelection(hairpin);
+            
+        }
+	   
 	    Ext.getCmp('saveButton').setDisabled(false);
             this.up('window').close();
            
