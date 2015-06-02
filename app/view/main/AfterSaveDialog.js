@@ -31,6 +31,10 @@ Ext.define('pmdCE.view.main.AfterSaveDialog', {
         var store = pmdCE.getApplication().getHairpinDataStore();
            
             store.reload();
+            
+          var dynamsStore = pmdCE.getApplication().getDynamDataStore();
+           
+            dynamsStore.reload();  
            
             Ext.getCmp('saveButton').setDisabled(true);
              this.up('window').close();

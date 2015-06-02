@@ -500,14 +500,16 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
     
     var modelPath = null;
     var prefix = null;
+    var elType = null;
      if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
     modelPath = 'pmdCE.model.Hairpin';
     prefix = 'hairpin_';
-        
+        elType = 'hairpin';
     }
     else{
         modelPath = 'pmdCE.model.Dynam';
          prefix = 'dynam_';
+         elType = 'dynam';
     }
     
      var hairId = prefix + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
@@ -516,6 +518,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
 	               id: hairId,
 	               name: 'choice_m'+startTaktField.getValue(),
                     icon: 'resources/images/details-xml.png',
+                    type : elType,
                     measureid: Ext.getCmp('cemain').getMeasureId(),
                     measurenr: startTaktField.getValue(), 
                     operation: 'create',
@@ -524,6 +527,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
                      children: [
                 {
                     icon: 'resources/images/mix_volume.png',
+                    type : elType,
                     staff: staffField.getValue(),                  
                     tstamp: tstampFieldOrig.getValue(),
                     tstamp2: tstamp2FieldOrig.getValue(),
@@ -535,6 +539,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
                     leaf: true
                 },
                 {icon: 'resources/images/mix_volume.png',
+                type : elType,
                     staff: staffField.getValue(),                    
                     tstamp: tstampFieldReg3.getValue(),
                     tstamp2: tstamp2FieldReg3.getValue(),
@@ -548,6 +553,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
                 },
                 {
                     icon: 'resources/images/mix_volume.png',
+                    type : elType,
                     staff: staffField.getValue(),                    
                     tstamp: tstampFieldReg2.getValue(),
                     tstamp2: tstamp2FieldReg2.getValue(),
@@ -576,6 +582,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
 	    if(!tstamp2FieldReg1.isDisabled()){
 	    hairpin.appendChild({
 	    icon: 'resources/images/mix_volume.png',
+	    type : elType,
                     staff: staffField.getValue(),                    
                     tstamp: tstampFieldReg1.getValue(),
                     tstamp2: tstamp2FieldReg1.getValue(),
@@ -593,6 +600,7 @@ Ext.define('pmdCE.view.main.ChoiceTimeCard', {
         if(!tstampFieldReg4.isDisabled()){
          hairpin.appendChild({
                    icon: 'resources/images/mix_volume.png',
+                   type : elType,
                     staff: staffField.getValue(),                    
                     tstamp: tstampFieldReg4.getValue(),
                     tstamp2: tstamp2FieldReg4.getValue(),

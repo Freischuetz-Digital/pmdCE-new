@@ -193,14 +193,17 @@ Ext.define('pmdCE.view.main.ObviousCard', {
     
     var modelPath = null;
     var prefix = null;
+    var elType = null;
      if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
     modelPath = 'pmdCE.model.Hairpin';
     prefix = 'hairpin_';
+    elType = 'hairpin';
         
     }
     else{
         modelPath = 'pmdCE.model.Dynam';
          prefix = 'dynam_';
+         elType = 'dynam';
     }
     
     
@@ -213,6 +216,7 @@ Ext.define('pmdCE.view.main.ObviousCard', {
                     obvious: true,
                     ambiguous: false,
                     operation: 'create',
+                    type : elType,
                     staff: staffField.getValue(), 
                     tstamp: tstampField.getValue(),
                     tstamp2: tstamp2Field.getValue(),

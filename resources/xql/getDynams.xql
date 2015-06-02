@@ -64,8 +64,6 @@ declare function local:jsonifyDynams($dynams) {
                                          
                     let $ambiguous := 'false'
                     
-                  
-            
                     let $place := $elem/string(@place)
                     let $staffText := $elem/@staff
                     
@@ -76,10 +74,11 @@ declare function local:jsonifyDynams($dynams) {
                     let $tstamp := $elem/(@tstamp)
                     let $tstamp2 := $elem/(@tstamp2)
                     
-                    let $rend := $elem/@rend
+                    let $rend := $elem/mei:rend/@rend
                     
-                     let $form := if($rend != '')
-                            then( /$rend)
+                     let $rend_1 := $elem/@rend
+                     let $form := if($rend_1 != '')
+                            then( /$rend_1)
                             else(/$elem)
                     
                       let $name := concat($form, '_s', $staffText, '_m', $measureN, '_', $place)
@@ -131,11 +130,13 @@ declare function local:jsonifyElements($elements) {
                         let $tstamp := $x//@tstamp
                         let $tstamp2 := $x//@tstamp2
                         
-                        let $rend := $x//@rend
-                        
-                        let $form := if($rend != '')
-                            then( /$rend)
+                        let $rend := $x//mei:rend/@rend
+                       
+                     let $rend_1 := $x/@rend
+                     let $form := if($rend_1 != '')
+                            then( /$rend_1)
                             else(/$x)
+                    
                     
                     return 
                         concat('{"name":"',$name1,'",',   

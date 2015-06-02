@@ -357,14 +357,16 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
     
     var modelPath = null;
     var prefix = null;
+     var elType = null;
      if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
     modelPath = 'pmdCE.model.Hairpin';
     prefix = 'hairpin_';
-        
+        elType = 'hairpin';
     }
     else{
         modelPath = 'pmdCE.model.Dynam';
          prefix = 'dynam_';
+         elType = 'dynam';
     }
     
         var hairId = prefix + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
@@ -372,6 +374,7 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
 	        var hairpin = Ext.create(modelPath, {
 	               id: hairId,
 	               name: 'choice_m'+startTaktField.getValue(),
+	               type : elType,
                     icon: 'resources/images/details-xml.png',
                     measureid: Ext.getCmp('cemain').getMeasureId(),
                     measurenr: startTaktField.getValue(), 
@@ -381,6 +384,7 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                      children: [
                 {
                     icon: 'resources/images/mix_volume.png',
+                    type : elType,
                     staff: staffField.getValue(),                  
                     tstamp: tstampFieldOrig.getValue(),
                     tstamp2: tstamp2FieldOrig.getValue(),
@@ -393,7 +397,8 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                 },
                 {
                     icon: 'resources/images/mix_volume.png',
-                    staff: staffField.getValue(),                    
+                    staff: staffField.getValue(), 
+                    type : elType,
                     tstamp: tstampFieldReg1.getValue(),
                     tstamp2: tstamp2FieldReg1.getValue(),
                     place: placeField.getValue(),
@@ -421,6 +426,7 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
 	     if(!tstampFieldReg2.isDisabled()){
 	    hairpin.appendChild({
 	    icon: 'resources/images/mix_volume.png',
+	    type : elType,
                     staff: staffField.getValue(),                    
                     tstamp: tstampFieldReg2.getValue(),
                     tstamp2: tstamp2FieldReg2.getValue(),

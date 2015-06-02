@@ -102,11 +102,21 @@ this.callParent()
     
         if(selectedNode !== null){
         
+          var elType = null;
+     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+    elType = 'hairpin';
+        
+    }
+    else{
+         elType = 'dynam';
+    }
+        
            selectedNode.set('operation', 'change');
 	       selectedNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
         
            selectedNode.appendChild({
                     icon: 'resources/images/mix_volume.png',
+                    type : elType,
                     staff: staffField.getValue(),
                     staff2: satffFieldBetween.getValue(), 
                     tstamp: tstampField.getValue(),

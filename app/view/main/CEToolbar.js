@@ -85,9 +85,14 @@ Ext.define('pmdCE.view.main.CEToolbar', {
 var store = pmdCE.getApplication().getHairpinDataStore();
 var modAndCreateElements = store.getUpdatedRecords();
 var deletedElements = store.getRemovedRecords();
-var modRecords = modAndCreateElements.concat(deletedElements);
-//store.getUpdatedRecords() 
-//modRecords.add(store.getRemovedRecords()) ;
+var modHairpins = modAndCreateElements.concat(deletedElements);
+
+var dynamsStore = pmdCE.getApplication().getDynamDataStore();
+var modAndCreateDynams = dynamsStore.getUpdatedRecords();
+var deletedDynams = dynamsStore.getRemovedRecords();
+var modDynams = modAndCreateDynams.concat(deletedDynams);
+
+var modRecords = modHairpins.concat(modDynams);
 
 console.log("******DATA******");
 console.log(modRecords);
@@ -95,6 +100,107 @@ console.log(modRecords);
 var objects = $('<div></div>');
 
 for(var i = 0; i < modRecords.length ; i++){
+// dynams
+if(modRecords[i].data.type === 'dynam'){
+     if(modRecords[i].data.obvious){
+        var object = $('<div></div>', {
+                id: modRecords[i].data.id,
+                operation: modRecords[i].data.operation,
+                sourcePath: pagesButton.getText(),
+                measureid: modRecords[i].data.measureid
+         });        
+            var code = $('<dynam></dynam>', {
+               staff : modRecords[i].data.staff2 !== "" ? modRecords[i].data.staff+' '+modRecords[i].data.staff2 : modRecords[i].data.staff,
+                place: modRecords[i].data.place,
+                tstamp: modRecords[i].data.tstamp,
+                tstamp2: modRecords[i].data.tstamp2,
+                'xml:id': modRecords[i].data.id,
+                xmlns: "http://www.music-encoding.org/ns/mei",
+                sameas: ""
+         });
+          if(modRecords[i].data.rend !== ''){
+              var rend = $('<rend></rend>', {
+             rend: modRecords[i].data.rend
+            });
+            $(rend).append(modRecords[i].data.form); 
+            $(code).append($(rend)); 
+         }
+         else{
+              $(code).append(modRecords[i].data.form); 
+         }
+
+         $(object).append(code);
+         $(objects).append($(object));        
+         }
+         else{
+            var head = $('<div></div>', {
+                id: modRecords[i].data.id,
+                operation: modRecords[i].data.operation,
+                sourcePath: pagesButton.getText(),
+                measureid: modRecords[i].data.measureid
+            }); 
+         
+         
+          var choice = $('<choice></choice>', {
+              'xml:id': modRecords[i].data.id,
+                xmlns: "http://www.music-encoding.org/ns/mei"
+             
+            });  
+         
+            for(var j = 0; j < modRecords[i].childNodes.length ; j++){
+                if(modRecords[i].childNodes[j].data.tag === 'orig'){
+                    var orig = $('<orig></orig>');
+                    var hair =  $('<dynam></dynam>', {
+                        staff : modRecords[i].childNodes[j].data.staff2 !== '' ? modRecords[i].childNodes[j].data.staff+' '+modRecords[i].childNodes[j].data.staff2 : modRecords[i].childNodes[j].data.staff,
+                        place: modRecords[i].childNodes[j].data.place,
+                        tstamp: modRecords[i].childNodes[j].data.tstamp,
+                        tstamp2: modRecords[i].childNodes[j].data.tstamp2,              
+                        sameas: ""
+                    });
+                    if(modRecords[i].childNodes[j].data.rend !== ''){
+                        var rend = $('<rend></rend>', {
+                            rend: modRecords[i].childNodes[j].data.rend
+                        });
+                        $(rend).append(modRecords[i].childNodes[j].data.form); 
+                        $(hair).append($(rend)); 
+                    }
+                    else{
+                        $(hair).append(modRecords[i].childNodes[j].data.form); 
+                    }
+                    
+                    $(orig).append($(hair)); 
+                    $(choice).append($(orig)); 
+                }
+                if(modRecords[i].childNodes[j].data.tag === 'reg'){
+                        var reg = $('<reg></reg>');
+                        var hair =  $('<dynam></dynam>', {
+                        staff : modRecords[i].childNodes[j].data.staff2 !== '' ? modRecords[i].childNodes[j].data.staff+' '+modRecords[i].childNodes[j].data.staff2 : modRecords[i].childNodes[j].data.staff,
+                        place: modRecords[i].childNodes[j].data.place,
+                        tstamp: modRecords[i].childNodes[j].data.tstamp,
+                        tstamp2: modRecords[i].childNodes[j].data.tstamp2,              
+                        sameas: ""
+                    }); 
+                     if(modRecords[i].childNodes[j].data.rend !== ''){
+                        var rend = $('<rend></rend>', {
+                            rend: modRecords[i].childNodes[j].data.rend
+                        });
+                        $(rend).append(modRecords[i].childNodes[j].data.form); 
+                        $(hair).append($(rend)); 
+                    }
+                    else{
+                        $(hair).append(modRecords[i].childNodes[j].data.form); 
+                    }
+                    $(reg).append($(hair)); 
+                    $(choice).append($(reg)); 
+                }              
+            } 
+           $(head).append(choice);
+             $(objects).append($(head));              
+         }                
+}
+
+// hairpins
+else{
     if(modRecords[i].data.obvious){
         var object = $('<div></div>', {
                 id: modRecords[i].data.id,
@@ -161,7 +267,8 @@ for(var i = 0; i < modRecords.length ; i++){
             } 
            $(head).append(choice);
              $(objects).append($(head));              
-         }              
+         } 
+         }
  }
  
  objects = $('<div></div>').append($(objects));
@@ -339,9 +446,9 @@ for(var i = 0; i < modRecords.length ; i++){
        
         facsimileView = new pmdCE.view.main.FacsimileView();
         Ext.getCmp('cepanel').add(facsimileView);
-         var facsimileStore = app.getFacsimileStore();
+      /*   var facsimileStore = app.getFacsimileStore();
         facsimileStore.getProxy().extraParams.path = item.text;
-        facsimileStore.load();
+        facsimileStore.load();*/
         
       /*  Ext.getCmp('facsimileview').setBind({
      store: facsimileStore

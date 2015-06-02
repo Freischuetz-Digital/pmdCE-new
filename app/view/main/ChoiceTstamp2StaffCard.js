@@ -505,14 +505,16 @@ staffFieldReg3.validate();
     
      var modelPath = null;
     var prefix = null;
+    var elType = null;
      if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
     modelPath = 'pmdCE.model.Hairpin';
     prefix = 'hairpin_';
-        
+        elType = 'hairpin';
     }
     else{
         modelPath = 'pmdCE.model.Dynam';
          prefix = 'dynam_';
+         elType = 'dynam';
     }
     
      var hairId = prefix + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
@@ -521,6 +523,7 @@ staffFieldReg3.validate();
 	               id: hairId,
 	               name: 'choice_m'+startTaktField.getValue(),
                     icon: 'resources/images/details-xml.png',
+                    type : elType,
                     measureid: Ext.getCmp('cemain').getMeasureId(),
                     measurenr: startTaktField.getValue(), 
                     operation: 'create',
@@ -529,6 +532,7 @@ staffFieldReg3.validate();
                      children: [
                 {
                     icon: 'resources/images/mix_volume.png',
+                    type : elType,
                     staff: staffField.getValue(),  
                     staff2: satffFieldBetween.getValue(), 
                     tstamp: tstampFieldOrig.getValue(),
@@ -542,6 +546,7 @@ staffFieldReg3.validate();
                 },
                 {
                     icon: 'resources/images/mix_volume.png',
+                    type : elType,
                     staff: staffField.getValue(), 
                     staff2: satffFieldBetween.getValue(),
                     tstamp: tstampFieldReg1.getValue(),
@@ -555,6 +560,7 @@ staffFieldReg3.validate();
                 },
                  {
                     icon: 'resources/images/mix_volume.png',
+                    type : elType,
                     staff: staffFieldReg3.getValue(),                    
                     tstamp: tstampFieldReg3.getValue(),
                     tstamp2: tstamp2FieldReg3.getValue(),
@@ -567,6 +573,7 @@ staffFieldReg3.validate();
                 },
                  {
                     icon: 'resources/images/mix_volume.png',
+                    type : elType,
                     staff: staffFieldReg4.getValue(),                    
                     tstamp: tstampFieldReg4.getValue(),
                     tstamp2: tstamp2FieldReg4.getValue(),
@@ -593,6 +600,7 @@ staffFieldReg3.validate();
 	    if(!tstamp2FieldReg2.isDisabled()){
 	    hairpin.appendChild({
 	   icon: 'resources/images/mix_volume.png',
+	   type : elType,
                     staff: staffField.getValue(),   
                     staff2: satffFieldBetween.getValue(),
                     tstamp: tstampFieldReg2.getValue(),
