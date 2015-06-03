@@ -17,7 +17,7 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
  
     initComponent: function() {
     
-    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+   /* if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
         selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 	   root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
     }
@@ -26,14 +26,28 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
 	   root = pmdCE.getApplication().getDynamDataStore().getRootNode();
     }
     
-              for(var i = 0; i < root.childNodes.length ; i++){
+         */
+         
+      
+	  
+	 if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+        root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+    }
+    else{
+         selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+         root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+    }
+    selectedNode = selection;
+    
+    for(var i = 0; i < root.childNodes.length ; i++){
 	       if(root.childNodes[i].data.id === selection.data.id){
 	               selectedId = i;
-	               selectedNode = root.childNodes[i];	
-	      
+	            
 	      break;
 	  }	      
-	  }    
+	  }
+	  
  
      this.items =  [
      {
@@ -49,7 +63,8 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
             selectedNode.data.operation =  'remove';
             selectedNode.remove();
             
-            if(selectedId === root.childNodes.length){
+            if(typeof selectedId !== 'undefined' ){
+                 if(selectedId === root.childNodes.length){
                 selectedId --;
             }
             
@@ -64,13 +79,16 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
             else{
                 var newSelection = root.childNodes[selectedId];
                 if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
-                    Ext.getCmp('cegridpanel').setSelection(hairpin);
+                    Ext.getCmp('cegridpanel').setSelection(newSelection);
                 }
                 else{
-                    Ext.getCmp('dynamsgridpanel').setSelection(hairpin);
+                    Ext.getCmp('dynamsgridpanel').setSelection(newSelection);
             
                 }
             }
+            }
+            
+           
             
            
     Ext.getCmp('saveButton').setDisabled(false);

@@ -36,8 +36,10 @@ declare function local:getSurfaces($source as xs:string, $mdiv as xs:string) as 
         
         let $doc := collection($freidi-pmd:ce-data)//mei:surface[@xml:id = $surface/@xml:id]/root()
         let $pb.before := $doc//mei:pb[@facs = '#' || $surface/@xml:id ]
-        let $pb := $pb.before//mei:staffDef
-        
+        let $pb := 
+            if($pb.before/*) then $pb.before//mei:staffDef
+            else $xml//id(substring-before($mdiv, '.xml'))/mei:score/mei:scoreDef//mei:staffDef
+       
         let $snippet := <controlEvents>{
                                 for $elem in $doc//mei:measure[preceding::mei:pb[1]/@xml:id = $pb.before/@xml:id]
                                 return
@@ -49,7 +51,7 @@ declare function local:getSurfaces($source as xs:string, $mdiv as xs:string) as 
         return
             '{"id": "' || $surface/@xml:id || '",' ||
             '"staffs":[' || local:jsonifyStaffNr($pb) || '],' ||
-            '"measures":[' || local:jsonifyStaffNr($measure) || '],' ||
+            '"measures":[' || local:jsonifyMeasureNr($measure) || '],' ||
             '"n": "' || $surface/@n || '"' ||
             '}'
 };
@@ -86,6 +88,7 @@ declare function local:getMovements($source as xs:string) as xs:string* {
 };
 
 let $sources := xmldb:get-child-collections('/db/apps/controlevents-data')
+
 return
     '[' || 
     string-join(
