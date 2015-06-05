@@ -33,8 +33,11 @@ Ext.define('pmdCE.view.main.EditDialog', {
     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
         selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
     }
-    else{
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
          selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+    }
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+         selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
     }
     	  
        if(selection.data.depth === 1){
@@ -61,6 +64,9 @@ Ext.define('pmdCE.view.main.EditDialog', {
 	      }	
 	      
 	      if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
+	           vordRend = selectedNode.data.rend;
+	      }
+	      else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
 	           vordRend = selectedNode.data.rend;
 	      }
 	      
@@ -94,6 +100,9 @@ Ext.define('pmdCE.view.main.EditDialog', {
 	                   vordTStamp2 = selectedNode.data.tstamp2;
 	                   
 	                   if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
+	           vordRend = selectedNode.data.rend;
+	      }
+	         else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
 	           vordRend = selectedNode.data.rend;
 	      }
 	      
@@ -172,7 +181,8 @@ tstampField.setValue(vordTStamp);
              selectedNode.set('tstamp', tstampField.value);
          
          }
-         if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1 || tstampField2.getValue() !== ""){
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1 || tstampField2.getValue() !== " 
+            || Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
              selectedNode.set('tstamp2', tstampField2.getValue());
          }
         
@@ -196,10 +206,15 @@ tstampField.setValue(vordTStamp);
 	       Ext.getCmp('cegridpanel').showXMLforSelectedElement(parentNode);
 	       Ext.getCmp('addelementbutton').setDisabled(false);
         }
-        else{
+        else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
             Ext.getCmp('dynamsgridpanel').setSelection(parentNode);
             Ext.getCmp('addelementbutton_1').setDisabled(false);
 	        Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(parentNode);
+        }
+         else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+            Ext.getCmp('dirsgridpanel').setSelection(parentNode);
+            Ext.getCmp('addelementbutton_2').setDisabled(false);
+	        Ext.getCmp('dirsgridpanel').showXMLforSelectedElement(parentNode);
         }
 	  
 	   
@@ -211,9 +226,13 @@ else{
 	       Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
 	       
         }
-        else{
+        else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
             Ext.getCmp('dynamsgridpanel').setSelection(selectedNode);
             Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(selectedNode);
+        }
+        else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+            Ext.getCmp('dirsgridpanel').setSelection(selectedNode);
+            Ext.getCmp('dirsgridpanel').showXMLforSelectedElement(selectedNode);
         }
 }
          

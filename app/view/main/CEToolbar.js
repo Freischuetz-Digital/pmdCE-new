@@ -92,16 +92,33 @@ var modAndCreateDynams = dynamsStore.getUpdatedRecords();
 var deletedDynams = dynamsStore.getRemovedRecords();
 var modDynams = modAndCreateDynams.concat(deletedDynams);
 
+var dirsStore = pmdCE.getApplication().getDirDataStore();
+var modAndCreateDirs = dirsStore.getUpdatedRecords();
+var deletedDirs = dirsStore.getRemovedRecords();
+var modDirs = modAndCreateDirs.concat(deletedDirs);
+
 var modRecords = modHairpins.concat(modDynams);
+modRecords.concat(modDirs);
 
 console.log("******DATA******");
 console.log(modRecords);
 
 var objects = $('<div></div>');
 
+
+
 for(var i = 0; i < modRecords.length ; i++){
 // dynams
-if(modRecords[i].data.type === 'dynam'){
+if(modRecords[i].data.type === 'dynam' || modRecords[i].data.type === 'dir'){
+
+    var typeElement = null;
+    if(modRecords[i].data.type === 'dynam'){
+    typeElement = '<dynam></dynam>';
+    }
+    else{
+        typeElement = '<dir></dir>';
+    }
+    
      if(modRecords[i].data.obvious){
         var object = $('<div></div>', {
                 id: modRecords[i].data.id,
@@ -109,7 +126,7 @@ if(modRecords[i].data.type === 'dynam'){
                 sourcePath: pagesButton.getText(),
                 measureid: modRecords[i].data.measureid
          });        
-            var code = $('<dynam></dynam>', {
+            var code = $(typeElement, {
                staff : modRecords[i].data.staff2 !== "" ? modRecords[i].data.staff+' '+modRecords[i].data.staff2 : modRecords[i].data.staff,
                 place: modRecords[i].data.place,
                 tstamp: modRecords[i].data.tstamp,
@@ -150,7 +167,7 @@ if(modRecords[i].data.type === 'dynam'){
             for(var j = 0; j < modRecords[i].childNodes.length ; j++){
                 if(modRecords[i].childNodes[j].data.tag === 'orig'){
                     var orig = $('<orig></orig>');
-                    var hair =  $('<dynam></dynam>', {
+                    var hair =  $(typeElement, {
                         staff : modRecords[i].childNodes[j].data.staff2 !== '' ? modRecords[i].childNodes[j].data.staff+' '+modRecords[i].childNodes[j].data.staff2 : modRecords[i].childNodes[j].data.staff,
                         place: modRecords[i].childNodes[j].data.place,
                         tstamp: modRecords[i].childNodes[j].data.tstamp,
@@ -173,7 +190,7 @@ if(modRecords[i].data.type === 'dynam'){
                 }
                 if(modRecords[i].childNodes[j].data.tag === 'reg'){
                         var reg = $('<reg></reg>');
-                        var hair =  $('<dynam></dynam>', {
+                        var hair =  $(typeElement, {
                         staff : modRecords[i].childNodes[j].data.staff2 !== '' ? modRecords[i].childNodes[j].data.staff+' '+modRecords[i].childNodes[j].data.staff2 : modRecords[i].childNodes[j].data.staff,
                         place: modRecords[i].childNodes[j].data.place,
                         tstamp: modRecords[i].childNodes[j].data.tstamp,
@@ -446,9 +463,9 @@ else{
        
         facsimileView = new pmdCE.view.main.FacsimileView();
         Ext.getCmp('cepanel').add(facsimileView);
-       /*  var facsimileStore = app.getFacsimileStore();
+         var facsimileStore = app.getFacsimileStore();
         facsimileStore.getProxy().extraParams.path = item.text;
-        facsimileStore.load();*/
+        facsimileStore.load();
         
       /*  Ext.getCmp('facsimileview').setBind({
      store: facsimileStore
@@ -493,6 +510,26 @@ else{
          dynamsStore.getProxy().extraParams.path = item.text;
          dynamsStore.load();
          Ext.getCmp('dynamsgridpanel').getView().bindStore(dynamsStore); 
+         
+         // dirs
+       if(typeof Ext.getCmp('dirsxmlview') !== 'undefined'){
+            // TODO: save?
+            Ext.getCmp('dirsitem').removeAll(true);
+        }  
+       dirsView = new pmdCE.view.main.dirs.DirsGridPanel();
+       Ext.getCmp('dirsitem').add(dirsView);
+       
+       dirsButtons = new pmdCE.view.main.dirs.DirsButtonsPanel();
+       Ext.getCmp('dirsitem').add(dirsButtons);
+       
+        dirsXmlView = new pmdCE.view.main.XMLEditorView({
+             id: 'dirsxmlview'
+         });  
+        Ext.getCmp('dirsitem').add(dirsXmlView);
+       var dirsStore = app.getDirDataStore();
+         dirsStore.getProxy().extraParams.path = item.text;
+         dirsStore.load();
+         Ext.getCmp('dirsgridpanel').getView().bindStore(dirsStore);         
        
     },
       

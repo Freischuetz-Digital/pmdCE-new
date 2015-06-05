@@ -359,10 +359,15 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
     prefix = 'hairpin_';
         elType = 'hairpin';
     }
-    else{
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
         modelPath = 'pmdCE.model.Dynam';
          prefix = 'dynam_';
          elType = 'dynam';
+    }
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+        modelPath = 'pmdCE.model.Dir';
+         prefix = 'dir_';
+         elType = 'dir';
     }
     
     var hairId = prefix + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);return v.toString(16);});
@@ -426,22 +431,27 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
 	    var root = null;
 	    if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
 	        root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-	    
-	    }
-	    else{
-	        root = pmdCE.getApplication().getDynamDataStore().getRootNode();
-	    }
-	    var parent = root.appendChild(hairpin);
+	         var parent = root.appendChild(hairpin);
 	   
-	    parent.expand();
+	       parent.expand();
+	       Ext.getCmp('cegridpanel').setSelection(hairpin);
 	    
-	     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
-            Ext.getCmp('cegridpanel').setSelection(hairpin);
-        }
-        else{
-            Ext.getCmp('dynamsgridpanel').setSelection(hairpin);
-            
-        }
+	    }
+	    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
+	        root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+	         var parent = root.appendChild(hairpin);
+	   
+	       parent.expand();
+	       Ext.getCmp('dynamsgridpanel').setSelection(hairpin);
+	    }
+	     else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+	        root = pmdCE.getApplication().getDirDataStore().getRootNode();
+	         var parent = root.appendChild(hairpin);
+	   
+	       parent.expand();
+	       Ext.getCmp('dirsgridpanel').setSelection(hairpin);
+	    }
+	  
 	   
 	    Ext.getCmp('saveButton').setDisabled(false);
             this.up('window').close();

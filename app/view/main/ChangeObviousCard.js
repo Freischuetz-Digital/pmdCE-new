@@ -27,6 +27,7 @@ Ext.define('pmdCE.view.main.ChangeObviousCard', {
     endTaktField: null,
     placeField: null,
     formField: null,
+    rend: null,
     
       tstampField: null,
       tstamp2Field: null,
@@ -43,9 +44,19 @@ Ext.define('pmdCE.view.main.ChangeObviousCard', {
          
          me = this;
          
+             if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
          selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-	  
+	  }
+	  else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
+	      selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+	  rootNode = pmdCE.getApplication().getDynamDataStore().getRootNode();
+	  }
+	  else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+	      selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
+	  rootNode = pmdCE.getApplication().getDirDataStore().getRootNode();
+	  }
+    
 	  for(var i = 0; i < rootNode.childNodes.length ; i++){
 	  if(rootNode.childNodes[i].data.id === selection.data.id
 	  && rootNode.childNodes[i].data.name === selection.data.name){
@@ -61,21 +72,28 @@ Ext.define('pmdCE.view.main.ChangeObviousCard', {
         staffField = this.createComboBoxStaff('Staff'); 
         staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
-        staffFieldCopy.setDisabled(true);
-        
+        staffFieldCopy.setDisabled(true);       
         startTaktField = this.createComboBoxMeasureNr('Start measure');
         startTaktField.validate();
         endTaktField = this.createComboBoxMeasureNr('End measure');
         endTaktField.validate();
         placeField = this.createComboBox('Place');
-        placeField.validate();
-        formField = this.createComboBoxForm('Form');
-        formField.validate();
-        
+        placeField.validate();       
         tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
         tstampField.validate();
-        tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
-        tstamp2Field.validate();
+          // hairpin
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             formField = this.createComboBoxForm('Form'); 
+             tstamp2Field = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
+             tstamp2Field.validate(); 
+         }
+         // dynams
+         else{
+             formField = this.createTextField('formOrig', 'Form'); 
+             tstamp2Field = this.createTextFieldTstamp2('tstamp2FieldOrig', 'Tstamp2');
+             rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
+         }
+         formField.validate();
        
           this.items  = [
         {
@@ -111,13 +129,18 @@ Ext.define('pmdCE.view.main.ChangeObviousCard', {
              margin: '0 10 0 0',
                 defaults: {
                     anchor: '100%'
-                },        
-                items: [
-                staffFieldCopy,
-               // satffFieldBetween,
+                }, 
+                
+                 items : Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
+                        staffFieldCopy,
                  placeField,
                 formField
-                ]
+                    ] : [
+                       staffFieldCopy,
+                 placeField,
+                formField,
+                       rend               
+                    ]
             },
             {
             xtype: 'fieldset',
@@ -190,9 +213,21 @@ Ext.define('pmdCE.view.main.ChangeObviousCard', {
        
     createElement: function () {
     
+     var elType = null;
+     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+        elType = 'hairpin';
+    }
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
+         elType = 'dynam';
+    }
+     else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+         elType = 'dir';
+    }
+    
      selectedNode.data.name = formField.getValue()+'_s'+staffField.getValue()+'_m'+placeField.getValue();
 	  selectedNode.data.obvious = true;
          selectedNode.data.ambiguous = false;
+         selectedNode.data.type = elType;
         selectedNode.data.staff = staffField.getValue();
           selectedNode.data.tstamp = tstampField.getValue();
            selectedNode.data.tstamp2 = tstamp2Field.getValue();
@@ -207,9 +242,21 @@ Ext.define('pmdCE.view.main.ChangeObviousCard', {
              
              selectedNode.removeAll();
              
-             Ext.getCmp('cegridpanel').setSelection(selectedNode);
-             Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
-    
+              if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+            Ext.getCmp('cegridpanel').setSelection(selectedNode);
+            Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
+        }
+        else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
+            Ext.getCmp('dynamsgridpanel').setSelection(selectedNode);
+            Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(selectedNode);
+            
+        }
+        else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+            Ext.getCmp('dirsgridpanel').setSelection(selectedNode);
+            Ext.getCmp('dirsgridpanel').showXMLforSelectedElement(selectedNode);
+            
+        }
+         
         Ext.getCmp('saveButton').setDisabled(false);
         Ext.getCmp('addelementbutton').setDisabled(true);
       
@@ -226,11 +273,20 @@ Ext.define('pmdCE.view.main.ChangeObviousCard', {
         if(typeof Ext.getCmp('cemain').getVerEndId() != 'undefined'){
              Ext.getCmp('endtime').removeAll(true);
         }
-                                   
+        
+                                  
            tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
         tstampField.validate();
-        tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
-        tstamp2Field.validate();
+          // hairpin
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+             tstamp2Field = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
+             tstamp2Field.validate(); 
+         }
+         // dynams
+         else{
+             tstamp2Field = this.createTextFieldTstamp2('tstamp2FieldOrig', 'Tstamp2');
+         }
+        
             Ext.getCmp('starttime').add(tstampField);
             Ext.getCmp('endtime').add(tstamp2Field);
             
@@ -274,6 +330,29 @@ Ext.define('pmdCE.view.main.ChangeObviousCard', {
         listeners: {
         focus: function(e, eOpts ){
            me1.handleCreateButton();
+        }
+        }
+   });
+
+return ceTextField;
+},
+
+ createTextFieldTstamp2: function(fieldName, fieldLabel){
+        var me1 = this;
+    var ceTextField = Ext.create('Ext.form.field.Text',{
+        name: fieldName,
+        id: fieldName,
+        fieldLabel: fieldLabel,
+        listeners: {
+        focus: function(e, eOpts ){
+           
+           me1.handleCreateButton();
+        },
+         render: function(c) {
+            c.getEl().on('keyup', function() {   
+           
+           me1.handleCreateButton();
+            }, c);
         }
         }
    });

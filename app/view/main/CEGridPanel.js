@@ -53,16 +53,22 @@ Ext.define('pmdCE.view.main.CEGridPanel', {
    if(object.selection.data.type === 'hairpin'){
        selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
    }
-   else{
+   else if(object.selection.data.type === 'dynam'){
        selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+   }
+   else if(object.selection.data.type === 'dir'){
+       selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
    }
   
    if(selection.data.obvious || selection.data.depth === 2){ 
    if(selection.data.type === 'hairpin'){
        Ext.getCmp('cemain').setComponentType('Hairpin'); 
    }
-   else{
+   else if(selection.data.type === 'dynam'){
        Ext.getCmp('cemain').setComponentType('Dynam'); 
+   }
+   else if(selection.data.type === 'dir'){
+       Ext.getCmp('cemain').setComponentType('Dir'); 
    }
      
     var win = new pmdCE.view.main.EditDialog();

@@ -34,9 +34,13 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
         selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
         root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
     }
-    else{
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
          selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
          root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+    }
+     else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+         selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
+         root = pmdCE.getApplication().getDirDataStore().getRootNode();
     }
     selectedNode = selection;
     
@@ -72,8 +76,11 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
                 if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
                     $('#xmleditorview-body').html('');
                 }
-                else{
+                else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
                     $('#dynamsxmlview-body').html('');
+                }
+                else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+                    $('#dirsxmlview-body').html('');
                 }                
             }
             else{
@@ -81,8 +88,12 @@ Ext.define('pmdCE.view.main.DeleteDialog', {
                 if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
                     Ext.getCmp('cegridpanel').setSelection(newSelection);
                 }
-                else{
+                else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
                     Ext.getCmp('dynamsgridpanel').setSelection(newSelection);
+            
+                }
+                else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+                    Ext.getCmp('dirsgridpanel').setSelection(newSelection);
             
                 }
             }

@@ -114,9 +114,13 @@ Ext.define('pmdCE.view.main.ChangeToChoiceTimeStaffCard', {
          selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 	  rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	  }
-	  else{
+	  else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
 	      selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
 	  rootNode = pmdCE.getApplication().getDynamDataStore().getRootNode();
+	  }
+	  else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+	      selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
+	  rootNode = pmdCE.getApplication().getDirDataStore().getRootNode();
 	  }
      
 	  for(var i = 0; i < rootNode.childNodes.length ; i++){
@@ -707,8 +711,11 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
      if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
         elType = 'hairpin';
     }
-    else{
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
          elType = 'dynam';
+    }
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+         elType = 'dir';
     }
 	 
 	  selectedNode.data.name = 'choice_m'+startTaktField.getValue();
@@ -833,9 +840,14 @@ checkBoxReg4  = this.createCheckBox('Disable reg', 'checkBoxReg4');
             Ext.getCmp('cegridpanel').setSelection(selectedNode);
             Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
         }
-        else{
+        else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
             Ext.getCmp('dynamsgridpanel').setSelection(selectedNode);
             Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(selectedNode);
+            
+        }
+        else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+            Ext.getCmp('dirsgridpanel').setSelection(selectedNode);
+            Ext.getCmp('dirsgridpanel').showXMLforSelectedElement(selectedNode);
             
         }
 	  

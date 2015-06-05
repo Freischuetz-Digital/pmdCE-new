@@ -508,10 +508,15 @@ staffFieldReg3.validate();
     prefix = 'hairpin_';
     elType = 'hairpin';       
     }
-    else{
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
         modelPath = 'pmdCE.model.Dynam';
          prefix = 'dynam_';
          elType = 'dynam';     
+    }
+    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+        modelPath = 'pmdCE.model.Dir';
+         prefix = 'dir_';
+         elType = 'dir';     
     }
     
     
@@ -592,8 +597,11 @@ staffFieldReg3.validate();
 	        root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 	    
 	    }
-	    else{
+	    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
 	        root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+	    }
+	    else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+	        root = pmdCE.getApplication().getDirDataStore().getRootNode();
 	    }
 	    var parent = root.appendChild(hairpin);
 	   
@@ -620,8 +628,12 @@ staffFieldReg3.validate();
 	     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
             Ext.getCmp('cegridpanel').setSelection(hairpin);
         }
-        else{
+        else if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1){
             Ext.getCmp('dynamsgridpanel').setSelection(hairpin);
+            
+        }
+        else if(Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
+            Ext.getCmp('dirsgridpanel').setSelection(hairpin);
             
         }
 	    
