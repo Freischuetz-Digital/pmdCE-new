@@ -923,14 +923,14 @@ createTextFieldTstamp2: function(fieldName, fieldLabel){
                tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
                
            }
-             if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
-             formFieldReg1.setValue(formField.getValue());
-                formFieldReg2.setValue(formField.getValue());
-                formFieldReg3.setValue(formField.getValue());
-                formFieldReg4.setValue(formField.getValue());
-                formFieldReg5.setValue(formField.getValue());
-                formFieldReg6.setValue(formField.getValue());
-           }
+            if(me.selectedFieldId === 'rendOrig' && !expertCheckBox.getValue()){
+               rendReg1.setValue(rend.getValue());
+               rendReg2.setValue(rend.getValue());
+               rendReg3.setValue(rend.getValue());
+               rendReg4.setValue(rend.getValue());
+               rendReg5.setValue(rend.getValue());
+               rendReg6.setValue(rend.getValue());
+           }    
            
            me1.handleCreateButton();
         },
@@ -950,14 +950,14 @@ createTextFieldTstamp2: function(fieldName, fieldLabel){
                tstamp2FieldReg6.setValue(tstamp2FieldOrig.getValue());
                
            }
-             if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
-             formFieldReg1.setValue(formField.getValue());
-                formFieldReg2.setValue(formField.getValue());
-                formFieldReg3.setValue(formField.getValue());
-                formFieldReg4.setValue(formField.getValue());
-                formFieldReg5.setValue(formField.getValue());
-                formFieldReg6.setValue(formField.getValue());
-           }        
+             if(me.selectedFieldId === 'rendOrig' && !expertCheckBox.getValue()){
+               rendReg1.setValue(rend.getValue());
+               rendReg2.setValue(rend.getValue());
+               rendReg3.setValue(rend.getValue());
+               rendReg4.setValue(rend.getValue());
+               rendReg5.setValue(rend.getValue());
+               rendReg6.setValue(rend.getValue());
+           }    
            me1.handleCreateButton();
             }, c);
         }

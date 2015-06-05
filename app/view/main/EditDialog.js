@@ -184,7 +184,7 @@ tstampField.setValue(vordTStamp);
                selectedNode.set('form', formField.getValue());
         
          }
-         if(rend !== null){
+         if(typeof rend !== 'undefined'){
              selectedNode.set('rend', rend.getValue());
          }
          

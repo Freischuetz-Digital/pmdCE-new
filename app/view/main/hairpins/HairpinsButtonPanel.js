@@ -13,7 +13,7 @@ Ext.define('pmdCE.view.main.hairpins.HairpinsButtonPanel', {
   deleteElementButton = this.deleteElementButton("deleteButton", 'Hairpin');
    deleteElementButton.setDisabled(true);
    
-   changeToButton = this.createChangeToButton('changetobutton', 'changetobuttonchoice', 'changetobuttonhairpin');
+   changeToButton = this.createChangeToButton('changetobutton', 'changetobuttonchoice', 'changetobuttonhairpin', 'Hairpin');
    changeToButton.setDisabled(true);
   
 this.items = [

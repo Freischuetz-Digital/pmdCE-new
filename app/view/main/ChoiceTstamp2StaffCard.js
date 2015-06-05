@@ -750,11 +750,11 @@ return ceTextField;
                tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
                
            }
-            if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
-             formFieldReg1.setValue(formField.getValue());
-                formFieldReg2.setValue(formField.getValue());
-                formFieldReg3.setValue(formField.getValue());
-                formFieldReg4.setValue(formField.getValue());
+             if(me.selectedFieldId === 'rendOrig'){
+               rendReg1.setValue(rend.getValue());
+               rendReg2.setValue(rend.getValue());
+                rendReg3.setValue(rend.getValue());
+               rendReg4.setValue(rend.getValue());
            }
            me1.handleCreateButton();
         },
@@ -772,11 +772,11 @@ return ceTextField;
                tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
                
            }
-            if(me.selectedFieldId === 'formOrig' && !expertCheckBox.getValue()){
-             formFieldReg1.setValue(formField.getValue());
-                formFieldReg2.setValue(formField.getValue());
-                formFieldReg3.setValue(formField.getValue());
-                formFieldReg4.setValue(formField.getValue());
+             if(me.selectedFieldId === 'rendOrig'){
+               rendReg1.setValue(rend.getValue());
+               rendReg2.setValue(rend.getValue());
+                rendReg3.setValue(rend.getValue());
+               rendReg4.setValue(rend.getValue());
            }
           
            me1.handleCreateButton();

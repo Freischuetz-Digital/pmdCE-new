@@ -551,6 +551,10 @@ getSelectedFieldId: function(){
                rendReg1.setValue(rend.getValue());
                rendReg2.setValue(rend.getValue());
            }
+         if(me.selectedFieldId === 'tstamp2FieldOrig' && !expertCheckBox.getValue()){
+               tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+               tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+           }
            
            me1.handleCreateButton();
         },

@@ -59,22 +59,21 @@ return ceButton;
 },
 
 
-createChangeToButton: function(buttonId, menuChoiceId, menuHairpinId){
-var me = this;
+createChangeToButton: function(buttonId, menuChoiceId, menuHairpinId, elementName){
+
+    var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 8, elementName);
     
-    var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 8, me);
+    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (1-2 regs)", 9, elementName);
     
-    var menuTStamp22Reg  = this.createMenuItem("for Tstamp2 (1-2 regs)", 9, me);
+    var menuStaff2Reg  = this.createMenuItem("for Staff (1-2 regs)", 10, elementName);
     
-    var menuStaff2Reg  = this.createMenuItem("for Staff (1-2 regs)", 10, me);
-    
-     var menuTime4Reg  = this.createMenuItem("for Time (2-4 regs)", 11, me);
+     var menuTime4Reg  = this.createMenuItem("for Time (2-4 regs)", 11, elementName);
      
-     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (3-4 regs)", 12, me);
+     var menuTStampAndStaff4Reg  = this.createMenuItem("for Tstamp and Staff (3-4 regs)", 12, elementName);
      
-     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (3-4 regs)", 13, me);
+     var menuTStamp2AndStaff4Reg  = this.createMenuItem("for Tstamp2 and Staff (3-4 regs)", 13, elementName);
      
-      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (4-6 regs)", 14, me);
+      var menuTimeAndStaff4Reg  = this.createMenuItem("for Time and Staff (4-6 regs)", 14, elementName);
       
     var ceButton = Ext.create('Ext.button.Button', {  
                     xtype: 'button',
@@ -103,6 +102,7 @@ var me = this;
                 id: menuHairpinId,
                 icon: 'resources/images/mix_volume.png',
                 handler: function() {
+                Ext.getCmp('cemain').setComponentType(elementName); 
                     var win = new pmdCE.view.main.ChangeObviousElDialog();
                             win.show();
                 }

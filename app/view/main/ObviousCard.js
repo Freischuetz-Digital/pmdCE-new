@@ -260,11 +260,23 @@ Ext.define('pmdCE.view.main.ObviousCard', {
         if(typeof Ext.getCmp('cemain').getVerEndId() != 'undefined'){
              Ext.getCmp('endtime').removeAll(true);
         }
-                                   
-           tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
-        tstampField.validate();
-        tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
-        tstamp2Field.validate();
+                  
+              tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
+        tstampField.validate();      
+                  
+                   // hairpin
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+           
+             tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
+             tstamp2Field.validate(); 
+         }
+         // dynams
+         else{
+            
+             tstamp2Field = this.createTextFieldTstamp2('tstampField2Obv', 'Tstamp2');
+            
+         }
+         
             Ext.getCmp('starttime').add(tstampField);
             Ext.getCmp('endtime').add(tstamp2Field);
             

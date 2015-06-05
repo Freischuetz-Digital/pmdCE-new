@@ -446,7 +446,7 @@ else{
        
         facsimileView = new pmdCE.view.main.FacsimileView();
         Ext.getCmp('cepanel').add(facsimileView);
-      /*   var facsimileStore = app.getFacsimileStore();
+       /*  var facsimileStore = app.getFacsimileStore();
         facsimileStore.getProxy().extraParams.path = item.text;
         facsimileStore.load();*/
         

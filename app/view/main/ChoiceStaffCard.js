@@ -68,11 +68,11 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
          
          // create orig fields
          // common 
-         staffField= this.createComboBoxStaff('Staff');
+         staffField= this.createComboBoxStaff('Staff', "stafforig");
          staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
         staffFieldCopy.setDisabled(true);
-        satffFieldBetween = this.createComboBoxStaff('Second staff'); 
+        satffFieldBetween = this.createComboBoxStaff('Second staff', "secorig"); 
         satffFieldBetween.validate();
         startTaktField= this.createComboBoxMeasureNr('Start measure');
         startTaktField.validate();
@@ -98,7 +98,7 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
 
         // reg1 fields
         // common
-        staffFieldReg1= this.createComboBoxStaff('Staff');  
+        staffFieldReg1= this.createComboBoxStaff('Staff', "staffreg1");  
         staffFieldReg1.validate();      
         placeFieldReg1 = this.createComboBox('Place');
         placeFieldReg1.validate();        
@@ -124,7 +124,7 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
                
     // reg2 fields
     // common
-    staffFieldReg2= this.createComboBoxStaff('Staff');  
+    staffFieldReg2= this.createComboBoxStaff('Staff', "staffreg2");  
     staffFieldReg2.validate();
         placeFieldReg2 = this.createComboBox('Place');
         placeFieldReg2.validate();       
@@ -385,7 +385,7 @@ expertCheckBox = this.createCheckBox1('Set fields editable', 'expert');
                     staff2: satffFieldBetween.getValue(), 
                     tstamp: tstampFieldOrig.getValue(),
                     tstamp2: tstamp2FieldOrig.getValue(),
-                    place: placeFieldOrig.getValue(),
+                    place: placeField.getValue(),
                     form: formField.getValue(),
                     rend: typeof rend!== 'undefined' ? rend.getValue() : null,
                     name: "orig",
@@ -612,7 +612,9 @@ return ceTextField;
 },
 
 
-   createComboBoxStaff: function(fieldName){
+   createComboBoxStaff: function(fieldName,  fieldId){
+   
+   var me10 = this;
   
    var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
    var selectedPage = Ext.getCmp('pages').getText();
@@ -635,10 +637,15 @@ return ceTextField;
     invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
-    if(fieldName.indexOf('Second') === -1){
+    if(fieldName.indexOf('Second') === -1 && fieldId.indexOf('reg') === -1){
         Ext.getCmp('cemain').setStaffNr(combo.getValue());
+        me10.handleNavigationButtons();
         }
-     me.handleNavigationButtons();
+        else{
+           // if(!expertCheckBox.getValue()){
+                me10.handleCreateButton();
+            //}          
+        }   
     }
   }
   });

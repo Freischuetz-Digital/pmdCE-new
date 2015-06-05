@@ -101,8 +101,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
         placeFieldReg1 = this.createComboBox('Place');
         placeFieldReg1.setDisabled(true);
         tstampFieldReg1 = this.createTextField('tstampFieldReg1', 'Tstamp');
-        tstampFieldReg1.validate();
-       
+        tstampFieldReg1.validate();       
         // hairpin
     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
              formFieldReg1 = this.createComboBoxForm('Form'); 
@@ -127,8 +126,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
         placeFieldReg2 = this.createComboBox('Place');
         placeFieldReg2.setDisabled(true);  
     tstampFieldReg2 = this.createTextField('tstampFieldReg2', 'Tstamp');
-    tstampFieldReg2.validate();
-    
+    tstampFieldReg2.validate();    
     // hairpin
     if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
         formFieldReg2 = this.createComboBoxForm('Form');
@@ -609,7 +607,9 @@ return ceTextField;
 },
 
 
-   createComboBoxStaff: function(fieldName){
+   createComboBoxStaff: function(fieldName,  fieldId){
+   
+   var me10 = this;
   
    var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
    var selectedPage = Ext.getCmp('pages').getText();
@@ -632,10 +632,13 @@ return ceTextField;
     invalidCls: '',
     listeners: {
     select: function(combo, record, index) {
+    
+    
+    
     if(fieldName.indexOf('Second') === -1){
         Ext.getCmp('cemain').setStaffNr(combo.getValue());       
         }
-        me.handleNavigationButtons();
+        me10.handleNavigationButtons();
     }
   }
  

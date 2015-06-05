@@ -14,7 +14,7 @@ Ext.define('pmdCE.view.main.dynams.DynamsButtonsPanel', {
   deleteElementButton = this.deleteElementButton("deleteButton_1", 'Dynam');
    deleteElementButton.setDisabled(true);
    
-   changeToButton = this.createChangeToButton('changetobutton_1', 'changetobuttonchoice_1', 'changetobuttonhairpin_1');
+   changeToButton = this.createChangeToButton('changetobutton_1', 'changetobuttonchoice_1', 'changetobuttonhairpin_1', 'Dynam');
    changeToButton.setDisabled(true);
   
 this.items = [
