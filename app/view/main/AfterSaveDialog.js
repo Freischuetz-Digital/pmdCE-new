@@ -35,6 +35,10 @@ Ext.define('pmdCE.view.main.AfterSaveDialog', {
           var dynamsStore = pmdCE.getApplication().getDynamDataStore();
            
             dynamsStore.reload();  
+            
+            var dirsStore = pmdCE.getApplication().getDirDataStore();
+           
+            dirsStore.reload();  
            
             Ext.getCmp('saveButton').setDisabled(true);
              this.up('window').close();

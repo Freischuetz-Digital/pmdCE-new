@@ -14,6 +14,7 @@ Ext.define('pmdCE.view.main.EditDialog', {
   tstampField: null,
    tstampField2: null,
    rend: null,
+   measureField: null,
  
     selection: null,
     selectedNode: null,
@@ -116,6 +117,10 @@ staffField = this.createTextField('staffField', 'Staff');
         
 staffField2 = this.createTextField('secondStaffField', 'Second staff');
 staffField2.setValue(vordStaff2);
+
+measureField = this.createTextField('measureField', 'Measure');
+measureField.setValue(vordStartMeasure);
+
 placeField = this.createComboBox('Place');
 placeField.setValue(vordPlace);
 tstampField = this.createTextField('tstampField', 'Tstamp');
@@ -138,6 +143,7 @@ tstampField.setValue(vordTStamp);
          this.items = Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ? [
              staffField,
                 staffField2,
+                measureField,
                tstampField,
                 tstampField2,
                 placeField,
@@ -146,6 +152,7 @@ tstampField.setValue(vordTStamp);
                     ] : [
                          staffField,
                 staffField2,
+                measureField,
                tstampField,
                 tstampField2,
                 placeField,
@@ -156,18 +163,25 @@ tstampField.setValue(vordTStamp);
     this.buttons = [{
         text:'Update',
         handler: function(){
+        console.log(measureField.getValue());
+        if(measureField.getValue() !== ""){
+                Ext.getCmp('cemain').setStartMeasure(measureField.getValue());
+                 var movement = Ext.getCmp('movement').getText();
+	             Ext.getCmp('cemain').setMeasureId(movement+"_measure"+measureField.getValue());
+        }
         
         if(typeof parentNode !== 'undefined'){
-             parentNode.set('operation', 'change');
-	           parentNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
+             parentNode.set('operation', 'change');           
+	         parentNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
+	         parentNode.set('measurenr', Ext.getCmp('cemain').getStartMeasure());
+	         
         }
         else{
            selectedNode.set('operation', 'change');
-	   selectedNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
-        
-            
+	       selectedNode.set('measureid', Ext.getCmp('cemain').getMeasureId()); 
+	       selectedNode.set('measurenr', Ext.getCmp('cemain').getStartMeasure());
         }
-     	 
+       
           if(staffField.getValue() !== ""){
              selectedNode.set('staff', staffField.getValue());
            
@@ -181,7 +195,7 @@ tstampField.setValue(vordTStamp);
              selectedNode.set('tstamp', tstampField.value);
          
          }
-         if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1 || tstampField2.getValue() !== " 
+         if(Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1 || tstampField2.getValue() !== "" 
             || Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1){
              selectedNode.set('tstamp2', tstampField2.getValue());
          }

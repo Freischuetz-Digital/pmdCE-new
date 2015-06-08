@@ -97,8 +97,9 @@ var modAndCreateDirs = dirsStore.getUpdatedRecords();
 var deletedDirs = dirsStore.getRemovedRecords();
 var modDirs = modAndCreateDirs.concat(deletedDirs);
 
-var modRecords = modHairpins.concat(modDynams);
-modRecords.concat(modDirs);
+var modRecTemp = modHairpins.concat(modDynams);
+
+var modRecords = modRecTemp.concat(modDirs);
 
 console.log("******DATA******");
 console.log(modRecords);
@@ -125,7 +126,8 @@ if(modRecords[i].data.type === 'dynam' || modRecords[i].data.type === 'dir'){
                 operation: modRecords[i].data.operation,
                 sourcePath: pagesButton.getText(),
                 measureid: modRecords[i].data.measureid
-         });        
+         });    
+         
             var code = $(typeElement, {
                staff : modRecords[i].data.staff2 !== "" ? modRecords[i].data.staff+' '+modRecords[i].data.staff2 : modRecords[i].data.staff,
                 place: modRecords[i].data.place,
@@ -463,9 +465,9 @@ else{
        
         facsimileView = new pmdCE.view.main.FacsimileView();
         Ext.getCmp('cepanel').add(facsimileView);
-         var facsimileStore = app.getFacsimileStore();
+       /*  var facsimileStore = app.getFacsimileStore();
         facsimileStore.getProxy().extraParams.path = item.text;
-        facsimileStore.load();
+        facsimileStore.load();*/
         
       /*  Ext.getCmp('facsimileview').setBind({
      store: facsimileStore

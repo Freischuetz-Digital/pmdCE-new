@@ -34,7 +34,7 @@ declare variable $surface := $doc//id($path);
 
 declare variable $slurs := $snippet//(mei:slur[not(./parent::mei:*/parent::mei:choice)]|mei:choice[.//mei:slur]);
 declare variable $dynams := $snippet//(mei:dynam[not(./parent::mei:*/parent::mei:choice)]|mei:choice[.//mei:dynam]);
-declare variable $dirs := $snippet//(mei:dynam[not(./parent::mei:*/parent::mei:choice)]|mei:choice[.//mei:dir]);
+declare variable $dirs := $snippet//(mei:dir[not(./parent::mei:*/parent::mei:choice)]|mei:choice[.//mei:dir]);
 declare variable $choicesDynam := $snippet//(mei:choice[.//mei:dynam]);
 declare variable $choicesDir := $snippet//(mei:choice[.//mei:dir]);
 
@@ -86,7 +86,7 @@ declare function local:jsonifyDirs($dirs) {
                     return 
                         concat('{"id":"',$id,'",',
                             '"name":"',$name,'",',
-                             '"type":"dynam",',
+                             '"type":"dir",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
                              '"icon":"resources/images/mix_volume.png",',
@@ -140,7 +140,7 @@ declare function local:jsonifyElements($elements) {
                     
                     return 
                         concat('{"name":"',$name1,'",',   
-                            '"type":"dynam",',
+                            '"type":"dir",',
                              '"icon":"resources/images/mix_volume.png",',
                             '"tstamp":"',$tstamp,'",',
                             '"tstamp2":"',$tstamp2,'",',
@@ -175,7 +175,7 @@ declare function local:jsonifyDirChoices($choicesDir) {
                     return 
                         concat('{"id":"',$id,'",',
                             '"name":"',$name,'",',
-                            '"type":"dynam",',
+                            '"type":"dir",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
                              '"icon":"resources/images/details-xml.png",',

@@ -99,8 +99,8 @@ Ext.define('pmdCE.Application', {
             model: 'pmdCE.model.Source',
              proxy: {
                  type: 'ajax',
-                url: 'data/pmd_ce_getNavigation.xql',
-              //  url: 'resources/xql/pmd_ce_getNavigation.xql',
+               // url: 'data/pmd_ce_getNavigation.xql',
+                url: 'resources/xql/pmd_ce_getNavigation.xql',
                  reader: {
                      type: 'json',
                      rootProperty: 'sigle'
@@ -115,9 +115,9 @@ Ext.define('pmdCE.Application', {
     extraParams: {path: ''},
              proxy:{
         type: 'ajax',
-      //url: 'resources/xql/getControlEvents.xql'
+      url: 'resources/xql/getControlEvents.xql'
        
-       url: 'resources/data/tree/treegrid_1.json'
+       //url: 'resources/data/tree/treegrid_1.json'
       
     },
     autoLoad: false
@@ -129,9 +129,9 @@ Ext.define('pmdCE.Application', {
     extraParams: {path: ''},
              proxy:{
         type: 'ajax',
-     // url: 'resources/xql/getDynams.xql'
+      url: 'resources/xql/getDynams.xql'
        
-      url: 'resources/data/tree/treegrid_2.json'
+      //url: 'resources/data/tree/treegrid_2.json'
       
     },
     autoLoad: false
@@ -143,16 +143,16 @@ dirDataStore = Ext.create('Ext.data.TreeStore', {
     extraParams: {path: ''},
              proxy:{
         type: 'ajax',
-     // url: 'resources/xql/getDirs.xql'
+      url: 'resources/xql/getDirs.xql'
        
-      url: 'resources/data/tree/treegrid_3.json'
+    //  url: 'resources/data/tree/treegrid_3.json'
       
     },
     autoLoad: false
 });
 
 
-facsimileStore= Ext.create('Ext.data.Store', {
+/*facsimileStore= Ext.create('Ext.data.Store', {
             model: 'pmdCE.model.Source',
             extraParams: {path: ''},
              proxy: {
@@ -165,7 +165,7 @@ facsimileStore= Ext.create('Ext.data.Store', {
 //                 }
              },
              autoLoad: true
-         });
+         });*/
   
        
          sourcesStore.load(); 
@@ -176,9 +176,9 @@ facsimileStore= Ext.create('Ext.data.Store', {
     return sourcesStore;
     },
     
-    getFacsimileStore: function(){
+    /*getFacsimileStore: function(){
     return facsimileStore;
-    },
+    },*/
     
     getSaveStore: function(){
     return saveStore;
