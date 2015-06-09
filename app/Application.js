@@ -84,7 +84,6 @@ Ext.define('pmdCE.Application', {
     hairpinStart: null,
     facsimilePath: null,
     saveStore: null,
-    facsimileStore: null,
     
     pageNr: null,
     
@@ -117,7 +116,7 @@ Ext.define('pmdCE.Application', {
         type: 'ajax',
       url: 'resources/xql/getControlEvents.xql'
        
-       //url: 'resources/data/tree/treegrid_1.json'
+    //   url: 'resources/data/tree/treegrid_1.json'
       
     },
     autoLoad: false
@@ -145,29 +144,12 @@ dirDataStore = Ext.create('Ext.data.TreeStore', {
         type: 'ajax',
       url: 'resources/xql/getDirs.xql'
        
-    //  url: 'resources/data/tree/treegrid_3.json'
+     // url: 'resources/data/tree/treegrid_3.json'
       
     },
     autoLoad: false
 });
-
-
-/*facsimileStore= Ext.create('Ext.data.Store', {
-            model: 'pmdCE.model.Source',
-            extraParams: {path: ''},
-             proxy: {
-                 type: 'ajax',
-                 url: 'data/getZones.xql'
-               // url: 'resources/xql/getZones.xql',
-//                reader: {
-//                     type: 'json',
-//                     rootProperty: 'sigle'
-//                 }
-             },
-             autoLoad: true
-         });*/
-  
-       
+     
          sourcesStore.load(); 
     },
     
@@ -175,11 +157,7 @@ dirDataStore = Ext.create('Ext.data.TreeStore', {
     getSourcesStore: function(){
     return sourcesStore;
     },
-    
-    /*getFacsimileStore: function(){
-    return facsimileStore;
-    },*/
-    
+ 
     getSaveStore: function(){
     return saveStore;
     },

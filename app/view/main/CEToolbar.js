@@ -378,7 +378,7 @@ else{
                             for(var k = 0; k < itemsArray[i].data.mdivs[j].pages.length ; k++){
                             var key = itemsArray[i].data.mdivs[j].pages[k].id;
                             this.pageMeasuresMap[key] = itemsArray[i].data.mdivs[j].pages[k].measures;                         
-                            this.staffNr[key] = itemsArray[i].data.mdivs[j].pages[k].staffs;  
+                            this.staffNr[key] = itemsArray[i].data.mdivs[j].pages[k].staffs;                           
                             var menuItem = Ext.create('Ext.menu.Item', {
                             itemId: itemsArray[i].data.mdivs[j].pages[k].id, 
                             text: itemsArray[i].data.mdivs[j].pages[k].id,
@@ -453,10 +453,10 @@ else{
         alert('save?')
         saveButton.setDisabled(true);
         } */
-       
+        
      
       var app = pmdCE.getApplication();
-       
+     
        // create facsimile view and load facsimile
       if(typeof Ext.getCmp('facsimileview') !== 'undefined'){
            Ext.getCmp('cepanel').remove('facsimileview');
@@ -465,15 +465,7 @@ else{
        
         facsimileView = new pmdCE.view.main.FacsimileView();
         Ext.getCmp('cepanel').add(facsimileView);
-       /*  var facsimileStore = app.getFacsimileStore();
-        facsimileStore.getProxy().extraParams.path = item.text;
-        facsimileStore.load();*/
-        
-      /*  Ext.getCmp('facsimileview').setBind({
-     store: facsimileStore
- });*/
-    
-        
+      
         // create editor for hairpins and load
         if(typeof Ext.getCmp('verovioview') !== 'undefined'){
             // TODO: save?
@@ -492,6 +484,7 @@ else{
          store.getProxy().extraParams.path = item.text;
          store.load();
          Ext.getCmp('cegridpanel').getView().bindStore(store);  
+        
        
        // dynams
        if(typeof Ext.getCmp('dynamsxmlview') !== 'undefined'){

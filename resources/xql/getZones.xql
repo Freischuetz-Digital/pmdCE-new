@@ -11,6 +11,9 @@ declare namespace transform="http://exist-db.org/xquery/transform";
 
 declare option exist:serialize "method=xhtml media-type=text/html omit-xml-declaration=yes indent=yes";
 
+declare variable $path := request:get-parameter('path', '');
+declare variable $typeString := request:get-parameter('types', 'all');
+
 declare function local:getJson($surface,$types) {
 
     let $page := $surface
@@ -50,8 +53,8 @@ declare function local:getJson($surface,$types) {
     
 };
 
-let $path := request:get-parameter('path', '')
-let $typeString := request:get-parameter('types', 'all')
+(:let $path := request:get-parameter('path', ''):)
+(:let $typeString := request:get-parameter('types', 'all'):)
 
 (:let $doc := doc('/db/apps/controlevents-data/' || $path):)
 let $doc := collection($freidi-pmd:ce-data)//mei:surface[@xml:id = $path]

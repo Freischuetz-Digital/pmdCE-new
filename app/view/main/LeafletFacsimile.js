@@ -1,37 +1,49 @@
 Ext.define('pmdCE.view.main.LeafletFacsimile', {
 		extend: 'Ext.Component',
+		requires: [
+        'pmdCE.model.Zone'
+    ],
 		alias: 'widget.leafletmapview',
 		id: 'leafletfacsimile',
 		config:{
 			map: null
 		},
+		 me: null,
+		
+		
 		afterRender: function(t, eOpts){
+		me = this;
 			this.callParent(arguments);
  
 			var leafletRef = window.L;
 			if (leafletRef == null){
 				this.update('No leaflet library loaded');
-			} else {
-				
-       var app = pmdCE.getApplication();
+			} 
+			else {
+		
+      var selectedPage = Ext.getCmp('pages').getText();
         
-       var store = app.getFacsimileStore();
+        Ext.Ajax.request({
+    url: 'resources/xql/getZones.xql',
+   // url: 'data/getZones.xql',
+    async: false,
+    method: 'GET',
+    params: {
+        path: selectedPage
+    },
+    success: function(result){
        
-       // var app = pmdCE.getApplication();
-       // var facsimileStore = app.getFacsimileStore();
-       // store.getProxy().extraParams.path = Ext.getCmp('pages').getText();
-      //  store.load();
-       
-        
-      /*  store.getProxy().extraParams.path = Ext.getCmp('pages').getText();
-        store.load();*/
-         
+                var json = jQuery.parseJSON(result.responseText);
+                
+                var zones = json.zones;
+                var page = json.page;
+    
          facsimileHeight = 
-         //4315;
-         store.data.items[0].data.page[0].height;
+        // 2992;
+         page.height;
         facsimileWidth = 
-        //3525;
-        store.data.items[0].data.page[0].width;
+       // 3991;
+        page.width;
         var originalMaxSize = null;
         
         if(facsimileHeight > facsimileWidth){
@@ -48,78 +60,105 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
 		  }
 		  console.log("maxZoomLevel :"+maxZoomLevel);  
           
-            var map = L.map(this.getId());
+            var map = L.map(me.getId());
 				
-				map.setView([0, 0], 1);
+				map.setView([0, 0], Math.round(maxZoomLevel/2));
 				
-				this.setMap(map);
+				me.setMap(map);
+				
+				 var sourceName = Ext.getCmp('source').getText();
+				
+				 var pageName = Ext.getCmp('pages').getText();
+				
+				 var path = 'http://localhost:8080/exist/apps/controlevents-data/'+sourceName+'/'+pageName+'/{z}-{x}-{y}.jpg';
             
             
-           var facsimileTile =  L.tileLayer.facsimileLayer('resources/data/example/{z}-{x}-{y}.jpg', {
+           var facsimileTile = /*L.tileLayer.facsimileLayer('resources/data/example/{z}-{x}-{y}.jpg', {
                 minZoom: 0,
                 maxZoom: maxZoomLevel,
 		        continuousWorld : true
-            }); 
+            }); 'http://localhost:8080/exist/apps/controlevents-data/D1849/D1849_p102/{z}-{x}-{y}.jpg'*/
+          
            
-           
-          /* L.tileLayer.facsimileLayer('http://localhost:8080/exist/apps/controlevents-data/D1849/D1849_p106/{z}-{x}-{y}.jpg', {
+           L.tileLayer.facsimileLayer(path, {
                 minZoom: 0,
                 maxZoom: maxZoomLevel,
 		        continuousWorld : true
-            });*/ 
+            });
+              
+              facsimileTile.setWidth(facsimileWidth);
+              
+              facsimileTile.setHeight(facsimileHeight);
               
            facsimileTile.addTo(map);
            
-           var selectedPage = Ext.getCmp('pages').getText(); 
+          /* var selectedPage = Ext.getCmp('pages').getText(); 
             var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
             var test = pageStaffMap[selectedPage];
             var staffNr = test[test.length-1];
          var pageMeasuresMap = Ext.getCmp('cetoolbar').pageMeasuresMap; 
             var test = pageMeasuresMap[selectedPage];  
-            var value = test[0];
-           
-           var zones = store.data.items[0].data.zones;
+            var value = test[0];*/
+            
            for(i=0; i < zones.length; i++){
-               if(zones[i].type === 'measure'){
+              /* if(zones[i].type === 'measure'){
                    var lrx = zones[i].lrx;
                    var lry = zones[i].uly;
                    var ulx = zones[i].ulx;
                    var uly = 0;
                  facsimileTile.showRectangleCenter(ulx, uly, lrx, lry, zones[i].n);
+               }*/
+               if(zones[i].type === 'staff'){
+               console.log(zones[i]);
+                    var lrx = zones[i].lrx;
+                   var lry = zones[i].lry;
+                   var ulx = zones[i].ulx;
+                   var uly = zones[i].uly;
+                   var id = zones[i].id;
+                   var splittedId = id.split('_');
+                   var splittedId = splittedId[3];
+                    var mrNr = splittedId.substring(7);                  
+                   var name = 's'+zones[i].n + 'm'+mrNr;
+                 facsimileTile.showRectangleCenter(ulx, uly, lrx, lry, name);
                }
-               if(zones[i].type === 'staff' && zones[i].n <= staffNr && zones[i].id.indexOf(value) > -1){ 
+               /*if(zones[i].type === 'staff' && zones[i].n <= staffNr && zones[i].id.indexOf(value) > -1){ 
                     var lrx = zones[i].ulx;
                    var lry = zones[i].lry;
                    var ulx = 0;
                   var uly = zones[i].uly;
                  facsimileTile.showRectangleCenter(ulx, uly, lrx, lry, zones[i].n);
-               }
+               }*/
            }
            
-           
-           map.on('click', function(e) {
-                  /*  console.log(e.latlng);
+            map.on('click', function(e) {
+                   console.log(e.latlng);
                     console.log(e.layerPoint);
                     console.log(e.containerPoint);
-                    console.log(e.originalEvent);*/
+                    console.log(e.originalEvent);
             });
+                
+    }
+});
+           
+           
+          
 			
 			}
 		},
     
 		onResize: function(w, h, oW, oH){
 		this.callParent(arguments);
-		var map = this.getMap();
+		var map = me.getMap();
 		if (map){
 			map.invalidateSize();
 		}
-	},
+	}
 	
-	listeners: {
+	 /* listeners: {
         click : {
             fn: function() {
             
-             var app = pmdCE.getApplication();
+           var app = pmdCE.getApplication();
                var store = app.getFacsimileStore();
                 console.log(store);
                 console.log(document);
@@ -131,6 +170,6 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
              element: 'el'
          
         }    
-    }
+    }*/
 	
 	});

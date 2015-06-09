@@ -23,6 +23,10 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
     */
 	rectangleCenter: null,
 	
+	facsimileWidth: null,
+	
+	facsimileHeight: null,
+	
 	/** 
 	 * Initialite a facsimile layer.
      * @overrides
@@ -31,6 +35,14 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
      */
 	initialize: function (url, options) {
 	   L.TileLayer.prototype.initialize.call(this, url, options);
+	},
+	
+	setWidth: function(facsimileWidth){
+	    this.facsimileWidth = facsimileWidth;
+	},
+	
+	setHeight: function(facsimileHeight){
+	    this.facsimileHeight = facsimileHeight;
 	},
 	
     /**
@@ -117,8 +129,8 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
            */
            
            var myIcon = L.divIcon({ 
-    iconSize: new L.Point(17, 17), 
-    html: nr
+    iconSize: new L.Point(0, 0), 
+    html: '<font style="color:blue">'+nr+'<font/>'
 });
 
 L.marker([latLngCenterPoint.lat, latLngCenterPoint.lng], {icon: myIcon}).addTo(this._map); 
@@ -133,8 +145,8 @@ L.marker([latLngCenterPoint.lat, latLngCenterPoint.lng], {icon: myIcon}).addTo(t
     */
     _addTile: function (coords, container) {
     
-    var originalMaxWidth = 3991;   
-    var originalMaxHeight = 2992;
+    var originalMaxWidth = this.facsimileWidth;//3991;   
+    var originalMaxHeight = this.facsimileHeight;//2992;
 	
 	var maxZoom = this._map.getMaxZoom();    
     var currZoom = this._map.getZoom();
