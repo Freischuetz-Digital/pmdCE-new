@@ -37,8 +37,8 @@ var measurePath = movement+"_measure"+measureid+"_s"+staffNr;
 
 
 Ext.Ajax.request({
-//url: "resources/verovio/testEnd.mei",
-  url: "resources/xql/getExtendedStaff.xql",
+url: "resources/verovio/testEnd.mei",
+ // url: "resources/xql/getExtendedStaff.xql",
     method: 'GET',
     params:{ 
         path: pageNr, 
@@ -64,14 +64,15 @@ Ext.Ajax.request({
     
     var xmlFile = jQuery.parseXML(text);
     var meiElements = xmlFile.getElementsByTagName('note');
-   
+    
    var elements = document.getElementsByClassName('note');
- 
+   
     for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
     var elId = element.id;
     if(elId.indexOf('End') != -1){ 
-        $("#"+elId).on('click',function(e) {        
+        $("#"+elId).on('click',function(e) {   
+        
          // two notes were selected
         if(e.shiftKey){
             me2.handleEventForTwoNotes(elements ,e.currentTarget, meiElements);
@@ -101,7 +102,7 @@ for (var i = 0; i < elements.length; i++) {
             var elementXML = meiElements[j];
             var elXMLId = elementXML.getAttribute('xml:id');
             if(elXMLId === note.id){  
-                if(note.style.fill === '#000000'){
+                if(note.style.fill === '#000000' || note.style.fill === 'rgb(0, 0, 0)'){
                         // TODO: set tstamp field
                         var tstamp = elementXML.getAttribute('tstamp');                        
                         $(note).css('fill','#3adf00');
@@ -178,14 +179,15 @@ for (var i = 0; i < elements.length; i++) {
 handleEventForOneNote: function(elements, note, meiElements){
 for (var i = 0; i < elements.length; i++) {
     var element = elements[i];
-    var elId = element.id;     
+    var elId = element.id;    
     if(elId.indexOf('End') != -1 && elId === note.id){ 
         for(var j = 0; j < meiElements.length; j++){
             var elementXML = meiElements[j];
-            var elXMLId = elementXML.getAttribute('xml:id');
+            var elXMLId = elementXML.getAttribute('xml:id');           
             if(elXMLId === note.id){
+            console.log(note.style.fill);
             // set color           
-                if(note.style.fill === '#000000'){
+                if(note.style.fill === '#000000' || note.style.fill === 'rgb(0, 0, 0)'){
                         // TODO: set tstamp field
                         var tstamp = elementXML.getAttribute('tstamp');  
                          this.tstampShift1 = elementXML.getAttribute('tstamp');
@@ -242,7 +244,7 @@ for (var i = 0; i < elements.length; i++) {
                         $(note).children().css('stroke','#3adf00');
                  }
                  // set color back after second note click
-                 else if(note.style.fill === '#3adf00'){
+                 else if(note.style.fill === '#3adf00' || note.style.fill === 'rgb(58, 223, 0)'){
                     tstampShift1 = null;
                         if(typeof Ext.getCmp('tstampField2Obv') !== 'undefined'){
                             Ext.getCmp('tstampField2Obv').setValue('');

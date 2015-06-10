@@ -38,8 +38,8 @@ var measurePath = movement+"_measure"+measureid+"_s"+staffNr;
 Ext.getCmp('cemain').setMeasureId(movement+"_measure"+measureid);
 
 Ext.Ajax.request({
-   // url: "resources/verovio/test.mei",
-    url: "resources/xql/getExtendedStaff.xql",
+    url: "resources/verovio/test.mei",
+   // url: "resources/xql/getExtendedStaff.xql",
     method: 'GET',
     params:{ 
        path: pageNr, 
@@ -65,9 +65,7 @@ Ext.Ajax.request({
    
     $('#'+currId+'-body').html(svg);
     var xmlFile = jQuery.parseXML(text);
-    console.log("*******VERSTART********");
-    console.log(xmlFile);
-   
+    
     var meiElements = xmlFile.getElementsByTagName('note');
      
    var elements = document.getElementsByClassName('note');
@@ -109,7 +107,7 @@ for (var i = 0; i < elements.length; i++) {
             var elXMLId = elementXML.getAttribute('xml:id');
            
             if(elXMLId === note.id){  
-                if(note.style.fill === '#000000'){
+                if(note.style.fill === '#000000'  || note.style.fill === 'rgb(0, 0, 0)'){
                         tstamp1 = elementXML.getAttribute('tstamp');                        
                         $(note).css('fill','#3adf00');
                         $(note).children().css('stroke','#3adf00');
@@ -162,7 +160,7 @@ for (var i = 0; i < elements.length; i++) {
             var elXMLId = elementXML.getAttribute('xml:id');
             if(elXMLId === note.id){
             // set color           
-                if(note.style.fill === '#000000'){
+                if(note.style.fill === '#000000'  || note.style.fill === 'rgb(0, 0, 0)'){
                         var tstamp = elementXML.getAttribute('tstamp'); 
                         // for av. case
                         this.tstampShift1 = elementXML.getAttribute('tstamp'); 
@@ -185,7 +183,7 @@ for (var i = 0; i < elements.length; i++) {
                         $(note).children().css('stroke','#3adf00');
                  }
                  // set color back after second note click
-                 else if(note.style.fill === '#3adf00'){
+                 else if(note.style.fill === '#3adf00' || note.style.fill === 'rgb(58, 223, 0)'){
                         tstampShift1 = null;
                         if(typeof Ext.getCmp('tstampFieldObv') !== 'undefined'){
                             Ext.getCmp('tstampFieldObv').setValue('');

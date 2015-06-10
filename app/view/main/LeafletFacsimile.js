@@ -1,8 +1,6 @@
 Ext.define('pmdCE.view.main.LeafletFacsimile', {
 		extend: 'Ext.Component',
-		requires: [
-        'pmdCE.model.Zone'
-    ],
+		
 		alias: 'widget.leafletmapview',
 		id: 'leafletfacsimile',
 		config:{
@@ -24,8 +22,8 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
       var selectedPage = Ext.getCmp('pages').getText();
         
         Ext.Ajax.request({
-    url: 'resources/xql/getZones.xql',
-   // url: 'data/getZones.xql',
+  //  url: 'resources/xql/getZones.xql',
+    url: 'data/getZones.xql',
     async: false,
     method: 'GET',
     params: {
@@ -73,19 +71,19 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
 				 var path = 'http://localhost:8080/exist/apps/controlevents-data/'+sourceName+'/'+pageName+'/{z}-{x}-{y}.jpg';
             
             
-           var facsimileTile = /*L.tileLayer.facsimileLayer('resources/data/example/{z}-{x}-{y}.jpg', {
+           var facsimileTile = L.tileLayer.facsimileLayer('resources/data/example/{z}-{x}-{y}.jpg', {
                 minZoom: 0,
                 maxZoom: maxZoomLevel,
 		        continuousWorld : true
-            }); 'http://localhost:8080/exist/apps/controlevents-data/D1849/D1849_p102/{z}-{x}-{y}.jpg'*/
+            }); 
           
            
-           L.tileLayer.facsimileLayer(path, {
+          /* L.tileLayer.facsimileLayer(path, {
                 minZoom: 0,
                 maxZoom: maxZoomLevel,
 		        continuousWorld : true
             });
-              
+              */
               facsimileTile.setWidth(facsimileWidth);
               
               facsimileTile.setHeight(facsimileHeight);
