@@ -22,8 +22,8 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
       var selectedPage = Ext.getCmp('pages').getText();
         
         Ext.Ajax.request({
-  //  url: 'resources/xql/getZones.xql',
-    url: 'data/getZones.xql',
+    url: 'resources/xql/getZones.xql',
+   // url: 'data/getZones.xql',
     async: false,
     method: 'GET',
     params: {
@@ -32,16 +32,12 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
     success: function(result){
        
                 var json = jQuery.parseJSON(result.responseText);
-                
+               
                 var zones = json.zones;
                 var page = json.page;
     
-         facsimileHeight = 
-        // 2992;
-         page.height;
-        facsimileWidth = 
-       // 3991;
-        page.width;
+         facsimileHeight = page.height;
+        facsimileWidth = page.width;
         var originalMaxSize = null;
         
         if(facsimileHeight > facsimileWidth){
@@ -68,22 +64,21 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
 				
 				 var pageName = Ext.getCmp('pages').getText();
 				
-				 var path = 'http://localhost:8080/exist/apps/controlevents-data/'+sourceName+'/'+pageName+'/{z}-{x}-{y}.jpg';
+				 var path = 'http://localhost:8080'+json.path;
             
-            
-           var facsimileTile = L.tileLayer.facsimileLayer('resources/data/example/{z}-{x}-{y}.jpg', {
+           var facsimileTile = /*L.tileLayer.facsimileLayer('resources/data/example/{z}-{x}-{y}.jpg', {
                 minZoom: 0,
                 maxZoom: maxZoomLevel,
 		        continuousWorld : true
-            }); 
+            }); */
           
            
-          /* L.tileLayer.facsimileLayer(path, {
+           L.tileLayer.facsimileLayer(path, {
                 minZoom: 0,
                 maxZoom: maxZoomLevel,
 		        continuousWorld : true
             });
-              */
+              
               facsimileTile.setWidth(facsimileWidth);
               
               facsimileTile.setHeight(facsimileHeight);
@@ -146,7 +141,7 @@ Ext.define('pmdCE.view.main.LeafletFacsimile', {
     
 		onResize: function(w, h, oW, oH){
 		this.callParent(arguments);
-		var map = me.getMap();
+		var map = this.getMap();
 		if (map){
 			map.invalidateSize();
 		}

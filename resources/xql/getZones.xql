@@ -14,7 +14,15 @@ declare option exist:serialize "method=xhtml media-type=text/html omit-xml-decla
 declare variable $path := request:get-parameter('path', '');
 declare variable $typeString := request:get-parameter('types', 'all');
 
+declare variable $surface := collection('/db/apps/controlevents-data/')//mei:surface[@xml:id = $path];
+             
+declare variable $graphic := $surface/mei:graphic[1];
+
+declare variable $imgSrc := $freidi-pmd:ce-imageURI || substring-before(substring-after($surface/mei:graphic/@target, 'sources/'),'.jpg') || '/{z}-{x}-{y}.jpg';
+
+
 declare function local:getJson($surface,$types) {
+
 
     let $page := $surface
     
@@ -47,7 +55,8 @@ declare function local:getJson($surface,$types) {
     return (
         '{',
             $pageJson,',',
-            '"zones":[',string-join($zonesJson,','),']',
+            '"zones":[',string-join($zonesJson,','),'],',
+            '"path":"',$imgSrc,'"',
         '}'
     )
     
