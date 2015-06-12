@@ -3,7 +3,7 @@
  * @class
  * @classdesc pmdCE.view.main.ChoiceTstamp2Card is class for create
  * two cards for 'create'-dialog. Card 2 of dialog consists
- * in orig-group, 1-2 regs and verovio view.
+ * in orig-group, 2 regs and verovio view.
  * This dialog is template for create choices depended on tstamp2.
  */
 Ext.define('pmdCE.view.main.ChoiceTstamp2Card', {

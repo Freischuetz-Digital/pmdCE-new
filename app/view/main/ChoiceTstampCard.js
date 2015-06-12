@@ -3,7 +3,7 @@
  * @class
  * @classdesc pmdCE.view.main.ChoiceTstampCard is class for create 
  * two cards for 'create'-dialog. Card 2 of dialog consists 
- * in orig-group, 1-2 regs and verovio view. 
+ * in orig-group, 2 regs and verovio view. 
  * This dialog is template for create choices depended on tstamp.
  */
 Ext.define('pmdCE.view.main.ChoiceTstampCard', {
@@ -75,8 +75,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
             tstamp2FieldOrig = this.createMandatoryTextField('tstamp2FieldOrig', 'Tstamp2');
             tstamp2FieldOrig.validate();
         }
-        // dynams else
-        {
+        // dynams 
+        else {
             formField = this.createMandatoryTextField('formOrig', 'Form');
             tstamp2FieldOrig = this.createOptionalTextField('tstamp2FieldOrig', 'Tstamp2');
             rend = this.createOptionalTextField('rendOrig', 'Rend');
@@ -97,8 +97,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
             tstamp2FieldReg1 = this.createMandatoryTextField('tstamp2FieldReg1', 'Tstamp2');
             tstamp2FieldReg1.validate();
         }
-        // dynams else
-        {
+        // dynams 
+        else{
             formFieldReg1 = this.createMandatoryTextField('formReg1', 'Form');
             tstamp2FieldReg1 = this.createOptionalTextField('tstamp2FieldReg1', 'Tstamp2');
             rendReg1 = this.createOptionalTextField('rendReg1', 'Rend');
@@ -122,8 +122,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
             tstamp2FieldReg2 = this.createMandatoryTextField('tstamp2FieldReg2', 'Tstamp2');
             tstamp2FieldReg2.validate();
         }
-        // dynams else
-        {
+        // dynams 
+        else{
             formFieldReg2 = this.createMandatoryTextField('formReg2', 'Form');
             tstamp2FieldReg2 = this.createOptionalTextField('tstamp2FieldReg2', 'Tstamp2');
             rendReg2 = this.createOptionalTextField('rendReg2', 'Rend');

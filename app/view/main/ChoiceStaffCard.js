@@ -3,7 +3,7 @@
  * @class
  * @classdesc pmdCE.view.main.ChoiceStaffCard is class for create
  * two cards for 'create'-dialog. Card 2 of dialog consists
- * in orig-group, 1-2 regs and verovio view.
+ * in orig-group, 2 regs and verovio view.
  * This dialog is template for create choices depended on staff.
  */
 Ext.define('pmdCE.view.main.ChoiceStaffCard', {
@@ -60,7 +60,7 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
 		staffField.validate();
 		staffFieldCopy = this.createMandatoryTextField('staffFieldCopy', 'Staff');
 		staffFieldCopy.setDisabled(true);
-		satffFieldBetween = this.createComboBox('Second staff', "secorig");
+		satffFieldBetween = this.createComboBox('Second staff', 'sestaffcorig');
 		satffFieldBetween.validate();
 		startTaktField = this.createComboBox('Start measure', 'startmeasure');
 		startTaktField.validate();
@@ -121,7 +121,7 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
 		tstampFieldReg2.setDisabled(true);
 		// hairpin
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
-			formFieldReg2 = this.createComboBox('Form', 'formreg1');
+			formFieldReg2 = this.createComboBox('Form', 'formreg2');
 			tstamp2FieldReg2 = this.createMandatoryTextField('tstamp2FieldReg2', 'Tstamp2');
 			tstamp2FieldReg2.validate();
 		}
@@ -457,7 +457,7 @@ Ext.define('pmdCE.view.main.ChoiceStaffCard', {
 	 * @param {object} combo.
 	 */
 	handleStaffField: function (combo) {
-		if (combo.id.indexOf('sec') === -1 && combo.id.indexO.indexOf('reg') === -1) {
+		if (combo.id.indexOf('sec') === -1 && combo.id.indexOf('reg') === -1) {
 			Ext.getCmp('cemain').setStaffNr(combo.getValue());
 			this.handleNavigationButtons();
 		} else {

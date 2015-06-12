@@ -68,7 +68,7 @@ Ext.define('pmdCE.view.main.ChoiceCard', {
 		var me = this;		
 		var storeField = null;
 		
-		if (fieldId === 'staffField') {
+		if (fieldId.indexOf('staff') > -1) {
 			var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
 			var selectedPage = Ext.getCmp('pages').getText();
 			
