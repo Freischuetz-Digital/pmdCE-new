@@ -113,13 +113,13 @@ Ext.define('pmdCE.view.main.ChoiceCard', {
 			invalidCls: '',
 			listeners: {
 				select: function (combo, record, index) {
-					if (combo.id === 'staffField') {
+					if (combo.id.indexOf('staff') > -1) {
 						me.handleStaffField(combo);
 					}
 					if (combo.id === 'startmeasure' || combo.id === 'endmeasure') {
 						me.handleMeasureField(combo);
 					}
-					if (fieldId.indexOf('place') > -1) {
+					if (fieldId.indexOf('place') > -1 || fieldId.indexOf('p3') > -1) {
 						me.handlePlaceField(combo);
 					}
 					if (fieldId.indexOf('form') > -1) {
