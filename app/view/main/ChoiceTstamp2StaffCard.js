@@ -89,7 +89,7 @@ Ext.define('pmdCE.view.main.ChoiceTstamp2StaffCard', {
          staffField.validate();
         staffFieldCopy = this.createTextField('staffFieldCopy', 'Staff');
         staffFieldCopy.setDisabled(true);
-        satffFieldBetween = this.createComboBoxStaff('Second staff' , "secorig");
+        satffFieldBetween = this.createComboBoxStaff('Second staff' , "secondorig");
         satffFieldBetween.validate();
         startTaktField= this.createComboBoxMeasureNr('Start measure');
         startTaktField.validate();
