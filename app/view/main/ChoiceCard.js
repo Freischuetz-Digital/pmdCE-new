@@ -95,6 +95,9 @@ Ext.define('pmdCE.view.main.ChoiceCard', {
 		if (fieldId.indexOf('place') > -1) {
 			storeField = new Array("above", "below");
 		}
+		if(fieldId.indexOf('p3states') > -1){
+			storeField = new Array("above", "below", "between");
+		}
 		if (fieldId.indexOf('form') > -1) {
 			storeField = new Array("cres", "dim");
 		}

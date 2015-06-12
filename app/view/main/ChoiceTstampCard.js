@@ -441,6 +441,10 @@ Ext.define('pmdCE.view.main.ChoiceTstampCard', {
             formFieldReg1.setValue(formField.getValue());
             formFieldReg2.setValue(formField.getValue());
         }
+        if (this.selectedFieldId === 'rendOrig' && ! expertCheckBox.getValue()) {
+			rendReg1.setValue(rend.getValue());
+			rendReg2.setValue(rend.getValue());
+		}
         this.handleCreateButton();
     },
     
