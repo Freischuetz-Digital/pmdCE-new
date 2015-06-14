@@ -16,7 +16,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 	createElementButton: null,
 	
 	// Global variables for card1
-	staffField: null,	
+	staffField: null,
 	startTaktField: null,
 	endTaktField: null,
 	
@@ -33,7 +33,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 	rend: null,
 	tstampFieldOrig: null,
 	tstamp2FieldOrig: null,
-	// reg1	
+	// reg1
 	staffFieldReg1: null,
 	placeFieldReg1: null,
 	formFieldReg1: null,
@@ -116,7 +116,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 			tstamp2FieldReg1 = this.createMandatoryTextField('tstamp2FieldReg1', 'Tstamp2');
 			tstamp2FieldReg1.validate();
 		}
-		// dynams
+		// dynams 
 		else {
 			formFieldReg1 = this.createMandatoryTextField('formReg1', 'Form');
 			tstamp2FieldReg1 = this.createOptionalTextField('tstamp2FieldReg1', 'Tstamp2');
@@ -155,7 +155,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 		
 		// reg3 fields
 		// common
-		staffFieldReg3 = this.createComboBox('Staff', "reg3");
+		staffFieldReg3 = this.createComboBox('Staff', "staffreg3");
 		staffFieldReg3.validate();
 		placeFieldReg3 = this.createComboBox('Place', 'p3statesreg3');
 		placeFieldReg3.validate();
@@ -180,7 +180,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 		
 		// reg4 fields
 		// common
-		staffFieldReg4 = this.createComboBox('Staff', "reg4");
+		staffFieldReg4 = this.createComboBox('Staff', "staffreg4");
 		staffFieldReg4.validate();
 		placeFieldReg4 = this.createComboBox('Place', 'p3statesreg4');
 		placeFieldReg4.validate();
@@ -214,7 +214,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 			staffField,
 			startTaktField,
 			endTaktField]
-		}, {
+		},
+		{
 			id: 'card-1',
 			layout: 'vbox',
 			border: false,
@@ -258,7 +259,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 					tstampFieldOrig,
 					tstamp2FieldOrig,
 					rend]
-				}, {
+				},
+				{
 					xtype: 'fieldset',
 					title: 'Reg',
 					id: 'starttime',
@@ -282,7 +284,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 					tstampFieldReg1,
 					tstamp2FieldReg1,
 					rendReg1]
-				}, {
+				},
+				{
 					xtype: 'fieldset',
 					title: 'Reg',
 					id: 'endtime',
@@ -309,7 +312,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 					tstamp2FieldReg2,
 					rendReg2]
 				}] // end card-1 items
-			}, {
+			},
+			{
 				id: 'card-12',
 				layout: {
 					type: 'hbox',
@@ -345,7 +349,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 					tstampFieldReg3,
 					tstamp2FieldReg3,
 					rendReg3]
-				}, {
+				},
+				{
 					xtype: 'fieldset',
 					title: 'Reg',
 					id: 'starttime1',
@@ -368,7 +373,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 					tstamp2FieldReg4,
 					rendReg4]
 				}] // end card-1 items
-			}, {
+			},
+			{
 				id: 'card-111',
 				layout: 'hbox',
 				border: false,
@@ -384,7 +390,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 					},
 					margin: '0 10 0 10',
 					items:[]
-				}, {
+				},
+				{
 					xtype: 'fieldset',
 					title: 'End Time (tstamp2)',
 					id: 'verovio2',
@@ -418,7 +425,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 	
 	/**
 	 * Crete hairpin, dir or dynams element, set new selection in tree-table and enable save button.
-	 */	
+	 */
 	createElement: function () {
 		
 		var modelPath = null;
@@ -467,7 +474,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 				name: "orig",
 				tag: "orig",
 				leaf: true
-			}, {
+			},
+			{
 				icon: 'resources/images/mix_volume.png',
 				type: elType,
 				staff: staffField.getValue(),
@@ -480,7 +488,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 				name: "reg",
 				tag: "reg",
 				leaf: true
-			}, {
+			},
+			{
 				icon: 'resources/images/mix_volume.png',
 				type: elType,
 				staff: staffFieldReg3.getValue(),
@@ -492,7 +501,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 				name: "reg",
 				tag: "reg",
 				leaf: true
-			}, {
+			},
+			{
 				icon: 'resources/images/mix_volume.png',
 				type: elType,
 				staff: staffFieldReg4.getValue(),
@@ -533,7 +543,7 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 				leaf: true
 			});
 		}
-				
+		
 		parent.expand();
 		
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
@@ -567,9 +577,8 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 		&& tstampFieldOrig.isValid() && tstamp2FieldOrig.isValid() 
 		&& satffFieldBetween.isValid() && tstampFieldReg1.isValid() 
 		&& tstampFieldReg2.isValid() && tstampFieldReg3.isValid() 
-		&& tstampFieldReg4.isValid() && tstamp2FieldReg1.isValid() 
-		&& tstamp2FieldReg2.isValid() && tstamp2FieldReg3.isValid() 
-		&& tstamp2FieldReg4.isValid() && staffFieldReg3.isValid() 
+		&& tstampFieldReg4.isValid() && tstamp2FieldReg1.isValid() && tstamp2FieldReg2.isValid() 
+		&& tstamp2FieldReg3.isValid() && tstamp2FieldReg4.isValid() && staffFieldReg3.isValid() 
 		&& placeFieldReg3.isValid() && staffFieldReg4.isValid() && placeFieldReg4.isValid()) {
 			createElementButton.setDisabled(false);
 		} else {
@@ -588,12 +597,12 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 		}
 		if (typeof Ext.getCmp('cemain').getVerEndId() != 'undefined') {
 			Ext.getCmp('verovio2').removeAll(true);
-		}		
+		}
 		verovioImageStart = new pmdCE.view.main.VerovioImageStart();
-		Ext.getCmp('verovio1').add(verovioImageStart);		
+		Ext.getCmp('verovio1').add(verovioImageStart);
 		verovioImageEnd = new pmdCE.view.main.VerovioImageEnd();
 		Ext.getCmp('verovio2').add(verovioImageEnd);
-				
+		
 		staffFieldCopy.setValue(staffField.getValue());
 		staffFieldReg1.setValue(staffField.getValue());
 		staffFieldReg2.setValue(staffField.getValue());
@@ -604,27 +613,27 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 	 */
 	handleTextField: function () {
 		if (this.selectedFieldId === 'tstampFieldOrig' && ! expertCheckBox.getValue()) {
-						tstampFieldReg3.setValue(tstampFieldOrig.getValue());
-						tstampFieldReg4.setValue(tstampFieldOrig.getValue());
-					}
-					if (this.selectedFieldId === 'tstamp2FieldOrig' && ! expertCheckBox.getValue()) {
-						tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-						tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
-						tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
-						tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
-					}
-					if (this.selectedFieldId === 'formOrig' && ! expertCheckBox.getValue()) {
-						formFieldReg1.setValue(formField.getValue());
-						formFieldReg2.setValue(formField.getValue());
-						formFieldReg3.setValue(formField.getValue());
-						formFieldReg4.setValue(formField.getValue());
-					}
-					if (this.selectedFieldId === 'rendOrig' && ! expertCheckBox.getValue()) {
-						rendReg1.setValue(rend.getValue());
-						rendReg2.setValue(rend.getValue());
-						rendReg3.setValue(rend.getValue());
-						rendReg4.setValue(rend.getValue());
-					}
+			tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+			tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+		}
+		if (this.selectedFieldId === 'tstamp2FieldOrig' && ! expertCheckBox.getValue()) {
+			tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+			tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+			tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+			tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
+		}
+		if (this.selectedFieldId === 'formOrig' && ! expertCheckBox.getValue()) {
+			formFieldReg1.setValue(formField.getValue());
+			formFieldReg2.setValue(formField.getValue());
+			formFieldReg3.setValue(formField.getValue());
+			formFieldReg4.setValue(formField.getValue());
+		}
+		if (this.selectedFieldId === 'rendOrig' && ! expertCheckBox.getValue()) {
+			rendReg1.setValue(rend.getValue());
+			rendReg2.setValue(rend.getValue());
+			rendReg3.setValue(rend.getValue());
+			rendReg4.setValue(rend.getValue());
+		}
 		this.handleCreateButton();
 	},
 	
@@ -633,17 +642,16 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 	 * @param {object} combo.
 	 */
 	handleStaffField: function (combo) {
-	if (combo.id ==='stafforig') {
-						Ext.getCmp('cemain').setStaffNr(combo.getValue());
-						this.handleNavigationButtons();
-					} 
-					else {
-						if (! expertCheckBox.getValue()) {
-							satffFieldBetweenReg1.setValue(combo.getValue());
-							satffFieldBetweenReg2.setValue(combo.getValue());
-							this.handleCreateButton();
-						}
-					}
+		if (combo.id === 'stafforig') {
+			Ext.getCmp('cemain').setStaffNr(combo.getValue());
+			this.handleNavigationButtons();
+		} else {
+			if (! expertCheckBox.getValue()) {
+				satffFieldBetweenReg1.setValue(combo.getValue());
+				satffFieldBetweenReg2.setValue(combo.getValue());
+				this.handleCreateButton();
+			}
+		}
 	},
 	
 	/**
@@ -652,10 +660,10 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 	 */
 	handlePlaceField: function (combo) {
 		if (combo.id === 'p3statesorig' && ! expertCheckBox.getValue()) {
-						placeFieldReg1.setValue(combo.getValue());
-						placeFieldReg2.setValue(combo.getValue());
-					}
-					me2.handleCreateButton();
+			placeFieldReg1.setValue(combo.getValue());
+			placeFieldReg2.setValue(combo.getValue());
+		}
+		this.handleCreateButton();
 	},
 	
 	/**
@@ -678,10 +686,10 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 	 */
 	handleFormField: function (combo) {
 		formFieldReg1.setValue(combo.getValue());
-					formFieldReg2.setValue(combo.getValue());
-					formFieldReg3.setValue(combo.getValue());
-					formFieldReg4.setValue(combo.getValue());
-					this.handleCreateButton();
+		formFieldReg2.setValue(combo.getValue());
+		formFieldReg3.setValue(combo.getValue());
+		formFieldReg4.setValue(combo.getValue());
+		this.handleCreateButton();
 	},
 	
 	/**
@@ -693,154 +701,152 @@ Ext.define('pmdCE.view.main.ChoiceTstampStaffCard', {
 	changeSelection: function (cb, checked) {
 		if (cb.id === 'checkBoxReg2') {
 			if (checked) {
-							tstampFieldReg2.setDisabled(true);
-							tstamp2FieldReg2.setDisabled(true);
-							placeFieldReg2.setDisabled(true);
-							satffFieldBetweenReg2.setDisabled(true);
-						} else if (! checked && expertCheckBox.getValue()) {
-							tstampFieldReg2.setDisabled(false);
-							tstamp2FieldReg2.setDisabled(false);
-							placeFieldReg2.setDisabled(false);
-							satffFieldBetweenReg2.setDisabled(false);
-						} else if (! checked && ! expertCheckBox.getValue()) {
-							tstampFieldReg2.setDisabled(false);
-							tstamp2FieldReg2.setDisabled(true);
-							placeFieldReg2.setDisabled(true);
-							satffFieldBetweenReg2.setDisabled(true);
-						}
+				tstampFieldReg2.setDisabled(true);
+				tstamp2FieldReg2.setDisabled(true);
+				placeFieldReg2.setDisabled(true);
+				satffFieldBetweenReg2.setDisabled(true);
+			} else if (! checked && expertCheckBox.getValue()) {
+				tstampFieldReg2.setDisabled(false);
+				tstamp2FieldReg2.setDisabled(false);
+				placeFieldReg2.setDisabled(false);
+				satffFieldBetweenReg2.setDisabled(false);
+			} else if (! checked && ! expertCheckBox.getValue()) {
+				tstampFieldReg2.setDisabled(false);
+				tstamp2FieldReg2.setDisabled(true);
+				placeFieldReg2.setDisabled(true);
+				satffFieldBetweenReg2.setDisabled(true);
+			}
 		}
 		if (cb.id === 'expert') {
 			if (checked) {
-						satffFieldBetweenReg1.setDisabled(false);
-						satffFieldBetweenReg1.validate();
-						placeFieldReg1.setDisabled(false);
-						placeFieldReg1.validate();
-						tstampFieldReg1.setDisabled(false);
-						tstampFieldReg1.validate();
-						tstamp2FieldReg1.setDisabled(false);
-						tstamp2FieldReg1.validate();
-						
-						staffFieldReg3.setDisabled(false);
-						staffFieldReg3.validate();
-						placeFieldReg3.setDisabled(false);
-						placeFieldReg3.validate();
-						tstampFieldReg3.setDisabled(false);
-						tstampFieldReg3.validate();
-						tstamp2FieldReg3.setDisabled(false);
-						tstamp2FieldReg3.validate();
-						
-						staffFieldReg4.setDisabled(false);
-						staffFieldReg4.validate();
-						placeFieldReg4.setDisabled(false);
-						placeFieldReg4.validate();
-						tstampFieldReg4.setDisabled(false);
-						tstampFieldReg4.validate();
-						tstamp2FieldReg4.setDisabled(false);
-						tstamp2FieldReg4.validate();
-						
-						if (checkBoxReg2.getValue()) {
-							satffFieldBetweenReg2.setDisabled(true);
-							satffFieldBetweenReg2.validate();
-							placeFieldReg2.setDisabled(true);
-							placeFieldReg2.validate();
-							tstampFieldReg2.setDisabled(true);
-							tstampFieldReg2.validate();
-							tstamp2FieldReg2.setDisabled(true);
-							tstamp2FieldReg2.validate();
-						} else {
-							satffFieldBetweenReg2.setDisabled(false);
-							satffFieldBetweenReg2.validate();
-							placeFieldReg2.setDisabled(false);
-							placeFieldReg2.validate();
-							tstampFieldReg2.setDisabled(false);
-							tstampFieldReg2.validate();
-							tstamp2FieldReg2.setDisabled(false);
-							tstamp2FieldReg2.validate();
-						}
-					}
-					// !checked 
-					else {
-						satffFieldBetweenReg1.setDisabled(true);
-						if (satffFieldBetweenReg1.getValue() === "" || satffFieldBetweenReg1.getValue() === null) {
-							satffFieldBetweenReg1.setValue(satffFieldBetween.getValue());
-						}
-						satffFieldBetweenReg1.validate();
-						placeFieldReg1.setDisabled(true);
-						if (placeFieldReg1.getValue() === "" || placeFieldReg1.getValue() === null) {
-							placeFieldReg1.setValue(placeField.getValue());
-						}
-						placeFieldReg1.validate();
-						tstampFieldReg1.setDisabled(false);
-						tstampFieldReg1.validate();
-						tstamp2FieldReg1.setDisabled(true);
-						if (tstamp2FieldReg1.getValue() === "") {
-							tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
-						}
-						tstamp2FieldReg1.validate();
-						
-						
-						staffFieldReg3.setDisabled(false);
-						staffFieldReg3.validate();
-						placeFieldReg3.setDisabled(false);
-						placeFieldReg3.validate();
-						tstampFieldReg3.setDisabled(true);
-						if (tstampFieldReg3.getValue() === "") {
-							tstampFieldReg3.setValue(tstampFieldOrig.getValue());
-						}
-						tstampFieldReg3.validate();
-						tstamp2FieldReg3.setDisabled(true);
-						if (tstamp2FieldReg3.getValue() === "") {
-							tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
-						}
-						tstamp2FieldReg3.validate();
-						
-						staffFieldReg4.setDisabled(false);
-						staffFieldReg4.validate();
-						placeFieldReg4.setDisabled(false);
-						placeFieldReg4.validate();
-						tstampFieldReg4.setDisabled(true);
-						if (tstampFieldReg4.getValue() === "") {
-							tstampFieldReg4.setValue(tstampFieldOrig.getValue());
-						}
-						tstampFieldReg4.validate();
-						tstamp2FieldReg4.setDisabled(true);
-						if (tstamp2FieldReg4.getValue() === "") {
-							tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
-						}
-						tstamp2FieldReg4.validate();
-						
-						if (checkBoxReg2.getValue()) {
-							satffFieldBetweenReg2.setDisabled(true);
-							satffFieldBetweenReg2.validate();
-							placeFieldReg2.setDisabled(true);
-							placeFieldReg2.validate();
-							tstampFieldReg2.setDisabled(true);
-							tstampFieldReg2.validate();
-							tstamp2FieldReg2.setDisabled(true);
-							tstamp2FieldReg2.validate();
-						} else {
-							satffFieldBetweenReg2.setDisabled(true);
-							if (satffFieldBetweenReg2.getValue() === "" || satffFieldBetweenReg2.getValue() === null) {
-								satffFieldBetweenReg2.setValue(satffFieldBetween.getValue());
-							}
-							satffFieldBetweenReg2.validate();
-							placeFieldReg2.setDisabled(true);
-							if (placeFieldReg2.getValue() === "" || placeFieldReg2.getValue() === null) {
-								placeFieldReg2.setValue(placeField.getValue());
-							}
-							placeFieldReg2.validate();
-							tstampFieldReg2.setDisabled(false);
-							tstampFieldReg2.validate();
-							tstamp2FieldReg2.setDisabled(true);
-							if (tstamp2FieldReg2.getValue() === "") {
-								tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
-							}
-							tstamp2FieldReg2.validate();
-						}
-					}
+				satffFieldBetweenReg1.setDisabled(false);
+				satffFieldBetweenReg1.validate();
+				placeFieldReg1.setDisabled(false);
+				placeFieldReg1.validate();
+				tstampFieldReg1.setDisabled(false);
+				tstampFieldReg1.validate();
+				tstamp2FieldReg1.setDisabled(false);
+				tstamp2FieldReg1.validate();
 				
+				staffFieldReg3.setDisabled(false);
+				staffFieldReg3.validate();
+				placeFieldReg3.setDisabled(false);
+				placeFieldReg3.validate();
+				tstampFieldReg3.setDisabled(false);
+				tstampFieldReg3.validate();
+				tstamp2FieldReg3.setDisabled(false);
+				tstamp2FieldReg3.validate();
+				
+				staffFieldReg4.setDisabled(false);
+				staffFieldReg4.validate();
+				placeFieldReg4.setDisabled(false);
+				placeFieldReg4.validate();
+				tstampFieldReg4.setDisabled(false);
+				tstampFieldReg4.validate();
+				tstamp2FieldReg4.setDisabled(false);
+				tstamp2FieldReg4.validate();
+				
+				if (checkBoxReg2.getValue()) {
+					satffFieldBetweenReg2.setDisabled(true);
+					satffFieldBetweenReg2.validate();
+					placeFieldReg2.setDisabled(true);
+					placeFieldReg2.validate();
+					tstampFieldReg2.setDisabled(true);
+					tstampFieldReg2.validate();
+					tstamp2FieldReg2.setDisabled(true);
+					tstamp2FieldReg2.validate();
+				} else {
+					satffFieldBetweenReg2.setDisabled(false);
+					satffFieldBetweenReg2.validate();
+					placeFieldReg2.setDisabled(false);
+					placeFieldReg2.validate();
+					tstampFieldReg2.setDisabled(false);
+					tstampFieldReg2.validate();
+					tstamp2FieldReg2.setDisabled(false);
+					tstamp2FieldReg2.validate();
+				}
+			}
+			// !checked 
+			else {
+				satffFieldBetweenReg1.setDisabled(true);
+				if (satffFieldBetweenReg1.getValue() === "" || satffFieldBetweenReg1.getValue() === null) {
+					satffFieldBetweenReg1.setValue(satffFieldBetween.getValue());
+				}
+				satffFieldBetweenReg1.validate();
+				placeFieldReg1.setDisabled(true);
+				if (placeFieldReg1.getValue() === "" || placeFieldReg1.getValue() === null) {
+					placeFieldReg1.setValue(placeField.getValue());
+				}
+				placeFieldReg1.validate();
+				tstampFieldReg1.setDisabled(false);
+				tstampFieldReg1.validate();
+				tstamp2FieldReg1.setDisabled(true);
+				if (tstamp2FieldReg1.getValue() === "") {
+					tstamp2FieldReg1.setValue(tstamp2FieldOrig.getValue());
+				}
+				tstamp2FieldReg1.validate();
+				
+				
+				staffFieldReg3.setDisabled(false);
+				staffFieldReg3.validate();
+				placeFieldReg3.setDisabled(false);
+				placeFieldReg3.validate();
+				tstampFieldReg3.setDisabled(true);
+				if (tstampFieldReg3.getValue() === "") {
+					tstampFieldReg3.setValue(tstampFieldOrig.getValue());
+				}
+				tstampFieldReg3.validate();
+				tstamp2FieldReg3.setDisabled(true);
+				if (tstamp2FieldReg3.getValue() === "") {
+					tstamp2FieldReg3.setValue(tstamp2FieldOrig.getValue());
+				}
+				tstamp2FieldReg3.validate();
+				
+				staffFieldReg4.setDisabled(false);
+				staffFieldReg4.validate();
+				placeFieldReg4.setDisabled(false);
+				placeFieldReg4.validate();
+				tstampFieldReg4.setDisabled(true);
+				if (tstampFieldReg4.getValue() === "") {
+					tstampFieldReg4.setValue(tstampFieldOrig.getValue());
+				}
+				tstampFieldReg4.validate();
+				tstamp2FieldReg4.setDisabled(true);
+				if (tstamp2FieldReg4.getValue() === "") {
+					tstamp2FieldReg4.setValue(tstamp2FieldOrig.getValue());
+				}
+				tstamp2FieldReg4.validate();
+				
+				if (checkBoxReg2.getValue()) {
+					satffFieldBetweenReg2.setDisabled(true);
+					satffFieldBetweenReg2.validate();
+					placeFieldReg2.setDisabled(true);
+					placeFieldReg2.validate();
+					tstampFieldReg2.setDisabled(true);
+					tstampFieldReg2.validate();
+					tstamp2FieldReg2.setDisabled(true);
+					tstamp2FieldReg2.validate();
+				} else {
+					satffFieldBetweenReg2.setDisabled(true);
+					if (satffFieldBetweenReg2.getValue() === "" || satffFieldBetweenReg2.getValue() === null) {
+						satffFieldBetweenReg2.setValue(satffFieldBetween.getValue());
+					}
+					satffFieldBetweenReg2.validate();
+					placeFieldReg2.setDisabled(true);
+					if (placeFieldReg2.getValue() === "" || placeFieldReg2.getValue() === null) {
+						placeFieldReg2.setValue(placeField.getValue());
+					}
+					placeFieldReg2.validate();
+					tstampFieldReg2.setDisabled(false);
+					tstampFieldReg2.validate();
+					tstamp2FieldReg2.setDisabled(true);
+					if (tstamp2FieldReg2.getValue() === "") {
+						tstamp2FieldReg2.setValue(tstamp2FieldOrig.getValue());
+					}
+					tstamp2FieldReg2.validate();
+				}
+			}
 		}
 		this.handleCreateButton();
 	}
-	
 });
