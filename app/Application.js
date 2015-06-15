@@ -9,45 +9,42 @@ Ext.define('pmdCE.Application', {
 	name: 'pmdCE',
 	
 	views:[
-	'main.CEToolbar',
-	'main.FacsimileView',
-	'main.XMLEditorView',
-	'main.CETabPanel',
-	'main.CEButtonPanel',
-	'main.VerovioImageStart',
-	'main.VerovioImageEnd',
-	'main.ChoiceDialog',
-	'main.CEGridPanel',
-	'main.dirs.DirsGridPanel',
-	'main.dirs.DirsButtonsPanel',
-	'main.dynams.DynamsGridPanel',
-	'main.dynams.DynamsButtonsPanel',
-	'main.hairpins.HairpinsGridPanel',
-	'main.hairpins.HairpinsButtonPanel',
-	'main.AddObviousElDialog',
-	'main.AddAmbiguousElDialog',
-	'main.EditDialog',
-	'main.ChoiceTstampCard',
-	'main.ChoiceTstamp2Card',
-	'main.ChoiceStaffCard',
-	'main.ChoiceTimeCard',
-	'main.ChoiceTstampStaffCard',
-	'main.ChoiceTstamp2StaffCard',
-	'main.ChoiceTimeStaffCard',
-	'main.ChoiceCard',
-	'main.AddOrigDialog',
-	'main.AddRegDialog',
-	'main.ObviousCard',
-	'main.AddObviousElDialog',
-	'main.ChangeObviousElDialog',
-	'main.ControlEventsItem',
-	'main.ChangeObviousCard',
-	'main.DeleteDialog',
-	'main.AfterSaveDialog',
-	'main.ChangeToObDialog',
-	'main.LeafletFacsimile',
-	'main.CEPanel',
-	'main.Main'],
+	'main.Main',
+	'toolbar.CEToolbar',
+	'toolbar.AfterSaveDialog',	
+	'facsimileView.FacsimileView',
+	'facsimileView.LeafletFacsimile',	
+	'tabPanel.XMLView',
+	'tabPanel.CETabPanel',
+	'tabPanel.CEButtonPanel',
+	'tabPanel.EditDialog',
+	'tabPanel.ControlEventsItem',
+	'tabPanel.CEGridPanel',	
+	'tabPanel.CEPanel',
+	'tabPanel.buttonDialogs.VerovioImageStart',
+	'tabPanel.buttonDialogs.VerovioImageEnd',
+	'tabPanel.buttonDialogs.AddObviousElDialog',
+	'tabPanel.buttonDialogs.AddAmbiguousElDialog',	
+	'tabPanel.buttonDialogs.AddOrigDialog',
+	'tabPanel.buttonDialogs.AddRegDialog',	
+	'tabPanel.buttonDialogs.ChangeObviousElDialog',	
+	'tabPanel.buttonDialogs.DeleteDialog',
+	'tabPanel.buttonDialogs.cards.ChoiceTstampCard',
+	'tabPanel.buttonDialogs.cards.ChoiceTstamp2Card',
+	'tabPanel.buttonDialogs.cards.ChoiceStaffCard',
+	'tabPanel.buttonDialogs.cards.ChoiceTimeCard',
+	'tabPanel.buttonDialogs.cards.ChoiceTstampStaffCard',
+	'tabPanel.buttonDialogs.cards.ChoiceTstamp2StaffCard',
+	'tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard',
+	'tabPanel.buttonDialogs.cards.ChoiceCard',
+	'tabPanel.buttonDialogs.cards.ObviousCard',
+	'tabPanel.buttonDialogs.cards.ChangeObviousCard',	
+	'tabPanel.dirs.DirsGridPanel',
+	'tabPanel.dirs.DirsButtonsPanel',
+	'tabPanel.dynams.DynamsGridPanel',
+	'tabPanel.dynams.DynamsButtonsPanel',
+	'tabPanel.hairpins.HairpinsGridPanel',
+	'tabPanel.hairpins.HairpinsButtonPanel'],
 	
 	models:[
 	'Source',
@@ -61,22 +58,13 @@ Ext.define('pmdCE.Application', {
 	stores:[],
 	
 	sourcesStore: null,
-	movementsStore: null,
-	pagesStore: null,
-	extStaff_start: null,
-	slursStore: null,
+	//movementsStore: null,
+	//pagesStore: null,
+	//slursStore: null,
 	renderer: null,
 	hairpinDataStore: null,
 	dynamDataStore: null,
 	dirDataStore: null,
-	hairpinStart: null,
-	facsimilePath: null,
-	saveStore: null,
-	
-	pageNr: null,
-	
-	storeT: null,
-	
 	
 	launch: function () {
 		
@@ -147,18 +135,6 @@ Ext.define('pmdCE.Application', {
 	
 	getSourcesStore: function () {
 		return sourcesStore;
-	},
-	
-	getSaveStore: function () {
-		return saveStore;
-	},
-	
-	getExtStaffStart: function () {
-		return extStaff_start;
-	},
-	
-	getHairpinsStore: function () {
-		return slursStore;
 	},
 	
 	getRenderer: function () {
