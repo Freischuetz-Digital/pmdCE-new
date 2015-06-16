@@ -4,7 +4,6 @@
  * plugin to promote that instance of this class to the body element.
  *
  */
-
 Ext.define('pmdCE.view.main.Main', {
 	extend: 'Ext.panel.Panel',
 	requires:[
@@ -17,14 +16,11 @@ Ext.define('pmdCE.view.main.Main', {
 		pack: 'start',
 		align: 'stretch'
 	},
-	
-	
+		
 	bodyPadding: 5,
 	
 	defaults: {
-		//frame: true,
 		border: true
-		// bodyPadding: 3
 	},
 	
 	ceToolbar: null,

@@ -1,3 +1,7 @@
+/**
+ * Creates class pmdCE.view.tabPanel.CETabPanel that extend from pmdCE.view.tabPanel.CETabPanel.
+ * @class
+ */
 Ext.define('pmdCE.view.tabPanel.CETabPanel', {
 	extend: 'Ext.tab.Panel',
 	
@@ -17,6 +21,10 @@ Ext.define('pmdCE.view.tabPanel.CETabPanel', {
 	dynamsItems: null,
 	dirsItems: null,
 	
+	/**
+	 * Create items
+	 * @overrides
+	 */
 	initComponent: function () {
 		
 		slursItem = new pmdCE.view.tabPanel.ControlEventsItem({

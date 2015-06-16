@@ -1,13 +1,11 @@
+/**
+ * Creates class pmdCE.view.toolbar.CEToolbar that extend from Ext.panel.Panel.
+ * @class
+ */
 Ext.define('pmdCE.view.toolbar.CEToolbar', {
 	extend: 'Ext.panel.Panel',
-	// xtype: 'basic-toolbar',
 	
 	id: 'cetoolbar',
-	
-	/* defaults: {
-	// collapsible: true,
-	// border: true
-	},*/
 	
 	homeButton: null,
 	sourceButton: null,
@@ -15,59 +13,47 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 	pagesButton: null,
 	arrowLeft: null,
 	arrowR: null,
-	
-	createButton: null,
 	saveButton: null,
-	deleteButton: null,
 	selectToolButton: null,
 	loginButton: null,
-	showXmlButton: null,
 	
 	staffNr: null,
 	pageMeasuresMap: null,
 	
-	me: null,
-	cePanelTable: null,
-	
+	/**
+	 * Create buttons and icons.
+	 * @overrides
+	 */
 	initComponent: function () {
 		
-		me = this;
-		
-		homeButton = this.createCEBox('box', {
+		homeButton = this.createCEBox({
 			tag: 'img', src: 'resources/images/freidi_icon_57.png', width: 26,
 			height: 26
 		},
 		this.homeOnItemToggle, true);
-		sourceButton = this.createCEButton('splitbutton', 'Source', 'source',[ {
+		sourceButton = this.createCEButton('Source', 'source',[ {
 			handler: this.sourceOnItemClick
-		}], this.click);
-		movementButton = this.createCEButton('splitbutton', 'Movement', 'movement',[ {
+		}], this.sourceClick);
+		movementButton = this.createCEButton('Movement', 'movement',[ {
 			handler: this.moveOnItemClick
-		}], this.click2);
+		}], this.movementClick);
 		movementButton.setDisabled(true);
 		arrowLeft = this.createCEIcon('arrowL', 'resources/images/page-prev-disabled.gif');
 		arrowLeft.setDisabled(true);
-		pagesButton = this.createCEButton('splitbutton', 'Pages', 'pages',[ {
+		pagesButton = this.createCEButton('Pages', 'pages',[ {
 			handler: this.pagesOnItemClick
-		}], this.click3);
+		}], this.pageClick);
 		pagesButton.setDisabled(true);
 		arrowR = this.createCEIcon('arrowR', 'resources/images/page-next-disabled.gif');
 		arrowR.setDisabled(true);
 		saveButton = this.createCEIcon('saveButton', 'resources/images/Save.png', this.saveComponents);
 		saveButton.setDisabled(true);
-		//createButton = this.createCEIcon1();
-		//('x-btn-text-icon x-ric-generic', '../../../resources/images/drop-add.gif', this.createComponent);
-		// createButton.setDisabled(true);
-		//deleteButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/icon16_error.png', this.deleteComponent);
-		//deleteButton.setDisabled(true);
-		//showXmlButton = this.createCEIcon('x-btn-text-icon x-ric-generic', 'resources/images/xml-32.png', this.saveComponents);
-		//showXmlButton.setDisabled(true);
-		selectToolButton = this.createCEButton('splitbutton', 'Control Events', 'controlevents',[ {
+		selectToolButton = this.createCEButton('Control Events', 'controlevents',[ {
 			text: 'Pitch Tool'
 		}, {
 			text: 'Abbrev Resolver'
 		}]);
-		loginButton = this.createLoginButton('splitbutton', 'Login');
+		loginButton = this.createLoginButton('Login');
 		loginButton.setDisabled(true);
 		this.tbar =[
 		homeButton,
@@ -79,21 +65,19 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		arrowR,
 		'-',
 		saveButton,
-		// createButton,
-		// deleteButton,
-		// '-',
-		// showXmlButton,
 		'->',
 		selectToolButton,
 		'-',
 		loginButton],
 		
-		
 		this.callParent()
 	},
 	
+	/**
+	 * Handler for save elements.
+	 * @param {object} btn: save button.
+	 */
 	saveComponents: function (btn) {
-		
 		var store = pmdCE.getApplication().getHairpinDataStore();
 		var modAndCreateElements = store.getUpdatedRecords();
 		var deletedElements = store.getRemovedRecords();
@@ -113,15 +97,10 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		
 		var modRecords = modRecTemp.concat(modDirs);
 		
-		console.log("******DATA******");
-		console.log(modRecords);
-		
 		var objects = $('<div></div>');
 		
-		
-		
 		for (var i = 0; i < modRecords.length; i++) {
-			// dynams
+			// dynams or dirs
 			if (modRecords[i].data.type === 'dynam' || modRecords[i].data.type === 'dir') {
 				
 				var typeElement = null;
@@ -293,12 +272,6 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		}
 		
 		objects = $('<div></div>').append($(objects));
-		console.log("******SAVE******");
-		console.log(objects);
-		console.log($(objects).html());
-		
-		
-		//var objects1 = '<div><div><div id="hair_c9096393-a14a-4050-a4b9-454e330afELE" operation="create" sourcepath="A_surface105" measureid="A_mov6_measure73"><hairpin place="above" staff="5" startid="#A_mov6_measure73" endid="#A_mov6_measure73_s5l1_e8" sameas="" xml:id="hair_c9096393-a14a-4050-a4b9-454e330afELE" xmlns="http://www.music-encoding.org/ns/mei"></hairpin></div></div></div>';
 		
 		$.ajax({
 			url: 'resources/xql/saveMEI.xql',
@@ -309,8 +282,6 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 			success: function (result) {
 				console.log(result);
 				var stringXML = (new XMLSerializer()).serializeToString(result);
-				console.log(stringXML);
-				
 				Ext.getCmp('cemain').setAfterSaveText(stringXML);
 				var win = new pmdCE.view.toolbar.AfterSaveDialog();
 				win.show();
@@ -318,13 +289,10 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		});
 	},
 	
-	createComponent: function (btn) {
-		
-		var win = new pmdCE.view.main.AddDialog();
-		win.show();
-	},
-	
-	click: function () {
+	/**
+	 * Listener on source click: add items to source menu.
+	 */
+	sourceClick: function () {
 		if (sourceButton.getText() === 'Source') {
 			sourceButton.getMenu().removeAll();
 			var app = pmdCE.getApplication();
@@ -341,7 +309,10 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		}
 	},
 	
-	click2: function () {
+	/**
+	 * Listener on movement click: add items to movement menu.
+	 */
+	movementClick: function () {
 		if (movementButton.getText() === 'Movement') {
 			movementButton.getMenu().removeAll();
 			var app = pmdCE.getApplication();
@@ -362,7 +333,10 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		}
 	},
 	
-	click3: function () {
+	/**
+	 * Listener on page click: add items to page menu.
+	 */
+	pageClick: function () {
 		if (pagesButton.getText() === 'Pages') {
 			pagesButton.getMenu().removeAll();
 			var app = pmdCE.getApplication();
@@ -394,7 +368,10 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		}
 	},
 	
-	
+	/**
+	 * Handler for selection menu item on source button
+	 * @param {object} item: selected source item.
+	 */
 	sourceOnItemClick: function (item) {
 		sourceButton.setText(item.text);
 		movementButton.setDisabled(false);
@@ -408,8 +385,6 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		pagesButton.setDisabled(true);
 		arrowLeft.setDisabled(true);
 		arrowR.setDisabled(true);
-		// createButton.setDisabled(true);
-		// deleteButton.setDisabled(true);
 		/*  if(!saveButton.isDisabled()){
 		// TODO
 		alert('save?')
@@ -418,12 +393,13 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		 */
 	},
 	
+	/**
+	 * Handler for selection menu item on movement button
+	 * @param {object} item: selected movement item.
+	 */
 	moveOnItemClick: function (item) {
 		movementButton.setText(item.text);
 		pagesButton.setDisabled(false);
-		// createButton.setDisabled(true);
-		// deleteButton.setDisabled(true);
-		
 		/*  if(!saveButton.isDisabled()){
 		// TODO
 		alert('save?')
@@ -435,24 +411,20 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		}
 	},
 	
+	/**
+	 * Handler for selection menu item on page button.
+	 * Create views and tree table.
+	 * @param {object} item: selected page item.
+	 */
 	pagesOnItemClick: function (item) {
 		pagesButton.setText(item.text);
-		// TODO: load facsimile and table, reload xml editor and editor
-		// TODO: current number page validation
-		//console.log(cePanelTable.getFacsimileView());
-		//cePanelTable.getXMLView();
-		// cePanelTable.getEditorView();
-		// cePanelTable.getCETabView();
 		arrowLeft.setDisabled(false);
 		arrowR.setDisabled(false);
-		// createButton.setDisabled(false);
-		// deleteButton.setDisabled(false);
 		// TODO: save for all testen
 		/*   if(!saveButton.isDisabled()){
 		alert('save?')
 		saveButton.setDisabled(true);
 		} */
-		
 		
 		var app = pmdCE.getApplication();
 		
@@ -460,13 +432,11 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		if (typeof Ext.getCmp('facsimileview') !== 'undefined') {
 			Ext.getCmp('cepanel').remove('facsimileview');
 		}
-		
 		facsimileView = new pmdCE.view.facsimileView.FacsimileView();
 		Ext.getCmp('cepanel').add(facsimileView);
 		
 		// create editor for hairpins and load
 		if (typeof Ext.getCmp('verovioview') !== 'undefined') {
-			// TODO: save?
 			Ext.getCmp('hairpinsitem').removeAll(true);
 		}
 		verovioView = new pmdCE.view.tabPanel.hairpins.HairpinsButtonPanel();
@@ -483,10 +453,8 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		store.load();
 		Ext.getCmp('cegridpanel').getView().bindStore(store);
 		
-		
 		// dynams
 		if (typeof Ext.getCmp('dynamsxmlview') !== 'undefined') {
-			// TODO: save?
 			Ext.getCmp('dynamsitem').removeAll(true);
 		}
 		dynamsView = new pmdCE.view.tabPanel.dynams.DynamsGridPanel();
@@ -506,7 +474,6 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		
 		// dirs
 		if (typeof Ext.getCmp('dirsxmlview') !== 'undefined') {
-			// TODO: save?
 			Ext.getCmp('dirsitem').removeAll(true);
 		}
 		dirsView = new pmdCE.view.tabPanel.dirs.DirsGridPanel();
@@ -525,19 +492,26 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		Ext.getCmp('dirsgridpanel').getView().bindStore(dirsStore);
 	},
 	
+	/**
+	 * Handler for get freischuetz home page
+	 */
 	homeOnItemToggle: function () {
 		window.location.href = "http://freischuetz-digital.de";
 	},
 	
-	
-	createCEButton: function (ceType, ceSource, ceId, ceMenu, ceHandler) {
+	/**
+	 * Create button with menu
+	 * @param {string} ceSource: name.
+	 * @param {string} ceId.
+	 * @param {object} ceMenu.
+	 * @param {object} ceHandler.
+	 */
+	createCEButton: function (ceSource, ceId, ceMenu, ceHandler) {
 		var ceButton = Ext.create('Ext.button.Button', {
 			xtype: 'button',
 			text: ceSource,
 			id: ceId,
 			scope: this,
-			// iconCls: ceIcon,
-			// scale: 'medium',
 			menu: ceMenu,
 			scale: 'medium',
 			handler: ceHandler
@@ -546,7 +520,11 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		return ceButton;
 	},
 	
-	createLoginButton: function (ceType, ceSource) {
+	/**
+	 * Create login button
+	 * @param {string} ceSource: name.
+	 */
+	createLoginButton: function (ceSource) {
 		var ceButton = Ext.create('Ext.button.Button', {
 			xtype: 'button',
 			scale: 'medium',
@@ -556,20 +534,14 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		return ceButton;
 	},
 	
-	createCEBox: function (ceType, ceAutoEl, ceOnItemToggle, ceEnableToggle) {
-		var ceBox = Ext.create('Ext.button.Button', {
-			// xtype: ceType,
-			autoEl: ceAutoEl,
-			enableToggle: ceEnableToggle,
-			toggleHandler: ceOnItemToggle
-		});
-		return ceBox;
-	},
-	
-	
+	/**
+	 * Create button-icon
+	 * @param {string} ceId.
+	 * @param {string} ceIcon: icon path.
+	 * @param {object} ceHandler.
+	 */
 	createCEIcon: function (ceId, ceIcon, ceHandler) {
 		var ceIcon = Ext.create('Ext.button.Button', {
-			//  cls: ceCls,
 			id: ceId,
 			icon: ceIcon,
 			scale: 'medium',
@@ -578,35 +550,19 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		return ceIcon;
 	},
 	
-	createCEIcon1: function () {
-		var ceIcon = Ext.create('Ext.button.Button', {
-			xtype: 'button',
-			//  cls: ceCls,
-			icon: "resources/images/drop-add.gif",
-			menu:[Ext.create('Ext.menu.Item', {
-				text: "Obvious",
-				icon: 'resources/images/mix_volume.png',
-				handler: function () {
-					// var win = new pmdCE.view.main.AddDialog();
-					var win = new pmdCE.view.tabPanel.buttonDialogs.AddObviousElDialog();
-					win.show();
-				}
-			}),
-			
-			Ext.create('Ext.menu.Item', {
-				text: "Ambiguous",
-				icon: 'resources/images/mix_volume.png',
-				handler: function () {
-					// TODO: choice
-					//var win = new pmdCE.view.main.ChoiceDialog();
-					var win = new pmdCE.view.tabPanel.buttonDialogs.AddAmbiguousElDialog();
-					win.show();
-				}
-			})]
+	/**
+	 * Create button
+	 * @param {object} ceAutoEl: icon.
+	 * @param {object} ceOnItemToggle: handler.
+	 * @param {boolean} ceEnableToggle.
+	 */
+	createCEBox: function (ceAutoEl, ceOnItemToggle, ceEnableToggle) {
+		var ceBox = Ext.create('Ext.button.Button', {
+			autoEl: ceAutoEl,
+			enableToggle: ceEnableToggle,
+			toggleHandler: ceOnItemToggle
 		});
-		
-		
-		
-		return ceIcon;
+		return ceBox;
 	}
+
 });

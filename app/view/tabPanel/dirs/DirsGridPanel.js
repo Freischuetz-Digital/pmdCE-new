@@ -1,3 +1,9 @@
+/**
+ * Creates class pmdCE.view.tabPanel.hairpins.HairpinsGridPanel that extend from pmdCE.view.tabPanel.DirsGridPanel.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.hairpins.DirsGridPanel is a class for create
+ * table tree in dirs-tab.
+ */
 Ext.define('pmdCE.view.tabPanel.dirs.DirsGridPanel', {
 	extend: 'pmdCE.view.tabPanel.CEGridPanel',
 	
@@ -6,6 +12,10 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsGridPanel', {
 	
 	id: 'dirsgridpanel',
 	
+	/**
+	 * Create table tree columns and selection listener
+	 * @overrides
+	 */
 	initComponent: function () {
 		
 		this.editColumn = this.createEditColumn();
@@ -58,42 +68,50 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsGridPanel', {
 			flex: 3,
 			sortable: true,
 			dataIndex: 'name'
-		}, {
+		},
+		{
 			text: 'Staff',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'staff'
-		}, {
+		},
+		{
 			text: '2. Staff',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'staff2'
-		}, {
+		},
+		{
 			text: 'Measure',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'measurenr'
-		}, {
+		},
+		{
 			text: 'Tstamp',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'tstamp'
-		}, {
+		},
+		{
 			text: 'Tstamp2',
 			flex: 1,
 			dataIndex: 'tstamp2',
 			sortable: true
-		}, {
+		},
+		{
 			text: 'Place',
 			flex: 1,
 			dataIndex: 'place',
 			sortable: true
-		}, {
+		},
+		{
 			text: 'Form',
 			flex: 1,
 			dataIndex: 'form',
 			sortable: true
-		}, {
+		},
+		{
 			text: 'Rend',
 			flex: 1,
 			dataIndex: 'rend',
@@ -104,8 +122,10 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsGridPanel', {
 		this.callParent()
 	},
 	
-	showXMLforSelectedElement: function (selectedObject) {
-		
+	/**
+	 * Create xml-fragment for xml view
+	 */
+	showXMLforSelectedElement: function (selectedObject) {		
 		var objects = $('<div></div>');
 		if (selectedObject.data.obvious) {
 			var object = $('<dir></dir>', {

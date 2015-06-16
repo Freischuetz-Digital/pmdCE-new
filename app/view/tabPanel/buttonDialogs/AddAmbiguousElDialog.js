@@ -1,17 +1,24 @@
+/**
+ * Creates class pmdCE.view.tabPanel.buttonDialogs.AddAmbiguousElDialog that extend from Ext.window.Window.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.buttonDialogs.AddAmbiguousElDialog is class create an ambigous
+ * element or switch from obvious to ambigous element.
+ */
 Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddAmbiguousElDialog', {
 	extend: 'Ext.window.Window',
 	title: 'Create Choice Element',
 	flex: 1,
-	//height: 200,
-	//width: 500,
 	modal: true,
-	// bodyPadding: 10,
 	border: false,
 	
 	autoScroll: true,
 	
 	ambiguousCard: null,
 	
+	/**
+	 * Create card depend from template type
+	 * @overrides
+	 */
 	initComponent: function () {
 		
 		switch (Ext.getCmp('cemain').getCard()) {
@@ -61,8 +68,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddAmbiguousElDialog', {
 		
 		this.items =[
 		ambiguousCard];
-		
-		
+			
 		this.callParent();
 	}
 });

@@ -1,9 +1,22 @@
+/**
+ * Creates class ppmdCE.view.tabPanel.hairpins.HairpinsButtonPanel that extend from pmdCE.view.tabPanel.DirsButtonsPanel.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.hairpins.DirsButtonsPanel is a class for create
+ * buttons for tree table in dirs-tab.
+ */
 Ext.define('pmdCE.view.tabPanel.dirs.DirsButtonsPanel', {
 	extend: 'pmdCE.view.tabPanel.CEButtonPanel',
 	
 	id: "dirsbuttonspanel",
 	
+	createNewElButton: null,
+	addElementButton: null,
+	changeToButton: null,
 	
+	/**
+	 * Create buttons
+	 * @overrides
+	 */
 	initComponent: function () {
 		
 		addElementButton = this.createCEButton('addelementbutton_2', 'Dir');

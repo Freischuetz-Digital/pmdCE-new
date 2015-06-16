@@ -102,7 +102,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceCard', {
 			storeField = new Array("cres", "dim");
 		}
 		
-		var ceTextField = Ext.create('Ext.form.ComboBox', {
+		var combo = Ext.create('Ext.form.ComboBox', {
 			fieldLabel: fieldName,
 			id: fieldId,
 			store: storeField,
@@ -128,7 +128,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceCard', {
 				}
 			}
 		});
-		return ceTextField;
+		return combo;
 	},
 	
 	/**

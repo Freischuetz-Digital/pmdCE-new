@@ -1,9 +1,12 @@
+/**
+ * Creates class pmdCE.view.tabPanel.EditDialog that extend from Ext.window.Window.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.EditDialog is a class for change values in control events.
+ */
 Ext.define('pmdCE.view.tabPanel.EditDialog', {
 	extend: 'Ext.window.Window',
 	title: 'Edit Values',
 	flex: 1,
-	//height: 200,
-	//width: 500,
 	modal: true,
 	bodyPadding: 10,
 	
@@ -29,6 +32,10 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 	vordStartMeasure: null,
 	vordEndMeasure: null,
 	
+	/**
+	 * Create all fields and navigation buttons
+	 * @overrides
+	 */
 	initComponent: function () {
 		
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
@@ -114,20 +121,20 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 		measureField = this.createTextField('measureField', 'Measure');
 		measureField.setValue(vordStartMeasure);
 		
-		placeField = this.createComboBox('Place');
+		placeField = this.createComboBox('Place', 'p3states');
 		placeField.setValue(vordPlace);
 		tstampField = this.createTextField('tstampField', 'Tstamp');
 		tstampField.setValue(vordTStamp);
 		
 		// hairpin
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
-			formField = this.createComboBoxForm('Form');
+			formField = this.createComboBox('Form', 'form');
 			tstampField2 = this.createTextField('tstampField2Obv', 'Tstamp2');
 		} else {
 			// dynams
 			formField = this.createTextField('formOrig', 'Form');
-			tstampField2 = this.createTextFieldTstamp2('tstampField2', 'Tstamp2');
-			rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
+			tstampField2 = this.createTextField('tstampField2', 'Tstamp2');
+			rend = this.createTextField('rendOrig', 'Rend');
 			rend.setValue(vordRend);
 		}
 		tstampField2.setValue(vordTStamp2);
@@ -173,8 +180,7 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 					selectedNode.set('staff', staffField.getValue());
 				}
 				//if(staffField2.getValue() !== ""){
-				selectedNode.set('staff2', staffField2.getValue());
-				
+				selectedNode.set('staff2', staffField2.getValue());				
 				//}
 				
 				if (tstampField.getValue() !== "") {
@@ -223,15 +229,12 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 						Ext.getCmp('dirsgridpanel').showXMLforSelectedElement(selectedNode);
 					}
 				}
-				
-				
+								
 				Ext.getCmp('saveButton').setDisabled(false);
-				
-				
+								
 				this.up('window').close();
 			}
-		},
-		{
+		}, {
 			text: 'Cancel',
 			handler: function () {
 				this.up('window').close();
@@ -242,30 +245,14 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 		this.callParent()
 	},
 	
+	/**
+	 * Create optional text field.
+	 * @param {string} fieldName - text name and id.
+	 * @param {string} fieldLabel - field label.
+	 */
 	createTextField: function (fieldName, fieldLabel) {
 		var ceTextField = Ext.create('Ext.form.field.Text', {
 			name: fieldName,
-			width: 285,
-			fieldLabel: fieldLabel,
-			//  allowBlank: false , // requires a non-empty value
-			listeners: { 'render': function (c) {
-					c.getEl().on('keyup', function () {
-						// Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-						// modelTest.set('start', startField.value);
-					},
-					c);
-				}
-			}
-		});
-		
-		return ceTextField;
-	},
-	
-	createTextFieldTstamp2: function (fieldName, fieldLabel) {
-		
-		var ceTextField = Ext.create('Ext.form.field.Text', {
-			name: fieldName,
-			id: fieldName,
 			width: 285,
 			fieldLabel: fieldLabel,
 			listeners: {
@@ -282,36 +269,23 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 		return ceTextField;
 	},
 	
-	createComboBox: function (fieldName) {
+	/**
+	 * Create not editable combo box and store dependent from combo type.
+	 * @param {string} fieldName - combo name.
+	 * @param {string} fieldId - combo id and type definition.
+	 */
+	createComboBox: function (fieldName, fieldId) {
+		var storeField = null;
 		
-		var states = new Array("above", "below", "between");
-		
-		var ceTextField = Ext.create('Ext.form.ComboBox', {
+		if (fieldId.indexOf('p3states') > -1) {
+			storeField = new Array("above", "below", "between");
+		}
+		if (fieldId.indexOf('form') > -1) {
+			storeField = new Array("cres", "dim");
+		}		
+		var combo = Ext.create('Ext.form.ComboBox', {
 			fieldLabel: fieldName,
-			store: states,
-			width: 285,
-			queryMode: 'local',
-			displayField: 'name',
-			editable: false,
-			//valueField: 'abbr',
-			listeners: {
-				select: function (combo, record, index) {
-					//Ext.getCmp('cetoolbar').getSaveButton().setDisabled(false);
-					// modelTest.set('curvedir', combo.getValue());
-				}
-			}
-		});
-		
-		return ceTextField;
-	},
-	
-	createComboBoxForm: function (fieldName) {
-		
-		var states = new Array("cres", "dim");
-		var me = this;
-		var ceTextField = Ext.create('Ext.form.ComboBox', {
-			fieldLabel: fieldName,
-			store: states,
+			store: storeField,
 			width: 285,
 			queryMode: 'local',
 			displayField: 'name',
@@ -322,6 +296,7 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 			}
 		});
 		
-		return ceTextField;
+		return combo;
 	}
+	
 });

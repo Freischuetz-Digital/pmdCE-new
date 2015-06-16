@@ -11,23 +11,23 @@ Ext.define('pmdCE.Application', {
 	views:[
 	'main.Main',
 	'toolbar.CEToolbar',
-	'toolbar.AfterSaveDialog',	
+	'toolbar.AfterSaveDialog',
 	'facsimileView.FacsimileView',
-	'facsimileView.LeafletFacsimile',	
+	'facsimileView.LeafletFacsimile',
 	'tabPanel.XMLView',
 	'tabPanel.CETabPanel',
 	'tabPanel.CEButtonPanel',
 	'tabPanel.EditDialog',
 	'tabPanel.ControlEventsItem',
-	'tabPanel.CEGridPanel',	
+	'tabPanel.CEGridPanel',
 	'tabPanel.CEPanel',
 	'tabPanel.buttonDialogs.VerovioImageStart',
 	'tabPanel.buttonDialogs.VerovioImageEnd',
 	'tabPanel.buttonDialogs.AddObviousElDialog',
-	'tabPanel.buttonDialogs.AddAmbiguousElDialog',	
+	'tabPanel.buttonDialogs.AddAmbiguousElDialog',
 	'tabPanel.buttonDialogs.AddOrigDialog',
-	'tabPanel.buttonDialogs.AddRegDialog',	
-	'tabPanel.buttonDialogs.ChangeObviousElDialog',	
+	'tabPanel.buttonDialogs.AddRegDialog',
+	'tabPanel.buttonDialogs.ChangeObviousElDialog',
 	'tabPanel.buttonDialogs.DeleteDialog',
 	'tabPanel.buttonDialogs.cards.ChoiceTstampCard',
 	'tabPanel.buttonDialogs.cards.ChoiceTstamp2Card',
@@ -38,7 +38,7 @@ Ext.define('pmdCE.Application', {
 	'tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard',
 	'tabPanel.buttonDialogs.cards.ChoiceCard',
 	'tabPanel.buttonDialogs.cards.ObviousCard',
-	'tabPanel.buttonDialogs.cards.ChangeObviousCard',	
+	'tabPanel.buttonDialogs.cards.ChangeObviousCard',
 	'tabPanel.dirs.DirsGridPanel',
 	'tabPanel.dirs.DirsButtonsPanel',
 	'tabPanel.dynams.DynamsGridPanel',
@@ -94,7 +94,7 @@ Ext.define('pmdCE.Application', {
 				type: 'ajax',
 				// url: 'resources/xql/getControlEvents.xql'
 				
-				url: 'resources/data/tree/treegrid_1.json'
+				url: 'data/tree/treegrid_1.json'
 			},
 			autoLoad: false
 		});
@@ -109,7 +109,7 @@ Ext.define('pmdCE.Application', {
 				type: 'ajax',
 				// url: 'resources/xql/getDynams.xql'
 				
-				url: 'resources/data/tree/treegrid_2.json'
+				url: 'data/tree/treegrid_2.json'
 			},
 			autoLoad: false
 		});
@@ -124,7 +124,7 @@ Ext.define('pmdCE.Application', {
 				type: 'ajax',
 				// url: 'resources/xql/getDirs.xql'
 				
-				url: 'resources/data/tree/treegrid_3.json'
+				url: 'data/tree/treegrid_3.json'
 			},
 			autoLoad: false
 		});

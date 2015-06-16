@@ -1,3 +1,8 @@
+/**
+ * Creates class pmdCE.view.tabPanel.ControlEventsItem that extend from Ext.panel.Panel.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.ControlEventsItem for create hairpins-, dirs-, dynams- and slurs- items.
+ */
 Ext.define('pmdCE.view.tabPanel.ControlEventsItem', {
 	extend: 'Ext.panel.Panel',
 	requires:[

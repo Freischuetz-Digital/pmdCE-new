@@ -1,10 +1,14 @@
+/**
+ * Creates class pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog that extend from Ext.window.Window.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog is class for add an orig to
+ * selected ambigous element.
+ */
 Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 	extend: 'Ext.window.Window',
 	title: 'Add Orig Element',
 	flex: 1,
 	id: 'obviousdialog',
-	//height: 200,
-	//width: 500,
 	modal: true,
 	bodyPadding: 10,
 	layout: 'vbox',
@@ -21,9 +25,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 	titleForAdd: null,
 	createElementButton: null,
 	
+	/**
+	 * Get selection from tree tabel and create all fields, buttons
+	 * @overrides
+	 */
 	initComponent: function () {
-		
-		
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 			selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 			rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
@@ -50,24 +56,23 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 		staffField = this.createTextField('staffField', 'Staff');
 		staffField.setValue(selectedNode.childNodes[0].data.staff);
 		staffField.setDisabled(true);
-		satffFieldBetween = this.createComboBoxStaff('Second staff');
-		placeField = this.createComboBox('Place');
+		satffFieldBetween = this.createComboBoxf('Second staff', 'staffBetween');
+		placeField = this.createComboBox('Place', 'place');
 		placeField.validate();
 		tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
 		tstampField.validate();
 		// hairpin
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
-			formField = this.createComboBoxForm('Form');
+			formField = this.createComboBox('Form', 'form');
 			tstampField2 = this.createTextField('tstampField2Obv', 'Tstamp2');
 			tstampField2.validate();
 		} else {
 			// dynams
 			formField = this.createTextField('formOrig', 'Form');
-			tstampField2 = this.createTextFieldTstamp2('tstampField2Obv', 'Tstamp2');
-			rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
+			tstampField2 = this.createOptionalTextField('tstampField2Obv', 'Tstamp2');
+			rend = this.createOptionalTextField('rendOrig', 'Rend');
 		}
 		formField.validate();
-		
 		
 		this.items = Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ?[
 		staffField,
@@ -84,7 +89,6 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 		tstampField2,
 		rend]
 		
-		
 		createElementButton = this.createNavigationButton('createElement', 'Add', this.createElement);
 		this.buttons =[
 		createElementButton, {
@@ -94,10 +98,12 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 			}
 		}]
 		
-		
 		this.callParent()
 	},
 	
+	/**
+	 * Crete hairpin, dir or dynams element, set new selection in tree-table and enable save button.
+	 */
 	createElement: function () {
 		
 		if (selectedNode !== null) {
@@ -155,7 +161,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 		console.log(this.titleForAdd);
 	},
 	
-	
+	/**
+	 * Create mandatory text field.
+	 * @param {string} fieldName - text name and id.
+	 * @param {string} fieldLabel - field label.
+	 */
 	createTextField: function (fieldName, fieldLabel) {
 		var me = this;
 		var ceTextField = Ext.create('Ext.form.field.Text', {
@@ -181,8 +191,13 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 		return ceTextField;
 	},
 	
-	createTextFieldTstamp2: function (fieldName, fieldLabel) {
-		var me1 = this;
+	/**
+	 * Create optional text field.
+	 * @param {string} fieldName - text name and id.
+	 * @param {string} fieldLabel - field label.
+	 */
+	createOtionalTextField: function (fieldName, fieldLabel) {
+		var me = this;
 		var ceTextField = Ext.create('Ext.form.field.Text', {
 			name: fieldName,
 			id: fieldName,
@@ -190,13 +205,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 			fieldLabel: fieldLabel,
 			listeners: {
 				focus: function (e, eOpts) {
-					
-					me1.handleCreateButton();
+					me.handleCreateButton();
 				},
 				render: function (c) {
 					c.getEl().on('keyup', function () {
-						
-						me1.handleCreateButton();
+						me.handleCreateButton();
 					},
 					c);
 				}
@@ -206,81 +219,54 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 		return ceTextField;
 	},
 	
-	
-	createComboBox: function (fieldName) {
-		
-		var states = new Array("above", "below", "between");
+	/**
+	 * Create a mandatory, not editable combo box and store dependent from combo type.
+	 * @param {string} fieldName - combo name.
+	 * @param {string} fieldId - combo id and type definition.
+	 */
+	createComboBox: function (fieldName, fieldId) {
 		var me = this;
-		var ceTextField = Ext.create('Ext.form.ComboBox', {
-			fieldLabel: fieldName,
-			store: states,
-			queryMode: 'local',
-			displayField: 'name',
-			editable: false,
-			width: 285,
-			allowBlank: false,
-			invalidCls: '',
-			listeners: {
-				select: function (combo, record, index) {
-					me.handleCreateButton();
-				}
+		var storeField = null;
+		if (fieldId.indexOf('staff') > -1) {
+			var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
+			var selectedPage = Ext.getCmp('pages').getText();
+			
+			var test = pageStaffMap[selectedPage];
+			
+			var storeField = new Array(test.length);
+			var value = test[0];
+			for (var i = 0; i < test.length; i++) {
+				storeField[i] = value++;
 			}
-		});
-		return ceTextField;
-	},
-	
-	createComboBoxForm: function (fieldName) {
-		
-		var states = new Array("cres", "dim");
-		var me = this;
-		var ceTextField = Ext.create('Ext.form.ComboBox', {
-			fieldLabel: fieldName,
-			store: states,
-			width: 285,
-			queryMode: 'local',
-			displayField: 'name',
-			editable: false,
-			allowBlank: false,
-			invalidCls: '',
-			listeners: {
-				select: function (combo, record, index) {
-					me.handleCreateButton();
-				}
-			}
-		});
-		
-		return ceTextField;
-	},
-	createComboBoxStaff: function (fieldName) {
-		
-		var pageStaffMap = Ext.getCmp('cetoolbar').staffNr;
-		var selectedPage = Ext.getCmp('pages').getText();
-		
-		var test = pageStaffMap[selectedPage];
-		
-		var dataMeasureNr = new Array(test.length);
-		var value = test[0];
-		for (var i = 0; i < test.length; i++) {
-			dataMeasureNr[i] = value++;
+		}
+		if (fieldId.indexOf('place') > -1) {
+			storeField = new Array("above", "below", "between");
+		}
+		if (fieldId.indexOf('form') > -1) {
+			storeField = new Array("cres", "dim");
 		}
 		
 		var ceTextField = Ext.create('Ext.form.ComboBox', {
 			fieldLabel: fieldName,
-			store: dataMeasureNr,
+			store: storeField,
 			queryMode: 'local',
 			displayField: 'name',
+			editable: false,
 			width: 285,
-			editable: true,
-			icon: 'resources/images/mix_volume.png',
+			allowBlank: false,
+			invalidCls: '',
 			listeners: {
 				select: function (combo, record, index) {
+					me.handleCreateButton();
 				}
 			}
 		});
 		return ceTextField;
 	},
 	
-	
+	/**
+	 * Handle function for disable/enable create-button.
+	 */
 	handleCreateButton: function () {
 		if (placeField.isValid() && formField.isValid() && tstampField.isValid() && tstampField2.isValid()) {
 			createElementButton.setDisabled(false);
@@ -289,6 +275,12 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 		}
 	},
 	
+	/**
+	 * Create a navigation button for card.
+	 * @param {string} navItemId - button id.
+	 * @param {string} navText - button name.
+	 * @param {object} navHandler - handler for button.
+	 */
 	createNavigationButton: function (navItemId, navText, navHandler) {
 		var navButton = Ext.create('Ext.button.Button', {
 			itemId: navItemId,
@@ -296,7 +288,6 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 			handler: navHandler,
 			disabled: true
 		})
-		
 		return navButton;
 	}
 });

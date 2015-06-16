@@ -1,3 +1,9 @@
+/**
+ * Creates class pmdCE.view.tabPanel.buttonDialogs.DeleteDialog that extend from Ext.window.Window.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.buttonDialogs.DeleteDialog is a class for delete
+ * element in table.
+ */
 Ext.define('pmdCE.view.tabPanel.buttonDialogs.DeleteDialog', {
 	extend: 'Ext.window.Window',
 	title: 'Delete Element',
@@ -13,23 +19,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.DeleteDialog', {
 	selectedId: null,
 	root: null,
 	
-	// layout: 'hbox',
-	
+	/**
+	 * Get selection, create buttons
+	 * @overrides
+	 */
 	initComponent: function () {
-		
-		/* if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
-		selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
-		root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-		}
-		else{
-		selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
-		root = pmdCE.getApplication().getDynamDataStore().getRootNode();
-		}
-		
-		 */
-		
-		
-		
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 			selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 			root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
@@ -87,20 +81,17 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.DeleteDialog', {
 					}
 				}
 				
-				
-				
-				
 				Ext.getCmp('saveButton').setDisabled(false);
 				this.up('window').close();
 			}
-		}, {
+		},
+		{
 			text: 'Cancel',
 			handler: function () {
 				this.up('window').close();
 			}
 		}],
-		
-		
+				
 		this.callParent()
 	}
 });

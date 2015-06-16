@@ -217,7 +217,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 			staffField,
 			startTaktField,
 			endTaktField]
-		}, {
+		},
+		{
 			id: 'card-1',
 			layout: 'vbox',
 			border: false,
@@ -254,7 +255,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 					tstampFieldOrig,
 					tstamp2FieldOrig,
 					rend]
-				}, {
+				},
+				{
 					xtype: 'fieldset',
 					title: 'Reg',
 					// id: 'starttime',
@@ -276,7 +278,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 					tstampFieldReg1,
 					tstamp2FieldReg1,
 					rendReg1]
-				}, {
+				},
+				{
 					xtype: 'fieldset',
 					title: 'Reg',
 					//  id: 'endtime',
@@ -319,7 +322,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 					},
 					margin: '0 10 0 10',
 					items:[]
-				}, {
+				},
+				{
 					xtype: 'fieldset',
 					title: 'End Time (tstamp2)',
 					id: 'verovio2',
@@ -484,7 +488,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 					name: "orig",
 					tag: "orig",
 					leaf: true
-				}, {
+				},
+				{
 					icon: 'resources/images/mix_volume.png',
 					staff: staffField.getValue(),
 					type: elType,

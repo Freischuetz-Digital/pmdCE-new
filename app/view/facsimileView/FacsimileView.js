@@ -1,3 +1,8 @@
+/**
+ * Creates class pmdCE.view.facsimileView.FacsimileView that extend from Ext.form.Panel.
+ * @class
+ * @classdesc pmdCE.view.facsimileView.FacsimileView for show facsimile.
+ */
 Ext.define('pmdCE.view.facsimileView.FacsimileView', {
 	extend: 'Ext.form.Panel',
 	requires:[
@@ -8,6 +13,10 @@ Ext.define('pmdCE.view.facsimileView.FacsimileView', {
 	id: 'facsimileview',
 	autoScroll: true,
 	
+	/**
+	 * Set title for view and create leaflet component.
+	 * @overrides
+	 */
 	initComponent: function () {
 		
 		var selectedPage = Ext.getCmp('pages').getText();
@@ -23,8 +32,6 @@ Ext.define('pmdCE.view.facsimileView.FacsimileView', {
 		
 		this.title = selectedPage + ' (measures: ' + value + ' - ' + endValue + '; staffNr: ' + staffNr + ')';
 		
-		me = this;
-		
 		this.items =[ {
 			xtype: 'leafletmapview',
 			flex: 1,
@@ -34,8 +41,7 @@ Ext.define('pmdCE.view.facsimileView.FacsimileView', {
 		this.callParent()
 	},
 	
-	click: function () {
-		
+	click: function () {		
 		console.log("Click");
 	}
 });

@@ -1,3 +1,9 @@
+/**
+ * Creates class pmdCE.view.tabPanel.CEGridPanel that extend from Ext.tree.Panel.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.CEGridPanel is a help class for create
+ * table tree in slurs-, hairpins-, dynams- and dirs-tabs.
+ */
 Ext.define('pmdCE.view.tabPanel.CEGridPanel', {
 	extend: 'Ext.tree.Panel',
 	
@@ -14,18 +20,12 @@ Ext.define('pmdCE.view.tabPanel.CEGridPanel', {
 	
 	useArrows: true,
 	rootVisible: false,
-	
-	editColumn: null,
-	
-	showDialog: function () {
-		
-		var win = new pmdCE.view.main.AddDialog();
-		win.show();
-	},
-	
+
+	/**
+	 * Create edit column with icon in table tree for ce-element.
+	 */
 	createEditColumn: function () {
-		var eColumn = Ext.create('Ext.grid.column.Action', {
-			
+		var eColumn = Ext.create('Ext.grid.column.Action', {			
 			xtype: 'actioncolumn',
 			header: 'Edit',
 			width: 40,
@@ -45,6 +45,12 @@ Ext.define('pmdCE.view.tabPanel.CEGridPanel', {
 		return eColumn;
 	},
 	
+	/**
+	 * Handler for selection clicked cell if this not selected and open edit dialog.
+	 * @param {object} object - panel.
+	 * @param {string} cell - ckicked cell.
+	 * @param {string} cell - ckicked row.
+	 */
 	changeElementDialog: function (object, cell, row) {
 		object.selectionModel.select(cell);
 		

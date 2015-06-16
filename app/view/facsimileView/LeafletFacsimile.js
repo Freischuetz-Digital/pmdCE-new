@@ -1,3 +1,8 @@
+/**
+ * Creates class pmdCE.view.facsimileView.LeafletFacsimile that extend from Ext.Component.
+ * @class
+ * @classdesc pmdCE.view.facsimileView.LeafletFacsimile for create leaflet component.
+ */
 Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 	extend: 'Ext.Component',
 	
@@ -6,11 +11,14 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 	config: {
 		map: null
 	},
-	me: null,
 	
-	
+	/**
+	 * Get data for initialize a map, data for show measures and ftaffs numbers, 
+	 * create leaflet
+	 * @overrides
+	 */
 	afterRender: function (t, eOpts) {
-		me = this;
+		var me = this;
 		this.callParent(arguments);
 		
 		var leafletRef = window.L;
@@ -64,7 +72,7 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 					
 					// var path = 'http://localhost:8080'+json.path;
 					
-					var facsimileTile = L.tileLayer.facsimileLayer('resources/data/example/{z}-{x}-{y}.jpg', {
+					var facsimileTile = L.tileLayer.facsimileLayer('data/example/{z}-{x}-{y}.jpg', {
 						minZoom: 0,
 						maxZoom: maxZoomLevel,
 						continuousWorld: true
@@ -132,6 +140,11 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 		}
 	},
 	
+	/**
+	 * Get called anytime the size is changed in the layout
+	 * and call the ‘invalidateSize’ method on the map.
+	 * @overrides
+	 */
 	onResize: function (w, h, oW, oH) {
 		this.callParent(arguments);
 		var map = this.getMap();

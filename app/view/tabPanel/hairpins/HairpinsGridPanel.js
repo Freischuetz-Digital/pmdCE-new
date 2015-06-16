@@ -1,3 +1,9 @@
+/**
+ * Creates class pmdCE.view.tabPanel.hairpins.HairpinsGridPanel that extend from pmdCE.view.tabPanel.CEGridPanel.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.hairpins.HairpinsGridPanel is a class for create
+ * table tree in hairpins-tab.
+ */
 Ext.define('pmdCE.view.tabPanel.hairpins.HairpinsGridPanel', {
 	extend: 'pmdCE.view.tabPanel.CEGridPanel',
 	
@@ -5,8 +11,12 @@ Ext.define('pmdCE.view.tabPanel.hairpins.HairpinsGridPanel', {
 	'pmdCE.model.Hairpin'],
 	
 	id: 'cegridpanel',
+	editColumn: null,
 	
-	
+	/**
+	 * Create table tree columns and selection listener
+	 * @overrides
+	 */
 	initComponent: function () {
 		this.editColumn = this.createEditColumn();
 		
@@ -57,38 +67,43 @@ Ext.define('pmdCE.view.tabPanel.hairpins.HairpinsGridPanel', {
 			flex: 3,
 			sortable: true,
 			dataIndex: 'name'
-		}, {
+		},
+		{
 			text: 'Staff',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'staff'
-		}, {
+		},
+		{
 			text: '2. Staff',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'staff2'
-		}, {
+		},
+		{
 			text: 'Measure',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'measurenr'
-		}, {
+		},
+		{
 			text: 'Tstamp',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'tstamp'
-		}, {
+		},
+		{
 			text: 'Tstamp2',
 			flex: 1,
 			dataIndex: 'tstamp2',
 			sortable: true
-		}, {
+		},
+		{
 			text: 'Place',
 			flex: 1,
 			dataIndex: 'place',
 			sortable: true
-		},
-		{
+		}, {
 			text: 'Form',
 			flex: 1,
 			dataIndex: 'form',
@@ -98,6 +113,9 @@ Ext.define('pmdCE.view.tabPanel.hairpins.HairpinsGridPanel', {
 		this.callParent()
 	},
 	
+	/**
+	 * Create xml-fragment for xml view
+	 */
 	showXMLforSelectedElement: function (selectedObject) {
 		var elementType = null;
 		if (selectedObject.data.type === 'hairpin') {
@@ -105,8 +123,7 @@ Ext.define('pmdCE.view.tabPanel.hairpins.HairpinsGridPanel', {
 		} else {
 			elementType = '<dynam></dynam>';
 		}
-		
-		
+				
 		var objects = $('<div></div>');
 		if (selectedObject.data.obvious) {
 			var object = $(elementType, {

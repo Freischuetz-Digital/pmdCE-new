@@ -1,3 +1,8 @@
+/**
+ * Creates class pmdCE.view.toolbar.AfterSaveDialog that extend from Ext.window.Window.
+ * @class
+ * @classdesc pmdCE.view.toolbar.AfterSaveDialog is a information for show saved elemnets to exist db.
+ */
 Ext.define('pmdCE.view.toolbar.AfterSaveDialog', {
 	extend: 'Ext.window.Window',
 	title: 'Saved Element(s)',
@@ -14,6 +19,10 @@ Ext.define('pmdCE.view.toolbar.AfterSaveDialog', {
 	
 	text: null,
 	
+	/**
+	 * Create info area and refresh store for elements
+	 * @overrides
+	 */
 	initComponent: function () {
 		
 		text = Ext.getCmp('cemain').getAfterSaveText();
@@ -25,16 +34,14 @@ Ext.define('pmdCE.view.toolbar.AfterSaveDialog', {
 		this.buttons =[ {
 			text: 'Ok',
 			handler: function () {
+				// refresh hairpin elements after save
 				var store = pmdCE.getApplication().getHairpinDataStore();
-				
 				store.reload();
-				
+				// refresh dynam elements after save
 				var dynamsStore = pmdCE.getApplication().getDynamDataStore();
-				
 				dynamsStore.reload();
-				
+				// refresh dir elements after save
 				var dirsStore = pmdCE.getApplication().getDirDataStore();
-				
 				dirsStore.reload();
 				
 				Ext.getCmp('saveButton').setDisabled(true);

@@ -1,11 +1,22 @@
+/**
+ * Creates class pmdCE.view.tabPanel.hairpins.DynamsGridPanel that extend from pmdCE.view.tabPanel.CEGridPanel.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.hairpins.DynamsGridPanel is a class for create
+ * table tree in dynams-tab.
+ */
 Ext.define('pmdCE.view.tabPanel.dynams.DynamsGridPanel', {
 	extend: 'pmdCE.view.tabPanel.CEGridPanel',
 	
-	requires:[
-	'pmdCE.model.Dynam'],
+	requires:['pmdCE.model.Dynam'],
 	
 	id: 'dynamsgridpanel',
 	
+	editColumn: null,
+	
+	/**
+	 * Create table tree columns and selection listener
+	 * @overrides
+	 */
 	initComponent: function () {
 		
 		this.editColumn = this.createEditColumn();
@@ -50,8 +61,7 @@ Ext.define('pmdCE.view.tabPanel.dynams.DynamsGridPanel', {
 				}
 			}
 		};
-		
-		
+				
 		this.columns =[ {
 			xtype: 'treecolumn',
 			text: 'Name/Orig/Reg',
@@ -104,8 +114,10 @@ Ext.define('pmdCE.view.tabPanel.dynams.DynamsGridPanel', {
 		this.callParent()
 	},
 	
-	showXMLforSelectedElement: function (selectedObject) {
-		
+	/**
+	 * Create xml-fragment for xml view
+	 */
+	showXMLforSelectedElement: function (selectedObject) {		
 		var objects = $('<div></div>');
 		if (selectedObject.data.obvious) {
 			var object = $('<dynam></dynam>', {

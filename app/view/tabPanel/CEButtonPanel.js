@@ -1,3 +1,9 @@
+/**
+ * Creates class pmdCE.view.tabPanel.CEButtonPanel that extend from Ext.panel.Panel.
+ * @class
+ * @classdesc pmdCE.view.tabPanel.CEButtonPanel is a help class for create
+ * buttons in slurs-, hairpins-, dynams- and dirs-tabs.
+ */
 Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 	extend: 'Ext.panel.Panel',
 	requires:[
@@ -14,17 +20,16 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 	
 	bodyPadding: 10,
 	
-	createNewElButton: null,
-	addElementButton: null,
-	changeToButton: null,
-	
-	card: 0,
-	
 	layout: {
 		type: 'vbox',
 		align: 'stretch'
 	},
 	
+	/**
+	 * Create add-button with menu for add orig or reg element.
+	 * @param {string} buttonId.
+	 * @param {string} elementName - component type.
+	 */
 	createCEButton: function (buttonId, elementName) {
 		var ceButton = Ext.create('Ext.button.Button', {
 			xtype: 'button',
@@ -33,8 +38,7 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 			margin: '0 0 10 0',
 			menu:[Ext.create('Ext.menu.Item', {
 				text: "Orig",
-				icon: 'resources/images/mix_volume.png',
-				
+				icon: 'resources/images/mix_volume.png',				
 				handler: function () {
 					Ext.getCmp('cemain').setComponentType(elementName);
 					var win = new pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog();
@@ -56,7 +60,13 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 		return ceButton;
 	},
 	
-	
+	/**
+	 * Create changeTo-button with menu for add orig or regs elements.
+	 * @param {string} buttonId.
+	 * @param {string} menuChoiceId.
+	 * @param {string} menuHairpinId.
+	 * @param {string} elementName - component type.
+	 */
 	createChangeToButton: function (buttonId, menuChoiceId, menuHairpinId, elementName) {
 		
 		var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 8, elementName);
@@ -108,6 +118,11 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 		return ceButton;
 	},
 	
+	/**
+	 * Create create-element-button with menu for add orig or regs elements.
+	 * @param {string} buttonId.
+	 * @param {string} elementName - component type.
+	 */
 	createHairpinButton: function (buttonId, elementName) {
 		
 		var menuTstamp2Reg = this.createMenuItem("for Tstamp (1-2 regs)", 1, elementName);
@@ -157,7 +172,12 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 		return ceButton;
 	},
 	
-	
+	/**
+	 * Create menu item for ambiguous elements.
+	 * @param {string} itemText - item name.
+	 * @param {string} type - id of template type.
+	 * @param {string} elementName - component type.
+	 */
 	createMenuItem: function (itemText, type, elementName) {
 		var item = Ext.create('Ext.menu.Item', {
 			text: itemText,
@@ -173,15 +193,18 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 		return item;
 	},
 	
-	
+	/**
+	 * Create delete button.
+	 * @param {string} buttonId.
+	 * @param {string} elementName - component type.
+	 */
 	deleteElementButton: function (buttonId, elementName) {
 		var ceButton = Ext.create('Ext.button.Button', {
 			xtype: 'button',
 			id: buttonId,
 			margin: '0 0 10 0',
 			text: 'Delete',
-			listeners: {
-				
+			listeners: {				
 				click: function () {
 					Ext.getCmp('cemain').setComponentType(elementName);
 					var win = new pmdCE.view.tabPanel.buttonDialogs.DeleteDialog();
@@ -191,29 +214,5 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 		});
 		
 		return ceButton;
-	},
-	
-	deleteElement: function () {
-		
-		
-		Ext.Msg.confirm("Deletion", "The element will be deleted", function (btnText) {
-			if (btnText === "yes") {
-				
-				rootNode = pmdCE.getApplication().getHairpinDataStore().getRootNode();
-				console.log(rootNode);
-				selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
-				for (var i = 0; i < rootNode.childNodes.length; i++) {
-					if (rootNode.childNodes[i].data.id === selection.data.id) {
-						selectedNode = rootNode.childNodes[i];
-						
-						break;
-					}
-				}
-				
-				
-				rootNode.remove(selection);
-			}
-		},
-		this);
 	}
 });
