@@ -50,7 +50,8 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		saveButton.setDisabled(true);
 		selectToolButton = this.createCEButton('Control Events', 'controlevents',[ {
 			text: 'Pitch Tool'
-		}, {
+		},
+		{
 			text: 'Abbrev Resolver'
 		}]);
 		loginButton = this.createLoginButton('Login');
@@ -122,7 +123,7 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 						staff: modRecords[i].data.staff2 !== "" ? modRecords[i].data.staff + ' ' + modRecords[i].data.staff2: modRecords[i].data.staff,
 						place: modRecords[i].data.place,
 						tstamp: modRecords[i].data.tstamp,
-						tstamp2: modRecords[i].data.tstamp2,
+						tstamp2: modRecords[i].data.tstamp2 !== "" ? modRecords[i].data.tstamp2 : null,
 						'xml:id': modRecords[i].data.id,
 						xmlns: "http://www.music-encoding.org/ns/mei",
 						sameas: ""
@@ -160,7 +161,7 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 								staff: modRecords[i].childNodes[j].data.staff2 !== '' ? modRecords[i].childNodes[j].data.staff + ' ' + modRecords[i].childNodes[j].data.staff2: modRecords[i].childNodes[j].data.staff,
 								place: modRecords[i].childNodes[j].data.place,
 								tstamp: modRecords[i].childNodes[j].data.tstamp,
-								tstamp2: modRecords[i].childNodes[j].data.tstamp2,
+								tstamp2: modRecords.childNodes[j].data.tstamp2 !== "" ? modRecords.childNodes[j].data.tstamp2 : null,
 								sameas: ""
 							});
 							if (modRecords[i].childNodes[j].data.rend !== '') {
@@ -182,7 +183,7 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 								staff: modRecords[i].childNodes[j].data.staff2 !== '' ? modRecords[i].childNodes[j].data.staff + ' ' + modRecords[i].childNodes[j].data.staff2: modRecords[i].childNodes[j].data.staff,
 								place: modRecords[i].childNodes[j].data.place,
 								tstamp: modRecords[i].childNodes[j].data.tstamp,
-								tstamp2: modRecords[i].childNodes[j].data.tstamp2,
+								tstamp2: modRecords.childNodes[j].data.tstamp2 !== "" ? modRecords.childNodes[j].data.tstamp2 : null,
 								sameas: ""
 							});
 							if (modRecords[i].childNodes[j].data.rend !== '') {
@@ -564,5 +565,4 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		});
 		return ceBox;
 	}
-
 });

@@ -68,50 +68,42 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsGridPanel', {
 			flex: 3,
 			sortable: true,
 			dataIndex: 'name'
-		},
-		{
+		}, {
 			text: 'Staff',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'staff'
-		},
-		{
+		}, {
 			text: '2. Staff',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'staff2'
-		},
-		{
+		}, {
 			text: 'Measure',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'measurenr'
-		},
-		{
+		}, {
 			text: 'Tstamp',
 			flex: 1,
 			sortable: true,
 			dataIndex: 'tstamp'
-		},
-		{
+		}, {
 			text: 'Tstamp2',
 			flex: 1,
 			dataIndex: 'tstamp2',
 			sortable: true
-		},
-		{
+		}, {
 			text: 'Place',
 			flex: 1,
 			dataIndex: 'place',
 			sortable: true
-		},
-		{
+		}, {
 			text: 'Form',
 			flex: 1,
 			dataIndex: 'form',
 			sortable: true
-		},
-		{
+		}, {
 			text: 'Rend',
 			flex: 1,
 			dataIndex: 'rend',
@@ -125,14 +117,14 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsGridPanel', {
 	/**
 	 * Create xml-fragment for xml view
 	 */
-	showXMLforSelectedElement: function (selectedObject) {		
+	showXMLforSelectedElement: function (selectedObject) {
 		var objects = $('<div></div>');
 		if (selectedObject.data.obvious) {
 			var object = $('<dir></dir>', {
 				staff: (selectedObject.data.staff2 !== "" ? (selectedObject.data.staff + ' ' + selectedObject.data.staff2): selectedObject.data.staff),
 				place: selectedObject.data.place,
 				tstamp: selectedObject.data.tstamp,
-				tstamp2: selectedObject.data.tstamp2,
+				tstamp2: selectedObject.data.tstamp2 !== "" ? selectedObject.data.tstamp2 : null,
 				'xml:id': selectedObject.data.id,
 				xmlns: "http://www.music-encoding.org/ns/mei",
 				sameas: ""
@@ -162,7 +154,7 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsGridPanel', {
 						staff: (selectedObject.childNodes[j].data.staff2 !== "" ? (selectedObject.childNodes[j].data.staff + ' ' + selectedObject.childNodes[j].data.staff2): selectedObject.childNodes[j].data.staff),
 						place: selectedObject.childNodes[j].data.place,
 						tstamp: selectedObject.childNodes[j].data.tstamp,
-						tstamp2: selectedObject.childNodes[j].data.tstamp2,
+						tstamp2: selectedObject.childNodes[j].data.tstamp2 !== "" ? selectedObject.childNodes[j].data.tstamp2 : null,
 						sameas: ""
 					});
 					if (selectedObject.childNodes[j].data.rend !== '') {
@@ -184,7 +176,7 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsGridPanel', {
 						place: selectedObject.childNodes[j].data.place,
 						form: selectedObject.childNodes[j].data.form,
 						tstamp: selectedObject.childNodes[j].data.tstamp,
-						tstamp2: selectedObject.childNodes[j].data.tstamp2,
+						tstamp2: selectedObject.childNodes[j].data.tstamp2 !== "" ? selectedObject.childNodes[j].data.tstamp2 : null,
 						sameas: ""
 					});
 					if (selectedObject.childNodes[j].data.rend !== '') {

@@ -70,6 +70,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 	initComponent: function () {
 		// create orig fields
 		// common
+		
 		staffField = this.createComboBox('Staff', 'staffField');
 		staffField.validate();
 		staffFieldCopy = this.createMandatoryTextField('staffFieldCopy', 'Staff');
@@ -217,8 +218,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 			staffField,
 			startTaktField,
 			endTaktField]
-		},
-		{
+		}, {
 			id: 'card-1',
 			layout: 'vbox',
 			border: false,
@@ -262,8 +262,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					tstampFieldOrig,
 					tstamp2FieldOrig,
 					rend]
-				},
-				{
+				}, {
 					xtype: 'fieldset',
 					title: 'Reg',
 					id: 'starttime',
@@ -285,8 +284,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					tstampFieldReg1,
 					tstamp2FieldReg1,
 					rendReg1]
-				},
-				{
+				}, {
 					xtype: 'fieldset',
 					title: 'Reg',
 					id: 'endtime',
@@ -308,7 +306,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					tstamp2FieldReg2,
 					rendReg2]
 				}]
-			}, {
+			},
+			{
 				id: 'card-111',
 				layout: 'hbox',
 				border: false,
@@ -324,8 +323,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					},
 					margin: '0 10 0 10',
 					items:[]
-				},
-				{
+				}, {
 					xtype: 'fieldset',
 					title: 'End Time (tstamp2)',
 					id: 'verovio2',
@@ -489,8 +487,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					name: "orig",
 					tag: "orig",
 					leaf: true
-				},
-				{
+				}, {
 					icon: 'resources/images/mix_volume.png',
 					type: elType,
 					staff: staffFieldReg1.getValue(),
@@ -502,8 +499,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					name: "reg",
 					tag: "reg",
 					leaf: true
-				},
-				{
+				}, {
 					icon: 'resources/images/mix_volume.png',
 					type: elType,
 					staff: staffFieldReg2.getValue(),
