@@ -41,8 +41,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageStart', {
 		Ext.getCmp('cemain').setMeasureId(movement + "_measure" + measureid);
 		
 		Ext.Ajax.request({
-			url: "data/test.mei",
-			// url: "resources/xql/getExtendedStaff.xql",
+			//url: "data/test.mei",
+			 url: "resources/xql/getExtendedStaff.xql",
 			method: 'GET',
 			params: {
 				path: pageNr,

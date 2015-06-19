@@ -39,8 +39,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageEnd', {
 		var measurePath = movement + "_measure" + measureid + "_s" + staffNr;
 		
 		Ext.Ajax.request({
-			url: "data/testEnd.mei",
-			//  url: "resources/xql/getExtendedStaff.xql",
+			//url: "data/testEnd.mei",
+			  url: "resources/xql/getExtendedStaff.xql",
 			method: 'GET',
 			params: {
 				path: pageNr,
