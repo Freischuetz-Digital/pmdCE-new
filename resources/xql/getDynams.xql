@@ -79,7 +79,7 @@ declare function local:jsonifyDynams($dynams) {
                      let $rend_1 := $elem/@rend
                      let $form := if($rend_1 != '')
                             then( /$rend_1)
-                            else(/$elem)
+                            else(normalize-space(/$elem/text()))
                     
                       let $name := concat($form, '_s', $staffText, '_m', $measureN, '_', $place)
                       
@@ -133,9 +133,13 @@ declare function local:jsonifyElements($elements) {
                         let $rend := $x//mei:rend/@rend
                        
                      let $rend_1 := $x/@rend
-                     let $form := if($rend_1 != '')
+                    (: let $form := if($rend_1 != '')
                             then( /$rend_1)
-                            else(/$x)
+                            else(/$x):)
+                            
+                             let $form := if($rend_1 != '')
+                            then( /$rend_1)
+                            else(normalize-space(/$x/text()))
                     
                     
                     return 
