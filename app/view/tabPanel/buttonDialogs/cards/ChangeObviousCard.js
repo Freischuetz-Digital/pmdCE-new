@@ -213,7 +213,9 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChangeObviousCard', {
 		selectedNode.data.operation = 'change';
 		selectedNode.data.leaf = true;
 		selectedNode.data.tag = "";
-		selectedNode.data.icon = 'resources/images/mix_volume.png';
+		if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+			selectedNode.data.icon = 'resources/images/mix_volume.png';
+		}		
 		selectedNode.data.measureid = Ext.getCmp('cemain').getMeasureId();
 		selectedNode.data.measurenr = startTaktField.getValue();
 		

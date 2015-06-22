@@ -171,7 +171,7 @@ handleCreateButton: function () {
 },
 
 createElement: function () {
-	
+	var elIcon = null;
 	var modelPath = null;
 	var prefix = null;
 	var elType = null;
@@ -179,6 +179,7 @@ createElement: function () {
 		modelPath = 'pmdCE.model.Hairpin';
 		prefix = 'hairpin_';
 		elType = 'hairpin';
+		elIcon = 'resources/images/mix_volume.png';
 	} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 		modelPath = 'pmdCE.model.Dynam';
 		prefix = 'dynam_';
@@ -198,7 +199,7 @@ createElement: function () {
 	var hairpin = Ext.create(modelPath, {
 		id: hairId,
 		name: formField.getValue() + '_s' + staffField.getValue() + '_m' + staffField.getValue() + '_' + placeField.getValue(),
-		icon: 'resources/images/mix_volume.png',
+		icon: elIcon,
 		obvious: true,
 		ambiguous: false,
 		operation: 'create',

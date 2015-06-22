@@ -38,7 +38,7 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 			margin: '0 0 10 0',
 			menu:[Ext.create('Ext.menu.Item', {
 				text: "Orig",
-				icon: 'resources/images/mix_volume.png',				
+				//icon: 'resources/images/mix_volume.png',				
 				handler: function () {
 					Ext.getCmp('cemain').setComponentType(elementName);
 					var win = new pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog();
@@ -48,7 +48,7 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 			
 			Ext.create('Ext.menu.Item', {
 				text: "Reg",
-				icon: 'resources/images/mix_volume.png',
+				//icon: 'resources/images/mix_volume.png',
 				handler: function () {
 					Ext.getCmp('cemain').setComponentType(elementName);
 					var win = new pmdCE.view.tabPanel.buttonDialogs.AddRegDialog();
@@ -92,7 +92,7 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 			menu:[Ext.create('Ext.menu.Item', {
 				text: "Choice",
 				id: menuChoiceId,
-				icon: 'resources/images/details-xml.png',
+				//icon: 'resources/images/details-xml.png',
 				menu:[
 				menuTstamp2Reg,
 				menuTStamp22Reg,
@@ -104,9 +104,9 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 			}),
 			
 			Ext.create('Ext.menu.Item', {
-				text: "Hairpin",
+				text: elementName,
 				id: menuHairpinId,
-				icon: 'resources/images/mix_volume.png',
+				//icon: 'resources/images/mix_volume.png',
 				handler: function () {
 					Ext.getCmp('cemain').setComponentType(elementName);
 					var win = new pmdCE.view.tabPanel.buttonDialogs.ChangeObviousElDialog();
@@ -146,7 +146,7 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 			margin: '0 0 10 0',
 			menu:[Ext.create('Ext.menu.Item', {
 				text: "Choice ...",
-				icon: 'resources/images/details-xml.png',
+				//icon: 'resources/images/details-xml.png',
 				
 				menu:[
 				menuTstamp2Reg,
@@ -160,7 +160,7 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 			
 			Ext.create('Ext.menu.Item', {
 				text: elementName,
-				icon: 'resources/images/mix_volume.png',
+				//icon: 'resources/images/mix_volume.png',
 				handler: function () {
 					Ext.getCmp('cemain').setComponentType(elementName);
 					var win = new pmdCE.view.tabPanel.buttonDialogs.AddObviousElDialog();
@@ -181,7 +181,7 @@ Ext.define('pmdCE.view.tabPanel.CEButtonPanel', {
 	createMenuItem: function (itemText, type, elementName) {
 		var item = Ext.create('Ext.menu.Item', {
 			text: itemText,
-			icon: 'resources/images/mix_volume.png',
+			//icon: 'resources/images/mix_volume.png',
 			handler: function () {
 				Ext.getCmp('cemain').setCard(type);
 				Ext.getCmp('cemain').setComponentType(elementName);

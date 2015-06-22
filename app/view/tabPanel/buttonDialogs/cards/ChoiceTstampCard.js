@@ -359,10 +359,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 		// for 'change to' dialog
 		if (Ext.getCmp('cemain').getCard() === 8) {
 			if (selectedNode !== null) {
-				
+				var elIcon = null;
 				var elType = null;
 				if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 					elType = 'hairpin';
+					elIcon = 'resources/images/mix_volume.png';
 				} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 					elType = 'dynam';
 				} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
@@ -380,11 +381,13 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 				selectedNode.data.tstamp2 = null;
 				selectedNode.data.form = null;
 				selectedNode.data.place = null;
-				selectedNode.data.operation = 'change',
-				selectedNode.data.icon = 'resources/images/details-xml.png',
+				selectedNode.data.operation = 'change';
+				if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
+					selectedNode.data.icon = 'resources/images/details-xml.png';
+				}
 				
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					type: elType,
 					staff: staffField.getValue(),
 					tstamp: tstampFieldOrig.getValue(),
@@ -397,7 +400,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 					leaf: true
 				});
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					type: elType,
 					staff: staffFieldReg1.getValue(),
 					tstamp: tstampFieldReg1.getValue(),
@@ -411,7 +414,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 				});
 				if (! tstampFieldReg2.isDisabled()) {
 					selectedNode.appendChild({
-						icon: 'resources/images/mix_volume.png',
+						icon: elIcon,
 						type: elType,
 						staff: staffFieldReg2.getValue(),
 						rend: typeof rendReg2 !== 'undefined' ? rendReg2.getValue(): null,
@@ -444,6 +447,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 			
 			this.up('window').close();
 		} else {
+			var elIconParent = null;
+			var elIconChild = null;
 			var modelPath = null;
 			var prefix = null;
 			var elType = null;
@@ -451,6 +456,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 				modelPath = 'pmdCE.model.Hairpin';
 				prefix = 'hairpin_';
 				elType = 'hairpin';
+				elIconParent = 'resources/images/details-xml.png';
+				elIconChild = 'resources/images/mix_volume.png';
 			} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 				modelPath = 'pmdCE.model.Dynam';
 				prefix = 'dynam_';
@@ -470,14 +477,14 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 				id: hairId,
 				name: 'choice_m' + startTaktField.getValue(),
 				type: elType,
-				icon: 'resources/images/details-xml.png',
+				icon: elIconParent,
 				measureid: Ext.getCmp('cemain').getMeasureId(),
 				measurenr: startTaktField.getValue(),
 				operation: 'create',
 				obvious: false,
 				ambiguous: true,
 				children:[ {
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffField.getValue(),
 					tstamp: tstampFieldOrig.getValue(),
@@ -490,7 +497,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 					leaf: true
 				},
 				{
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					staff: staffField.getValue(),
 					type: elType,
 					tstamp: tstampFieldReg1.getValue(),
@@ -516,7 +523,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 			
 			if (! tstampFieldReg2.isDisabled()) {
 				hairpin.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffField.getValue(),
 					tstamp: tstampFieldReg2.getValue(),

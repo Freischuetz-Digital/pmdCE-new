@@ -29,8 +29,8 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 			var selectedPage = Ext.getCmp('pages').getText();
 			
 			Ext.Ajax.request({
-				 url: 'resources/xql/getZones.xql',
-				//url: 'data/getZones.xql',
+				// url: 'resources/xql/getZones.xql',
+				url: 'data/getZones.xql',
 				async: false,
 				method: 'GET',
 				params: {
@@ -73,18 +73,18 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 					 var path = 'http://localhost:8080'+json.path;
 					
 					var facsimileTile = 
-					/*L.tileLayer.facsimileLayer('data/example/{z}-{x}-{y}.jpg', {
+					L.tileLayer.facsimileLayer('data/example/{z}-{x}-{y}.jpg', {
 						minZoom: 0,
 						maxZoom: maxZoomLevel,
 						continuousWorld: true
-					});*/
+					});
 					
-					
+				/*	
 					 L.tileLayer.facsimileLayer(path, {
 					minZoom: 0,
 					maxZoom: maxZoomLevel,
 					continuousWorld : true
-					});
+					});*/
 					
 					facsimileTile.setWidth(facsimileWidth);
 					

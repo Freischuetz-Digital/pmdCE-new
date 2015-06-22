@@ -70,7 +70,7 @@ declare function local:jsonifySlurs($slurs) {
                              '"type":"slur",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
-                             '"icon":"resources/images/mix_volume.png",',
+                            (: '"icon":"resources/images/mix_volume.png",',:)
                             '"measureid":"',$measureID,'",',
                             '"measurenr":"',$measureN,'",',
                            (: '"children":[{',  
@@ -117,7 +117,7 @@ declare function local:jsonifyElements($elements) {
                     return 
                         concat('{"name":"',$name1,'",',   
                             '"type":"slur",',
-                             '"icon":"resources/images/mix_volume.png",',
+                           (:  '"icon":"resources/images/mix_volume.png",',:)
                             '"tstamp":"',$tstamp,'",',
                             '"tstamp2":"',$tstamp2,'",',
                             '"startid":"',$startID,'",',
@@ -154,7 +154,7 @@ declare function local:jsonifySlurChoices($choicesSlur) {
                             '"type":"slur",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
-                             '"icon":"resources/images/details-xml.png",',
+                            (: '"icon":"resources/images/details-xml.png",',:)
                             '"measureid":"',$measureID,'",',
                             '"measurenr":"',$measureN,'",',
                             '"children":[',  

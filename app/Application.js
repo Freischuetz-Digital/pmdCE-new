@@ -77,8 +77,8 @@ Ext.define('pmdCE.Application', {
 			model: 'pmdCE.model.Source',
 			proxy: {
 				type: 'ajax',
-				//url: 'data/pmd_ce_getNavigation.xql',
-				   url: 'resources/xql/pmd_ce_getNavigation.xql',
+				url: 'data/pmd_ce_getNavigation.xql',
+				//   url: 'resources/xql/pmd_ce_getNavigation.xql',
 				reader: {
 					type: 'json',
 					rootProperty: 'sigle'
@@ -95,9 +95,9 @@ Ext.define('pmdCE.Application', {
 			},
 			proxy: {
 				type: 'ajax',
-				url: 'resources/xql/getControlEvents.xql'
+				//url: 'resources/xql/getControlEvents.xql'
 				
-				//url: 'data/tree/treegrid_1.json'
+				url: 'data/tree/treegrid_1.json'
 			},
 			autoLoad: false
 		});
@@ -110,9 +110,9 @@ Ext.define('pmdCE.Application', {
 			},
 			proxy: {
 				type: 'ajax',
-				 url: 'resources/xql/getDynams.xql'
+				 //url: 'resources/xql/getDynams.xql'
 				
-				//url: 'data/tree/treegrid_2.json'
+				url: 'data/tree/treegrid_2.json'
 			},
 			autoLoad: false
 		});
@@ -125,9 +125,9 @@ Ext.define('pmdCE.Application', {
 			},
 			proxy: {
 				type: 'ajax',
-				 url: 'resources/xql/getDirs.xql'
+				// url: 'resources/xql/getDirs.xql'
 				
-				//url: 'data/tree/treegrid_3.json'
+				url: 'data/tree/treegrid_3.json'
 			},
 			autoLoad: false
 		});
@@ -141,9 +141,9 @@ Ext.define('pmdCE.Application', {
 			},
 			proxy: {
 				type: 'ajax',
-				 url: 'resources/xql/getSlurs.xql'
+				 //url: 'resources/xql/getSlurs.xql'
 				
-				//url: 'data/tree/treegrid_4.json'
+				url: 'data/tree/treegrid_4.json'
 			},
 			autoLoad: false
 		});

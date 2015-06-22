@@ -15,6 +15,9 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddAmbiguousElDialog', {
 	
 	ambiguousCard: null,
 	
+	x: 60,
+    y: 60,
+	
 	/**
 	 * Create card depend from template type
 	 * @overrides

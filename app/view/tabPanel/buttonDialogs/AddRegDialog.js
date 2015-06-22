@@ -108,8 +108,10 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddRegDialog', {
 		
 		if (selectedNode !== null) {
 			var elType = null;
+			var elIcon = null
 			if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 				elType = 'hairpin';
+				elIcon = 'resources/images/mix_volume.png';
 			} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 				elType = 'dynam';
 			} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
@@ -120,7 +122,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddRegDialog', {
 			selectedNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
 			
 			selectedNode.appendChild({
-				icon: 'resources/images/mix_volume.png',
+				icon: elIcon,
 				type: elType,
 				staff: staffField.getValue(),
 				staff2: satffFieldBetween.getValue(),

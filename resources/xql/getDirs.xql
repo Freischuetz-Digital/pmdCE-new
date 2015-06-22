@@ -94,7 +94,7 @@ declare function local:jsonifyDirs($dirs) {
                              '"type":"dir",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
-                             '"icon":"resources/images/mix_volume.png",',
+                             (:'"icon":"resources/images/mix_volume.png",',:)
                             '"measureid":"',$measureID,'",',
                             '"measurenr":"',$measureN,'",',
                            (: '"children":[{',  
@@ -150,7 +150,7 @@ declare function local:jsonifyElements($elements) {
                     return 
                         concat('{"name":"',$name1,'",',   
                             '"type":"dir",',
-                             '"icon":"resources/images/mix_volume.png",',
+                            (: '"icon":"resources/images/mix_volume.png",',:)
                             '"tstamp":"',$tstamp,'",',
                             '"tstamp2":"',$tstamp2,'",',
                             '"place":"',$place,'",',
@@ -187,7 +187,7 @@ declare function local:jsonifyDirChoices($choicesDir) {
                             '"type":"dir",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
-                             '"icon":"resources/images/details-xml.png",',
+                            (: '"icon":"resources/images/details-xml.png",',:)
                             '"measureid":"',$measureID,'",',
                             '"measurenr":"',$measureN,'",',
                             '"children":[',  

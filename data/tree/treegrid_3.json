@@ -3,7 +3,6 @@
         {
             "name": "cres_s1_m55_below",
             "id": "dir_12345678",
-            "icon": 'resources/images/mix_volume.png',
             "type": "dir",
              "obvious": true,
              "ambiguous": false,
@@ -21,7 +20,6 @@
             
             "name": "dim_s1_m63_below",
             "id": "dir_elena",
-            "icon": 'resources/images/mix_volume.png',
             "type": "dir",
             "obvious": true,
             "ambiguous": false,
@@ -39,7 +37,6 @@
             
             "name": "dim_s8_m62_between",
             "id": "dir_d639e5b4-a5a6-414b-b163-e266cfd28549",
-            "icon": 'resources/images/details-xml.png',
             "type": "dir",
             "obvious": false,
             "ambiguous": true,
@@ -47,7 +44,6 @@
              "children": [
         {
                 "name": "orig",
-            "icon": 'resources/images/mix_volume.png',
              "leaf": true,
              "type": "dir",
                     "staff": "8", 
@@ -62,7 +58,6 @@
         
         {
             "name": "reg",
-            "icon": 'resources/images/mix_volume.png',
              "leaf": true,
              "type": "dir",
                     "staff": "8",
@@ -76,7 +71,6 @@
         }, 
         {
              "name": "reg",
-            "icon": 'resources/images/mix_volume.png',
              "leaf": true,
              "type": "dir",
                     "staff": "9", 

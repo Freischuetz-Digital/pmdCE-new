@@ -360,10 +360,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 		// for 'change to' dialog
 		if (Ext.getCmp('cemain').getCard() === 10) {
 			if (selectedNode !== null) {
-				
+				var elIcon = null;
 				var elType = null;
 				if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 					elType = 'hairpin';
+					elIcon = 'resources/images/mix_volume.png';
 				} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 					elType = 'dynam';
 				} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
@@ -381,12 +382,13 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 				selectedNode.data.tstamp2 = null;
 				selectedNode.data.form = null;
 				selectedNode.data.place = null;
-				selectedNode.data.operation = 'change',
-				selectedNode.data.icon = 'resources/images/details-xml.png',
-				
+				selectedNode.data.operation = 'change';
+				if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
+					selectedNode.data.icon = 'resources/images/details-xml.png';
+				}
 				// selectedNode.removeChild(nodeToDelete);
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					rend: typeof rend !== 'undefined' ? rend.getValue(): null,
 					staff: staffField.getValue(),
 					staff2: satffFieldBetween.getValue(),
@@ -399,7 +401,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					leaf: true
 				});
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					rend: typeof rend !== 'undefined' ? rend.getValue(): null,
 					staff: staffFieldReg1.getValue(),
 					tstamp: tstampFieldReg1.getValue(),
@@ -411,7 +413,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					leaf: true
 				});
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					rend: typeof rend !== 'undefined' ? rend.getValue(): null,
 					staff: staffFieldReg2.getValue(),
 					tstamp: tstampFieldReg2.getValue(),
@@ -442,6 +444,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 			
 			this.up('window').close();
 		} else {
+			var elIconParent = null;
+			var elIconChild = null;
 			var modelPath = null;
 			var prefix = null;
 			var elType = null;
@@ -449,6 +453,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 				modelPath = 'pmdCE.model.Hairpin';
 				prefix = 'hairpin_';
 				elType = 'hairpin';
+				elIconParent = 'resources/images/details-xml.png';
+				elIconChild = 'resources/images/mix_volume.png';
 			} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 				modelPath = 'pmdCE.model.Dynam';
 				prefix = 'dynam_';
@@ -467,7 +473,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 			var hairpin = Ext.create(modelPath, {
 				id: hairId,
 				name: 'choice_m' + startTaktField.getValue(),
-				icon: 'resources/images/details-xml.png',
+				icon: elIconParent,
 				type: elType,
 				measureid: Ext.getCmp('cemain').getMeasureId(),
 				measurenr: startTaktField.getValue(),
@@ -475,7 +481,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 				obvious: false,
 				ambiguous: true,
 				children:[ {
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffField.getValue(),
 					staff2: satffFieldBetween.getValue(),
@@ -488,7 +494,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					tag: "orig",
 					leaf: true
 				}, {
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffFieldReg1.getValue(),
 					tstamp: tstampFieldReg1.getValue(),
@@ -500,7 +506,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceStaffCard', {
 					tag: "reg",
 					leaf: true
 				}, {
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffFieldReg2.getValue(),
 					tstamp: tstampFieldReg2.getValue(),

@@ -629,10 +629,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 		if (Ext.getCmp('cemain').getCard() === 14) {
 			if (selectedNode !== null) {
 				
-				
+				var elIcon = null;
 				var elType = null;
 				if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 					elType = 'hairpin';
+					elIcon = 'resources/images/mix_volume.png';
 				} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 					elType = 'dynam';
 				} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
@@ -650,12 +651,14 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 				selectedNode.data.tstamp2 = null;
 				selectedNode.data.form = null;
 				selectedNode.data.place = null;
-				selectedNode.data.operation = 'change',
-				selectedNode.data.icon = 'resources/images/details-xml.png',
+				selectedNode.data.operation = 'change';
+				if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
+					selectedNode.data.icon = 'resources/images/details-xml.png';
+				}
 				
 				// selectedNode.removeChild(nodeToDelete);
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					staff: staffField.getValue(),
 					type: elType,
 					staff2: satffFieldBetween.getValue(),
@@ -669,7 +672,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 					leaf: true
 				});
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					type: elType,
 					staff: staffFieldReg1.getValue(),
 					staff2: satffFieldBetween.getValue(),
@@ -684,7 +687,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 				});
 				if (! tstampFieldReg2.isDisabled()) {
 					selectedNode.appendChild({
-						icon: 'resources/images/mix_volume.png',
+						icon: elIcon,
 						type: elType,
 						staff: staffFieldReg2.getValue(),
 						staff2: satffFieldBetween.getValue(),
@@ -699,7 +702,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 					});
 				}
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					type: elType,
 					staff: staffFieldReg3.getValue(),
 					staff2: satffFieldBetween.getValue(),
@@ -714,7 +717,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 				});
 				if (! tstamp2FieldReg4.isDisabled()) {
 					selectedNode.appendChild({
-						icon: 'resources/images/mix_volume.png',
+						icon: elIcon,
 						type: elType,
 						staff: staffFieldReg4.getValue(),
 						staff2: satffFieldBetween.getValue(),
@@ -729,7 +732,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 					});
 				}
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					type: elType,
 					staff: staffFieldReg5.getValue(),
 					tstamp: tstampFieldReg5.getValue(),
@@ -742,7 +745,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 					leaf: true
 				});
 				selectedNode.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIcon,
 					type: elType,
 					staff: staffFieldReg6.getValue(),
 					tstamp: tstampFieldReg6.getValue(),
@@ -774,6 +777,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 			
 			this.up('window').close();
 		} else {
+			var elIconParent = null;
+			var elIconChild = null;
 			var modelPath = null;
 			var prefix = null;
 			var elType = null;
@@ -781,6 +786,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 				modelPath = 'pmdCE.model.Hairpin';
 				prefix = 'hairpin_';
 				elType = 'hairpin';
+				elIconParent = 'resources/images/details-xml.png';
+				elIconChild = 'resources/images/mix_volume.png';
 			} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 				modelPath = 'pmdCE.model.Dynam';
 				prefix = 'dynam_';
@@ -799,7 +806,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 			var hairpin = Ext.create(modelPath, {
 				id: hairId,
 				name: 'choice_m' + startTaktField.getValue(),
-				icon: 'resources/images/details-xml.png',
+				icon: elIconParent,
 				type: elType,
 				measureid: Ext.getCmp('cemain').getMeasureId(),
 				measurenr: startTaktField.getValue(),
@@ -807,7 +814,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 				obvious: false,
 				ambiguous: true,
 				children:[ {
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffField.getValue(),
 					staff2: satffFieldBetween.getValue(),
@@ -820,7 +827,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 					tag: "orig",
 					leaf: true
 				}, {
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffField.getValue(),
 					staff2: satffFieldBetween.getValue(),
@@ -833,7 +840,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 					tag: "reg",
 					leaf: true
 				}, {
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffField.getValue(),
 					staff2: satffFieldBetween.getValue(),
@@ -846,7 +853,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 					tag: "reg",
 					leaf: true
 				}, {
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffFieldReg5.getValue(),
 					tstamp: tstampFieldReg5.getValue(),
@@ -859,7 +866,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 					leaf: true
 				},
 				{
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffFieldReg6.getValue(),
 					tstamp: tstampFieldReg6.getValue(),
@@ -885,7 +892,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 			
 			if (! tstampFieldReg2.isDisabled()) {
 				hairpin.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffField.getValue(),
 					staff2: satffFieldBetween.getValue(),
@@ -901,7 +908,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTimeStaffCard', {
 			}
 			if (! tstamp2FieldReg4.isDisabled()) {
 				hairpin.appendChild({
-					icon: 'resources/images/mix_volume.png',
+					icon: elIconChild,
 					type: elType,
 					staff: staffField.getValue(),
 					staff2: satffFieldBetween.getValue(),

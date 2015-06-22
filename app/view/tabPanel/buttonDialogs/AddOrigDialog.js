@@ -56,7 +56,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 		staffField = this.createTextField('staffField', 'Staff');
 		staffField.setValue(selectedNode.childNodes[0].data.staff);
 		staffField.setDisabled(true);
-		satffFieldBetween = this.createComboBoxf('Second staff', 'staffBetween');
+		satffFieldBetween = this.createComboBox('Second staff', 'staffBetween');
 		placeField = this.createComboBox('Place', 'place');
 		placeField.validate();
 		tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
@@ -69,8 +69,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 		} else {
 			// dynams
 			formField = this.createTextField('formOrig', 'Form');
-			tstampField2 = this.createOptionalTextField('tstampField2Obv', 'Tstamp2');
-			rend = this.createOptionalTextField('rendOrig', 'Rend');
+			tstampField2 = this.createOtionalTextField('tstampField2Obv', 'Tstamp2');
+			rend = this.createOtionalTextField('rendOrig', 'Rend');
 		}
 		formField.validate();
 		
@@ -107,10 +107,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 	createElement: function () {
 		
 		if (selectedNode !== null) {
-			
+			var elIcon = null;
 			var elType = null;
 			if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 				elType = 'hairpin';
+				elIcon = 'resources/images/mix_volume.png';
 			} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 				elType = 'dynam';
 			} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
@@ -121,7 +122,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 			selectedNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
 			
 			selectedNode.appendChild({
-				icon: 'resources/images/mix_volume.png',
+				icon: elIcon,
 				type: elType,
 				staff: staffField.getValue(),
 				staff2: satffFieldBetween.getValue(),

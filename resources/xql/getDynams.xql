@@ -89,7 +89,7 @@ declare function local:jsonifyDynams($dynams) {
                              '"type":"dynam",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
-                             '"icon":"resources/images/mix_volume.png",',
+                            (: '"icon":"resources/images/mix_volume.png",',:)
                             '"measureid":"',$measureID,'",',
                             '"measurenr":"',$measureN,'",',
                            (: '"children":[{',  
@@ -145,7 +145,7 @@ declare function local:jsonifyElements($elements) {
                     return 
                         concat('{"name":"',$name1,'",',   
                             '"type":"dynam",',
-                             '"icon":"resources/images/mix_volume.png",',
+                             (:'"icon":"resources/images/mix_volume.png",',:)
                             '"tstamp":"',$tstamp,'",',
                             '"tstamp2":"',$tstamp2,'",',
                             '"place":"',$place,'",',
@@ -182,7 +182,7 @@ declare function local:jsonifyDynamChoices($choicesDynam) {
                             '"type":"dynam",',
                             '"obvious":"',$obvious,'",',
                             '"ambiguous":"',$ambiguous,'",',                           
-                             '"icon":"resources/images/details-xml.png",',
+                             (:'"icon":"resources/images/details-xml.png",',:)
                             '"measureid":"',$measureID,'",',
                             '"measurenr":"',$measureN,'",',
                             '"children":[',  

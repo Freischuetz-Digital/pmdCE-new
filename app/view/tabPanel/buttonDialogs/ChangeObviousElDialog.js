@@ -12,6 +12,9 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.ChangeObviousElDialog', {
 	
 	obviousCard: null,
 	
+	x: 60,
+    y: 60,
+	
 	/**
 	 * Create card
 	 * @overrides
