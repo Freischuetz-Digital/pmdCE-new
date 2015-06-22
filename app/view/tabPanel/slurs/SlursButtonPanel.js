@@ -24,6 +24,7 @@ Ext.define('pmdCE.view.tabPanel.slurs.SlursButtonPanel', {
 		this.addElementButton.setDisabled(true);
 		
 		this.createNewElButton = this.createHairpinButton("createhairpinbutton_3", 'Slur');
+		this.createNewElButton.setDisabled(true);
 		
 		this.deleteButton = this.deleteElementButton("deleteButton_3", 'Slur');
 		this.deleteButton.setDisabled(true);

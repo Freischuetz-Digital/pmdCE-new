@@ -28,7 +28,7 @@ Ext.define('pmdCE.view.tabPanel.slurs.SlursGridPanel', {
 				var selectedObject;
 				
 				if (typeof eOpts[0] !== 'undefined' && eOpts[0].data.depth === 1) {
-					Ext.getCmp('deleteButton_3').setDisabled(false);
+					/*Ext.getCmp('deleteButton_3').setDisabled(false);
 					Ext.getCmp('changetobutton_3').setDisabled(false);
 					
 					if (selected.selected.items[0].data.obvious) {
@@ -45,13 +45,13 @@ Ext.define('pmdCE.view.tabPanel.slurs.SlursGridPanel', {
 						Ext.getCmp('addelementbutton_3').setDisabled(true);
 					} else {
 						Ext.getCmp('addelementbutton_3').setDisabled(false);
-					}
+					}*/
 					
 					selectedObject = selected.selected.items[0];
 				} else if (typeof eOpts[0] !== 'undefined' && eOpts[0].data.depth === 2) {
-					Ext.getCmp('deleteButton_3').setDisabled(false);
+					/*Ext.getCmp('deleteButton_3').setDisabled(false);
 					Ext.getCmp('addelementbutton_3').setDisabled(true);
-					Ext.getCmp('changetobutton_3').setDisabled(true);
+					Ext.getCmp('changetobutton_3').setDisabled(true);*/
 					
 					selectedObject = selected.selected.items[0].parentNode;
 				}
@@ -61,6 +61,8 @@ Ext.define('pmdCE.view.tabPanel.slurs.SlursGridPanel', {
 				}
 			}
 		};
+		
+		this.editColumn.setDisabled(true);
 		
 		this.columns =[ {
 			xtype: 'treecolumn',
@@ -100,21 +102,21 @@ Ext.define('pmdCE.view.tabPanel.slurs.SlursGridPanel', {
 			sortable: true
 		},
 		{
-			text: 'Place',
+			text: 'StartId',
 			flex: 1,
-			dataIndex: 'place',
+			sortable: true,
+			dataIndex: 'startid'
+		},
+		{
+			text: 'EndId',
+			flex: 1,
+			dataIndex: 'endid',
 			sortable: true
 		},
 		{
-			text: 'Form',
+			text: 'Curvedir',
 			flex: 1,
-			dataIndex: 'form',
-			sortable: true
-		},
-		{
-			text: 'Rend',
-			flex: 1,
-			dataIndex: 'rend',
+			dataIndex: 'curvedir',
 			sortable: true
 		},
 		
@@ -130,22 +132,15 @@ Ext.define('pmdCE.view.tabPanel.slurs.SlursGridPanel', {
 		if (selectedObject.data.obvious) {
 			var object = $('<slur></slur>', {
 				staff: (selectedObject.data.staff2 !== "" ? (selectedObject.data.staff + ' ' + selectedObject.data.staff2): selectedObject.data.staff),
-				place: selectedObject.data.place,
-				tstamp: selectedObject.data.tstamp,
+				curvedir: selectedObject.data.curvedir,
+				tstamp: selectedObject.data.tstamp !== "" ? selectedObject.data.tstamp : null,
 				tstamp2: selectedObject.data.tstamp2 !== "" ? selectedObject.data.tstamp2 : null,
+				startid: selectedObject.data.startid !== "" ? selectedObject.data.startid : null,
+				endid: selectedObject.data.endid !== "" ? selectedObject.data.endid : null,
 				'xml:id': selectedObject.data.id,
 				xmlns: "http://www.music-encoding.org/ns/mei",
 				sameas: ""
 			});
-			if (selectedObject.data.rend !== '') {
-				var rend = $('<rend></rend>', {
-					rend: selectedObject.data.rend
-				});
-				$(rend).append(selectedObject.data.form);
-				$(object).append($(rend));
-			} else {
-				$(object).append(selectedObject.data.form);
-			}
 			$(objects).append($(object));
 		} else {
 			
@@ -153,27 +148,20 @@ Ext.define('pmdCE.view.tabPanel.slurs.SlursGridPanel', {
 				'xml:id': selectedObject.data.id,
 				xmlns: "http://www.music-encoding.org/ns/mei"
 			});
-			console.log('***************');
-			console.log(selectedObject);
+		
 			for (var j = 0; j < selectedObject.childNodes.length; j++) {
 				if (selectedObject.childNodes[j].data.tag === 'orig') {
 					var orig = $('<orig></orig>');
 					var hair = $('<slur></slur>', {
 						staff: (selectedObject.childNodes[j].data.staff2 !== "" ? (selectedObject.childNodes[j].data.staff + ' ' + selectedObject.childNodes[j].data.staff2): selectedObject.childNodes[j].data.staff),
-						place: selectedObject.childNodes[j].data.place,
-						tstamp: selectedObject.childNodes[j].data.tstamp,
+						curvedir: selectedObject.childNodes[j].data.curvedir,
+						tstamp: selectedObject.childNodes[j].data.tstamp !== "" ? selectedObject.childNodes[j].data.tstamp : null,
 						tstamp2: selectedObject.childNodes[j].data.tstamp2 !== "" ? selectedObject.childNodes[j].data.tstamp2 : null,
+						startid: selectedObject.childNodes[j].data.startid !== "" ? selectedObject.childNodes[j].data.startid : null,
+						endid: selectedObject.childNodes[j].data.endid !== "" ? selectedObject.childNodes[j].data.endid : null,
 						sameas: ""
 					});
-					if (selectedObject.childNodes[j].data.rend !== '') {
-						var rend = $('<rend></rend>', {
-							rend: selectedObject.childNodes[j].data.rend
-						});
-						$(rend).append(selectedObject.childNodes[j].data.form);
-						$(hair).append($(rend));
-					} else {
-						$(hair).append(selectedObject.childNodes[j].data.form);
-					}
+					
 					$(orig).append($(hair));
 					$(choice).append($(orig));
 				}
@@ -181,21 +169,15 @@ Ext.define('pmdCE.view.tabPanel.slurs.SlursGridPanel', {
 					var reg = $('<reg></reg>');
 					var hair = $('<slur></slur>', {
 						staff: (selectedObject.childNodes[j].data.staff2 !== "" ? (selectedObject.childNodes[j].data.staff + ' ' + selectedObject.childNodes[j].data.staff2): selectedObject.childNodes[j].data.staff),
-						place: selectedObject.childNodes[j].data.place,
+						curvedir: selectedObject.childNodes[j].data.curvedir,
 						form: selectedObject.childNodes[j].data.form,
-						tstamp: selectedObject.childNodes[j].data.tstamp,
+						tstamp: selectedObject.childNodes[j].data.tstamp !== "" ? selectedObject.childNodes[j].data.tstamp : null,
 						tstamp2: selectedObject.childNodes[j].data.tstamp2 !== "" ? selectedObject.childNodes[j].data.tstamp2 : null,
+						startid: selectedObject.childNodes[j].data.startid !== "" ? selectedObject.childNodes[j].data.startid : null,
+						endid: selectedObject.childNodes[j].data.endid !== "" ? selectedObject.childNodes[j].data.endid : null,
 						sameas: ""
 					});
-					if (selectedObject.childNodes[j].data.rend !== '') {
-						var rend = $('<rend></rend>', {
-							rend: selectedObject.childNodes[j].data.rend
-						});
-						$(rend).append(selectedObject.childNodes[j].data.form);
-						$(hair).append($(rend));
-					} else {
-						$(hair).append(selectedObject.childNodes[j].data.form);
-					}
+					
 					$(reg).append($(hair));
 					$(choice).append($(reg));
 				}

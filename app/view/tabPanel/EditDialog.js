@@ -37,6 +37,8 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 			me.selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
 		} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
 			me.selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
+		}else if (Ext.getCmp('cemain').getComponentType().indexOf('Slur') > -1) {
+			me.selection = Ext.getCmp('slursgridpanel').getSelectionModel().getSelection()[0];
 		}
 		
 		var vordStaff = null;

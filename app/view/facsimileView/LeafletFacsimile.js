@@ -29,8 +29,8 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 			var selectedPage = Ext.getCmp('pages').getText();
 			
 			Ext.Ajax.request({
-				// url: 'resources/xql/getZones.xql',
-				url: 'data/getZones.xql',
+				 url: 'resources/xql/getZones.xql',
+				//url: 'data/getZones.xql',
 				async: false,
 				method: 'GET',
 				params: {
@@ -73,18 +73,18 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 					 var path = 'http://localhost:8080'+json.path;
 					
 					var facsimileTile = 
-					L.tileLayer.facsimileLayer('data/example/{z}-{x}-{y}.jpg', {
+					/*L.tileLayer.facsimileLayer('data/example/{z}-{x}-{y}.jpg', {
 						minZoom: 0,
 						maxZoom: maxZoomLevel,
 						continuousWorld: true
-					});
+					});*/
 					
 					
-					/* L.tileLayer.facsimileLayer(path, {
+					 L.tileLayer.facsimileLayer(path, {
 					minZoom: 0,
 					maxZoom: maxZoomLevel,
 					continuousWorld : true
-					});*/
+					});
 					
 					facsimileTile.setWidth(facsimileWidth);
 					
@@ -109,7 +109,7 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 						facsimileTile.showRectangleCenter(ulx, uly, lrx, lry, zones[i].n);
 						}*/
 						if (zones[i].type === 'staff') {
-							console.log(zones[i]);
+							//console.log(zones[i]);
 							var lrx = zones[i].lrx;
 							var lry = zones[i].lry;
 							var ulx = zones[i].ulx;
@@ -131,10 +131,10 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 					}
 					
 					map.on('click', function (e) {
-						console.log(e.latlng);
+						/*console.log(e.latlng);
 						console.log(e.layerPoint);
 						console.log(e.containerPoint);
-						console.log(e.originalEvent);
+						console.log(e.originalEvent);*/
 					});
 				}
 			});
