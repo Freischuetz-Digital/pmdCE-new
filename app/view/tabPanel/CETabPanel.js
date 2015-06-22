@@ -27,34 +27,34 @@ Ext.define('pmdCE.view.tabPanel.CETabPanel', {
 	 */
 	initComponent: function () {
 		
-		slursItem = new pmdCE.view.tabPanel.ControlEventsItem({
+		this.slursItem = new pmdCE.view.tabPanel.ControlEventsItem({
 			title: 'Slurs',
 			id: 'slursitem'
 			// icon: 'resources/images/mix_volume.png'
 		}),
 		
-		hairpinsItems = new pmdCE.view.tabPanel.ControlEventsItem({
+		this.hairpinsItems = new pmdCE.view.tabPanel.ControlEventsItem({
 			title: 'Hairpins',
 			id: 'hairpinsitem',
 			icon: 'resources/images/mix_volume.png'
 		}),
 		
-		dynamsItems = new pmdCE.view.tabPanel.ControlEventsItem({
+		this.dynamsItems = new pmdCE.view.tabPanel.ControlEventsItem({
 			title: 'Dynams',
 			id: 'dynamsitem'
 			// icon: 'resources/images/mix_volume.png'
 		}),
 		
-		dirsItems = new pmdCE.view.tabPanel.ControlEventsItem({
+		this.dirsItems = new pmdCE.view.tabPanel.ControlEventsItem({
 			title: 'Dirs',
 			id: 'dirsitem'
 			// icon: 'resources/images/mix_volume.png'
 		}),
 		this.items =[
-		slursItem,
-		hairpinsItems,
-		dynamsItems,
-		dirsItems],
+		this.slursItem,
+		this.hairpinsItems,
+		this.dynamsItems,
+		this.dirsItems],
 		
 		this.callParent()
 	}

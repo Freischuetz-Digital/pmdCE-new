@@ -12,6 +12,7 @@ Ext.define('pmdCE.view.tabPanel.dynams.DynamsButtonsPanel', {
 	createNewElButton: null,
 	addElementButton: null,
 	changeToButton: null,
+	deleteButton: null,
 	
 	/**
 	 * Create buttons
@@ -19,22 +20,22 @@ Ext.define('pmdCE.view.tabPanel.dynams.DynamsButtonsPanel', {
 	 */
 	initComponent: function () {
 		
-		addElementButton = this.createCEButton('addelementbutton_1', 'Dynam');
-		addElementButton.setDisabled(true);
+		this.addElementButton = this.createCEButton('addelementbutton_1', 'Dynam');
+		this.addElementButton.setDisabled(true);
 		
-		createHairpinButton = this.createHairpinButton("createhairpinbutton_1", 'Dynam');
+		this.createNewElButton = this.createHairpinButton("createhairpinbutton_1", 'Dynam');
 		
-		deleteElementButton = this.deleteElementButton("deleteButton_1", 'Dynam');
-		deleteElementButton.setDisabled(true);
+		this.deleteButton = this.deleteElementButton("deleteButton_1", 'Dynam');
+		this.deleteButton.setDisabled(true);
 		
-		changeToButton = this.createChangeToButton('changetobutton_1', 'changetobuttonchoice_1', 'changetobuttonhairpin_1', 'Dynam');
-		changeToButton.setDisabled(true);
+		this.changeToButton = this.createChangeToButton('changetobutton_1', 'changetobuttonchoice_1', 'changetobuttonhairpin_1', 'Dynam');
+		this.changeToButton.setDisabled(true);
 		
 		this.items =[
-		createHairpinButton,
-		changeToButton,
-		addElementButton,
-		deleteElementButton],
+		this.createNewElButton,
+		this.changeToButton,
+		this.addElementButton,
+		this.deleteButton],
 		this.callParent()
 	}
 });

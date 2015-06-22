@@ -25,10 +25,10 @@ Ext.define('pmdCE.view.toolbar.AfterSaveDialog', {
 	 */
 	initComponent: function () {
 		
-		text = Ext.getCmp('cemain').getAfterSaveText();
+		this.text = Ext.getCmp('cemain').getAfterSaveText();
 		
 		this.items =[ {
-			html: 'save success: ' + text
+			html: 'save success: ' + this.text
 		}],
 		
 		this.buttons =[ {
@@ -43,6 +43,9 @@ Ext.define('pmdCE.view.toolbar.AfterSaveDialog', {
 				// refresh dir elements after save
 				var dirsStore = pmdCE.getApplication().getDirDataStore();
 				dirsStore.reload();
+				// refresh slur elements after save
+				var slursStore = pmdCE.getApplication().getSlurDataStore();
+				slursStore.reload();
 				
 				Ext.getCmp('saveButton').setDisabled(true);
 				this.up('window').close();

@@ -21,7 +21,6 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddRegDialog', {
 	satffFieldBetween: null,
 	selectedNode: null,
 	rend: null,
-	titleForAdd: null,
 	
 	createElementButton: null,
 	

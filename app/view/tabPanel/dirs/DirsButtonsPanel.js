@@ -12,6 +12,7 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsButtonsPanel', {
 	createNewElButton: null,
 	addElementButton: null,
 	changeToButton: null,
+	deleteButton: null,
 	
 	/**
 	 * Create buttons
@@ -19,22 +20,22 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsButtonsPanel', {
 	 */
 	initComponent: function () {
 		
-		addElementButton = this.createCEButton('addelementbutton_2', 'Dir');
-		addElementButton.setDisabled(true);
+		this.addElementButton = this.createCEButton('addelementbutton_2', 'Dir');
+		this.addElementButton.setDisabled(true);
 		
-		createHairpinButton = this.createHairpinButton("createhairpinbutton_2", 'Dir');
+		this.createNewElButton = this.createHairpinButton("createhairpinbutton_2", 'Dir');
 		
-		deleteElementButton = this.deleteElementButton("deleteButton_2", 'Dir');
-		deleteElementButton.setDisabled(true);
+		this.deleteButton = this.deleteElementButton("deleteButton_2", 'Dir');
+		this.deleteButton.setDisabled(true);
 		
-		changeToButton = this.createChangeToButton('changetobutton_2', 'changetobuttonchoice_2', 'changetobuttonhairpin_2', 'Dir');
-		changeToButton.setDisabled(true);
+		this.changeToButton = this.createChangeToButton('changetobutton_2', 'changetobuttonchoice_2', 'changetobuttonhairpin_2', 'Dir');
+		this.changeToButton.setDisabled(true);
 		
 		this.items =[
-		createHairpinButton,
-		changeToButton,
-		addElementButton,
-		deleteElementButton],
+		this.createNewElButton,
+		this.changeToButton,
+		this.addElementButton,
+		this.deleteButton],
 		this.callParent()
 	}
 });

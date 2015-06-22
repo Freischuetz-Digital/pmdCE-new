@@ -183,8 +183,12 @@ Ext.define('pmdCE.view.tabPanel.hairpins.HairpinsGridPanel', {
 		
 		if (selectedObject.data.type === 'hairpin') {
 			$('#xmleditorview-body').html(tmp);
-		} else {
+		} else if (selectedObject.data.type === 'dynam') {
 			$('#dynamsxmlview-body').html(tmp);
+		} else if (selectedObject.data.type === 'dir') {
+			$('#dirsxmlview-body').html(tmp);
+		}else if (selectedObject.data.type === 'slur') {
+			$('#slursxmlview-body').html(tmp);
 		}
 	}
 });

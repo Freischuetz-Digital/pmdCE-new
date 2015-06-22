@@ -38,12 +38,12 @@ Ext.define('pmdCE.view.main.Main', {
 	
 	initComponent: function () {
 		
-		ceToolbar = new pmdCE.view.toolbar.CEToolbar(),
-		cePanel = new pmdCE.view.tabPanel.CEPanel(),
+		this.ceToolbar = new pmdCE.view.toolbar.CEToolbar(),
+		this.cePanel = new pmdCE.view.tabPanel.CEPanel(),
 		
 		this.items =[
-		ceToolbar,
-		cePanel]
+		this.ceToolbar,
+		this.cePanel]
 		
 		this.callParent()
 	},

@@ -20,10 +20,10 @@ Ext.define('pmdCE.view.tabPanel.CEPanel', {
 	
 	initComponent: function () {
 		
-		ceTabView = new pmdCE.view.tabPanel.CETabPanel(),
+		this.ceTabView = new pmdCE.view.tabPanel.CETabPanel(),
 		
 		this.items =[
-		ceTabView],
+		this.ceTabView],
 		this.callParent();
 	}
 });

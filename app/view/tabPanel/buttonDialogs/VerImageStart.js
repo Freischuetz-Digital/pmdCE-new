@@ -17,7 +17,6 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageStart', {
 	currId: null,
 	
 	tstampShift1: null,
-	currId: null,
 	
 	/**
 	 * Get data for verovio and create a view with click listener
@@ -26,11 +25,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageStart', {
 	initComponent: function () {
 		
 		var me = this;
-		currId = this.id;
-		Ext.getCmp('cemain').setVerStartId(currId);
+		me.currId = me.id;
+		Ext.getCmp('cemain').setVerStartId(me.currId);
 		
 		app = pmdCE.getApplication();
-		renderer = app.getRenderer();
+		me.renderer = app.getRenderer();
 		
 		var pageNr = Ext.getCmp('pages').getText();
 		var measureid = Ext.getCmp('cemain').getStartMeasure();
@@ -41,8 +40,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageStart', {
 		Ext.getCmp('cemain').setMeasureId(movement + "_measure" + measureid);
 		
 		Ext.Ajax.request({
-			//url: "data/test.mei",
-			 url: "resources/xql/getExtendedStaff.xql",
+			url: "data/test.mei",
+			// url: "resources/xql/getExtendedStaff.xql",
 			method: 'GET',
 			params: {
 				path: pageNr,
@@ -61,12 +60,12 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageStart', {
 					border: 0,
 					scale: 33
 				});
-				renderer.setOptions(options);
-				renderer.loadData(text);
+				me.renderer.setOptions(options);
+				me.renderer.loadData(text);
 				// var svg = renderer.renderPage( 1, options );
-				var svg = renderer.renderData(text, options);
+				var svg = me.renderer.renderData(text, options);
 				
-				$('#' + currId + '-body').html(svg);
+				$('#' + me.currId + '-body').html(svg);
 				var xmlFile = jQuery.parseXML(text);
 				
 				var meiElements = xmlFile.getElementsByTagName('note');

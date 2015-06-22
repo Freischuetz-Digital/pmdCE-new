@@ -14,8 +14,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageEnd', {
 	tileId: null,
 	bodyId: null,
 	margin: '0 0 0 35',
-	renderer: null,
 	
+	renderer: null,	
 	currId2: null,
 	tstampShift1: null,
 	
@@ -25,12 +25,12 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageEnd', {
 	 */
 	initComponent: function () {
 		
-		var me2 = this;
-		currId2 = this.id;
-		Ext.getCmp('cemain').setVerEndId(currId2);
+		var me = this;
+		me.currId2 = me.id;
+		Ext.getCmp('cemain').setVerEndId(me.currId2);
 		
 		app = pmdCE.getApplication();
-		renderer = app.getRenderer();
+		me.renderer = app.getRenderer();
 		
 		var pageNr = Ext.getCmp('pages').getText();
 		var measureid = Ext.getCmp('cemain').getEndMeasure();
@@ -39,8 +39,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageEnd', {
 		var measurePath = movement + "_measure" + measureid + "_s" + staffNr;
 		
 		Ext.Ajax.request({
-			//url: "data/testEnd.mei",
-			  url: "resources/xql/getExtendedStaff.xql",
+			url: "data/testEnd.mei",
+			//  url: "resources/xql/getExtendedStaff.xql",
 			method: 'GET',
 			params: {
 				path: pageNr,
@@ -58,11 +58,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageEnd', {
 					border: 0,
 					scale: 33
 				});
-				renderer.setOptions(options);
-				renderer.loadData(text);
-				var svg = renderer.renderPage(1, options);
+				me.renderer.setOptions(options);
+				me.renderer.loadData(text);
+				var svg = me.renderer.renderPage(1, options);
 				
-				$('#' + currId2 + '-body').html(svg);
+				$('#' + me.currId2 + '-body').html(svg);
 				
 				var xmlFile = jQuery.parseXML(text);
 				var meiElements = xmlFile.getElementsByTagName('note');
@@ -76,10 +76,10 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageEnd', {
 						$("#" + elId).on('click', function (e) {
 							// two notes were selected
 							if (e.shiftKey) {
-								me2.handleEventForTwoNotes(elements, e.currentTarget, meiElements);
+								me.handleEventForTwoNotes(elements, e.currentTarget, meiElements);
 							} else {
 								// one note was selected
-								me2.handleEventForOneNote(elements, e.currentTarget, meiElements);
+								me.handleEventForOneNote(elements, e.currentTarget, meiElements);
 							}
 						});
 					}

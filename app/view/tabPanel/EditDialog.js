@@ -22,41 +22,43 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 	selection: null,
 	selectedNode: null,
 	parentNode: null,
-	vordRend: null,
-	vordStaff: null,
-	vordStaff2: null,
-	vordForm: null,
-	vordPlace: null,
-	vordTStamp: null,
-	vordTStamp2: null,
-	vordStartMeasure: null,
-	vordEndMeasure: null,
 	
 	/**
 	 * Create all fields and navigation buttons
 	 * @overrides
 	 */
 	initComponent: function () {
+	
+		var me = this;
 		
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
-			selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+			me.selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
 		} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
-			selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+			me.selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
 		} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
-			selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
+			me.selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
 		}
 		
-		if (selection.data.depth === 1) {
-			selectedNode = selection;
+		var vordStaff = null;
+		var vordStaff2 = null;
+		var vordForm =  null;
+		var vordPlace = null;
+		var vordTStamp = null;
+		var vordTStamp2 = null;
+		var vordStartMeasure = null;
+		var vordEndMeasure = null;
+		
+		if (me.selection.data.depth === 1) {
+			me.selectedNode = me.selection;
 			
-			vordStaff = selectedNode.data.staff;
-			vordStaff2 = selectedNode.data.staff2;
-			vordStartMeasure = selectedNode.data.measurenr;
-			vordForm = selectedNode.data.form;
-			vordPlace = selectedNode.data.place;
-			vordTStamp = selectedNode.data.tstamp;
-			vordTStamp2 = selectedNode.data.tstamp2;
-			Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+			vordStaff = me.selectedNode.data.staff;
+			vordStaff2 = me.selectedNode.data.staff2;
+			vordStartMeasure = me.selectedNode.data.measurenr;
+			vordForm = me.selectedNode.data.form;
+			vordPlace = me.selectedNode.data.place;
+			vordTStamp = me.selectedNode.data.tstamp;
+			vordTStamp2 = me.selectedNode.data.tstamp2;
+			Ext.getCmp('cemain').setStartMeasure(me.selectedNode.data.measurenr);
 			Ext.getCmp('cemain').setStaffNr(vordStaff);
 			
 			if (typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined') {
@@ -70,18 +72,18 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 			}
 			
 			if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
-				vordRend = selectedNode.data.rend;
+				vordRend = me.selectedNode.data.rend;
 			} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
-				vordRend = selectedNode.data.rend;
+				vordRend = me.selectedNode.data.rend;
 			}
 			
 			var movement = Ext.getCmp('movement').getText();
 			Ext.getCmp('cemain').setMeasureId(movement + "_measure" + vordStartMeasure);
-		} else if (selection.data.depth === 2) {
-			selectedNode = selection;
-			parentNode = selection.parentNode;
-			vordStartMeasure = parentNode.data.measurenr;
-			Ext.getCmp('cemain').setStartMeasure(parentNode.data.measurenr);
+		} else if (me.selection.data.depth === 2) {
+			me.selectedNode = me.selection;
+			me.parentNode = me.selection.parentNode;
+			me.vordStartMeasure = me.parentNode.data.measurenr;
+			Ext.getCmp('cemain').setStartMeasure(me.parentNode.data.measurenr);
 			var movement = Ext.getCmp('movement').getText();
 			Ext.getCmp('cemain').setMeasureId(movement + "_measure" + vordStartMeasure);
 			if (typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined') {
@@ -94,139 +96,139 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 				Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
 			}
 			
-			vordStaff = selectedNode.data.staff;
+			vordStaff = me.selectedNode.data.staff;
 			Ext.getCmp('cemain').setStaffNr(vordStaff);
-			vordStaff2 = selectedNode.data.staff2;
+			vordStaff2 = me.selectedNode.data.staff2;
 			
-			vordForm = selectedNode.data.form;
-			vordPlace = selectedNode.data.place;
-			vordTStamp = selectedNode.data.tstamp;
-			vordTStamp2 = selectedNode.data.tstamp2;
+			vordForm = me.selectedNode.data.form;
+			vordPlace = me.selectedNode.data.place;
+			vordTStamp = me.selectedNode.data.tstamp;
+			vordTStamp2 = me.selectedNode.data.tstamp2;
 			
 			if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
-				vordRend = selectedNode.data.rend;
+				vordRend = me.selectedNode.data.rend;
 			} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
-				vordRend = selectedNode.data.rend;
+				vordRend = me.selectedNode.data.rend;
 			}
 		}
 		
 		
 		// common
-		staffField = this.createTextField('staffField', 'Staff');
-		staffField.setValue(vordStaff);
+		me.staffField = me.createTextField('staffField', 'Staff');
+		me.staffField.setValue(vordStaff);
 		
-		staffField2 = this.createTextField('secondStaffField', 'Second staff');
-		staffField2.setValue(vordStaff2);
+		me.staffField2 = me.createTextField('secondStaffField', 'Second staff');
+		me.staffField2.setValue(vordStaff2);
 		
-		measureField = this.createTextField('measureField', 'Measure');
-		measureField.setValue(vordStartMeasure);
+		me.measureField = me.createTextField('measureField', 'Measure');
+		me.measureField.setValue(vordStartMeasure);
 		
-		placeField = this.createComboBox('Place', 'p3states');
-		placeField.setValue(vordPlace);
-		tstampField = this.createTextField('tstampField', 'Tstamp');
-		tstampField.setValue(vordTStamp);
+		me.placeField = me.createComboBox('Place', 'p3states');
+		me.placeField.setValue(vordPlace);
+		me.tstampField = me.createTextField('tstampField', 'Tstamp');
+		me.tstampField.setValue(vordTStamp);
 		
 		// hairpin
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
-			formField = this.createComboBox('Form', 'form');
-			tstampField2 = this.createTextField('tstampField2Obv', 'Tstamp2');
+			me.formField = me.createComboBox('Form', 'form');
+			me.tstampField2 = me.createTextField('tstampField2Obv', 'Tstamp2');
 		} else {
 			// dynams
-			formField = this.createTextField('formOrig', 'Form');
-			tstampField2 = this.createTextField('tstampField2', 'Tstamp2');
-			rend = this.createTextField('rendOrig', 'Rend');
-			rend.setValue(vordRend);
+			me.formField = me.createTextField('formOrig', 'Form');
+			me.tstampField2 = me.createTextField('tstampField2', 'Tstamp2');
+			me.rend = me.createTextField('rendOrig', 'Rend');
+			me.rend.setValue(vordRend);
 		}
-		tstampField2.setValue(vordTStamp2);
-		formField.setValue(vordForm);
-		this.items = Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ?[
-		staffField,
-		staffField2,
-		measureField,
-		tstampField,
-		tstampField2,
-		placeField,
-		formField]:[
-		staffField,
-		staffField2,
-		measureField,
-		tstampField,
-		tstampField2,
-		placeField,
-		formField,
-		rend]
+		me.tstampField2.setValue(vordTStamp2);
+		me.formField.setValue(vordForm);
+		me.items = Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1 ?[
+		me.staffField,
+		me.staffField2,
+		me.measureField,
+		me.tstampField,
+		me.tstampField2,
+		me.placeField,
+		me.formField]:[
+		me.staffField,
+		me.staffField2,
+		me.measureField,
+		me.tstampField,
+		me.tstampField2,
+		me.placeField,
+		me.formField,
+		me.rend]
 		
-		this.buttons =[ {
+		me.buttons =[ {
 			text: 'Update',
 			handler: function () {
-				console.log(measureField.getValue());
-				if (measureField.getValue() !== "") {
-					Ext.getCmp('cemain').setStartMeasure(measureField.getValue());
+				if (me.measureField.getValue() !== "") {
+					Ext.getCmp('cemain').setStartMeasure(me.measureField.getValue());
 					var movement = Ext.getCmp('movement').getText();
-					Ext.getCmp('cemain').setMeasureId(movement + "_measure" + measureField.getValue());
+					Ext.getCmp('cemain').setMeasureId(movement + "_measure" + me.measureField.getValue());
 				}
-				
-				if (typeof parentNode !== 'undefined') {
-					parentNode.set('operation', 'change');
-					parentNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
-					parentNode.set('measurenr', Ext.getCmp('cemain').getStartMeasure());
+		
+				if (typeof me.parentNode !== 'undefined' && me.parentNode !== null) {
+					me.parentNode.set('operation', 'change');
+					me.parentNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
+					me.parentNode.set('measurenr', Ext.getCmp('cemain').getStartMeasure());
 				} else {
-					selectedNode.set('operation', 'change');
-					selectedNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
-					selectedNode.set('measurenr', Ext.getCmp('cemain').getStartMeasure());
+					me.selectedNode.set('operation', 'change');
+					me.selectedNode.set('measureid', Ext.getCmp('cemain').getMeasureId());
+					me.selectedNode.set('measurenr', Ext.getCmp('cemain').getStartMeasure());
 				}
 				
-				if (staffField.getValue() !== "") {
-					selectedNode.set('staff', staffField.getValue());
+				if (me.staffField.getValue() !== "") {
+					me.selectedNode.set('staff', me.staffField.getValue());
 				}
 				//if(staffField2.getValue() !== ""){
-				selectedNode.set('staff2', staffField2.getValue());				
+				me.selectedNode.set('staff2', me.staffField2.getValue());				
 				//}
 				
-				if (tstampField.getValue() !== "") {
-					selectedNode.set('tstamp', tstampField.value);
+				if (me.tstampField.getValue() !== "") {
+					me.selectedNode.set('tstamp', me.tstampField.value);
 				}
-				if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1 || tstampField2.getValue() !== "" || Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
-					selectedNode.set('tstamp2', tstampField2.getValue());
-				}
-				
-				if (placeField.getValue() !== null) {
-					selectedNode.set('place', placeField.getValue());
-				}
-				if (formField.getValue() !== null) {
-					selectedNode.set('form', formField.getValue());
-				}
-				if (typeof rend !== 'undefined') {
-					selectedNode.set('rend', rend.getValue());
+				if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1 || me.tstampField2.getValue() !== "" 
+						|| Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
+					me.selectedNode.set('tstamp2', me.tstampField2.getValue());
 				}
 				
-				if (typeof parentNode !== 'undefined') {
-					parentNode.expand();
+				if (me.placeField.getValue() !== null) {
+					me.selectedNode.set('place', me.placeField.getValue());
+				}
+				if (me.formField.getValue() !== null) {
+					me.selectedNode.set('form', me.formField.getValue());
+				}
+				if (typeof me.rend !== 'undefined' && me.rend !== null) {
+					me.selectedNode.set('rend', me.rend.getValue());
+				}
+				
+				if (typeof me.parentNode !== 'undefined' && me.parentNode !== null) {
+					me.parentNode.expand();
 					
 					if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
-						Ext.getCmp('cegridpanel').setSelection(parentNode);
-						Ext.getCmp('cegridpanel').showXMLforSelectedElement(parentNode);
+						Ext.getCmp('cegridpanel').setSelection(me.parentNode);
+						Ext.getCmp('cegridpanel').showXMLforSelectedElement(me.parentNode);
 						Ext.getCmp('addelementbutton').setDisabled(false);
 					} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
-						Ext.getCmp('dynamsgridpanel').setSelection(parentNode);
+						Ext.getCmp('dynamsgridpanel').setSelection(me.parentNode);
 						Ext.getCmp('addelementbutton_1').setDisabled(false);
-						Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(parentNode);
+						Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(me.parentNode);
 					} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
-						Ext.getCmp('dirsgridpanel').setSelection(parentNode);
+						Ext.getCmp('dirsgridpanel').setSelection(me.parentNode);
 						Ext.getCmp('addelementbutton_2').setDisabled(false);
-						Ext.getCmp('dirsgridpanel').showXMLforSelectedElement(parentNode);
+						Ext.getCmp('dirsgridpanel').showXMLforSelectedElement(me.parentNode);
 					}
 				} else {
 					
 					if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
-						Ext.getCmp('cegridpanel').setSelection(selectedNode);
-						Ext.getCmp('cegridpanel').showXMLforSelectedElement(selectedNode);
+						Ext.getCmp('cegridpanel').setSelection(me.selectedNode);
+						Ext.getCmp('cegridpanel').showXMLforSelectedElement(me.selectedNode);
 					} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
-						Ext.getCmp('dynamsgridpanel').setSelection(selectedNode);
-						Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(selectedNode);
+						Ext.getCmp('dynamsgridpanel').setSelection(me.selectedNode);
+						Ext.getCmp('dynamsgridpanel').showXMLforSelectedElement(me.selectedNode);
 					} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
-						Ext.getCmp('dirsgridpanel').setSelection(selectedNode);
-						Ext.getCmp('dirsgridpanel').showXMLforSelectedElement(selectedNode);
+						Ext.getCmp('dirsgridpanel').setSelection(me.selectedNode);
+						Ext.getCmp('dirsgridpanel').showXMLforSelectedElement(me.selectedNode);
 					}
 				}
 								

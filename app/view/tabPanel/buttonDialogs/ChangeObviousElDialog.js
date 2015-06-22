@@ -18,10 +18,10 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.ChangeObviousElDialog', {
 	 */
 	initComponent: function () {
 		
-		obviousCard = new pmdCE.view.tabPanel.buttonDialogs.cards.ChangeObviousCard(),
+		this.obviousCard = new pmdCE.view.tabPanel.buttonDialogs.cards.ChangeObviousCard(),
 		
 		this.items =[
-		obviousCard],
+		this.obviousCard],
 		this.callParent()
 	}
 });

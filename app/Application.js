@@ -43,6 +43,8 @@ Ext.define('pmdCE.Application', {
 	'tabPanel.dirs.DirsButtonsPanel',
 	'tabPanel.dynams.DynamsGridPanel',
 	'tabPanel.dynams.DynamsButtonsPanel',
+	'tabPanel.slurs.SlursButtonPanel',
+	'tabPanel.slurs.SlursGridPanel',
 	'tabPanel.hairpins.HairpinsGridPanel',
 	'tabPanel.hairpins.HairpinsButtonPanel'],
 	
@@ -53,7 +55,7 @@ Ext.define('pmdCE.Application', {
 	'Page',
 	'Dir',
 	'Hairpin',
-	'Slurs'],
+	'Slur'],
 	
 	stores:[],
 	
@@ -65,17 +67,18 @@ Ext.define('pmdCE.Application', {
 	hairpinDataStore: null,
 	dynamDataStore: null,
 	dirDataStore: null,
+	slurDataStore: null,
 	
 	launch: function () {
 		
-		renderer = new verovio.toolkit(),
+		this.renderer = new verovio.toolkit(),
 		
-		sourcesStore = Ext.create('Ext.data.Store', {
+		this.sourcesStore = Ext.create('Ext.data.Store', {
 			model: 'pmdCE.model.Source',
 			proxy: {
 				type: 'ajax',
-				//url: 'data/pmd_ce_getNavigation.xql',
-				   url: 'resources/xql/pmd_ce_getNavigation.xql',
+				url: 'data/pmd_ce_getNavigation.xql',
+				//   url: 'resources/xql/pmd_ce_getNavigation.xql',
 				reader: {
 					type: 'json',
 					rootProperty: 'sigle'
@@ -84,7 +87,7 @@ Ext.define('pmdCE.Application', {
 			autoLoad: true
 		});
 		
-		hairpinDataStore = Ext.create('Ext.data.TreeStore', {
+		this.hairpinDataStore = Ext.create('Ext.data.TreeStore', {
 			model: 'pmdCE.model.Hairpin',
 			
 			extraParams: {
@@ -92,14 +95,14 @@ Ext.define('pmdCE.Application', {
 			},
 			proxy: {
 				type: 'ajax',
-				url: 'resources/xql/getControlEvents.xql'
+				//url: 'resources/xql/getControlEvents.xql'
 				
-				//url: 'data/tree/treegrid_1.json'
+				url: 'data/tree/treegrid_1.json'
 			},
 			autoLoad: false
 		});
 		
-		dynamDataStore = Ext.create('Ext.data.TreeStore', {
+		this.dynamDataStore = Ext.create('Ext.data.TreeStore', {
 			model: 'pmdCE.model.Dynam',
 			
 			extraParams: {
@@ -107,14 +110,14 @@ Ext.define('pmdCE.Application', {
 			},
 			proxy: {
 				type: 'ajax',
-				 url: 'resources/xql/getDynams.xql'
+				// url: 'resources/xql/getDynams.xql'
 				
-				//url: 'data/tree/treegrid_2.json'
+				url: 'data/tree/treegrid_2.json'
 			},
 			autoLoad: false
 		});
 		
-		dirDataStore = Ext.create('Ext.data.TreeStore', {
+		this.dirDataStore = Ext.create('Ext.data.TreeStore', {
 			model: 'pmdCE.model.Dir',
 			
 			extraParams: {
@@ -122,34 +125,54 @@ Ext.define('pmdCE.Application', {
 			},
 			proxy: {
 				type: 'ajax',
-				 url: 'resources/xql/getDirs.xql'
+				 //url: 'resources/xql/getDirs.xql'
 				
-				//url: 'data/tree/treegrid_3.json'
+				url: 'data/tree/treegrid_3.json'
 			},
 			autoLoad: false
 		});
 		
-		sourcesStore.load();
+		
+		this.slurDataStore = Ext.create('Ext.data.TreeStore', {
+			model: 'pmdCE.model.Slur',
+			
+			extraParams: {
+				path: ''
+			},
+			proxy: {
+				type: 'ajax',
+				 //url: 'resources/xql/getSlurs.xql'
+				
+				url: 'data/tree/treegrid_4.json'
+			},
+			autoLoad: false
+		});
+		
+		this.sourcesStore.load();
 	},
 	
 	
 	getSourcesStore: function () {
-		return sourcesStore;
+		return this.sourcesStore;
 	},
 	
 	getRenderer: function () {
-		return renderer;
+		return this.renderer;
 	},
 	
 	getHairpinDataStore: function () {
-		return hairpinDataStore;
+		return this.hairpinDataStore;
 	},
 	
 	getDynamDataStore: function () {
-		return dynamDataStore;
+		return this.dynamDataStore;
+	},
+	
+	getSlurDataStore: function () {
+		return this.slurDataStore;
 	},
 	
 	getDirDataStore: function () {
-		return dirDataStore;
+		return this.dirDataStore;
 	}
 });

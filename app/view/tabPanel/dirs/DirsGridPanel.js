@@ -204,6 +204,8 @@ Ext.define('pmdCE.view.tabPanel.dirs.DirsGridPanel', {
 			$('#dynamsxmlview-body').html(tmp);
 		} else if (selectedObject.data.type === 'dir') {
 			$('#dirsxmlview-body').html(tmp);
+		}else if (selectedObject.data.type === 'slur') {
+			$('#slursxmlview-body').html(tmp);
 		}
 	}
 });

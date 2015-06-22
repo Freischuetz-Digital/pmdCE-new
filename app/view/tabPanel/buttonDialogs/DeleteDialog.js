@@ -24,21 +24,24 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.DeleteDialog', {
 	 * @overrides
 	 */
 	initComponent: function () {
+	
+	 	var me = this;
+	 	
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
-			selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
-			root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
+			me.selection = Ext.getCmp('cegridpanel').getSelectionModel().getSelection()[0];
+			me.root = pmdCE.getApplication().getHairpinDataStore().getRootNode();
 		} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
-			selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
-			root = pmdCE.getApplication().getDynamDataStore().getRootNode();
+			me.selection = Ext.getCmp('dynamsgridpanel').getSelectionModel().getSelection()[0];
+			me.root = pmdCE.getApplication().getDynamDataStore().getRootNode();
 		} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dir') > -1) {
-			selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
-			root = pmdCE.getApplication().getDirDataStore().getRootNode();
+			me.selection = Ext.getCmp('dirsgridpanel').getSelectionModel().getSelection()[0];
+			me.root = pmdCE.getApplication().getDirDataStore().getRootNode();
 		}
-		selectedNode = selection;
+		me.selectedNode = me.selection;
 		
-		for (var i = 0; i < root.childNodes.length; i++) {
-			if (root.childNodes[i].data.id === selection.data.id) {
-				selectedId = i;
+		for (var i = 0; i < me.root.childNodes.length; i++) {
+			if (me.root.childNodes[i].data.id === me.selection.data.id) {
+				me.selectedId = i;
 				
 				break;
 			}
@@ -46,22 +49,22 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.DeleteDialog', {
 		
 		
 		this.items =[ {
-			html: "Element \n" + selectedNode.data.name + "\n will be removed."
+			html: "Element \n" + me.selectedNode.data.name + "\n will be removed."
 		}],
 		
 		this.buttons =[ {
 			text: 'Delete',
 			handler: function () {
 				
-				selectedNode.data.operation = 'remove';
-				selectedNode.remove();
+				me.selectedNode.data.operation = 'remove';
+				me.selectedNode.remove();
 				
-				if (typeof selectedId !== 'undefined') {
-					if (selectedId === root.childNodes.length) {
-						selectedId--;
+				if (typeof me.selectedId !== 'undefined') {
+					if (me.selectedId === me.root.childNodes.length) {
+						me.selectedId--;
 					}
 					
-					if (selectedId === -1) {
+					if (me.selectedId === -1) {
 						if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 							$('#xmleditorview-body').html('');
 						} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
@@ -70,7 +73,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.DeleteDialog', {
 							$('#dirsxmlview-body').html('');
 						}
 					} else {
-						var newSelection = root.childNodes[selectedId];
+						var newSelection = me.root.childNodes[me.selectedId];
 						if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 							Ext.getCmp('cegridpanel').setSelection(newSelection);
 						} else if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {

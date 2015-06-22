@@ -7,15 +7,8 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 	
 	id: 'cetoolbar',
 	
-	homeButton: null,
-	sourceButton: null,
-	movementButton: null,
-	pagesButton: null,
-	arrowLeft: null,
-	arrowR: null,
-	saveButton: null,
-	selectToolButton: null,
-	loginButton: null,
+	// Buttons: sourceButton, movementButton, pagesButton, arrowLeft, arrowR, saveButton,
+	// selectToolButton, loginButton
 	
 	staffNr: null,
 	pageMeasuresMap: null,
@@ -26,7 +19,7 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 	 */
 	initComponent: function () {
 		
-		homeButton = this.createCEBox({
+		var homeButton = this.createCEBox({
 			tag: 'img', src: 'resources/images/freidi_icon_57.png', width: 26,
 			height: 26
 		},
@@ -491,6 +484,25 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		dirsStore.getProxy().extraParams.path = item.text;
 		dirsStore.load();
 		Ext.getCmp('dirsgridpanel').getView().bindStore(dirsStore);
+		
+		// slurs
+		if (typeof Ext.getCmp('slursxmlview') !== 'undefined') {
+			Ext.getCmp('slursitem').removeAll(true);
+		}
+		sursView = new pmdCE.view.tabPanel.slurs.SlursGridPanel();
+		Ext.getCmp('slursitem').add(sursView);
+		
+		slursButtons = new pmdCE.view.tabPanel.slurs.SlursButtonPanel();
+		Ext.getCmp('slursitem').add(slursButtons);
+		
+		slursXmlView = new pmdCE.view.tabPanel.XMLView({
+			id: 'slursxmlview'
+		});
+		Ext.getCmp('slursitem').add(slursXmlView);
+		var slursStore = app.getSlurDataStore();
+		slursStore.getProxy().extraParams.path = item.text;
+		slursStore.load();
+		Ext.getCmp('slursgridpanel').getView().bindStore(slursStore);
 	},
 	
 	/**

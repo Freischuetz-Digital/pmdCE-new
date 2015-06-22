@@ -1,15 +1,15 @@
 /**
- * Creates class pmdCE.view.tabPanel.hairpins.DynamsGridPanel that extend from pmdCE.view.tabPanel.CEGridPanel.
+ * Creates class pmdCE.view.tabPanel.slurs.SlursGridPanel that extend from pmdCE.view.tabPanel.CEGridPanel.
  * @class
- * @classdesc pmdCE.view.tabPanel.hairpins.DynamsGridPanel is a class for create
- * table tree in dynams-tab.
+ * @classdesc pmdCE.view.tabPanel.slurs.SlursGridPanel is a class for create
+ * table tree in slurs-tab.
  */
-Ext.define('pmdCE.view.tabPanel.dynams.DynamsGridPanel', {
+Ext.define('pmdCE.view.tabPanel.slurs.SlursGridPanel', {
 	extend: 'pmdCE.view.tabPanel.CEGridPanel',
 	
 	requires:[ 'pmdCE.model.Dynam'],
 	
-	id: 'dynamsgridpanel',
+	id: 'slursgridpanel',
 	
 	editColumn: null,
 	
@@ -28,30 +28,30 @@ Ext.define('pmdCE.view.tabPanel.dynams.DynamsGridPanel', {
 				var selectedObject;
 				
 				if (typeof eOpts[0] !== 'undefined' && eOpts[0].data.depth === 1) {
-					Ext.getCmp('deleteButton_1').setDisabled(false);
-					Ext.getCmp('changetobutton_1').setDisabled(false);
+					Ext.getCmp('deleteButton_3').setDisabled(false);
+					Ext.getCmp('changetobutton_3').setDisabled(false);
 					
 					if (selected.selected.items[0].data.obvious) {
-						Ext.getCmp('changetobuttonchoice_1').setDisabled(false);
-						Ext.getCmp('changetobuttonchoice_1').menu.setDisabled(false);
-						Ext.getCmp('changetobuttonhairpin_1').setDisabled(true);
+						Ext.getCmp('changetobuttonchoice_3').setDisabled(false);
+						Ext.getCmp('changetobuttonchoice_3').menu.setDisabled(false);
+						Ext.getCmp('changetobuttonhairpin_3').setDisabled(true);
 					} else {
-						Ext.getCmp('changetobuttonchoice_1').setDisabled(true);
-						Ext.getCmp('changetobuttonchoice_1').menu.setDisabled(true);
-						Ext.getCmp('changetobuttonhairpin_1').setDisabled(false);
+						Ext.getCmp('changetobuttonchoice_3').setDisabled(true);
+						Ext.getCmp('changetobuttonchoice_3').menu.setDisabled(true);
+						Ext.getCmp('changetobuttonhairpin_3').setDisabled(false);
 					}
 					
 					if (selected.selected.items[0].data.obvious) {
-						Ext.getCmp('addelementbutton_1').setDisabled(true);
+						Ext.getCmp('addelementbutton_3').setDisabled(true);
 					} else {
-						Ext.getCmp('addelementbutton_1').setDisabled(false);
+						Ext.getCmp('addelementbutton_3').setDisabled(false);
 					}
 					
 					selectedObject = selected.selected.items[0];
 				} else if (typeof eOpts[0] !== 'undefined' && eOpts[0].data.depth === 2) {
-					Ext.getCmp('deleteButton_1').setDisabled(false);
-					Ext.getCmp('addelementbutton_1').setDisabled(true);
-					Ext.getCmp('changetobutton_1').setDisabled(true);
+					Ext.getCmp('deleteButton_3').setDisabled(false);
+					Ext.getCmp('addelementbutton_3').setDisabled(true);
+					Ext.getCmp('changetobutton_3').setDisabled(true);
 					
 					selectedObject = selected.selected.items[0].parentNode;
 				}
@@ -128,7 +128,7 @@ Ext.define('pmdCE.view.tabPanel.dynams.DynamsGridPanel', {
 	showXMLforSelectedElement: function (selectedObject) {
 		var objects = $('<div></div>');
 		if (selectedObject.data.obvious) {
-			var object = $('<dynam></dynam>', {
+			var object = $('<slur></slur>', {
 				staff: (selectedObject.data.staff2 !== "" ? (selectedObject.data.staff + ' ' + selectedObject.data.staff2): selectedObject.data.staff),
 				place: selectedObject.data.place,
 				tstamp: selectedObject.data.tstamp,
@@ -158,7 +158,7 @@ Ext.define('pmdCE.view.tabPanel.dynams.DynamsGridPanel', {
 			for (var j = 0; j < selectedObject.childNodes.length; j++) {
 				if (selectedObject.childNodes[j].data.tag === 'orig') {
 					var orig = $('<orig></orig>');
-					var hair = $('<dynam></dynam>', {
+					var hair = $('<slur></slur>', {
 						staff: (selectedObject.childNodes[j].data.staff2 !== "" ? (selectedObject.childNodes[j].data.staff + ' ' + selectedObject.childNodes[j].data.staff2): selectedObject.childNodes[j].data.staff),
 						place: selectedObject.childNodes[j].data.place,
 						tstamp: selectedObject.childNodes[j].data.tstamp,
@@ -179,7 +179,7 @@ Ext.define('pmdCE.view.tabPanel.dynams.DynamsGridPanel', {
 				}
 				if (selectedObject.childNodes[j].data.tag === 'reg') {
 					var reg = $('<reg></reg>');
-					var hair = $('<dynam></dynam>', {
+					var hair = $('<slur></slur>', {
 						staff: (selectedObject.childNodes[j].data.staff2 !== "" ? (selectedObject.childNodes[j].data.staff + ' ' + selectedObject.childNodes[j].data.staff2): selectedObject.childNodes[j].data.staff),
 						place: selectedObject.childNodes[j].data.place,
 						form: selectedObject.childNodes[j].data.form,
