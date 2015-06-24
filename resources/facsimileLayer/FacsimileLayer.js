@@ -53,7 +53,7 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
     * @param {number} lry - right y coordinste.
     */
      enableRectangle: function(ulx, uly, lrx, lry){  
-      // if(typeof rectangle === 'undefined' || rectangle === null){
+       if(typeof this.rectangle === 'undefined' || this.rectangle === null){
             // define points in coordinates system
             var pointLeft = L.point(ulx, uly);
             var pointRight = L.point(lrx, lry);
@@ -67,27 +67,29 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
          
 	       // create bounds for a rectangle
 	       bounds = L.latLngBounds(latLngLeft, latLngRight);
-     
+	       
             // create rectangle
-            console.log(Ext.getCmp('leafletfacsimile').getMap());
-	       var rectangle = L.rectangle(bounds, {color: "#ff7800", weight: 1}).addTo(this._map);
+           // console.log(Ext.getCmp('leafletfacsimile').getMap());
+	       this.rectangle = L.rectangle(bounds, {color: 'blue', weight: 1}).addTo(this._map);
 	      
+	      // zoom rectangle in windows center
+	      this._map.fitBounds(bounds);
 	        
-	   // }
+	    }
        },     
        
      /**
       * Remove rectanle and center from map.
      */
        disableRectangle: function(){
-          if(typeof rectangle !== 'undefined' && this._map.hasLayer(rectangle)){
-            this._map.removeLayer(rectangle);
-            rectangle = null;
+          if(typeof this.rectangle !== 'undefined' && this._map.hasLayer(this.rectangle)){
+            this._map.removeLayer(this.rectangle);
+            this.rectangle = null;
           }
-          if(typeof rectangleCenter !== 'undefined' && this._map.hasLayer(rectangleCenter)){
+         /* if(typeof rectangleCenter !== 'undefined' && this._map.hasLayer(rectangleCenter)){
             this._map.removeLayer(rectangleCenter);
             rectangleCenter = null;
-          }   
+          }  */ 
        },
        
      /**
@@ -125,8 +127,8 @@ L.TileLayer.FacsimileLayer = L.TileLayer.extend({
                color: 'red',
                fillColor: '#f03',
                fillOpacity: 0.5
-           }).addTo(this._map);
-           */
+           }).addTo(this._map);*/
+           
            
            var myIcon = L.divIcon({ 
     iconSize: new L.Point(0, 0), 

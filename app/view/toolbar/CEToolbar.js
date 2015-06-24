@@ -385,6 +385,21 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		saveButton.setDisabled(true);
 		}
 		 */
+		 if (typeof Ext.getCmp('facsimileview') !== 'undefined') {
+			Ext.getCmp('cepanel').remove('facsimileview');
+		}
+		if (typeof Ext.getCmp('verovioview') !== 'undefined') {
+			Ext.getCmp('hairpinsitem').removeAll(true);
+		}
+		if (typeof Ext.getCmp('dynamsxmlview') !== 'undefined') {
+			Ext.getCmp('dynamsitem').removeAll(true);
+		}
+		if (typeof Ext.getCmp('dirsxmlview') !== 'undefined') {
+			Ext.getCmp('dirsitem').removeAll(true);
+		}
+		if (typeof Ext.getCmp('slursxmlview') !== 'undefined') {
+			Ext.getCmp('slursitem').removeAll(true);
+		}
 	},
 	
 	/**
@@ -402,6 +417,22 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 		
 		if (pagesButton.getText() !== 'Pages') {
 			pagesButton.setText('Pages');
+		}
+		
+		if (typeof Ext.getCmp('facsimileview') !== 'undefined') {
+			Ext.getCmp('cepanel').remove('facsimileview');
+		}
+		if (typeof Ext.getCmp('verovioview') !== 'undefined') {
+			Ext.getCmp('hairpinsitem').removeAll(true);
+		}
+		if (typeof Ext.getCmp('dynamsxmlview') !== 'undefined') {
+			Ext.getCmp('dynamsitem').removeAll(true);
+		}
+		if (typeof Ext.getCmp('dirsxmlview') !== 'undefined') {
+			Ext.getCmp('dirsitem').removeAll(true);
+		}
+		if (typeof Ext.getCmp('slursxmlview') !== 'undefined') {
+			Ext.getCmp('slursitem').removeAll(true);
 		}
 	},
 	

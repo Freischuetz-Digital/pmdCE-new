@@ -55,7 +55,8 @@ Ext.define('pmdCE.view.tabPanel.hairpins.HairpinsGridPanel', {
 					selectedObject = selected.selected.items[0].parentNode;
 				}
 				
-				if (typeof selectedObject !== 'undefined') {
+				if (typeof selectedObject !== 'undefined') {					
+					Ext.getCmp('leafletfacsimile').showMeasure(selectedObject);					
 					this.showXMLforSelectedElement(selectedObject);
 				}
 			}

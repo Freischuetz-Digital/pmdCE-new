@@ -57,6 +57,7 @@ Ext.define('pmdCE.view.tabPanel.slurs.SlursGridPanel', {
 				}
 				
 				if (typeof selectedObject !== 'undefined') {
+					Ext.getCmp('leafletfacsimile').showMeasure(selectedObject);	
 					this.showXMLforSelectedElement(selectedObject);
 				}
 			}

@@ -57,6 +57,7 @@ Ext.define('pmdCE.view.tabPanel.dynams.DynamsGridPanel', {
 				}
 				
 				if (typeof selectedObject !== 'undefined') {
+					Ext.getCmp('leafletfacsimile').showMeasure(selectedObject);	
 					this.showXMLforSelectedElement(selectedObject);
 				}
 			}
