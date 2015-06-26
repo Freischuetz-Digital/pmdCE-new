@@ -94,8 +94,13 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampStaffCard', {
 		satffFieldBetween.validate();
 		startTaktField = this.createComboBox('Start measure', 'startmeasure');
 		startTaktField.validate();
-		endTaktField = this.createComboBox('End measure', 'endmeasure');
-		endTaktField.validate();
+		if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+			endTaktField = this.createComboBox('End measure', 'endmeasure');
+			endTaktField.validate();
+		}	
+		else{
+			endTaktField = this.createOptionalComboBox('End measure', 'endmeasure');
+		}
 		placeField = this.createComboBox('Place', 'p3statesorig');
 		placeField.validate();
 		tstampFieldOrig = this.createMandatoryTextField('tstampFieldOrig', 'Tstamp');
@@ -261,7 +266,12 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampStaffCard', {
 			}
 			staffField.setValue(vordStaff);
 			startTaktField.setValue(vordStartMeasure);
-			endTaktField.setValue(vordEndMeasure);
+			if(typeof vordEndMeasure !== 'undefined'){
+				endTaktField.setValue(vordEndMeasure);
+			}
+			else{
+				endTaktField.setValue(startTaktField);
+			}
 			placeField.setValue(vordPlace);
 			tstampFieldOrig.setValue(vordTStamp);
 			tstamp2FieldOrig.setValue(vordTStamp2);
@@ -865,7 +875,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampStaffCard', {
 		if (combo.id.indexOf('start') > -1) {
 			Ext.getCmp('cemain').setStartMeasure(combo.getValue());
 		}
-		if (combo.id.indexOf('end') > -1) {
+		if (combo.id.indexOf('end') > -1  && typeof combo.getValue() != 'undefined') {
 			Ext.getCmp('cemain').setEndMeasure(combo.getValue());
 		}
 		this.handleNavigationButtons();

@@ -132,6 +132,46 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceCard', {
 	},
 	
 	/**
+	 * Create an optional, not editable combo box and store dependent from combo type.
+	 * @param {string} fieldName - combo name.
+	 * @param {string} fieldId - combo id and type definition.
+	 */
+	createOptionalComboBox: function (fieldName, fieldId) {
+		var me = this;
+		var storeField = null;
+		
+		if (fieldId === 'endmeasure') {
+			var pageMeasuresMap = Ext.getCmp('cetoolbar').pageMeasuresMap;
+			var selectedPage = Ext.getCmp('pages').getText();
+			
+			var test = pageMeasuresMap[selectedPage];
+			
+			storeField = new Array(test.length);
+			var value = test[0];
+			for (var i = 0; i < test.length; i++) {
+				storeField[i] = value++;
+			}
+		}
+		
+		var combo = Ext.create('Ext.form.ComboBox', {
+			fieldLabel: fieldName,
+			id: fieldId,
+			store: storeField,
+			queryMode: 'local',
+			displayField: 'name',
+			editable: false,
+			listeners: {
+				select: function (combo, record, index) {
+					if (combo.id === 'endmeasure') {
+						me.handleMeasureField(combo);
+					}
+				}
+			}
+		});
+		return combo;
+	},
+	
+	/**
 	 * Create a check box.
 	 * @param {string} fieldName - check box name.
 	 * @param {string} fieldId - check box id.

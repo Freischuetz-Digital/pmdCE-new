@@ -168,9 +168,23 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 	showMeasure: function(selectedObject){
 		//console.log('Show');
 		//console.log(selectedObject);
-		var measureNr = 'measure'+selectedObject.data.measurenr+'_s'+selectedObject.data.staff;
+		var staffnr = null;
+		if(selectedObject.data.ambiguous){
+			for (var j = 0; j < selectedObject.childNodes.length; j++) {
+				if (selectedObject.childNodes[j].data.tag === 'orig') {
+					staffnr = selectedObject.childNodes[j].data.staff;
+					break;
+				}				
+			}			
+		}
+		else{
+			staffnr = selectedObject.data.staff;
+		}
+		var measureNr = 'measure'+selectedObject.data.measurenr+'_s'+staffnr;
 		for (i = 0; i < zones.length; i++) {
 			if(zones[i].id.indexOf(measureNr) > -1){
+			//console.log('Show');
+			//console.log(zones[i]);
 				var lrx = zones[i].lrx;
 				var lry = zones[i].lry;
 				var ulx = zones[i].ulx;

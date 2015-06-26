@@ -71,8 +71,13 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChangeObviousCard', {
 		staffFieldCopy.setDisabled(true);
 		startTaktField = this.createComboBoxMeasureNr('Start measure');
 		startTaktField.validate();
-		endTaktField = this.createComboBoxMeasureNr('End measure');
-		endTaktField.validate();
+		if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
+			endTaktField = this.createComboBox('End measure', 'endmeasure');
+			endTaktField.validate();
+		}	
+		else{
+			endTaktField = this.createOptionalComboBox('End measure', 'endmeasure');
+		}
 		placeField = this.createComboBox('Place');
 		placeField.validate();
 		tstampField = this.createTextField('tstampFieldObv', 'Tstamp');
@@ -386,6 +391,60 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChangeObviousCard', {
 			}
 		});
 		return ceTextField;
+	},
+	
+	/**
+	 * Create an optional, not editable combo box and store dependent from combo type.
+	 * @param {string} fieldName - combo name.
+	 * @param {string} fieldId - combo id and type definition.
+	 */
+	createOptionalComboBox: function (fieldName, fieldId) {
+		var me = this;
+		var storeField = null;
+		
+		if (fieldId === 'endmeasure') {
+			var pageMeasuresMap = Ext.getCmp('cetoolbar').pageMeasuresMap;
+			var selectedPage = Ext.getCmp('pages').getText();
+			
+			var test = pageMeasuresMap[selectedPage];
+			
+			storeField = new Array(test.length);
+			var value = test[0];
+			for (var i = 0; i < test.length; i++) {
+				storeField[i] = value++;
+			}
+		}
+		
+		var combo = Ext.create('Ext.form.ComboBox', {
+			fieldLabel: fieldName,
+			id: fieldId,
+			store: storeField,
+			queryMode: 'local',
+			displayField: 'name',
+			editable: false,
+			listeners: {
+				select: function (combo, record, index) {
+					if (combo.id === 'endmeasure') {
+						me.handleMeasureField(combo);
+					}
+				}
+			}
+		});
+		return combo;
+	},
+	
+	/**
+	 * Handle function for set start and end measure for get verovio.
+	 * @param {object} combo.
+	 */
+	handleMeasureField: function (combo) {
+		if (combo.id.indexOf('start') > -1) {
+			Ext.getCmp('cemain').setStartMeasure(combo.getValue());
+		}
+		if (combo.id.indexOf('end') > -1 && typeof combo.getValue() != 'undefined') {
+			Ext.getCmp('cemain').setEndMeasure(combo.getValue());
+		}
+		this.handleNavigationButtons();
 	},
 	
 	
