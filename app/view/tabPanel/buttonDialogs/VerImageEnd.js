@@ -215,7 +215,9 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.VerovioImageEnd', {
 								}
 								Ext.getCmp('tstampField2Obv').setValue(prefix + "m+" + tstamp);
 								Ext.getCmp('tstampField2Obv').focus();
-							} else if (typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' && Ext.getCmp('ambiguouscard').getSelectedFieldId() !== null && Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2') > -1) {
+							} else if (typeof Ext.getCmp('ambiguouscard').getSelectedFieldId() !== 'undefined' 
+							&& Ext.getCmp('ambiguouscard').getSelectedFieldId() !== null 
+							&& Ext.getCmp('ambiguouscard').getSelectedFieldId().indexOf('tstamp2') > -1) {
 								console.log(Ext.getCmp('ambiguouscard').getSelectedFieldId());
 								var prefix = null;
 								var startId = Ext.getCmp('cemain').getStartMeasure();

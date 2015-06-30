@@ -47,7 +47,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ObviousCard', {
 		startTaktField = this.createComboBoxMeasureNr('Start measure');
 		startTaktField.validate();
 		if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
-			endTaktField = this.createComboBox('End measure', 'endmeasure');
+			endTaktField = this.createComboBoxMeasureNr('End measure');
 			endTaktField.validate();
 		}	
 		else{

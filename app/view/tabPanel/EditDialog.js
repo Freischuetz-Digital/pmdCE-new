@@ -88,6 +88,16 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 			Ext.getCmp('cemain').setStartMeasure(me.parentNode.data.measurenr);
 			var movement = Ext.getCmp('movement').getText();
 			Ext.getCmp('cemain').setMeasureId(movement + "_measure" + vordStartMeasure);
+						
+			vordStaff = me.selectedNode.data.staff;
+			Ext.getCmp('cemain').setStaffNr(vordStaff);
+			vordStaff2 = me.selectedNode.data.staff2;
+			
+			vordForm = me.selectedNode.data.form;
+			vordPlace = me.selectedNode.data.place;
+			vordTStamp = me.selectedNode.data.tstamp;
+			vordTStamp2 = me.selectedNode.data.tstamp2;
+			
 			if (typeof vordTStamp2 !== 'undefined' && typeof vordStartMeasure !== 'undefined') {
 				var prefix = vordTStamp2.substring(0, 1);
 				if (prefix !== 'm') {
@@ -97,15 +107,6 @@ Ext.define('pmdCE.view.tabPanel.EditDialog', {
 				}
 				Ext.getCmp('cemain').setEndMeasure(vordEndMeasure);
 			}
-			
-			vordStaff = me.selectedNode.data.staff;
-			Ext.getCmp('cemain').setStaffNr(vordStaff);
-			vordStaff2 = me.selectedNode.data.staff2;
-			
-			vordForm = me.selectedNode.data.form;
-			vordPlace = me.selectedNode.data.place;
-			vordTStamp = me.selectedNode.data.tstamp;
-			vordTStamp2 = me.selectedNode.data.tstamp2;
 			
 			if (Ext.getCmp('cemain').getComponentType().indexOf('Dynam') > -1) {
 				vordRend = me.selectedNode.data.rend;

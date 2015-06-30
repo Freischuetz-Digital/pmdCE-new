@@ -72,7 +72,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChangeObviousCard', {
 		startTaktField = this.createComboBoxMeasureNr('Start measure');
 		startTaktField.validate();
 		if(Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1){
-			endTaktField = this.createComboBox('End measure', 'endmeasure');
+			endTaktField = this.createComboBoxMeasureNr('End measure');
 			endTaktField.validate();
 		}	
 		else{
@@ -85,12 +85,12 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChangeObviousCard', {
 		// hairpin
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
 			formField = this.createComboBoxForm('Form');
-			tstamp2Field = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
+			tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
 			tstamp2Field.validate();
 		} else {
 			// dynams
 			formField = this.createTextField('formOrig', 'Form');
-			tstamp2Field = this.createTextFieldTstamp2('tstamp2FieldOrig', 'Tstamp2');
+			tstamp2Field = this.createTextFieldTstamp2('tstampField2Obv', 'Tstamp2');
 			rend = this.createTextFieldTstamp2('rendOrig', 'Rend');
 		}
 		formField.validate();
@@ -258,11 +258,11 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChangeObviousCard', {
 		tstampField.validate();
 		// hairpin
 		if (Ext.getCmp('cemain').getComponentType().indexOf('Hairpin') > -1) {
-			tstamp2Field = this.createTextField('tstamp2FieldOrig', 'Tstamp2');
+			tstamp2Field = this.createTextField('tstampField2Obv', 'Tstamp2');
 			tstamp2Field.validate();
 		} else {
 			// dynams
-			tstamp2Field = this.createTextFieldTstamp2('tstamp2FieldOrig', 'Tstamp2');
+			tstamp2Field = this.createTextFieldTstamp2('tstampField2Obv', 'Tstamp2');
 		}
 		
 		Ext.getCmp('starttime').add(tstampField);
@@ -307,7 +307,13 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChangeObviousCard', {
 			listeners: {
 				focus: function (e, eOpts) {
 					me1.handleCreateButton();
-				}
+				},
+			render: function (c) {
+			c.getEl().on('keyup', function () {
+				me1.handleCreateButton();
+			},
+			c);
+		}
 			}
 		});
 		

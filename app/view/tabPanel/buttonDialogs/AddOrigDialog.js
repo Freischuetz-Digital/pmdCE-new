@@ -41,21 +41,36 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 			rootNode = pmdCE.getApplication().getDirDataStore().getRootNode();
 		}
 		
-		for (var i = 0; i < rootNode.childNodes.length; i++) {
-			if (rootNode.childNodes[i].data.id === selection.data.id) {
-				selectedNode = rootNode.childNodes[i];
-				Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
-				Ext.getCmp('cemain').setStaffNr(selectedNode.childNodes[0].data.staff);
-				var movement = Ext.getCmp('movement').getText();
-				Ext.getCmp('cemain').setMeasureId(movement + "_measure" + selectedNode.data.measurenr);
-				break;
-			}
-		}
+		//if (selection.data.depth === 1) {
+			selectedNode = selection;
+			var movement = Ext.getCmp('movement').getText();
+			Ext.getCmp('cemain').setMeasureId(movement + "_measure" + selectedNode.data.measurenr);
+			Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+			Ext.getCmp('cemain').setStaffNr(selectedNode.childNodes[0].data.staff);
+			
+		//}
+		
+//		for (var i = 0; i < rootNode.childNodes.length; i++) {
+//			if (rootNode.childNodes[i].data.id === selection.data.id) {
+//				selectedNode = rootNode.childNodes[i];
+//				Ext.getCmp('cemain').setStartMeasure(selectedNode.data.measurenr);
+//				Ext.getCmp('cemain').setStaffNr(selectedNode.data.staff);
+//				var movement = Ext.getCmp('movement').getText();
+//				Ext.getCmp('cemain').setMeasureId(movement + "_measure" + selectedNode.data.measurenr);
+//				break;
+//			}
+//		}
 		
 		// common
 		staffField = this.createTextField('staffField', 'Staff');
 		staffField.setValue(selectedNode.childNodes[0].data.staff);
 		staffField.setDisabled(true);
+		staffField.validate();
+		//createComboBox('Staff', 'staffField');
+		//createTextField('staffField', 'Staff');
+		//staffField.setValue(selectedNode.childNodes[0].data.staff);
+		//staffField.setDisabled(true);
+		//staffField.validate();
 		satffFieldBetween = this.createComboBox('Second staff', 'staffBetween');
 		placeField = this.createComboBox('Place', 'place');
 		placeField.validate();
@@ -269,7 +284,8 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.AddOrigDialog', {
 	 * Handle function for disable/enable create-button.
 	 */
 	handleCreateButton: function () {
-		if (placeField.isValid() && formField.isValid() && tstampField.isValid() && tstampField2.isValid()) {
+		if (placeField.isValid() && formField.isValid() && tstampField.isValid() && tstampField2.isValid()
+		&& staffField.isValid()) {
 			createElementButton.setDisabled(false);
 		} else {
 			createElementButton.setDisabled(true);

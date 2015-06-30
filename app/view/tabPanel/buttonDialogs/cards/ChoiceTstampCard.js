@@ -213,7 +213,7 @@ Ext.define('pmdCE.view.tabPanel.buttonDialogs.cards.ChoiceTstampCard', {
 			formFieldReg2.setValue(vordForm);
 			tstamp2FieldReg1.setValue(vordTStamp2);
 			tstamp2FieldReg2.setValue(vordTStamp2);
-			if (typeof rend !== 'undefined') {
+			if (typeof rend !== 'undefined' || rend !== null) {
 				rend.setValue(vordRend);
 				rendReg1.setValue(vordRend);
 				rendReg2.setValue(vordRend);
