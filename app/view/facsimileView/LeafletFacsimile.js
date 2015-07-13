@@ -80,8 +80,8 @@ Ext.define('pmdCE.view.facsimileView.LeafletFacsimile', {
 					
 					 var path = 'http://localhost:8080'+json.path;
 					 
-					 console.log('facsimile path');
-					 console.log(json.path);
+					// console.log('facsimile path');
+					// console.log(json.path);
 					
 					me.facsimileTile = 
 					/*L.tileLayer.facsimileLayer('data/example/{z}-{x}-{y}.jpg', {

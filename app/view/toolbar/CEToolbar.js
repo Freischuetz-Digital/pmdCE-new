@@ -154,7 +154,7 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 								staff: modRecords[i].childNodes[j].data.staff2 !== '' ? modRecords[i].childNodes[j].data.staff + ' ' + modRecords[i].childNodes[j].data.staff2: modRecords[i].childNodes[j].data.staff,
 								place: modRecords[i].childNodes[j].data.place,
 								tstamp: modRecords[i].childNodes[j].data.tstamp,
-								tstamp2: modRecords.childNodes[j].data.tstamp2 !== "" ? modRecords.childNodes[j].data.tstamp2 : null,
+								tstamp2: modRecords[i].childNodes[j].data.tstamp2 !== "" ? modRecords[i].childNodes[j].data.tstamp2 : null,
 								sameas: ""
 							});
 							if (modRecords[i].childNodes[j].data.rend !== '') {
@@ -176,7 +176,7 @@ Ext.define('pmdCE.view.toolbar.CEToolbar', {
 								staff: modRecords[i].childNodes[j].data.staff2 !== '' ? modRecords[i].childNodes[j].data.staff + ' ' + modRecords[i].childNodes[j].data.staff2: modRecords[i].childNodes[j].data.staff,
 								place: modRecords[i].childNodes[j].data.place,
 								tstamp: modRecords[i].childNodes[j].data.tstamp,
-								tstamp2: modRecords.childNodes[j].data.tstamp2 !== "" ? modRecords.childNodes[j].data.tstamp2 : null,
+								tstamp2: modRecords[i].childNodes[j].data.tstamp2 !== "" ? modRecords[i].childNodes[j].data.tstamp2 : null,
 								sameas: ""
 							});
 							if (modRecords[i].childNodes[j].data.rend !== '') {

@@ -145,8 +145,6 @@ Ext.define('pmdCE.view.tabPanel.hairpins.HairpinsGridPanel', {
 				'xml:id': selectedObject.data.id,
 				xmlns: "http://www.music-encoding.org/ns/mei"
 			});
-			console.log('***************');
-			console.log(selectedObject);
 			for (var j = 0; j < selectedObject.childNodes.length; j++) {
 				if (selectedObject.childNodes[j].data.tag === 'orig') {
 					var orig = $('<orig></orig>');
